@@ -1,15 +1,21 @@
 import { sprinkles, Sprinkles } from "./spakles.css";
 
+type ParsePropReturn<T> = [
+  Partial<Sprinkles>,
+  Partial<Omit<T, keyof Sprinkles>>
+];
+
 export const parseProps = <T extends Record<string, any>>(props: T) => {
   const atomProps: Record<string, unknown> = {};
   const nativeProps: Record<string, unknown> = {};
 
-  for (const key in props) {
+  Object.entries(props).forEach(([key, value]) => {
     if (sprinkles.properties.has(key as keyof Sprinkles)) {
-      atomProps[key] = props[key as keyof typeof props];
+      atomProps[key] = value;
     } else {
-      nativeProps[key] = props[key as keyof typeof props];
+      nativeProps[key] = value;
     }
-  }
-  return [atomProps, nativeProps];
+  });
+
+  return [atomProps, nativeProps] as ParsePropReturn<T>;
 };
