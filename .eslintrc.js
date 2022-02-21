@@ -8,7 +8,7 @@ module.exports = {
   parserOptions: {
     project: "./tsconfig.json",
   },
-  ignorePatterns: ["**/*.config.js", "**/*.eslintrc.js"],
+  ignorePatterns: ["**/*.config.js", "**/*.setup.js", "**/*.eslintrc.js"],
   rules: {
     "@typescript-eslint/quotes": "off",
     "react/function-component-definition": "off",
