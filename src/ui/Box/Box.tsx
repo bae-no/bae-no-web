@@ -1,4 +1,4 @@
-import { AllHTMLAttributes } from "react";
+import { AllHTMLAttributes, createElement, forwardRef } from "react";
 import { base } from "../reset.css";
 import { sprinkles, Sprinkles } from "../spakles.css";
 import { parseProps } from "../utils";
@@ -10,27 +10,34 @@ export interface BoxProps
     >,
     Sprinkles {}
 
-function Box({
-  children,
-  display = "flex",
-  flexDirection = "column",
-  as,
-  ...props
-}: BoxProps) {
-  const [atomProps, nativeProps] = parseProps(props);
+const Box = forwardRef(
+  (
+    {
+      children,
+      display = "flex",
+      flexDirection = "column",
+      as = "div",
+      className = "",
+      ...props
+    }: BoxProps,
+    ref
+  ) => {
+    const [atomProps, nativeProps] = parseProps(props);
 
-  return (
-    <div
-      className={`${sprinkles({
-        ...atomProps,
-        display,
-        flexDirection,
-      })} ${base}`}
-      {...nativeProps}
-    >
-      {children}
-    </div>
-  );
-}
+    return createElement(
+      as,
+      {
+        className: `${sprinkles({
+          ...atomProps,
+          display,
+          flexDirection,
+        })} ${base} ${className}`,
+        ...nativeProps,
+        ref,
+      },
+      children
+    );
+  }
+);
 
 export default Box;

@@ -17,5 +17,8 @@ module.exports = {
     "operator-linebreak": "off",
     "react/jsx-props-no-spreading": "off",
     "@typescript-eslint/indent": "off",
+    "implicit-arrow-linebreak": "off",
+    "react/require-default-props": "off",
+    "object-curly-newline": "off",
   },
 };
