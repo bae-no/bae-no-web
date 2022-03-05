@@ -1,11 +1,9 @@
 name: ci
-on:
-  pull_request:
-    types: [labeled, unlabeled]
+on: [pull_request]
 
 jobs:
   build:
-    if: ${{ github.event.label.name != 'test' }}
+    if: ${{ !contains(github.event.head_commit.message, 'test') }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
