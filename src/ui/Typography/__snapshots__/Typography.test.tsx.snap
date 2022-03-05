@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UI Box Component match snapshot 1`] = `
+exports[`UI Typography Component match snapshot 1`] = `
 <div>
   <p
     class="spakles_display_flex_mobile__178i8kn3 spakles_flexDirection_column_mobile__178i8kni reset_base__4op0mk0 Typography_typographyDefaultStyle__1rfncg19 Typography_fontSizes__1rfncg10 Typography_fontWeights_bold__1rfncg17 "
