@@ -3,7 +3,7 @@
 exports[`UI Box Component match snapshot 1`] = `
 <div>
   <div
-    class="spakles_padding_small_mobile__178i8kn1r spakles_display_flex_mobile__178i8kn3 spakles_flexDirection_row_mobile__178i8knf reset_base__4op0mk0 "
+    class="sprinkles_padding_small_mobile__1vna7gb1r sprinkles_display_flex_mobile__1vna7gb3 sprinkles_flexDirection_row_mobile__1vna7gbf reset_base__4op0mk0"
   />
 </div>
 `;

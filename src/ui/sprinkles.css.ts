@@ -34,6 +34,7 @@ const responsiveProperties = defineProperties({
     marginRight: space,
     cursor: ["pointer"],
     width: layout,
+    height: layout,
     zIndex: [-1, 0, 1, 2, 3, 4, 5],
   },
   shorthands: {
