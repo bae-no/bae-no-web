@@ -1,37 +1,37 @@
 import { HtmlHTMLAttributes } from "react";
 import { Box } from "../Box";
-import { Sprinkles, sprinkles } from "../spakles.css";
-import {
-  fontSizes,
-  fontWeights,
-  typographyDefaultStyle,
-} from "./Typography.css";
+import { Sprinkles, sprinkles } from "../sprinkles.css";
+import { FontStyle, fontStyle } from "./Typography.css";
 
-interface TypographyProps
-  extends Pick<
-      HtmlHTMLAttributes<HTMLParagraphElement>,
-      "placeholder" | "children"
-    >,
-    Pick<Sprinkles, "color"> {
-  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "label";
-  fontSize?: keyof typeof fontSizes;
-  fontWeight?: keyof typeof fontWeights;
-}
+type TypographyProps = Pick<
+  HtmlHTMLAttributes<HTMLParagraphElement>,
+  "placeholder" | "children"
+> &
+  Pick<Sprinkles, "color"> &
+  FontStyle & {
+    as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "label";
+  };
 
 function Typography({
   children,
   as = "p",
   color,
-  fontSize = 5,
-  fontWeight = "regular",
+  fontSize,
+  fontWeight,
   placeholder,
 }: TypographyProps) {
   return (
     <Box
       as={as}
-      className={`${typographyDefaultStyle} ${fontSizes[fontSize]} ${
-        fontWeights[fontWeight]
-      } ${sprinkles({ color })}`}
+      className={[
+        fontStyle({
+          fontSize,
+          fontWeight,
+        }),
+        sprinkles({
+          color,
+        }),
+      ]}
       placeholder={placeholder}
     >
       {children}

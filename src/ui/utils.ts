@@ -1,4 +1,4 @@
-import { sprinkles, Sprinkles } from "./spakles.css";
+import { sprinkles, Sprinkles } from "./sprinkles.css";
 
 type ParsePropReturn<T> = [
   Partial<Sprinkles>,
