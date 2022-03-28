@@ -5,11 +5,12 @@ import {
   useMemo,
   useState,
 } from "react";
-import { User } from "@supabase/supabase-js";
+import { User, Session } from "@supabase/supabase-js";
 import supabase from "src/lib/supabase";
 
 export type AuthContextProps = {
   user?: User;
+  session?: Session;
   signInWithGoogle: () => void;
   signOut: () => void;
   loading: boolean;
@@ -21,6 +22,7 @@ export const AuthContext = createContext<Partial<AuthContextProps>>({});
 export const AuthProvider: FunctionComponent = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [session, setSession] = useState<Session | undefined>(undefined);
   const [loggedIn, setLoggedIn] = useState(false);
 
   const signInWithGoogle = async () => {
@@ -42,10 +44,12 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
 
   useEffect(() => {
     const users = supabase.auth.user();
+    const sessions = supabase.auth.session();
 
-    if (users) {
+    if (users && sessions) {
       setUser(users);
       setLoggedIn(true);
+      setSession(sessions);
       // 유저정보가 있을시에 라우텅
     }
 
@@ -54,11 +58,13 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
         if (session?.user) {
           setUser(session.user);
           setLoggedIn(true);
+          setSession(session);
           // 유저 정보가 있을시에 라우팅
         } else {
           setUser(undefined);
           setLoading(false);
           setLoggedIn(false);
+          setSession(undefined);
           // 유저정보가 없으면 로그인 라우팅
         }
       }
@@ -76,8 +82,9 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
       signOut,
       loading,
       loggedIn,
+      session,
     }),
-    [loading, loggedIn, user]
+    [loading, loggedIn, user, session]
   );
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
