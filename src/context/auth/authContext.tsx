@@ -19,7 +19,7 @@ export type AuthContextProps = {
 
 export const AuthContext = createContext<Partial<AuthContextProps>>({});
 
-export const AuthProvider: FunctionComponent = ({ children }) => {
+export const AuthProvider: FC = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<User | undefined>(undefined);
   const [session, setSession] = useState<Session | undefined>(undefined);
