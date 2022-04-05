@@ -955,14 +955,14 @@
     "@typescript-eslint/types" "5.12.0"
     eslint-visitor-keys "^3.0.0"
 
-"@vanilla-extract/babel-plugin@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@vanilla-extract/babel-plugin/-/babel-plugin-1.1.4.tgz#4a37a6c6e6bd7f80e399f5771c5d51af0d8bd2c0"
-  integrity sha512-w1IDtUk91CTyeXCJi2bJdgXnZ4/D38KiyOoctTF7U7rHGoMH7gCIpsEeO400aUupPVlSL9a8pffCYuCkzzOZWA==
+"@vanilla-extract/babel-plugin@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/babel-plugin/-/babel-plugin-1.1.5.tgz#dcd1cd33979a7162135d3fc94a977b533764cf1d"
+  integrity sha512-wt2Sxgt2ZzslwwTDaZFGdrf0yUsoadOwAM73R6Gzv/1UJSzIdThVss/5JSwVO4RKvnus+0I1Iiq8pWqSJsRbCQ==
   dependencies:
     "@babel/core" "^7.13.10"
     "@babel/template" "^7.12.13"
-    "@vanilla-extract/integration" "^2.0.1"
+    "@vanilla-extract/integration" "^3.0.0"
 
 "@vanilla-extract/css@^1.6.8":
   version "1.6.8"
@@ -989,6 +989,19 @@
     chalk "^4.1.1"
     esbuild "^0.11.16"
     eval "^0.1.6"
+    find-up "^5.0.0"
+    javascript-stringify "^2.0.1"
+    lodash "^4.17.21"
+    outdent "^0.8.0"
+
+"@vanilla-extract/integration@^3.0.0":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/integration/-/integration-3.0.1.tgz#7f4bb01667f65f745fae3d9e39be699b115839d5"
+  integrity sha512-4G4WgkalVRIsJyDb/X08S0xcG2eDm1RJvqIgji0D7HvOSeyD+nvPEhbq8FAxs7MeVyyPDoCWsCKQvS3f9jz9UA==
+  dependencies:
+    "@vanilla-extract/css" "^1.6.8"
+    esbuild "^0.11.16"
+    eval "0.1.6"
     find-up "^5.0.0"
     javascript-stringify "^2.0.1"
     lodash "^4.17.21"
@@ -2034,7 +2047,7 @@ esutils@^2.0.2:
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
 
-eval@^0.1.6:
+eval@0.1.6, eval@^0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/eval/-/eval-0.1.6.tgz#9620d7d8c85515e97e6b47c5814f46ae381cb3cc"
   integrity sha512-o0XUw+5OGkXw4pJZzQoXUk+H87DHuC+7ZE//oSrRGtatTmr12oTnLfg6QOq9DyTt0c/p4TwzgmkKrBzWTSizyQ==
