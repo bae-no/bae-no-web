@@ -3,7 +3,9 @@ import Typography from "./Typography";
 
 describe("UI Typography Component", () => {
   it("match snapshot", () => {
-    const { container } = render(<Typography fontSize={1} fontWeight="bold" />);
+    const { container } = render(
+      <Typography fontSize="typo2" fontWeight="bold" />
+    );
 
     expect(container).toMatchSnapshot();
   });
