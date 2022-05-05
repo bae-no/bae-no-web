@@ -1,17 +1,19 @@
 import type { AppProps } from "next/app";
 import { Hydrate, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
+import { useInit } from "src/hooks";
 import { queryClient } from "src/queryClient";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useInit();
   return (
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <RecoilRoot>
           <Component {...pageProps} />
-        </Hydrate>
-      </QueryClientProvider>
-    </RecoilRoot>
+        </RecoilRoot>
+      </Hydrate>
+    </QueryClientProvider>
   );
 }
 
