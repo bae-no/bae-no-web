@@ -2,19 +2,22 @@ import { style } from "@vanilla-extract/css";
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 
 const fontSize = {
-  typo1: { fontSize: "1.875rem", lineHeight: "2.5rem" },
-  typo2: { fontSize: "1.625rem", lineHeight: "2.1875rem" },
-  typo3: { fontSize: "1.375rem", lineHeight: "1.8125rem" },
-  typo4: { fontSize: "1.125rem", lineHeight: "1.5625rem" },
-  typo5: { fontSize: "1rem", lineHeight: "1.3125rem" },
-  typo6: { fontSize: "0.9375rem", lineHeight: "1.25rem" },
-  typo7: { fontSize: "0.8125rem", lineHeight: "1.125rem" },
-};
-
-const fontWeight = {
-  bold: { fontWeight: "700" },
-  semiBold: { fontWeight: "600" },
-  regular: { fontWeight: "400" },
+  headline1: { fontSize: "3.2rem", lineHeight: "4.2rem", fontWeight: "700" },
+  headline2: { fontSize: "2.8rem", lineHeight: "3.8rem", fontWeight: "700" },
+  headline3: { fontSize: "2.4rem", lineHeight: "3.2rem", fontWeight: "700" },
+  headline4: { fontSize: "2rem", lineHeight: "2.8rem", fontWeight: "700" },
+  headline5: { fontSize: "1.8rem", lineHeight: "2.6rem", fontWeight: "700" },
+  headline6: { fontSize: "1.6rem", lineHeight: "2.4rem", fontWeight: "700" },
+  "body1-m": { fontSize: "1.6rem", lineHeight: "2.4rem", fontWeight: "500" },
+  "body1-r": { fontSize: "1.6rem", lineHeight: "2.4rem", fontWeight: "400" },
+  "body2-m": { fontSize: "1.4rem", lineHeight: "2rem", fontWeight: "500" },
+  "body2-r": { fontSize: "1.4rem", lineHeight: "2rem", fontWeight: "400" },
+  "body3-m": { fontSize: "1.3rem", lineHeight: "1.8rem", fontWeight: "500" },
+  "body3-r": { fontSize: "1.3rem", lineHeight: "1.8rem", fontWeight: "400" },
+  "caption1-m": { fontSize: "1.2rem", lineHeight: "1.6rem", fontWeight: "500" },
+  "caption1-r": { fontSize: "1.2rem", lineHeight: "1.6rem", fontWeight: "400" },
+  "caption2-m": { fontSize: "1rem", lineHeight: "1.2rem", fontWeight: "500" },
+  "caption2-r": { fontSize: "1rem", lineHeight: "1.2rem", fontWeight: "400" },
 };
 
 const base = style({
@@ -25,8 +28,8 @@ const base = style({
 
 export const fontStyle = recipe({
   base,
-  variants: { fontSize, fontWeight },
-  defaultVariants: { fontSize: "typo5", fontWeight: "regular" },
+  variants: { fontSize },
+  defaultVariants: { fontSize: "body1-r" },
 });
 
 export type FontStyle = RecipeVariants<typeof fontStyle>;

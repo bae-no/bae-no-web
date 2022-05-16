@@ -3,6 +3,7 @@ import { globalStyle, style } from "@vanilla-extract/css";
 globalStyle("html, body", {
   margin: 0,
   padding: 0,
+  fontSize: "62.5%",
 });
 
 export const base = style({
