@@ -9,7 +9,7 @@ type TypographyProps = Pick<
 > &
   Pick<Sprinkles, "color"> &
   FontStyle & {
-    as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "label";
+    as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "label" | "span";
   };
 
 function Typography({
@@ -17,7 +17,6 @@ function Typography({
   as = "p",
   color,
   fontSize,
-  fontWeight,
   placeholder,
 }: TypographyProps) {
   return (
@@ -26,7 +25,6 @@ function Typography({
       className={[
         fontStyle({
           fontSize,
-          fontWeight,
         }),
         sprinkles({
           color,
