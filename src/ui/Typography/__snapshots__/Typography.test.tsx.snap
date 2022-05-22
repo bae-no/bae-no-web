@@ -3,7 +3,7 @@
 exports[`UI Typography Component match snapshot 1`] = `
 <div>
   <p
-    class="sprinkles_display_flex_mobile__1vna7gb3 sprinkles_flexDirection_column_mobile__1vna7gbi reset_base__4op0mk0 Typography_base__1rfncg10 Typography_fontStyle_fontSize_typo2__1rfncg12 Typography_fontStyle_fontWeight_bold__1rfncg18"
+    class="sprinkles_display_flex_mobile__1vna7gb3 sprinkles_flexDirection_column_mobile__1vna7gbi reset_base__4op0mk0 Typography_base__1rfncg10"
   />
 </div>
 `;
