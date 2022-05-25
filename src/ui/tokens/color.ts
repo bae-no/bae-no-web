@@ -35,5 +35,6 @@ export const colors = {
   black8: "#EDEDED",
   black9: "#F2F2F2",
   black10: "#F8F8F8",
+  white: "#FFFFFF",
   skyBlue1: "#33D1F3",
 };

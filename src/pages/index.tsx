@@ -3,7 +3,7 @@ import { dehydrate } from "react-query";
 import { AsyncBoundary } from "src/components/AsyncBoundary";
 import { getMeQuery } from "src/queries";
 import { queryClient } from "src/queryClient";
-import { Typography } from "src/ui";
+import { Typography, Toggle } from "src/ui";
 import { SERVER_BASE_URL, getServerSidePropsWithCookies } from "src/utils";
 
 function Test() {
@@ -14,6 +14,7 @@ function Test() {
     <>
       {data?.response?.user.email}
       <Typography fontSize="body1-b">test</Typography>
+      <Toggle />
       <button type="button" onClick={() => getMeQuery.fetchQuery()}>
         test
       </button>
@@ -25,6 +26,7 @@ const LoadingComponent = () => <h1>...loading</h1>;
 const ErrorFallback = () => (
   <div>
     <Typography fontSize="body2-b">test</Typography>
+    <Toggle />
     <a href={`${SERVER_BASE_URL}/v1/auths/google`}>구글</a>;
     <a href={`${SERVER_BASE_URL}/v1/auths/kakao`}>카카오</a>;
   </div>

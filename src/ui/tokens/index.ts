@@ -1,4 +1,1 @@
-export * from "./color";
-export * from "./layout";
-export * from "./size";
-export * from "./space";
+export * from "./theme.css";
