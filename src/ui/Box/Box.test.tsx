@@ -3,7 +3,7 @@ import Box from "./Box";
 
 describe("UI Box Component", () => {
   it("match snapshot", () => {
-    const { container } = render(<Box flexDirection="row" p="small" />);
+    const { container } = render(<Box flexDirection="row" p="sm" />);
     expect(container).toMatchSnapshot();
   });
 

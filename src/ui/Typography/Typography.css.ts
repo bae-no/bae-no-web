@@ -1,20 +1,40 @@
 import { style } from "@vanilla-extract/css";
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
+import { entries, flatMap, fromEntries, keys, map, pipe } from "@fxts/core";
 
-const fontSize = {
-  typo1: { fontSize: "1.875rem", lineHeight: "2.5rem" },
-  typo2: { fontSize: "1.625rem", lineHeight: "2.1875rem" },
-  typo3: { fontSize: "1.375rem", lineHeight: "1.8125rem" },
-  typo4: { fontSize: "1.125rem", lineHeight: "1.5625rem" },
-  typo5: { fontSize: "1rem", lineHeight: "1.3125rem" },
-  typo6: { fontSize: "0.9375rem", lineHeight: "1.25rem" },
-  typo7: { fontSize: "0.8125rem", lineHeight: "1.125rem" },
+const fontsBase = {
+  body1: { fontSize: "1.6rem", lineHeight: "2.4rem" },
+  body2: { fontSize: "1.4rem", lineHeight: "2rem" },
+  body3: { fontSize: "1.3rem", lineHeight: "1.8rem" },
+  caption1: { fontSize: "1.2rem", lineHeight: "1.6rem" },
+  caption2: { fontSize: "1rem", lineHeight: "1.2rem" },
 };
 
-const fontWeight = {
-  bold: { fontWeight: "700" },
-  semiBold: { fontWeight: "600" },
-  regular: { fontWeight: "400" },
+const fontWeights = {
+  b: "700",
+  m: "500",
+  r: "400",
+};
+
+const fonts = pipe(
+  fontsBase,
+  entries,
+  flatMap(([key, value]) =>
+    map(
+      (v) => [`${key}-${v}`, { ...value, fontWeight: fontWeights[v] }] as const,
+      keys(fontWeights)
+    )
+  ),
+  fromEntries
+);
+
+const fontSize = {
+  headline1: { fontSize: "3.2rem", lineHeight: "4.2rem", fontWeight: "700" },
+  headline2: { fontSize: "2.8rem", lineHeight: "3.8rem", fontWeight: "700" },
+  headline3: { fontSize: "2.4rem", lineHeight: "3.2rem", fontWeight: "700" },
+  headline4: { fontSize: "2rem", lineHeight: "2.8rem", fontWeight: "700" },
+  headline5: { fontSize: "1.8rem", lineHeight: "2.6rem", fontWeight: "700" },
+  ...fonts,
 };
 
 const base = style({
@@ -25,8 +45,8 @@ const base = style({
 
 export const fontStyle = recipe({
   base,
-  variants: { fontSize, fontWeight },
-  defaultVariants: { fontSize: "typo5", fontWeight: "regular" },
+  variants: { fontSize },
+  defaultVariants: { fontSize: "body1-r" },
 });
 
 export type FontStyle = RecipeVariants<typeof fontStyle>;

@@ -1,10 +1,12 @@
 module.exports = {
   extends: [
-    "next/core-web-vitals",
+    "next",
     "airbnb",
     "airbnb-typescript",
     "plugin:react/jsx-runtime",
+    "prettier",
   ],
+  plugins: ["react", "react-hooks", "@typescript-eslint"],
   parserOptions: {
     project: "./tsconfig.json",
   },
@@ -20,5 +22,6 @@ module.exports = {
     "implicit-arrow-linebreak": "off",
     "react/require-default-props": "off",
     "object-curly-newline": "off",
+    "consistent-return": "off",
   },
 };

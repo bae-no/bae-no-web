@@ -1,15 +1,15 @@
 import { HtmlHTMLAttributes } from "react";
 import { Box } from "../Box";
-import { Sprinkles, sprinkles } from "../sprinkles.css";
+import { Sprinkles } from "../sprinkles.css";
 import { FontStyle, fontStyle } from "./Typography.css";
 
 type TypographyProps = Pick<
   HtmlHTMLAttributes<HTMLParagraphElement>,
-  "placeholder" | "children"
+  "aria-label" | "children"
 > &
   Pick<Sprinkles, "color"> &
   FontStyle & {
-    as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "label";
+    as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "label" | "span";
   };
 
 function Typography({
@@ -17,22 +17,16 @@ function Typography({
   as = "p",
   color,
   fontSize,
-  fontWeight,
-  placeholder,
+  ...rest
 }: TypographyProps) {
   return (
     <Box
+      {...rest}
       as={as}
-      className={[
-        fontStyle({
-          fontSize,
-          fontWeight,
-        }),
-        sprinkles({
-          color,
-        }),
-      ]}
-      placeholder={placeholder}
+      color={color}
+      className={fontStyle({
+        fontSize,
+      })}
     >
       {children}
     </Box>
