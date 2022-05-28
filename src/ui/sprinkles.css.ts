@@ -1,5 +1,7 @@
 import { defineProperties, createSprinkles } from "@vanilla-extract/sprinkles";
-import { colors, layout, space } from "./tokens";
+import { theme } from "./tokens";
+
+const { colors, layout, space } = theme;
 
 const responsiveProperties = defineProperties({
   conditions: {
@@ -11,6 +13,7 @@ const responsiveProperties = defineProperties({
   responsiveArray: ["mobile", "tablet", "desktop"],
   properties: {
     display: ["none", "flex", "block", "inline", "grid"],
+    position: ["absolute", "relative", "fixed", "sticky"],
     flexDirection: ["row", "column"],
     flex: [0, 0.5, 1],
     justifyContent: [
@@ -34,7 +37,13 @@ const responsiveProperties = defineProperties({
     marginRight: space,
     cursor: ["pointer"],
     width: layout,
+    minWidth: layout,
+    maxWidth: layout,
     height: layout,
+    minHeight: layout,
+    maxHeight: layout,
+    borderRadius: layout,
+    boxSizing: ["border-box", "content-box"],
     zIndex: [-1, 0, 1, 2, 3, 4, 5],
   },
   shorthands: {
@@ -44,6 +53,10 @@ const responsiveProperties = defineProperties({
     m: ["margin"],
     mx: ["marginLeft", "marginRight"],
     my: ["marginTop", "marginBottom"],
+    br: ["borderRadius"],
+    size: ["width", "height"],
+    minSize: ["minWidth", "minHeight"],
+    maxSize: ["maxWidth", "maxHeight"],
   },
 });
 
@@ -58,6 +71,9 @@ const colorProperties = defineProperties({
     color: colors,
     backgroundColor: colors,
     borderColor: colors,
+  },
+  shorthands: {
+    bg: ["backgroundColor"],
   },
 });
 
