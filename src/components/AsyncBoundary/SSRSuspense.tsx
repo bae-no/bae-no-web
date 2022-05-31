@@ -1,10 +1,12 @@
-import { ComponentProps, Suspense } from "react";
+import { ReactElement, ReactNode, Suspense } from "react";
 import { useMounted } from "src/hooks";
 
-const SSRSafeSuspense = ({
-  children,
-  fallback,
-}: ComponentProps<typeof Suspense>) => {
+interface SSRSafeSuspenseProps {
+  fallback: ReactElement;
+  children: ReactNode;
+}
+
+const SSRSafeSuspense = ({ children, fallback }: SSRSafeSuspenseProps) => {
   const isMounted = useMounted();
 
   if (isMounted) {
