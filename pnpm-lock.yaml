@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@fxts/core': ^0.6.2
+  '@fxts/core': ^0.7.0
   '@radix-ui/react-switch': ^0.1.5
   '@testing-library/jest-dom': ^5.16.4
   '@testing-library/react': ^13.1.1
@@ -35,7 +35,7 @@ specifiers:
   typescript: ^4.6.4
 
 dependencies:
-  '@fxts/core': 0.6.2
+  '@fxts/core': 0.7.0
   '@radix-ui/react-switch': 0.1.5_react@18.1.0
   '@vanilla-extract/babel-plugin': 1.1.5
   '@vanilla-extract/css': 1.7.0
@@ -411,8 +411,8 @@ packages:
       - supports-color
     dev: true
 
-  /@fxts/core/0.6.2:
-    resolution: {integrity: sha512-jKTHHR2gqmMOgS8xla/0RQMETUcjQmOssRyajF5J6JTJMmSdpanViJH3ZL6LwV6Mve/L+I5yza6/UqXdMeIkMg==}
+  /@fxts/core/0.7.0:
+    resolution: {integrity: sha512-bqQl05C5JkbfXf4yvZier9SMnnLYOqYI3sXuHCGpf2esTFDLPZp+po0ILSElRQ3ARiHFrM9RC9P7qdffAkQsUg==}
     dependencies:
       tslib: 2.4.0
     dev: false
