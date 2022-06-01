@@ -6,11 +6,12 @@ module.exports = {
     "plugin:react/jsx-runtime",
     "prettier",
   ],
-  plugins: ["react", "react-hooks", "@typescript-eslint"],
+  plugins: ["react", "@typescript-eslint"],
   parserOptions: {
     project: "./tsconfig.json",
   },
-  ignorePatterns: ["**/*.config.js", "**/*.setup.js", "**/*.eslintrc.js"],
+  parser: "@typescript-eslint/parser",
+  ignorePatterns: ["**/*.js", "**/*.d.ts"],
   rules: {
     "@typescript-eslint/quotes": "off",
     "react/function-component-definition": "off",
