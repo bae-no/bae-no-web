@@ -1,9 +1,12 @@
+import { keys, map, pipe, toArray } from "@fxts/core";
 import type { NextPage } from "next";
 import { dehydrate } from "react-query";
 import { AsyncBoundary } from "src/components/AsyncBoundary";
 import { getMeQuery } from "src/queries";
 import { queryClient } from "src/queryClient";
 import { Typography, Toggle } from "src/ui";
+import Icon from "src/ui/Icon/Icon";
+import { SVG_ICON_MAP } from "src/ui/Icon/iconMap";
 import { SERVER_BASE_URL, getServerSidePropsWithCookies } from "src/utils";
 
 function Test() {
@@ -27,6 +30,12 @@ const ErrorFallback = () => (
   <div>
     <Typography fontSize="body2-b">test</Typography>
     <Toggle />
+    {pipe(
+      SVG_ICON_MAP,
+      keys,
+      map((key) => <Icon key={key} name={key} size="xxl" color="orange1" />),
+      toArray
+    )}
     <a href={`${SERVER_BASE_URL}/v1/auths/google`}>구글</a>;
     <a href={`${SERVER_BASE_URL}/v1/auths/kakao`}>카카오</a>;
   </div>

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UI Icon Component match snapshot 1`] = `
+<div>
+  <svg
+    class="sprinkles_color_black2_lightMode__1vna7gblf"
+    data-testid="test"
+  />
+</div>
+`;
