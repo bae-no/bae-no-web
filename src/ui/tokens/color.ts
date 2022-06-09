@@ -5,6 +5,7 @@ export const colors = {
   orange4: "#FEB36F",
   orange5: "#FECC9F",
   orange6: "#FFE6CF",
+  orange7: "#EE790F",
   success1: "#75D181",
   success2: "#91DA9A",
   success3: "#ACE3B3",
@@ -35,6 +36,7 @@ export const colors = {
   black8: "#EDEDED",
   black9: "#F2F2F2",
   black10: "#F8F8F8",
+  black11: "#E8E8E8",
   white: "#FFFFFF",
   skyBlue1: "#33D1F3",
 };

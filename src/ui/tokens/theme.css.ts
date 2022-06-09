@@ -4,7 +4,7 @@ import { layout } from "./layout";
 import { size } from "./size";
 import { space } from "./space";
 
-export const theme = createGlobalTheme("#__next", {
+export const theme = createGlobalTheme("body", {
   colors,
   layout,
   size,
