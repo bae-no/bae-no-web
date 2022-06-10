@@ -16,6 +16,7 @@ const responsiveProperties = defineProperties({
     position: ["absolute", "relative", "fixed", "sticky"],
     flexDirection: ["row", "column"],
     flex: [0, 0.5, 1],
+    gap: space,
     justifyContent: [
       "stretch",
       "flex-start",

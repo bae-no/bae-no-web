@@ -3,7 +3,7 @@
 exports[`UI Icon Component match snapshot 1`] = `
 <div>
   <svg
-    class="sprinkles_color_black2_lightMode__1vna7gblf"
+    class="sprinkles_color_black2_lightMode__1vna7gbmb"
     data-testid="test"
   />
 </div>
