@@ -14,7 +14,7 @@ const responsiveProperties = defineProperties({
   properties: {
     display: ["none", "flex", "block", "inline", "grid"],
     position: ["absolute", "relative", "fixed", "sticky"],
-    flexDirection: ["row", "column"],
+    flexDirection: ["row", "column", "row-reverse", "column-reverse"],
     flex: [0, 0.5, 1],
     gap: space,
     justifyContent: [
