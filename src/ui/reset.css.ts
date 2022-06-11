@@ -11,12 +11,14 @@ export const base = style({
   padding: 0,
   border: 0,
   boxSizing: "border-box",
+  textDecoration: "none",
 });
 
 const button = style({
   background: 0,
   border: 0,
   WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
+  cursor: "pointer",
 });
 
 const list = style({
