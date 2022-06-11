@@ -4,7 +4,7 @@ import { dehydrate } from "react-query";
 import { AsyncBoundary } from "src/components/AsyncBoundary";
 import { getMeQuery } from "src/queries";
 import { queryClient } from "src/queryClient";
-import { Typography, Toggle } from "src/ui";
+import { Typography, Toggle, Popup } from "src/ui";
 import Icon from "src/ui/Icon/Icon";
 import { SVG_ICON_MAP } from "src/ui/Icon/iconMap";
 import { SERVER_BASE_URL, getServerSidePropsWithCookies } from "src/utils";
@@ -30,6 +30,18 @@ const ErrorFallback = () => (
   <div>
     <Typography fontSize="body2-b">test</Typography>
     <Toggle />
+    <Popup
+      cancelText="tesaaaa"
+      confirmText="test"
+      description="fdsa"
+      buttonDirection="column"
+      onConfirm={() => {
+        console.log("test");
+      }}
+      title="fas"
+    >
+      <div>test</div>
+    </Popup>
     {pipe(
       SVG_ICON_MAP,
       keys,
