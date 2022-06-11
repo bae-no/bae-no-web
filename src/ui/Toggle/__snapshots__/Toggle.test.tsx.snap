@@ -4,14 +4,14 @@ exports[`UI Toggle Component match snapshot 1`] = `
 <div>
   <button
     aria-checked="false"
-    class="Toggle_toggleRootStyle__f6mp672 Toggle__f6mp670 sprinkles_padding_xxxs_mobile__1vna7gb2x sprinkles_borderRadius_md_mobile__1vna7gbjl sprinkles_minWidth_lg_mobile__1vna7gbdf sprinkles_minHeight_lg_mobile__1vna7gbh6 sprinkles_backgroundColor_black7_lightMode__1vna7gbot Toggle_toggleRootStyle__f6mp671 reset_base__4op0mk0"
+    class="Toggle_toggleRootStyle__f6mp672 Toggle__f6mp670 sprinkles_padding_xxxs_mobile__1vna7gb33 sprinkles_borderRadius_md_mobile__1vna7gbjr sprinkles_minWidth_lg_mobile__1vna7gbdl sprinkles_minHeight_lg_mobile__1vna7gbhc sprinkles_backgroundColor_black7_lightMode__1vna7gboz Toggle_toggleRootStyle__f6mp671 reset_base__4op0mk0"
     data-state="unchecked"
     role="switch"
     type="button"
     value="on"
   >
     <span
-      class="Toggle_toggleThumbStyle__f6mp674 Toggle__f6mp673 sprinkles_borderRadius_half_mobile__1vna7gbix sprinkles_width_lg_mobile__1vna7gbc6 sprinkles_height_lg_mobile__1vna7gbfx sprinkles_backgroundColor_white_lightMode__1vna7gbp3 sprinkles_display_block_mobile__1vna7gb6"
+      class="Toggle_toggleThumbStyle__f6mp674 Toggle__f6mp673 sprinkles_borderRadius_half_mobile__1vna7gbj3 sprinkles_width_lg_mobile__1vna7gbcc sprinkles_height_lg_mobile__1vna7gbg3 sprinkles_backgroundColor_white_lightMode__1vna7gbp9 sprinkles_display_block_mobile__1vna7gb6"
       data-state="unchecked"
     />
   </button>

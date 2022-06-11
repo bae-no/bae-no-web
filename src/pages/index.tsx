@@ -35,6 +35,9 @@ const ErrorFallback = () => (
       confirmText="test"
       description="fdsa"
       buttonDirection="column"
+      onConfirm={() => {
+        console.log("test");
+      }}
       title="fas"
     >
       <div>test</div>

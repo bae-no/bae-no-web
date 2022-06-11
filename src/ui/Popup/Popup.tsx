@@ -4,6 +4,7 @@ import {
   Content,
   AlertDialogContentProps,
   AlertDialog,
+  AlertDialogProps,
   AlertDialogTrigger,
   AlertDialogTitle,
   AlertDialogDescription,
@@ -28,7 +29,7 @@ function AlertDialogContent({ children, ...props }: AlertDialogContentProps) {
   );
 }
 
-interface PopupProps {
+interface PopupProps extends Pick<AlertDialogProps, "open" | "onOpenChange"> {
   children: ReactNode;
   title: string;
   description: string;
@@ -46,9 +47,11 @@ export default function Popup({
   cancelText,
   onConfirm,
   buttonDirection = "row",
+  open,
+  onOpenChange,
 }: PopupProps) {
   return (
-    <AlertDialog>
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <Box gap={buttonDirection === "column" ? "xl" : "lg"}>
