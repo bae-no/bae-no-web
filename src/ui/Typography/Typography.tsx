@@ -1,4 +1,4 @@
-import { HtmlHTMLAttributes } from "react";
+import { forwardRef, HtmlHTMLAttributes } from "react";
 import { Box } from "../Box";
 import { Sprinkles } from "../sprinkles.css";
 import { FontStyle, fontStyle } from "./Typography.css";
@@ -12,16 +12,11 @@ type TypographyProps = Pick<
     as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "label" | "span";
   };
 
-function Typography({
-  children,
-  as = "p",
-  color,
-  fontSize,
-  ...rest
-}: TypographyProps) {
-  return (
+const Typography = forwardRef(
+  ({ children, as = "p", color, fontSize, ...rest }: TypographyProps, ref) => (
     <Box
       {...rest}
+      ref={ref}
       as={as}
       color={color}
       className={fontStyle({
@@ -30,7 +25,7 @@ function Typography({
     >
       {children}
     </Box>
-  );
-}
+  )
+);
 
 export default Typography;

@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@fxts/core': ^0.7.0
+  '@fxts/core': ^0.8.0
   '@radix-ui/react-alert-dialog': ^0.1.7
   '@radix-ui/react-switch': ^0.1.5
   '@svgr/webpack': ^6.2.1
@@ -38,7 +38,7 @@ specifiers:
   typescript: ^4.6.4
 
 dependencies:
-  '@fxts/core': 0.7.0
+  '@fxts/core': 0.8.0
   '@radix-ui/react-alert-dialog': 0.1.7_i6xcbgvvylvakhe2evaee3dlf4
   '@radix-ui/react-switch': 0.1.5_react@18.1.0
   '@vanilla-extract/babel-plugin': 1.1.5
@@ -1459,8 +1459,8 @@ packages:
       - supports-color
     dev: true
 
-  /@fxts/core/0.7.0:
-    resolution: {integrity: sha512-bqQl05C5JkbfXf4yvZier9SMnnLYOqYI3sXuHCGpf2esTFDLPZp+po0ILSElRQ3ARiHFrM9RC9P7qdffAkQsUg==}
+  /@fxts/core/0.8.0:
+    resolution: {integrity: sha512-OisOCjqknlKb+g7tenOr/hFRL4gZgZa6KsVyDCn2u7vBBXqLwD+bPIXeZDdsc2yRTrtUGq6IWQseIqmAWN3sKw==}
     dependencies:
       tslib: 2.4.0
     dev: false

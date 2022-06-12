@@ -55,7 +55,7 @@ export default function Popup({
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <Box gap={buttonDirection === "column" ? "xl" : "lg"}>
-          <Box gap="xs">
+          <Box gap="xs" alignItems="center">
             <AlertDialogTitle asChild>
               <Typography as="h2" fontSize="headline4">
                 {title}
