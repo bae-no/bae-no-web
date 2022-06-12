@@ -1,8 +1,10 @@
-import { fireEvent, render } from "@testing-library/react";
 import { useState } from "react";
+
+import { fireEvent, render } from "@testing-library/react";
+
 import Toggle from "./Toggle";
 
-function MockComponent(props: unknown) {
+const MockComponent = (props: unknown) => {
   const [checked, setChecked] = useState(false);
   return <Toggle {...props} checked={checked} onCheckedChange={setChecked} />;
 }
@@ -48,7 +50,7 @@ describe("UI Toggle Component", () => {
 
   it("should render correct default checked", () => {
     const { getByTestId } = render(
-      <Toggle data-testid="toggle" defaultChecked />
+      <Toggle defaultChecked data-testid="toggle" />
     );
     const target = getByTestId("toggle");
 
@@ -60,7 +62,7 @@ describe("UI Toggle Component", () => {
   it("should handle disabled state", () => {
     const mockClick = jest.fn();
     const { getByTestId } = render(
-      <Toggle data-testid="toggle" disabled onCheckedChange={mockClick} />
+      <Toggle disabled data-testid="toggle" onCheckedChange={mockClick} />
     );
     const target = getByTestId("toggle");
 

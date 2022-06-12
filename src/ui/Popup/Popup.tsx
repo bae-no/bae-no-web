@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 import {
   Portal,
   Overlay,
@@ -11,36 +13,37 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "@radix-ui/react-alert-dialog";
-import { ReactNode } from "react";
 
 import { Box } from "../Box";
 import { Button } from "../Button";
-import { Typography } from "../Typography";
 import { overlayCss } from "../modalBase.css";
+import { Typography } from "../Typography";
+
 import { popupContentCss } from "./Popup.css";
 
-function AlertDialogContent({ children, ...props }: AlertDialogContentProps) {
-  return (
-    <Portal>
-      <Overlay className={overlayCss} />
-      <Content className={popupContentCss} {...props}>
-        {children}
-      </Content>
-    </Portal>
-  );
-}
+const AlertDialogContent = ({
+  children,
+  ...props
+}: AlertDialogContentProps) => (
+  <Portal>
+    <Overlay className={overlayCss} />
+    <Content className={popupContentCss} {...props}>
+      {children}
+    </Content>
+  </Portal>
+);
 
 interface PopupProps extends Pick<AlertDialogProps, "open" | "onOpenChange"> {
-  children: ReactNode;
-  title: string;
-  description: string;
-  cancelText?: string;
-  confirmText: string;
-  onConfirm?: () => void;
   buttonDirection?: "row" | "column";
+  cancelText?: string;
+  children: ReactNode;
+  confirmText: string;
+  description: string;
+  onConfirm?: () => void;
+  title: string;
 }
 
-export default function Popup({
+const Popup = ({
   children,
   title,
   description,
@@ -50,41 +53,41 @@ export default function Popup({
   buttonDirection = "row",
   open,
   onOpenChange,
-}: PopupProps) {
-  return (
-    <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
-      <AlertDialogContent>
-        <Box gap={buttonDirection === "column" ? "xl" : "lg"}>
-          <Box gap="xs" alignItems="center">
-            <AlertDialogTitle asChild>
-              <Typography as="h2" fontSize="headline4">
-                {title}
-              </Typography>
-            </AlertDialogTitle>
-            <AlertDialogDescription asChild>
-              <Typography color="black3" fontSize="body1-m">
-                {description}
-              </Typography>
-            </AlertDialogDescription>
-          </Box>
-          <Box
-            gap={buttonDirection === "column" ? "xs" : undefined}
-            flexDirection={
-              buttonDirection === "column" ? "column-reverse" : "row"
-            }
-          >
-            {cancelText && (
-              <AlertDialogCancel asChild>
-                <Button color="white">{cancelText}</Button>
-              </AlertDialogCancel>
-            )}
-            <AlertDialogAction asChild>
-              <Button onClick={onConfirm}>{confirmText}</Button>
-            </AlertDialogAction>
-          </Box>
+}: PopupProps) => (
+  <AlertDialog open={open} onOpenChange={onOpenChange}>
+    <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
+    <AlertDialogContent>
+      <Box gap={buttonDirection === "column" ? "xl" : "lg"}>
+        <Box alignItems="center" gap="xs">
+          <AlertDialogTitle asChild>
+            <Typography as="h2" fontSize="headline4">
+              {title}
+            </Typography>
+          </AlertDialogTitle>
+          <AlertDialogDescription asChild>
+            <Typography color="black3" fontSize="body1-m">
+              {description}
+            </Typography>
+          </AlertDialogDescription>
         </Box>
-      </AlertDialogContent>
-    </AlertDialog>
-  );
-}
+        <Box
+          flexDirection={
+            buttonDirection === "column" ? "column-reverse" : "row"
+          }
+          gap={buttonDirection === "column" ? "xs" : undefined}
+        >
+          {cancelText && (
+            <AlertDialogCancel asChild>
+              <Button color="white">{cancelText}</Button>
+            </AlertDialogCancel>
+          )}
+          <AlertDialogAction asChild>
+            <Button onClick={onConfirm}>{confirmText}</Button>
+          </AlertDialogAction>
+        </Box>
+      </Box>
+    </AlertDialogContent>
+  </AlertDialog>
+);
+
+export default Popup;

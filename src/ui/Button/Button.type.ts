@@ -1,23 +1,25 @@
 import { MouseEvent, ReactNode, AriaAttributes } from "react";
+
 import { SvgIconKey } from "../Icon/iconMap";
+
 import { ButtonStyle } from "./Button.css";
 
 interface ButtonBaseProps extends AriaAttributes {
   children: ReactNode;
-  leftIconName?: SvgIconKey;
   disabled?: boolean;
+  leftIconName?: SvgIconKey;
 }
 
 interface ButtonTypeProps extends ButtonBaseProps {
-  type?: "button" | "submit" | "reset";
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   href?: never;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  type?: "button" | "submit" | "reset";
 }
 
 interface LinkTypeProps extends ButtonBaseProps {
   href: string;
-  type?: never;
   onClick?: never;
+  type?: never;
 }
 
 export type ButtonProps = ButtonStyle & (ButtonTypeProps | LinkTypeProps);

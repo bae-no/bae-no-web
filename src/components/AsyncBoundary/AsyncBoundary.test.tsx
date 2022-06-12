@@ -5,14 +5,14 @@ import { hideErrorLog, customRender } from "src/utils/testUtils";
 
 import { AsyncBoundary } from ".";
 
-function MockComponent() {
+const MockComponent = () => {
   const { data } = useQuery(["mock"], () => Promise.resolve("mock"), {
     suspense: true,
   });
   return <div>{data}</div>;
-}
+};
 
-function MockErrorComponent() {
+const MockErrorComponent = () => {
   useQuery(
     ["mock", "error"],
     () =>
@@ -25,15 +25,11 @@ function MockErrorComponent() {
     }
   );
   return <div>test</div>;
-}
+};
 
-function LoadingFallback() {
-  return <div>Loading...</div>;
-}
+const LoadingFallback = () => <div>Loading...</div>;
 
-function ErrorFallback() {
-  return <>error</>;
-}
+const ErrorFallback = () => <>error</>;
 
 describe("common/components/AsyncBoundary", () => {
   it("should render child", () => {
@@ -70,8 +66,8 @@ describe("common/components/AsyncBoundary", () => {
 
     const container = customRender(
       <AsyncBoundary
-        loadingFallback={() => <span>loading</span>}
         errorFallback={({ error }) => <div>{error.message}</div>}
+        loadingFallback={() => <span>loading</span>}
       >
         <MockErrorComponent />
       </AsyncBoundary>

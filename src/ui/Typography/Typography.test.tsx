@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+
 import Typography from "./Typography";
 
 describe("UI Typography Component", () => {

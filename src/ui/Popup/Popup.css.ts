@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+
 import { contentCss } from "../modalBase.css";
 import { sprinkles } from "../sprinkles.css";
 

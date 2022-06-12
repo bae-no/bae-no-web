@@ -1,6 +1,8 @@
 import { forwardRef, HtmlHTMLAttributes } from "react";
+
 import { Box } from "../Box";
 import { Sprinkles } from "../sprinkles.css";
+
 import { FontStyle, fontStyle } from "./Typography.css";
 
 type TypographyProps = Pick<
@@ -16,12 +18,12 @@ const Typography = forwardRef(
   ({ children, as = "p", color, fontSize, ...rest }: TypographyProps, ref) => (
     <Box
       {...rest}
-      ref={ref}
       as={as}
-      color={color}
       className={fontStyle({
         fontSize,
       })}
+      color={color}
+      ref={ref}
     >
       {children}
     </Box>

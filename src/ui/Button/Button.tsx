@@ -1,8 +1,11 @@
-import Link from "next/link";
 import { ForwardedRef, forwardRef } from "react";
+
+import Link from "next/link";
+
 import { Box } from "../Box";
 import { Icon } from "../Icon";
 import { element } from "../reset.css";
+
 import { buttonStyle } from "./Button.css";
 import { ButtonProps } from "./Button.type";
 
@@ -24,19 +27,19 @@ const Button = forwardRef(
   ) => {
     const renderButton = () => (
       <Box
-        as={href ? "a" : "button"}
-        type={type}
-        ref={ref}
         alignItems="center"
-        justifyContent="center"
-        flexDirection="row"
+        as={href ? "a" : "button"}
         className={[
           element.button,
-          buttonStyle({ variant, color, size }),
+          buttonStyle({ color, size, variant }),
           disabled && "disabled",
         ]}
-        onClick={onClick}
         disabled={disabled}
+        flexDirection="row"
+        justifyContent="center"
+        ref={ref}
+        type={type}
+        onClick={onClick}
         {...rest}
       >
         {leftIconName && (

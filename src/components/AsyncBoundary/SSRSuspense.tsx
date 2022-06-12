@@ -1,9 +1,10 @@
 import { ReactElement, ReactNode, Suspense } from "react";
+
 import { useMounted } from "src/hooks";
 
 interface SSRSafeSuspenseProps {
-  fallback: ReactElement;
   children: ReactNode;
+  fallback: ReactElement;
 }
 
 const SSRSafeSuspense = ({ children, fallback }: SSRSafeSuspenseProps) => {

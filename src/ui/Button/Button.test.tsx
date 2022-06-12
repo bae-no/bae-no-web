@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+
 import Button from "./Button";
 
 describe("UI Button Component", () => {
@@ -29,7 +30,7 @@ describe("UI Button Component", () => {
   it("should not trigger click event on disabled", () => {
     const mockClick = jest.fn();
     render(
-      <Button onClick={mockClick} disabled>
+      <Button disabled onClick={mockClick}>
         test text
       </Button>
     );

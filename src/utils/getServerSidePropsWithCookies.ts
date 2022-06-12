@@ -1,4 +1,5 @@
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
+
 import { setCookiesOnServer } from "./getCookie";
 
 export function getServerSidePropsWithCookies(callback: GetServerSideProps) {

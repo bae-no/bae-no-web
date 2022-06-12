@@ -1,14 +1,15 @@
 import { render, screen } from "@testing-library/react";
+
 import Popup from "./Popup";
 
 describe("UI Popup Component", () => {
   it("match snapshot", () => {
     const { container } = render(
       <Popup
+        buttonDirection="column"
         cancelText="tesaaaa"
         confirmText="test"
         description="fdsa"
-        buttonDirection="column"
         title="fas"
       >
         <div>test</div>
@@ -20,10 +21,10 @@ describe("UI Popup Component", () => {
   it("render text", () => {
     render(
       <Popup
+        buttonDirection="column"
         cancelText="tesaaaa"
         confirmText="test"
         description="fdsa"
-        buttonDirection="column"
         title="fas"
       >
         <div>tet</div>
