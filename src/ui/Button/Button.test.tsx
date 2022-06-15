@@ -3,11 +3,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import Button from "./Button";
 
 describe("UI Button Component", () => {
-  it("should match snapshot", () => {
-    const { container } = render(<Button href="/">test</Button>);
-    expect(container).toMatchSnapshot();
-  });
-
   it("should render text", () => {
     render(<Button href="/">test text</Button>);
     expect(screen.getByText("test text")).toBeInTheDocument();

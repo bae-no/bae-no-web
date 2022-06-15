@@ -7,19 +7,15 @@ import { theme } from "../tokens";
 import Icon from "./Icon";
 
 jest.mock("next/dynamic", () => () => {
-  const DynamicComponent = (props: SVGAttributes<SVGElement>) => <svg {...props} />
+  const DynamicComponent = (props: SVGAttributes<SVGElement>) => (
+    <svg {...props} />
+  );
   DynamicComponent.displayName = "LoadableComponent";
   DynamicComponent.preload = jest.fn();
   return DynamicComponent;
 });
 
 describe("UI Icon Component", () => {
-  it("match snapshot", () => {
-    const { container } = render(<Icon data-testid="test" name="close" />);
-
-    expect(container).toMatchSnapshot();
-  });
-
   it("could have aria-label", () => {
     render(<Icon aria-label="test" name="close" />);
     expect(screen.getByLabelText("test")).toBeInTheDocument();
