@@ -3,6 +3,7 @@ import { Hydrate, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import { useInit } from "src/hooks";
 import { queryClient } from "src/queryClient";
+import "src/ui/global.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useInit();

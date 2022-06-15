@@ -1,7 +1,7 @@
 import { waitFor } from "@testing-library/react";
 import { useQuery } from "react-query";
 
-import { hideErrorLog, customRender } from "src/utils";
+import { hideErrorLog, customRender } from "src/utils/testUtils";
 
 import { AsyncBoundary } from ".";
 

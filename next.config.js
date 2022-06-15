@@ -1,5 +1,9 @@
 const { createVanillaExtractPlugin } = require("@vanilla-extract/next-plugin");
 const withVanillaExtract = createVanillaExtractPlugin();
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
 require("./scripts/generateIcon");
 
 /** @type {import('next').NextConfig} */
@@ -10,7 +14,7 @@ const nextConfig = {
   },
 };
 
-module.exports = {
+module.exports = withBundleAnalyzer({
   webpack(config, option) {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -34,4 +38,4 @@ module.exports = {
 
     return withVanillaExtract(nextConfig).webpack(config, option);
   },
-};
+});

@@ -12,17 +12,18 @@ import {
   AlertDialogAction,
 } from "@radix-ui/react-alert-dialog";
 import { ReactNode } from "react";
-import { Box } from "../Box";
 
+import { Box } from "../Box";
 import { Button } from "../Button";
 import { Typography } from "../Typography";
-import { contentCss, overlayCss } from "./Popup.css";
+import { overlayCss } from "../modalBase.css";
+import { popupContentCss } from "./Popup.css";
 
 function AlertDialogContent({ children, ...props }: AlertDialogContentProps) {
   return (
     <Portal>
       <Overlay className={overlayCss} />
-      <Content className={contentCss} {...props}>
+      <Content className={popupContentCss} {...props}>
         {children}
       </Content>
     </Portal>
@@ -55,7 +56,7 @@ export default function Popup({
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <Box gap={buttonDirection === "column" ? "xl" : "lg"}>
-          <Box gap="xs">
+          <Box gap="xs" alignItems="center">
             <AlertDialogTitle asChild>
               <Typography as="h2" fontSize="headline4">
                 {title}

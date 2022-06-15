@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:dev": "ANALYZE=true next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
     "test-watch": "jest --watch"
   },
   "dependencies": {
-    "@fxts/core": "^0.7.0",
+    "@fxts/core": "^0.8.0",
     "@radix-ui/react-alert-dialog": "^0.1.7",
     "@radix-ui/react-switch": "^0.1.5",
     "@vanilla-extract/babel-plugin": "^1.1.5",
@@ -31,6 +32,7 @@
     "recoil": "^0.7.2"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^12.1.6",
     "@svgr/webpack": "^6.2.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
