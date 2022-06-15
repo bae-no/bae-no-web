@@ -7,7 +7,7 @@
     "build": "next build",
     "build:dev": "ANALYZE=true next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint && eslint --ignore-path .gitignore .",
     "test": "jest",
     "test-watch": "jest --watch"
   },
