@@ -43,10 +43,10 @@ const base = style({
   overflowWrap: `break-word`,
 });
 
-export const fontStyle = recipe({
+export const fontCss = recipe({
   base,
   defaultVariants: { fontSize: "body1-r" },
   variants: { fontSize },
 });
 
-export type FontStyle = RecipeVariants<typeof fontStyle>;
+export type FontCss = RecipeVariants<typeof fontCss>;

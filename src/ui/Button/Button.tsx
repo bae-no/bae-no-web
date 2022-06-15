@@ -6,7 +6,7 @@ import { Box } from "../Box";
 import { Icon } from "../Icon";
 import { element } from "../reset.css";
 
-import { buttonStyle } from "./Button.css";
+import { buttonCss } from "./Button.css";
 import { ButtonProps } from "./Button.type";
 
 const Button = forwardRef(
@@ -31,7 +31,7 @@ const Button = forwardRef(
         as={href ? "a" : "button"}
         className={[
           element.button,
-          buttonStyle({ color, size, variant }),
+          buttonCss({ color, size, variant }),
           disabled && "disabled",
         ]}
         disabled={disabled}

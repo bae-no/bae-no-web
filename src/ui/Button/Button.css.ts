@@ -1,9 +1,9 @@
 import { createVar, style } from "@vanilla-extract/css";
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 
+import { fontCss } from "../fontBase.css";
 import { sprinkles } from "../sprinkles.css";
 import { theme } from "../tokens";
-import { fontStyle } from "../Typography/Typography.css";
 
 const { colors } = theme;
 
@@ -49,7 +49,7 @@ const outlineStyle = style({
   },
 });
 
-export const buttonStyle = recipe({
+export const buttonCss = recipe({
   base: sprinkles({ borderRadius: "xs" }),
   defaultVariants: { color: "orange", size: "l", variant: "primary" },
   variants: {
@@ -85,15 +85,15 @@ export const buttonStyle = recipe({
     size: {
       l: [
         sprinkles({ gap: "xs", py: "sm", width: "full" }),
-        fontStyle({ fontSize: "body1-m" }),
+        fontCss({ fontSize: "body1-m" }),
       ],
       m: [
         sprinkles({ gap: "xs", px: "md", py: "xs", width: "fit" }),
-        fontStyle({ fontSize: "body2-m" }),
+        fontCss({ fontSize: "body2-m" }),
       ],
       s: [
         sprinkles({ gap: "xxs", px: "xs", py: "xxs", width: "fit" }),
-        fontStyle({ fontSize: "body3-m" }),
+        fontCss({ fontSize: "body3-m" }),
       ],
     },
     variant: {
@@ -103,4 +103,4 @@ export const buttonStyle = recipe({
   },
 });
 
-export type ButtonStyle = RecipeVariants<typeof buttonStyle>;
+export type ButtonCss = RecipeVariants<typeof buttonCss>;
