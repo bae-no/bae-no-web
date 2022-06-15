@@ -1,4 +1,5 @@
 import { keyframes, style } from "@vanilla-extract/css";
+
 import { sprinkles } from "./sprinkles.css";
 
 const animationCss = "300ms cubic-bezier(0.16, 1, 0.3, 1) forwards";
@@ -15,17 +16,17 @@ const contentShow = keyframes({
 
 export const overlayCss = style([
   {
-    inset: 0,
     animation: `${overlayShow} ${animationCss}`,
+    inset: 0,
   },
   sprinkles({ bg: "black1", position: "fixed" }),
 ]);
 
 export const contentCss = style([
   {
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
     animation: `${contentShow} ${animationCss}`,
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%, -50%)",
   },
 ]);

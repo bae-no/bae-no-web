@@ -1,23 +1,23 @@
 import { globalStyle, style } from "@vanilla-extract/css";
 
 globalStyle("html, body", {
+  fontSize: "62.5%",
   margin: 0,
   padding: 0,
-  fontSize: "62.5%",
 });
 
 export const base = style({
-  margin: 0,
-  padding: 0,
   border: 0,
   boxSizing: "border-box",
+  margin: 0,
+  padding: 0,
   textDecoration: "none",
 });
 
 const button = style({
+  WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
   background: 0,
   border: 0,
-  WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
   cursor: "pointer",
 });
 
@@ -27,6 +27,6 @@ const list = style({
 
 export const element = {
   button,
-  ul: list,
   ol: list,
+  ul: list,
 };

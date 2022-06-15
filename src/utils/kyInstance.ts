@@ -1,7 +1,8 @@
 import ky, { HTTPError } from "ky-universal";
-import { ServerResponseBase } from "src/types";
 
+import { ServerResponseBase } from "src/types";
 import { getCookie } from "src/utils/getCookie";
+
 import { tokenStorage } from "./localStorage";
 
 type RefreshTokenResponse = ServerResponseBase<{
@@ -46,15 +47,7 @@ export const getToken = async () => {
 };
 
 export const kyInstance = ky.extend({
-  prefixUrl: SERVER_BASE_URL,
-  retry: 0,
   hooks: {
-    beforeRequest: [
-      (request) => {
-        const token = getCookie("x-auth-cookie");
-        request.headers.set("Authorization", `Bearer ${token}`);
-      },
-    ],
     afterResponse: [
       async (request, _, response) => {
         const { error } = await response.json();
@@ -70,5 +63,13 @@ export const kyInstance = ky.extend({
         }
       },
     ],
+    beforeRequest: [
+      (request) => {
+        const token = getCookie("x-auth-cookie");
+        request.headers.set("Authorization", `Bearer ${token}`);
+      },
+    ],
   },
+  prefixUrl: SERVER_BASE_URL,
+  retry: 0,
 });

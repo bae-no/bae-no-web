@@ -5,9 +5,9 @@ import { kyInstance } from "src/utils";
 interface GetMeResponse {
   user: {
     address: [];
+    defaultAddressId: string;
     email: string;
     id: number;
-    defaultAddressId: string;
     profile: {
       save_money: number;
     };

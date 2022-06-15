@@ -1,19 +1,19 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
-export default function Document() {
-  return (
-    <Html>
-      <Head>
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
-        />
-      </Head>
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
-}
+const Document = () => (
+  <Html>
+    <Head>
+      <link
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+        rel="stylesheet"
+        type="text/css"
+      />
+    </Head>
+    <body>
+      <Main />
+      <NextScript />
+    </body>
+  </Html>
+);
+
+export default Document;

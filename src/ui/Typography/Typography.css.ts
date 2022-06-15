@@ -1,6 +1,6 @@
+import { entries, flatMap, fromEntries, keys, map, pipe } from "@fxts/core";
 import { style } from "@vanilla-extract/css";
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
-import { entries, flatMap, fromEntries, keys, map, pipe } from "@fxts/core";
 
 const fontsBase = {
   body1: { fontSize: "1.6rem", lineHeight: "2.4rem" },
@@ -29,24 +29,24 @@ const fonts = pipe(
 );
 
 const fontSize = {
-  headline1: { fontSize: "3.2rem", lineHeight: "4.2rem", fontWeight: "700" },
-  headline2: { fontSize: "2.8rem", lineHeight: "3.8rem", fontWeight: "700" },
-  headline3: { fontSize: "2.4rem", lineHeight: "3.2rem", fontWeight: "700" },
-  headline4: { fontSize: "2rem", lineHeight: "2.8rem", fontWeight: "700" },
-  headline5: { fontSize: "1.8rem", lineHeight: "2.6rem", fontWeight: "700" },
+  headline1: { fontSize: "3.2rem", fontWeight: "700", lineHeight: "4.2rem" },
+  headline2: { fontSize: "2.8rem", fontWeight: "700", lineHeight: "3.8rem" },
+  headline3: { fontSize: "2.4rem", fontWeight: "700", lineHeight: "3.2rem" },
+  headline4: { fontSize: "2rem", fontWeight: "700", lineHeight: "2.8rem" },
+  headline5: { fontSize: "1.8rem", fontWeight: "700", lineHeight: "2.6rem" },
   ...fonts,
 };
 
 const base = style({
-  overflowWrap: `break-word`,
   fontFamily:
     "Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif",
+  overflowWrap: `break-word`,
 });
 
 export const fontStyle = recipe({
   base,
-  variants: { fontSize },
   defaultVariants: { fontSize: "body1-r" },
+  variants: { fontSize },
 });
 
 export type FontStyle = RecipeVariants<typeof fontStyle>;

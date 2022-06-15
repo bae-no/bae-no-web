@@ -1,5 +1,7 @@
-import clsx, { ClassValue } from "clsx";
 import { AllHTMLAttributes, createElement, forwardRef } from "react";
+
+import clsx, { ClassValue } from "clsx";
+
 import { base } from "../reset.css";
 import { sprinkles, Sprinkles } from "../sprinkles.css";
 import { parseProps } from "../utils";
