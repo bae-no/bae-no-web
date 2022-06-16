@@ -1,10 +1,12 @@
-import { MouseEvent, ReactNode, AriaAttributes } from "react";
+import { MouseEvent, ReactNode } from "react";
+
+import { ComponentBaseProps } from "src/types";
 
 import { SvgIconKey } from "../Icon/iconMap";
 
-import { ButtonStyle } from "./Button.css";
+import { ButtonCss } from "./Button.css";
 
-interface ButtonBaseProps extends AriaAttributes {
+interface ButtonBaseProps extends ComponentBaseProps {
   children: ReactNode;
   disabled?: boolean;
   leftIconName?: SvgIconKey;
@@ -22,4 +24,4 @@ interface LinkTypeProps extends ButtonBaseProps {
   type?: never;
 }
 
-export type ButtonProps = ButtonStyle & (ButtonTypeProps | LinkTypeProps);
+export type ButtonProps = ButtonCss & (ButtonTypeProps | LinkTypeProps);
