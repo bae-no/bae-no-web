@@ -14,7 +14,7 @@ const disabledColorVar = createVar();
 const fontColorVar = createVar();
 const disableFontColorVar = createVar();
 
-const primaryStyle = style({
+const defaultStyle = style({
   ":active": {
     backgroundColor: activeColorVar,
   },
@@ -51,7 +51,7 @@ const outlineStyle = style({
 
 export const buttonCss = recipe({
   base: sprinkles({ borderRadius: "xs" }),
-  defaultVariants: { color: "orange", size: "l", variant: "primary" },
+  defaultVariants: { color: "orange", size: "l", variant: "default" },
   variants: {
     color: {
       gray: {
@@ -97,8 +97,8 @@ export const buttonCss = recipe({
       ],
     },
     variant: {
+      default: defaultStyle,
       outline: outlineStyle,
-      primary: primaryStyle,
     },
   },
 });

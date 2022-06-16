@@ -8,6 +8,7 @@ module.exports = {
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:typescript-sort-keys/recommended",
+    "plugin:storybook/recommended",
   ],
   plugins: [
     "react",
@@ -21,10 +22,17 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   ignorePatterns: ["**/*.js", "**/*.d.ts"],
   rules: {
+    "import/no-extraneous-dependencies": [
+      "error",
+      { devDependencies: ["**/*.stories.*", "**/*.test.*", "jest.*"] },
+    ],
     "@typescript-eslint/quotes": "off",
     "react/jsx-sort-props": [
       "error",
-      { callbacksLast: true, shorthandFirst: true },
+      {
+        callbacksLast: true,
+        shorthandFirst: true,
+      },
     ],
     "react/function-component-definition": [
       "error",
@@ -37,7 +45,10 @@ module.exports = {
     "import/order": [
       "error",
       {
-        alphabetize: { order: "asc", caseInsensitive: true },
+        alphabetize: {
+          order: "asc",
+          caseInsensitive: true,
+        },
         groups: [
           "builtin",
           "external",
