@@ -82,3 +82,24 @@ export const Default = Template.bind({});
 Default.args = {
   children: "Default Box",
 };
+
+export const TwoChildren = Template.bind({});
+TwoChildren.args = {
+  children: (
+    <>
+      <div>test1</div>
+      <div>test2</div>
+    </>
+  ),
+};
+
+export const ThreeChildren = Template.bind({});
+ThreeChildren.args = {
+  children: (
+    <>
+      <div>test1</div>
+      <div>test2</div>
+      <div>test3</div>
+    </>
+  ),
+};
