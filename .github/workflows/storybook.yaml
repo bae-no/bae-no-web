@@ -13,7 +13,6 @@ jobs:
         with:
           PATTERNS: |
             +(src)/**/*.stories.*
-      - run: echo ${{env.GIT_DIFF}}
   deploy-storybook:
     needs: check-git-diff
     runs-on: ubuntu-latest
@@ -32,5 +31,5 @@ jobs:
 
       - name: Deploy
         env:
-          - CHROMATIC_PROJECT_TOKEN=${{ secrets.CHROMATIC_TOKEN }}
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_TOKEN }}
         run: pnpm chromatic
