@@ -1,5 +1,8 @@
 name: deploy-storybook
-on: [pull_request]
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   deploy-storybook:
@@ -26,7 +29,7 @@ jobs:
         if: env.GIT_DIFF
 
       - name: Deploy
+        run: pnpm chromatic
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_TOKEN }}
-        run: pnpm chromatic
         if: env.GIT_DIFF
