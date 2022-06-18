@@ -1,11 +1,8 @@
-name: ci
-on:
-  push:
-    branches:
-      - main
+name: deploy-storybook
+on: [pull_request]
 
 jobs:
-  check-git-diff:
+  deploy-storybook:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -13,23 +10,23 @@ jobs:
         with:
           PATTERNS: |
             +(src)/**/*.stories.*
-  deploy-storybook:
-    needs: check-git-diff
-    runs-on: ubuntu-latest
-    if: env.GIT_DIFF
-    steps:
       - uses: pnpm/action-setup@v2.0.1
         with:
           version: 7.0.0-rc.9
+        if: env.GIT_DIFF
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
           cache: pnpm
+        if: env.GIT_DIFF
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+        if: env.GIT_DIFF
 
       - name: Deploy
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_TOKEN }}
         run: pnpm chromatic
+        if: env.GIT_DIFF
