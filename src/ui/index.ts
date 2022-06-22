@@ -6,3 +6,4 @@ export * from "./Button";
 export * from "./Popup";
 export * from "./Input";
 export * from "./Form";
+export * from "./Radio";
