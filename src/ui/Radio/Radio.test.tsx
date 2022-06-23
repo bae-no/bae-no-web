@@ -41,7 +41,6 @@ describe("UI Radio Component", () => {
     const mockOnValueChange = jest.fn();
     render(
       <Radio
-        disabled
         radioValue={[{ label: "test" }]}
         onValueChange={mockOnValueChange}
       />

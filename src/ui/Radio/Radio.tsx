@@ -16,16 +16,10 @@ type RootType = {
 type RadioProps = ComponentBaseProps &
   Pick<RootType, "onValueChange"> & {
     defaultValue?: string;
-    disabled?: boolean;
     radioValue: { label: string; value?: string }[];
   };
 
-const Radio = ({
-  radioValue,
-  disabled = false,
-  onValueChange,
-  defaultValue,
-}: RadioProps) => {
+const Radio = ({ radioValue, onValueChange, defaultValue }: RadioProps) => {
   const id = useId();
   return (
     <Root defaultValue={defaultValue} onValueChange={onValueChange}>
@@ -39,7 +33,6 @@ const Radio = ({
           >
             <Item
               className={radioItemStyle}
-              disabled={disabled}
               id={id + String(index)}
               value={radioData.value || radioData.label}
             >
