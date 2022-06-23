@@ -4,7 +4,7 @@ import { dehydrate } from "react-query";
 import { AsyncBoundary } from "src/components/AsyncBoundary";
 import { getMeQuery } from "src/queries";
 import { queryClient } from "src/queryClient";
-import { Typography, Toggle, Popup } from "src/ui";
+import { Typography, Toggle, Popup, Radio } from "src/ui";
 import Icon from "src/ui/Icon/Icon";
 import { SVG_ICON_MAP } from "src/ui/Icon/iconMap";
 import { SERVER_BASE_URL, getServerSidePropsWithCookies } from "src/utils";
@@ -49,6 +49,9 @@ const ErrorFallback = () => (
     )}
     <a href={`${SERVER_BASE_URL}/v1/auths/google`}>구글</a>;
     <a href={`${SERVER_BASE_URL}/v1/auths/kakao`}>카카오</a>;
+    <Radio
+      radioValue={[{ label: "test1", value: "testValue" }, { label: "test2" }]}
+    />
   </div>
 );
 

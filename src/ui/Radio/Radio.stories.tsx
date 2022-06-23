@@ -15,5 +15,9 @@ const Template: ComponentStory<typeof Radio> = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   disabled: false,
-  radioValue: ["", "라디오버튼 라벨", "라디오버튼 라벨2"],
+  radioValue: [
+    { label: "" },
+    { label: "라디오버튼 라벨", value: "라디오버튼 라벨 value" },
+    { label: "라디오버튼 라벨2" },
+  ],
 };

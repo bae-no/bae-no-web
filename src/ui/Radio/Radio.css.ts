@@ -31,26 +31,16 @@ export const radioItemStyle = style([
   sprinkles({
     bg: "white",
     borderRadius: "half",
+    cursor: "pointer",
     padding: "none",
     size: "lg",
   }),
   style({
     border: `solid 1px ${colors.black7}`,
-  }),
-]);
-
-export const itemLabelBox = style([
-  sprinkles({
-    alignItems: "center",
-    display: "flex",
-    gap: "md",
-  }),
-]);
-
-export const radioRootStyle = style([
-  sprinkles({
-    display: "flex",
-    flexDirection: "column",
-    gap: "lg",
+    selectors: {
+      '&[data-state="checked"]': {
+        border: "none",
+      },
+    },
   }),
 ]);

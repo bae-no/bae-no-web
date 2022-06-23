@@ -4,14 +4,17 @@ import Radio from "./Radio";
 
 describe("UI Radio Component", () => {
   it("should render label text", () => {
-    render(<Radio radioValue={["test", "test2"]} />);
+    render(<Radio radioValue={[{ label: "test" }, { label: "test2" }]} />);
     expect(screen.getByLabelText("test")).toBeInTheDocument();
     expect(screen.getByLabelText("test2")).toBeInTheDocument();
   });
 
   it("should default value", () => {
     render(
-      <Radio defaultValue="test3" radioValue={["test", "test2", "test3"]} />
+      <Radio
+        defaultValue="test3"
+        radioValue={[{ label: "test" }, { label: "test2" }, { label: "test3" }]}
+      />
     );
 
     expect(screen.getByLabelText("test3")).toBeChecked();
@@ -20,19 +23,28 @@ describe("UI Radio Component", () => {
   it("should on value change event ", () => {
     const mockOnValueChange = jest.fn();
     render(
-      <Radio radioValue={["test", "test2"]} onValueChange={mockOnValueChange} />
+      <Radio
+        radioValue={[{ label: "test" }, { label: "test2" }]}
+        onValueChange={mockOnValueChange}
+      />
     );
     fireEvent.click(screen.getByLabelText("test"));
+    expect(screen.getByLabelText("test")).toBeChecked();
+    expect(mockOnValueChange).toHaveBeenCalled();
 
-    expect(screen.getByLabelText("test")).toBeInTheDocument();
-    expect(screen.getByLabelText("test2")).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText("test2"));
+    expect(screen.getByLabelText("test2")).toBeChecked();
     expect(mockOnValueChange).toHaveBeenCalled();
   });
 
   it("should handle disabled state", () => {
     const mockOnValueChange = jest.fn();
     render(
-      <Radio disabled radioValue={["test"]} onValueChange={mockOnValueChange} />
+      <Radio
+        disabled
+        radioValue={[{ label: "test" }]}
+        onValueChange={mockOnValueChange}
+      />
     );
     fireEvent.click(screen.getByLabelText("test"));
 

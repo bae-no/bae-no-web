@@ -1,50 +1,62 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+import { useId } from "react";
+
 import { Root, Item, Indicator } from "@radix-ui/react-radio-group";
 
+import { ComponentBaseProps } from "src/types";
+
+import { Box } from "../Box";
 import { Typography } from "../Typography";
 
-import {
-  radioItemStyle,
-  radioIndicatorStyle,
-  itemLabelBox,
-  radioRootStyle,
-} from "./Radio.css";
+import { radioItemStyle, radioIndicatorStyle } from "./Radio.css";
 
-interface RadioProps {
-  defaultValue?: string;
-  disabled?: boolean;
-  onValueChange?: (e?: string) => void;
-  radioValue: string[];
-}
+type RootType = {
+  onValueChange?: (e: string) => void;
+};
+
+type RadioProps = ComponentBaseProps &
+  Pick<RootType, "onValueChange"> & {
+    defaultValue?: string;
+    disabled?: boolean;
+    radioValue: { label: string; value?: string }[];
+  };
 
 const Radio = ({
   radioValue,
   disabled = false,
   onValueChange,
   defaultValue,
-}: RadioProps) => (
-  <Root
-    aria-label="View density"
-    className={radioRootStyle}
-    defaultValue={defaultValue}
-    onValueChange={onValueChange}
-  >
-    {radioValue.map((radioData, index) => (
-      <div className={itemLabelBox} key={radioData}>
-        <Item
-          className={radioItemStyle}
-          disabled={disabled}
-          id={String(index)}
-          value={radioData}
-        >
-          <Indicator className={radioIndicatorStyle} />
-        </Item>
-        <label htmlFor={String(index)}>
-          <Typography fontSize="body2-m">{radioData}</Typography>
-        </label>
-      </div>
-    ))}
-  </Root>
-);
+}: RadioProps) => {
+  const id = useId();
+  return (
+    <Root defaultValue={defaultValue} onValueChange={onValueChange}>
+      <Box gap="lg">
+        {radioValue.map((radioData, index) => (
+          <Box
+            display="flex"
+            flexDirection="row"
+            gap="md"
+            key={radioData.label}
+          >
+            <Item
+              className={radioItemStyle}
+              disabled={disabled}
+              id={id + String(index)}
+              value={radioData.value || radioData.label}
+            >
+              <Indicator className={radioIndicatorStyle} />
+            </Item>
+            <Typography
+              as="label"
+              fontSize="body2-m"
+              htmlFor={id + String(index)}
+            >
+              {radioData.label}
+            </Typography>
+          </Box>
+        ))}
+      </Box>
+    </Root>
+  );
+};
 
 export default Radio;
