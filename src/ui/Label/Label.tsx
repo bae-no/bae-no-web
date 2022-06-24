@@ -1,21 +1,23 @@
 import { ReactNode } from "react";
+
 import { Box } from "../Box";
-import { LabelStyle, labelStyle } from "./Label.css";
+
+import { LabelCss, labelCss } from "./Label.css";
 
 interface Props {
   children: ReactNode;
 }
 
-export type LabelProps = Props & LabelStyle;
+export type LabelProps = Props & LabelCss;
 
-const Label = ({ children, variant, color }: LabelProps) => (
+const Label = ({ children, color, variant }: LabelProps) => (
   <Box
-    as="label"
-    display={variant === "border" ? "inline-block" : "flex"}
     alignItems="center"
-    justifyContent="center"
+    as="label"
+    className={[labelCss({ color, variant })]}
+    display="inline-block"
     flexDirection="row"
-    className={[labelStyle({ variant, color })]}
+    justifyContent="center"
   >
     {children}
   </Box>

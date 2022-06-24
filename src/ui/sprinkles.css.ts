@@ -44,6 +44,7 @@ const responsiveProperties = defineProperties({
     paddingRight: space,
     paddingTop: space,
     position: ["absolute", "relative", "fixed", "sticky"],
+    textAlign: ["center", "left", "right"],
     width: layout,
     zIndex: [-1, 0, 1, 2, 3, 4, 5],
   },

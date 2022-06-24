@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+
 import { theme } from "../tokens";
 
 import Label from "./Label";
