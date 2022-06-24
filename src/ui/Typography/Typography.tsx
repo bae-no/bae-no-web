@@ -1,5 +1,7 @@
 import { forwardRef, ReactNode } from "react";
 
+import { ClassValue } from "clsx";
+
 import { ComponentBaseProps } from "src/types";
 
 import { Box } from "../Box";
@@ -11,17 +13,31 @@ type TypographyProps = ComponentBaseProps &
   FontCss & {
     as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "label" | "span";
     children: ReactNode;
+    className?: ClassValue;
     htmlFor?: string;
   };
 
 const Typography = forwardRef(
-  ({ children, as = "p", color, fontSize, ...rest }: TypographyProps, ref) => (
+  (
+    {
+      children,
+      as = "p",
+      color,
+      fontSize,
+      className,
+      ...rest
+    }: TypographyProps,
+    ref
+  ) => (
     <Box
       {...rest}
       as={as}
-      className={fontCss({
-        fontSize,
-      })}
+      className={[
+        fontCss({
+          fontSize,
+        }),
+        className,
+      ]}
       color={color}
       ref={ref}
     >
