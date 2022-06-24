@@ -34,19 +34,6 @@ describe("UI Radio Component", () => {
 
     fireEvent.click(screen.getByLabelText("test2"));
     expect(screen.getByLabelText("test2")).toBeChecked();
-    expect(mockOnValueChange).toHaveBeenCalled();
-  });
-
-  it("should handle disabled state", () => {
-    const mockOnValueChange = jest.fn();
-    render(
-      <Radio
-        radioValue={[{ label: "test" }]}
-        onValueChange={mockOnValueChange}
-      />
-    );
-    fireEvent.click(screen.getByLabelText("test"));
-
-    expect(mockOnValueChange).not.toHaveBeenCalled();
+    expect(mockOnValueChange).toHaveBeenCalledTimes(2);
   });
 });

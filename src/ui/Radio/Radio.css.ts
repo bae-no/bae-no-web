@@ -5,16 +5,14 @@ import { theme } from "../tokens";
 
 const { colors } = theme;
 
-export const radioIndicatorStyle = style([
+export const radioIndicatorCss = style([
   sprinkles({
     alignItems: "center",
     bg: "orange2",
     br: "half",
     display: "flex",
-    height: "full",
     justifyContent: "center",
     size: "full",
-    width: "full",
   }),
   {
     "::after": {
@@ -27,7 +25,7 @@ export const radioIndicatorStyle = style([
   },
 ]);
 
-export const radioItemStyle = style([
+export const radioItemCss = style([
   sprinkles({
     bg: "white",
     borderRadius: "half",
@@ -37,6 +35,7 @@ export const radioItemStyle = style([
   }),
   style({
     border: `solid 1px ${colors.black7}`,
+    outline: "none",
     selectors: {
       '&[data-state="checked"]': {
         border: "none",

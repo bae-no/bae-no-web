@@ -1,55 +1,67 @@
-import { useId } from "react";
+import { forwardRef, useId, ForwardedRef } from "react";
 
-import { Root, Item, Indicator } from "@radix-ui/react-radio-group";
+import {
+  Root,
+  Item,
+  Indicator,
+  RadioGroupProps,
+} from "@radix-ui/react-radio-group";
 
 import { ComponentBaseProps } from "src/types";
 
 import { Box } from "../Box";
+import { sprinkles } from "../sprinkles.css";
 import { Typography } from "../Typography";
 
-import { radioItemStyle, radioIndicatorStyle } from "./Radio.css";
+import { radioIndicatorCss, radioItemCss } from "./Radio.css";
 
-type RootType = {
-  onValueChange?: (e: string) => void;
-};
+interface RadioProps
+  extends ComponentBaseProps,
+    Pick<RadioGroupProps, "onValueChange"> {
+  defaultValue?: string;
+  radioValue: { label: string; value?: string }[];
+}
 
-type RadioProps = ComponentBaseProps &
-  Pick<RootType, "onValueChange"> & {
-    defaultValue?: string;
-    radioValue: { label: string; value?: string }[];
-  };
-
-const Radio = ({ radioValue, onValueChange, defaultValue }: RadioProps) => {
-  const id = useId();
-  return (
-    <Root defaultValue={defaultValue} onValueChange={onValueChange}>
-      <Box gap="lg">
-        {radioValue.map((radioData, index) => (
-          <Box
-            display="flex"
-            flexDirection="row"
-            gap="md"
-            key={radioData.label}
-          >
-            <Item
-              className={radioItemStyle}
-              id={id + String(index)}
-              value={radioData.value || radioData.label}
-            >
-              <Indicator className={radioIndicatorStyle} />
-            </Item>
-            <Typography
-              as="label"
-              fontSize="body2-m"
-              htmlFor={id + String(index)}
-            >
-              {radioData.label}
-            </Typography>
-          </Box>
-        ))}
-      </Box>
-    </Root>
-  );
-};
+const Radio = forwardRef(
+  (
+    { radioValue, onValueChange, defaultValue, ...rest }: RadioProps,
+    ref: ForwardedRef<HTMLDivElement>
+  ) => {
+    const id = useId();
+    return (
+      <Root
+        {...rest}
+        defaultValue={defaultValue}
+        ref={ref}
+        onValueChange={onValueChange}
+      >
+        <Box gap="lg">
+          {radioValue.map(({ label, value }, index) => {
+            const radioId = id + String(index);
+            return (
+              <Box alignItems="center" flexDirection="row" gap="md" key={label}>
+                <Item
+                  className={radioItemCss}
+                  id={radioId}
+                  value={value || label}
+                >
+                  <Indicator className={radioIndicatorCss} />
+                </Item>
+                <Typography
+                  as="label"
+                  className={sprinkles({ cursor: "pointer" })}
+                  fontSize="body2-m"
+                  htmlFor={radioId}
+                >
+                  {label}
+                </Typography>
+              </Box>
+            );
+          })}
+        </Box>
+      </Root>
+    );
+  }
+);
 
 export default Radio;
