@@ -1,11 +1,16 @@
-import clsx, { ClassValue } from "clsx";
 import { AllHTMLAttributes, createElement, forwardRef } from "react";
+
+import clsx, { ClassValue } from "clsx";
+
+import { ComponentBaseProps } from "src/types";
+
 import { base } from "../reset.css";
 import { sprinkles, Sprinkles } from "../sprinkles.css";
 import { parseProps } from "../utils";
 
 export interface BoxProps
-  extends Omit<
+  extends ComponentBaseProps,
+    Omit<
       AllHTMLAttributes<HTMLElement>,
       | "className"
       | "content"

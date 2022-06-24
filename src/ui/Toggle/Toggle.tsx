@@ -1,25 +1,26 @@
+import { ForwardedRef, forwardRef } from "react";
+
 import { Root, Thumb } from "@radix-ui/react-switch";
 import clsx from "clsx";
-import { ForwardedRef, forwardRef } from "react";
+
 import { base } from "../reset.css";
+
 import { toggleRootStyle, toggleThumbStyle } from "./Toggle.css";
 
 interface ToggleProps {
-  defaultChecked?: boolean;
   checked?: boolean;
-  onCheckedChange?: (checked: boolean) => void;
+  defaultChecked?: boolean;
   disabled?: boolean;
-  required?: boolean;
   name?: string;
+  onCheckedChange?: (checked: boolean) => void;
+  required?: boolean;
   value?: string;
 }
 
-function Toggle(props: ToggleProps, ref: ForwardedRef<HTMLButtonElement>) {
-  return (
-    <Root {...props} ref={ref} className={clsx([toggleRootStyle, base])}>
+const Toggle = (props: ToggleProps, ref: ForwardedRef<HTMLButtonElement>) => (
+    <Root {...props} className={clsx([toggleRootStyle, base])} ref={ref}>
       <Thumb className={toggleThumbStyle} />
     </Root>
-  );
-}
+  )
 
 export default forwardRef(Toggle);

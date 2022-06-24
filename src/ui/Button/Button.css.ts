@@ -1,8 +1,9 @@
 import { createVar, style } from "@vanilla-extract/css";
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
+
+import { fontCss } from "../fontBase.css";
 import { sprinkles } from "../sprinkles.css";
 import { theme } from "../tokens";
-import { fontStyle } from "../Typography/Typography.css";
 
 const { colors } = theme;
 
@@ -13,9 +14,7 @@ const disabledColorVar = createVar();
 const fontColorVar = createVar();
 const disableFontColorVar = createVar();
 
-const primaryStyle = style({
-  backgroundColor: defaultColorVar,
-  color: fontColorVar,
+const defaultStyle = style({
   ":active": {
     backgroundColor: activeColorVar,
   },
@@ -23,6 +22,8 @@ const primaryStyle = style({
     backgroundColor: disabledColorVar,
     color: disableFontColorVar,
   },
+  backgroundColor: defaultColorVar,
+  color: fontColorVar,
   selectors: {
     "&.disabled": {
       backgroundColor: disabledColorVar,
@@ -32,14 +33,14 @@ const primaryStyle = style({
 });
 
 const outlineStyle = style({
-  borderColor: defaultColorVar,
-  color: defaultColorVar,
-  borderWidth: "1px",
-  borderStyle: "solid",
   ":active": {
     borderColor: activeColorVar,
     color: activeColorVar,
   },
+  borderColor: defaultColorVar,
+  borderStyle: "solid",
+  borderWidth: "1px",
+  color: defaultColorVar,
   selectors: {
     "&.disabled": {
       borderColor: disabledColorVar,
@@ -48,58 +49,58 @@ const outlineStyle = style({
   },
 });
 
-export const buttonStyle = recipe({
+export const buttonCss = recipe({
   base: sprinkles({ borderRadius: "xs" }),
+  defaultVariants: { color: "orange", size: "l", variant: "default" },
   variants: {
-    variant: {
-      primary: primaryStyle,
-      outline: outlineStyle,
-    },
     color: {
-      orange: {
-        vars: {
-          [defaultColorVar]: colors.orange2,
-          [activeColorVar]: colors.orange7,
-          [disabledColorVar]: colors.orange5,
-          [fontColorVar]: colors.white,
-          [disableFontColorVar]: colors.white,
-        },
-      },
       gray: {
         vars: {
-          [defaultColorVar]: colors.black9,
           [activeColorVar]: colors.black11,
+          [defaultColorVar]: colors.black9,
+          [disableFontColorVar]: colors.black6,
           [disabledColorVar]: colors.black9,
           [fontColorVar]: colors.black1,
-          [disableFontColorVar]: colors.black6,
+        },
+      },
+      orange: {
+        vars: {
+          [activeColorVar]: colors.orange7,
+          [defaultColorVar]: colors.orange2,
+          [disableFontColorVar]: colors.white,
+          [disabledColorVar]: colors.orange5,
+          [fontColorVar]: colors.white,
         },
       },
       white: {
         vars: {
-          [defaultColorVar]: colors.white,
           [activeColorVar]: colors.white,
+          [defaultColorVar]: colors.white,
+          [disableFontColorVar]: colors.black1,
           [disabledColorVar]: colors.white,
           [fontColorVar]: colors.black1,
-          [disableFontColorVar]: colors.black1,
         },
       },
     },
     size: {
       l: [
-        sprinkles({ py: "sm", width: "full", gap: "xs" }),
-        fontStyle({ fontSize: "body1-m" }),
+        sprinkles({ gap: "xs", py: "sm", width: "full" }),
+        fontCss({ fontSize: "body1-m" }),
       ],
       m: [
-        sprinkles({ py: "xs", px: "md", width: "fit", gap: "xs" }),
-        fontStyle({ fontSize: "body2-m" }),
+        sprinkles({ gap: "xs", px: "md", py: "xs", width: "fit" }),
+        fontCss({ fontSize: "body2-m" }),
       ],
       s: [
-        sprinkles({ py: "xxs", px: "xs", width: "fit", gap: "xxs" }),
-        fontStyle({ fontSize: "body3-m" }),
+        sprinkles({ gap: "xxs", px: "xs", py: "xxs", width: "fit" }),
+        fontCss({ fontSize: "body3-m" }),
       ],
     },
+    variant: {
+      default: defaultStyle,
+      outline: outlineStyle,
+    },
   },
-  defaultVariants: { variant: "primary", color: "orange", size: "l" },
 });
 
-export type ButtonStyle = RecipeVariants<typeof buttonStyle>;
+export type ButtonCss = RecipeVariants<typeof buttonCss>;

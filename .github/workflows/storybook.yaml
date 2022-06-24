@@ -1,0 +1,35 @@
+name: deploy-storybook
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy-storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: technote-space/get-diff-action@v6
+        with:
+          PATTERNS: |
+            +(src)/**/*.stories.*
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.0.0-rc.9
+        if: env.GIT_DIFF
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: pnpm
+        if: env.GIT_DIFF
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        if: env.GIT_DIFF
+
+      - name: Deploy
+        run: pnpm chromatic
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_TOKEN }}
+        if: env.GIT_DIFF

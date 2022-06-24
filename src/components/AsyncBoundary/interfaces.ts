@@ -7,9 +7,9 @@ export interface AsyncBoundaryProps
     ErrorBoundaryProps,
     "fallback" | "FallbackComponent" | "fallbackRender"
   > {
-  loadingFallback: (props?: unknown) => ReactElement<typeof props>;
+  children: ReactNode;
   errorFallback: Required<
     ComponentProps<typeof ErrorBoundary>
   >["FallbackComponent"];
-  children: ReactNode;
+  loadingFallback: (props?: unknown) => ReactElement<typeof props>;
 }
