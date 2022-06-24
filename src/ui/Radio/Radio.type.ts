@@ -5,6 +5,11 @@ import { ComponentBaseProps } from "src/types";
 export interface RadioProps
   extends ComponentBaseProps,
     Pick<RadioGroupProps, "onValueChange"> {
-  contentValue: { label: string; value?: string }[];
+  contentValue: RadioContentValueProps[];
   defaultValue?: string;
+}
+
+export interface RadioContentValueProps {
+  label: string;
+  value?: string;
 }

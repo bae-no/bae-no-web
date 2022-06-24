@@ -4,7 +4,7 @@ import Radio from "./Radio";
 
 describe("UI Radio Component", () => {
   it("should render label text", () => {
-    render(<Radio radioValue={[{ label: "test" }, { label: "test2" }]} />);
+    render(<Radio contentValue={[{ label: "test" }, { label: "test2" }]} />);
     expect(screen.getByLabelText("test")).toBeInTheDocument();
     expect(screen.getByLabelText("test2")).toBeInTheDocument();
   });
@@ -12,8 +12,12 @@ describe("UI Radio Component", () => {
   it("should default value", () => {
     render(
       <Radio
+        contentValue={[
+          { label: "test" },
+          { label: "test2" },
+          { label: "test3" },
+        ]}
         defaultValue="test3"
-        radioValue={[{ label: "test" }, { label: "test2" }, { label: "test3" }]}
       />
     );
 
@@ -24,7 +28,7 @@ describe("UI Radio Component", () => {
     const mockOnValueChange = jest.fn();
     render(
       <Radio
-        radioValue={[{ label: "test" }, { label: "test2" }]}
+        contentValue={[{ label: "test" }, { label: "test2" }]}
         onValueChange={mockOnValueChange}
       />
     );

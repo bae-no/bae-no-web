@@ -19,7 +19,9 @@ const Radio = forwardRef(
       onValueChange={onValueChange}
     >
       <Box gap="lg">
-        <RadioContent contentValue={contentValue} />
+        {contentValue.map(({ label, value }) => (
+          <RadioContent key={label} label={label} value={value} />
+        ))}
       </Box>
     </Root>
   )
