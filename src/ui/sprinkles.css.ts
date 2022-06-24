@@ -16,7 +16,7 @@ const responsiveProperties = defineProperties({
     borderRadius: layout,
     boxSizing: ["border-box", "content-box"],
     cursor: ["pointer"],
-    display: ["none", "flex", "block", "inline", "grid"],
+    display: ["none", "flex", "block", "inline-block", "inline", "grid"],
     flex: [0, 0.5, 1],
     flexDirection: ["row", "column", "row-reverse", "column-reverse"],
     gap: space,
