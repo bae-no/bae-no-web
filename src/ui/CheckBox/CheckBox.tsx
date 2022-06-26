@@ -7,13 +7,15 @@ import { Icon } from "../Icon";
 import { sprinkles } from "../sprinkles.css";
 import { Typography } from "../Typography";
 
-import { checkBoxRootCss, checkBoxIndicatorCss } from "./CheckBox.css";
+import {
+  checkBoxRootCss,
+  checkBoxIndicatorCss,
+  checkBoxIconCss,
+} from "./CheckBox.css";
 
 interface CheckBoxProp extends CheckboxProps {
-  checked: boolean;
   label: string;
   size?: "large" | "small";
-  value: string;
 }
 
 const CheckBox = forwardRef(
@@ -22,6 +24,7 @@ const CheckBox = forwardRef(
       size = "small",
       checked,
       onCheckedChange,
+      defaultChecked,
       value,
       label,
       name,
@@ -36,6 +39,7 @@ const CheckBox = forwardRef(
         <Root
           checked={checked}
           className={checkBoxRootCss}
+          defaultChecked={defaultChecked}
           id={id}
           name={name}
           ref={ref}
@@ -43,11 +47,7 @@ const CheckBox = forwardRef(
           onCheckedChange={onCheckedChange}
         >
           <Indicator forceMount className={checkBoxIndicatorCss}>
-            <Icon
-              color={checked ? "orange2" : "black9"}
-              name="checkbox"
-              size="lg"
-            />
+            <Icon className={checkBoxIconCss} name="checkbox" size="lg" />
           </Indicator>
         </Root>
         <Typography

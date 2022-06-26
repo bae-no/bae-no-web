@@ -1,6 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
 import { sprinkles } from "../sprinkles.css";
+import { theme } from "../tokens";
 
 export const checkBoxRootCss = style([
   sprinkles({
@@ -21,4 +22,16 @@ export const checkBoxIndicatorCss = style([
     alignItems: "center",
     display: "flex",
   }),
+  {
+    color: theme.colors.black9,
+    selectors: {
+      '&[data-state="checked"]': {
+        color: theme.colors.orange2,
+      },
+    },
+  },
 ]);
+
+export const checkBoxIconCss = style({
+  color: "inherit",
+});
