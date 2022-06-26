@@ -15,3 +15,10 @@ export const checkBoxRootCss = style([
     border: "none",
   },
 ]);
+
+export const checkBoxIndicatorCss = style([
+  sprinkles({
+    alignItems: "center",
+    display: "flex",
+  }),
+]);

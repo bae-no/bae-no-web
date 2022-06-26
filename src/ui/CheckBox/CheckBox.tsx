@@ -1,4 +1,4 @@
-import { useId, forwardRef, ForwardedRef, useState } from "react";
+import { useId, forwardRef, ForwardedRef } from "react";
 
 import { Root, Indicator, CheckboxProps } from "@radix-ui/react-checkbox";
 
@@ -7,59 +7,53 @@ import { Icon } from "../Icon";
 import { sprinkles } from "../sprinkles.css";
 import { Typography } from "../Typography";
 
-import { checkBoxRootCss } from "./CheckBox.css";
+import { checkBoxRootCss, checkBoxIndicatorCss } from "./CheckBox.css";
 
 interface CheckBoxProp extends CheckboxProps {
-  defaultChecked?: boolean;
+  checked: boolean;
   label: string;
-  titleType?: boolean;
+  size?: "large" | "small";
   value: string;
 }
 
 const CheckBox = forwardRef(
   (
     {
-      titleType = false,
-      defaultChecked = false,
+      size = "small",
+      checked,
       onCheckedChange,
       value,
       label,
+      name,
     }: CheckBoxProp,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
-    const size = titleType ? "body1-b" : "body2-m";
+    const fontSize = size === "large" ? "body1-b" : "body2-m";
     const id = useId();
-    const [checked, setCheck] = useState(defaultChecked);
-    const handleCheckedChange = (e: boolean) => {
-      if (onCheckedChange) {
-        onCheckedChange(e);
-      }
-      setCheck(e);
-    };
+
     return (
       <Box alignItems="center" flexDirection="row" gap="xs">
         <Root
+          checked={checked}
           className={checkBoxRootCss}
-          defaultChecked={checked}
           id={id}
+          name={name}
           ref={ref}
           value={value}
-          onCheckedChange={handleCheckedChange}
+          onCheckedChange={onCheckedChange}
         >
-          <Indicator forceMount>
-            <Box ref={ref}>
-              <Icon
-                color={checked ? "orange2" : "black9"}
-                name="checkbox"
-                size="lg"
-              />
-            </Box>
+          <Indicator forceMount className={checkBoxIndicatorCss}>
+            <Icon
+              color={checked ? "orange2" : "black9"}
+              name="checkbox"
+              size="lg"
+            />
           </Indicator>
         </Root>
         <Typography
           as="label"
           className={sprinkles({ cursor: "pointer" })}
-          fontSize={size}
+          fontSize={fontSize}
           htmlFor={id}
         >
           {label}
