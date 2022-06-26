@@ -5,6 +5,7 @@ specifiers:
   '@fxts/core': ^0.8.0
   '@next/bundle-analyzer': ^12.1.6
   '@radix-ui/react-alert-dialog': ^0.1.7
+  '@radix-ui/react-radio-group': ^0.1.5
   '@radix-ui/react-switch': ^0.1.5
   '@storybook/addon-actions': ^6.5.9
   '@storybook/addon-essentials': ^6.5.9
@@ -56,7 +57,8 @@ specifiers:
 
 dependencies:
   '@fxts/core': 0.8.0
-  '@radix-ui/react-alert-dialog': 0.1.7_47ae209ab5c2ea051c9a2540426c6b2f
+  '@radix-ui/react-alert-dialog': 0.1.7_eurjwfem4ie5nnznw6gmhlbswe
+  '@radix-ui/react-radio-group': 0.1.5_react@18.1.0
   '@radix-ui/react-switch': 0.1.5_react@18.1.0
   '@vanilla-extract/babel-plugin': 1.1.5
   '@vanilla-extract/css': 1.7.0
@@ -2317,6 +2319,19 @@ packages:
       - '@types/react'
     dev: false
 
+  /@radix-ui/react-collection/0.1.4_react@18.1.0:
+    resolution: {integrity: sha512-3muGI15IdgaDFjOcO7xX8a35HQRBRF6LH9pS6UCeZeRmbslkVeHyJRQr2rzICBUoX7zgIA0kXyMDbpQnJGyJTA==}
+    peerDependencies:
+      react: ^16.8 || ^17.0
+    dependencies:
+      '@babel/runtime': 7.18.3
+      '@radix-ui/react-compose-refs': 0.1.0_react@18.1.0
+      '@radix-ui/react-context': 0.1.1_react@18.1.0
+      '@radix-ui/react-primitive': 0.1.4_react@18.1.0
+      '@radix-ui/react-slot': 0.1.2_react@18.1.0
+      react: 18.1.0
+    dev: false
+
   /@radix-ui/react-compose-refs/0.1.0_react@18.1.0:
     resolution: {integrity: sha512-eyclbh+b77k+69Dk72q3694OHrn9B3QsoIRx7ywX341U9RK1ThgQjMFZoPtmZNQTksXHLNEiefR8hGVeFyInGg==}
     peerDependencies:
@@ -2452,6 +2467,42 @@ packages:
     dependencies:
       '@babel/runtime': 7.17.9
       '@radix-ui/react-slot': 0.1.2_react@18.1.0
+      react: 18.1.0
+    dev: false
+
+  /@radix-ui/react-radio-group/0.1.5_react@18.1.0:
+    resolution: {integrity: sha512-ybgHsmh/V2crKvK6xZ56dpPul7b+vyxcq7obWqHbr5W6Ca11wdm0E7lS0i/Y6pgfIKYOWIARmZYDpRMEeRCPOw==}
+    peerDependencies:
+      react: ^16.8 || ^17.0
+    dependencies:
+      '@babel/runtime': 7.18.3
+      '@radix-ui/primitive': 0.1.0
+      '@radix-ui/react-compose-refs': 0.1.0_react@18.1.0
+      '@radix-ui/react-context': 0.1.1_react@18.1.0
+      '@radix-ui/react-label': 0.1.5_react@18.1.0
+      '@radix-ui/react-presence': 0.1.2_react@18.1.0
+      '@radix-ui/react-primitive': 0.1.4_react@18.1.0
+      '@radix-ui/react-roving-focus': 0.1.5_react@18.1.0
+      '@radix-ui/react-use-controllable-state': 0.1.0_react@18.1.0
+      '@radix-ui/react-use-previous': 0.1.1_react@18.1.0
+      '@radix-ui/react-use-size': 0.1.1_react@18.1.0
+      react: 18.1.0
+    dev: false
+
+  /@radix-ui/react-roving-focus/0.1.5_react@18.1.0:
+    resolution: {integrity: sha512-ClwKPS5JZE+PaHCoW7eu1onvE61pDv4kO8W4t5Ra3qMFQiTJLZMdpBQUhksN//DaVygoLirz4Samdr5Y1x1FSA==}
+    peerDependencies:
+      react: ^16.8 || ^17.0
+    dependencies:
+      '@babel/runtime': 7.18.3
+      '@radix-ui/primitive': 0.1.0
+      '@radix-ui/react-collection': 0.1.4_react@18.1.0
+      '@radix-ui/react-compose-refs': 0.1.0_react@18.1.0
+      '@radix-ui/react-context': 0.1.1_react@18.1.0
+      '@radix-ui/react-id': 0.1.5_react@18.1.0
+      '@radix-ui/react-primitive': 0.1.4_react@18.1.0
+      '@radix-ui/react-use-callback-ref': 0.1.0_react@18.1.0
+      '@radix-ui/react-use-controllable-state': 0.1.0_react@18.1.0
       react: 18.1.0
     dev: false
 
@@ -4456,7 +4507,7 @@ packages:
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
-      csstype: 3.0.11
+       csstype: 3.1.0
     dev: true
 
   /@types/scheduler/0.16.2:
