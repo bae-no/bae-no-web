@@ -5,6 +5,7 @@ specifiers:
   '@fxts/core': ^0.8.0
   '@next/bundle-analyzer': ^12.1.6
   '@radix-ui/react-alert-dialog': ^0.1.7
+  '@radix-ui/react-avatar': ^0.1.4
   '@radix-ui/react-checkbox': ^0.1.5
   '@radix-ui/react-radio-group': ^0.1.5
   '@radix-ui/react-switch': ^0.1.5
@@ -59,6 +60,7 @@ specifiers:
 dependencies:
   '@fxts/core': 0.8.0
   '@radix-ui/react-alert-dialog': 0.1.7_eurjwfem4ie5nnznw6gmhlbswe
+  '@radix-ui/react-avatar': 0.1.4_react@18.1.0
   '@radix-ui/react-checkbox': 0.1.5_react@18.1.0
   '@radix-ui/react-radio-group': 0.1.5_react@18.1.0
   '@radix-ui/react-switch': 0.1.5_react@18.1.0
@@ -2313,6 +2315,19 @@ packages:
       react-dom: 18.1.0_react@18.1.0
     transitivePeerDependencies:
       - '@types/react'
+    dev: false
+
+  /@radix-ui/react-avatar/0.1.4_react@18.1.0:
+    resolution: {integrity: sha512-RTs3KQTToVKJHHsn/E+vC2MyP0LnA6uMdcD7thwaCJEbI6NAvf56Y+RNJPSsGXz1o2LkD7Iy5SogsrzBwXQk6A==}
+    peerDependencies:
+      react: ^16.8 || ^17.0
+    dependencies:
+      '@babel/runtime': 7.18.3
+      '@radix-ui/react-context': 0.1.1_react@18.1.0
+      '@radix-ui/react-primitive': 0.1.4_react@18.1.0
+      '@radix-ui/react-use-callback-ref': 0.1.0_react@18.1.0
+      '@radix-ui/react-use-layout-effect': 0.1.0_react@18.1.0
+      react: 18.1.0
     dev: false
 
   /@radix-ui/react-checkbox/0.1.5_react@18.1.0:
