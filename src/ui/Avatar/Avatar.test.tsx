@@ -42,7 +42,7 @@ describe("UI Avatar Component", () => {
   });
 
   it("should render the fallback initially", () => {
-    const fallback = rendered.queryByText(FALLBACK_TEXT);
+    const fallback = rendered.queryByText(FALLBACK_TEXT[0]);
     expect(fallback).toBeInTheDocument();
   });
 
@@ -52,7 +52,7 @@ describe("UI Avatar Component", () => {
   });
 
   it("should render the image after it has loaded", async () => {
-    const fallBackText = rendered.getByText(FALLBACK_TEXT);
+    const fallBackText = rendered.getByText(FALLBACK_TEXT[0]);
     image = await rendered.findByRole("img");
 
     expect(fallBackText).not.toBeInTheDocument();
@@ -62,5 +62,10 @@ describe("UI Avatar Component", () => {
   it("should have alt text on the image", async () => {
     image = await rendered.findByAltText(IMAGE_ALT_TEXT);
     expect(image).toBeInTheDocument();
+  });
+
+  it("should render the fallback text", () => {
+    const { getByText } = render(<Avatar size="lg" text="QWERTY" />);
+    expect(getByText("Q"));
   });
 });

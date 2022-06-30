@@ -5,11 +5,16 @@ import {
   AvatarImageProps,
 } from "@radix-ui/react-avatar";
 
-import { avatarRootCss, avatarFallbackCss, avatarImageCss } from "./Avatar.css";
+import {
+  avatarRootCss,
+  avatarFallbackCss,
+  avatarImageCss,
+  RootSizeType,
+} from "./Avatar.css";
 
 interface AvatarProps
   extends Pick<AvatarImageProps, "alt" | "src" | "onLoadingStatusChange"> {
-  size: "xxl" | "xl" | "lg" | "md" | "sm" | "xs";
+  size: RootSizeType;
   text?: string;
 }
 
@@ -30,7 +35,9 @@ const Avatar = ({
         src={src}
         onLoadingStatusChange={onLoadingStatusChange}
       />
-      <Fallback className={avatarFallbackCss({ size, type })}>{text}</Fallback>
+      <Fallback className={avatarFallbackCss({ size, type })}>
+        {text?.[0]}
+      </Fallback>
     </Root>
   );
 };
