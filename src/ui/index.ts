@@ -9,3 +9,4 @@ export * from "./Form";
 export * from "./Radio";
 export * from "./Label";
 export * from "./CheckBox";
+export * from "./Avatar";
