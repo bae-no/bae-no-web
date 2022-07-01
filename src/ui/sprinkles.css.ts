@@ -2,7 +2,7 @@ import { defineProperties, createSprinkles } from "@vanilla-extract/sprinkles";
 
 import { theme } from "./tokens";
 
-const { colors, layout, space } = theme;
+const { colors, layout, space, transform } = theme;
 
 const responsiveProperties = defineProperties({
   conditions: {
@@ -13,7 +13,12 @@ const responsiveProperties = defineProperties({
   defaultCondition: "mobile",
   properties: {
     alignItems: ["stretch", "flex-start", "center", "flex-end"],
+    borderBottomLeftRadius: layout,
+    borderBottomRightRadius: layout,
     borderRadius: layout,
+    borderTopLeftRadius: layout,
+    borderTopRightRadius: layout,
+    bottom: layout,
     boxSizing: ["border-box", "content-box"],
     cursor: ["pointer"],
     display: ["none", "flex", "block", "inline-block", "inline", "grid"],
@@ -21,6 +26,7 @@ const responsiveProperties = defineProperties({
     flexDirection: ["row", "column", "row-reverse", "column-reverse"],
     gap: space,
     height: layout,
+    inset: layout,
     justifyContent: [
       "stretch",
       "flex-start",
@@ -29,6 +35,7 @@ const responsiveProperties = defineProperties({
       "space-around",
       "space-between",
     ],
+    left: layout,
     margin: space,
     marginBottom: space,
     marginLeft: space,
@@ -38,6 +45,7 @@ const responsiveProperties = defineProperties({
     maxWidth: layout,
     minHeight: layout,
     minWidth: layout,
+    outline: ["none"],
     overflow: ["visible", "hidden", "scroll", "auto"],
     padding: space,
     paddingBottom: space,
@@ -45,12 +53,17 @@ const responsiveProperties = defineProperties({
     paddingRight: space,
     paddingTop: space,
     position: ["absolute", "relative", "fixed", "sticky"],
+    right: layout,
     textAlign: ["center", "left", "right"],
+    top: layout,
+    transform,
     width: layout,
     zIndex: [-1, 0, 1, 2, 3, 4, 5],
   },
   responsiveArray: ["mobile", "tablet", "desktop"],
   shorthands: {
+    borderBottomRadius: ["borderTopLeftRadius", "borderTopRightRadius"],
+    borderTopRadius: ["borderTopLeftRadius", "borderTopRightRadius"],
     br: ["borderRadius"],
     m: ["margin"],
     maxSize: ["maxWidth", "maxHeight"],
