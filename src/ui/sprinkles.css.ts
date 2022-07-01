@@ -38,6 +38,7 @@ const responsiveProperties = defineProperties({
     maxWidth: layout,
     minHeight: layout,
     minWidth: layout,
+    overflow: ["visible", "hidden", "scroll", "auto"],
     padding: space,
     paddingBottom: space,
     paddingLeft: space,

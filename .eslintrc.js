@@ -22,6 +22,8 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   ignorePatterns: ["**/*.js", "**/*.d.ts"],
   rules: {
+    "class-methods-use-this": "off",
+    "no-constructor-return": "off",
     "import/no-extraneous-dependencies": [
       "error",
       { devDependencies: ["**/*.stories.*", "**/*.test.*", "jest.*"] },
