@@ -1,9 +1,8 @@
-import { KeyboardEvent, ReactNode, useRef } from "react";
+import { KeyboardEvent, useRef } from "react";
 
 import {
   Content,
   Dialog,
-  DialogClose,
   DialogTitle,
   DialogTrigger,
   Overlay,
@@ -11,63 +10,16 @@ import {
 } from "@radix-ui/react-dialog";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { InferArray } from "src/types";
+import { Box } from "../../Box";
+import { overlayCss } from "../../modalBase.css";
+import { PullToClose } from "../../PullToClose";
+import { Typography } from "../../Typography";
+import { contentContainerCss, contentCss } from "../BottomDrawer.css";
 
-import { Box } from "../Box";
-import { Icon } from "../Icon";
-import { overlayCss } from "../modalBase.css";
-import { PullToClose } from "../PullToClose";
-import { Typography } from "../Typography";
-
-import { contentContainerCss, contentCss } from "./BottomDrawer.css";
+import { SelectBottomDrawerProps } from "./SelectBottomDrawer.types";
+import { SelectItem } from "./SelectItem";
 
 const MotionOverlay = motion(Overlay);
-
-interface SelectBottomDrawerProps {
-  onOpenChange: (open: boolean) => void;
-  onValueChange: (value: string) => void;
-  open: boolean;
-  options: Array<{ label: string; value: string }>;
-  title?: string;
-  trigger?: ReactNode;
-  value?: string;
-}
-
-const SelectItem = ({
-  label,
-  value,
-  onValueChange,
-  currentValue,
-}: InferArray<SelectBottomDrawerProps["options"]> &
-  Pick<SelectBottomDrawerProps, "onValueChange"> & {
-    currentValue?: string;
-  }) => {
-  const handleClick = () => {
-    onValueChange(value);
-  };
-  const selected = value === currentValue;
-
-  return (
-    <DialogClose asChild>
-      <Box
-        aria-selected={selected}
-        as="button"
-        flexDirection="row"
-        justifyContent="space-between"
-        outline="none"
-        px="md"
-        py="xs"
-        role="option"
-        onClick={handleClick}
-      >
-        <Typography color={selected ? "orange2" : "black3"} fontSize="body1-m">
-          {label}
-        </Typography>
-        {selected && <Icon color="orange2" name="check" size="lg" />}
-      </Box>
-    </DialogClose>
-  );
-};
 
 const SelectBottomDrawer = ({
   title,
