@@ -1,1 +1,1 @@
-export { default as SelectBottomDrawer } from "./SelectBottomDrawer";
+export * from "./SelectBottomDrawer";
