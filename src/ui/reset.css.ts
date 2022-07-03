@@ -1,10 +1,4 @@
-import { globalStyle, style } from "@vanilla-extract/css";
-
-globalStyle("html, body", {
-  fontSize: "62.5%",
-  margin: 0,
-  padding: 0,
-});
+import { style } from "@vanilla-extract/css";
 
 export const base = style({
   border: 0,

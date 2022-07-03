@@ -85,5 +85,7 @@ module.exports = {
     "react/require-default-props": "off",
     "object-curly-newline": "off",
     "consistent-return": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
   },
 };

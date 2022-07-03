@@ -4,10 +4,12 @@ import { colors } from "./color";
 import { layout } from "./layout";
 import { size } from "./size";
 import { space } from "./space";
+import { transform } from "./transform";
 
 export const theme = createGlobalTheme("body", {
   colors,
   layout,
   size,
   space,
+  transform,
 });

@@ -10,3 +10,4 @@ export * from "./Radio";
 export * from "./Label";
 export * from "./CheckBox";
 export * from "./Avatar";
+export * from "./BottomDrawer";
