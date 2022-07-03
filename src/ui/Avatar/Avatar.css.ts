@@ -5,45 +5,43 @@ import { fontCss } from "../fontBase.css";
 import { sprinkles } from "../sprinkles.css";
 import { theme } from "../tokens";
 
-const avatarRootBaseCss = style([
-  sprinkles({
-    alignItems: "center",
-    br: "full",
-    display: "flex",
-    justifyContent: "center",
-    overflow: "hidden",
-  }),
-  {
-    border: `solid 1px ${theme.colors.black7} `,
-  },
-]);
+const avatarRootBaseCss = sprinkles({
+  alignItems: "center",
+  borderColor: "black7",
+  borderStyle: "solid",
+  borderWidth: "xxxxs",
+  br: "full",
+  display: "flex",
+  justifyContent: "center",
+  overflow: "hidden",
+});
 
 const rootSize = {
   lg: [
     {
-      height: "56px",
-      width: "56px",
+      height: "5.6rem",
+      width: "5.6rem",
     },
   ],
   md: {
-    height: "48px",
-    width: "48px",
+    height: "4.8rem",
+    width: "4.8rem",
   },
   sm: {
-    height: "40px",
-    width: "40px",
+    height: "4.0rem",
+    width: "4.0rem",
   },
   xl: {
-    height: "80px",
-    width: "80px",
+    height: "8.0rem",
+    width: "8.0rem",
   },
   xs: {
-    height: "28px",
-    width: "28px",
+    height: "2.8rem",
+    width: "2.8rem",
   },
   xxl: {
-    height: "96px",
-    width: "96px",
+    height: "9.6rem",
+    width: "9.6rem",
   },
 };
 

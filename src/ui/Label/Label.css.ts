@@ -7,20 +7,21 @@ import { colors } from "../tokens/color";
 const defaultCss = sprinkles({
   borderRadius: "xxs",
   minWidth: "xxxl",
-  px: "xs",
   py: "xs",
   textAlign: "center",
 });
 
 const borderCss = sprinkles({
   borderRadius: "md",
-  px: "xs",
   py: "xxxs",
-  size: "auto",
+  width: "auto",
 });
 
 export const labelCss = recipe({
-  base: fontCss({ fontSize: "caption1-b" }),
+  base: [
+    fontCss({ fontSize: "caption1-b" }),
+    sprinkles({ height: "fit", px: "xs" }),
+  ],
   defaultVariants: { color: "orange", variant: "default" },
   variants: {
     color: {

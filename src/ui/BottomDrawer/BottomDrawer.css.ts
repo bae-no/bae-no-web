@@ -1,5 +1,6 @@
-import { style } from "@vanilla-extract/css";
+import { keyframes, style } from "@vanilla-extract/css";
 
+import { animationCss } from "../modalBase.css";
 import { sprinkles } from "../sprinkles.css";
 
 export const contentContainerCss = sprinkles({
@@ -23,3 +24,22 @@ export const contentCss = style([
   }),
   { padding: "4rem 1.6rem" },
 ]);
+
+const slideUp = keyframes({
+  "0%": { transform: "translateY(100%)" },
+  "100%": { transform: "translateY(0%)" },
+});
+
+const slideDown = keyframes({
+  "0%": { transform: "translateY(0%)" },
+  "100%": { transform: "translateY(100%)" },
+});
+
+export const contentAnimationCss = style({
+  animation: `${slideUp} ${animationCss}`,
+  selectors: {
+    '&[data-state="closed"]': {
+      animationName: slideDown,
+    },
+  },
+});

@@ -9,4 +9,5 @@ export const space = {
   xxs: "0.4rem",
   xxxl: "6.4rem",
   xxxs: "0.2rem",
+  xxxxs: "0.1rem",
 };
