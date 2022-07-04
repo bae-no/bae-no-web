@@ -9,7 +9,7 @@ import { FontCss, fontCss } from "../fontBase.css";
 import { Sprinkles } from "../sprinkles.css";
 
 type TypographyProps = ComponentBaseProps &
-  Pick<Sprinkles, "color"> &
+  Pick<Sprinkles, "color" | "textAlign"> &
   FontCss & {
     as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "label" | "span";
     children: ReactNode;
@@ -25,6 +25,7 @@ const Typography = forwardRef(
       color,
       fontSize,
       className,
+      textAlign,
       ...rest
     }: TypographyProps,
     ref
@@ -40,6 +41,7 @@ const Typography = forwardRef(
       ]}
       color={color}
       ref={ref}
+      textAlign={textAlign}
     >
       {children}
     </Box>
