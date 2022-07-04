@@ -14,7 +14,9 @@ export function getCookie(key: string) {
   return value;
 }
 
-export function setCookiesOnServer(cookies: Record<string, string>) {
+export function setCookiesOnServer(
+  cookies: Record<string, string | undefined>
+) {
   if (global.window)
     throw new Error("this function must not be called on client side");
 
