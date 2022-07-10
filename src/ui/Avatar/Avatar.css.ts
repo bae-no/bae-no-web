@@ -5,24 +5,21 @@ import { fontCss } from "../fontBase.css";
 import { sprinkles } from "../sprinkles.css";
 import { theme } from "../tokens";
 
-const avatarRootBaseCss = sprinkles({
+const avatarRootBaseCss = style({
   alignItems: "center",
-  borderColor: "black7",
-  borderStyle: "solid",
-  borderWidth: "xxxxs",
-  br: "full",
+  border: `solid 1px ${theme.colors.black7}`,
+  borderRadius: "100%",
   display: "flex",
   justifyContent: "center",
   overflow: "hidden",
 });
 
 const rootSize = {
-  lg: [
-    {
-      height: "5.6rem",
-      width: "5.6rem",
-    },
-  ],
+  lg: {
+    height: "5.6rem",
+    width: "5.6rem",
+  },
+
   md: {
     height: "4.8rem",
     width: "4.8rem",
@@ -52,22 +49,21 @@ export const avatarRootCss = recipe({
   },
 });
 
-export const avatarImageCss = style([
-  sprinkles({
-    br: "full",
-    size: "full",
-  }),
-  {
-    objectFit: "cover",
-  },
-]);
+// const a = sprinkles({});
+export const avatarImageCss = style({
+  borderRadius: "100%",
+  height: "100%",
+  objectFit: "cover",
+  width: "100%",
+});
 
-const avatarFallbackBaseCss = sprinkles({
+const avatarFallbackBaseCss = style({
   alignItems: "center",
-  color: "white",
+  color: theme.colors.white,
   display: "flex",
+  height: "100%",
   justifyContent: "center",
-  size: "full",
+  width: "100%",
 });
 
 export const avatarFallbackCss = recipe({
