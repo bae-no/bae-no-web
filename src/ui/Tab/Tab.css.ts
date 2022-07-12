@@ -26,26 +26,26 @@ export const tabListCss = style([
 
 export const typographyCss = style([
   sprinkles({
-    borderStyle: "solid",
+    alignItems: "center",
+    backgroundColor: "white",
     borderColor: "black7",
+    borderStyle: "solid",
     borderWidth: "xxxxs",
     color: "black3",
-    display: "flex",
-    justifyContent: "center",
     cursor: "pointer",
-    alignItems: "center",
+    display: "flex",
     gap: "xs",
-    backgroundColor: "white",
+    justifyContent: "center",
   }),
   {
-    height: "3.2rem",
-    width: "5.3rem",
     borderRadius: "5rem",
+    height: "3.2rem",
     selectors: {
       '&[data-state="active"]': {
         border: `solid 1px ${theme.colors.orange2}`,
         color: theme.colors.orange2,
       },
     },
+    width: "5.3rem",
   },
 ]);

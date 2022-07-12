@@ -2,7 +2,6 @@ import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 
 import { fontCss } from "../fontBase.css";
-import { sprinkles } from "../sprinkles.css";
 import { theme } from "../tokens";
 
 const avatarRootBaseCss = style({
