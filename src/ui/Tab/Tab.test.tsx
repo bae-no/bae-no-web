@@ -4,26 +4,24 @@ import Tab, { TabProps } from "./Tab";
 
 type MockComponentProps = Pick<TabProps, "defaultValue" | "onValueChange">;
 
-const MockComponent = ({ defaultValue, onValueChange }: MockComponentProps) => {
-  return (
-    <Tab
-      defaultValue={defaultValue}
-      onValueChange={onValueChange}
-      tab={[
-        {
-          content: "fristValue",
-          tabId: "tabId1",
-          label: "firstTrigger",
-        },
-        {
-          content: "secondValue",
-          tabId: "tabId2",
-          label: "secondTrigger",
-        },
-      ]}
-    />
-  );
-};
+const MockComponent = ({ defaultValue, onValueChange }: MockComponentProps) => (
+  <Tab
+    defaultValue={defaultValue}
+    tab={[
+      {
+        content: "fristValue",
+        label: "firstTrigger",
+        tabId: "tabId1",
+      },
+      {
+        content: "secondValue",
+        label: "secondTrigger",
+        tabId: "tabId2",
+      },
+    ]}
+    onValueChange={onValueChange}
+  />
+);
 
 describe("UI Tab Component", () => {
   it("should render trigger text", () => {
