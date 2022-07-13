@@ -1,55 +1,46 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
-import Tab, { TabProps } from "./Tab";
+import { TabContent, TabLabel, TabList } from "./TabComponent";
+import Tab, { TabProps } from "./TabComponent/Tab";
 
 type MockComponentProps = Pick<TabProps, "defaultValue" | "onValueChange">;
 
 const MockComponent = ({ defaultValue, onValueChange }: MockComponentProps) => (
-  <Tab
-    defaultValue={defaultValue}
-    tab={[
-      {
-        content: "fristValue",
-        label: "firstTrigger",
-        tabId: "tabId1",
-      },
-      {
-        content: "secondValue",
-        label: "secondTrigger",
-        tabId: "tabId2",
-      },
-    ]}
-    onValueChange={onValueChange}
-  />
+  <Tab defaultValue={defaultValue} onValueChange={onValueChange}>
+    <TabList>
+      <TabLabel value="tabValue1">firstLabel</TabLabel>
+      <TabLabel value="tabValue2">secondLabel</TabLabel>
+    </TabList>
+    <TabContent value="tabValue1">fristContent</TabContent>
+    <TabContent value="tabValue2">secondContent</TabContent>
+  </Tab>
 );
 
 describe("UI Tab Component", () => {
   it("should render trigger text", () => {
     render(<MockComponent />);
-    expect(screen.getByText("firstTrigger"));
-    expect(screen.getByText("secondTrigger"));
+    expect(screen.getByText("firstLabel"));
+    expect(screen.getByText("secondLabel"));
   });
 
   it("should render defaultValue", () => {
-    render(<MockComponent defaultValue="tabId2" />);
-    expect(screen.getByText("secondValue"));
+    render(<MockComponent defaultValue="tabValue1" />);
+    expect(screen.getByText("fristContent"));
   });
 
   it("should click event", async () => {
     render(<MockComponent />);
-    fireEvent.click(screen.getByText("firstTrigger"));
-    await waitFor(() => {
-      expect(screen.getByText("firstTrigger")).toBeInTheDocument();
-    });
+    fireEvent.mouseDown(screen.getByText("firstLabel"));
+    expect(screen.getByText("fristContent")).toBeInTheDocument();
   });
 
   it("should on value change", () => {
     const mockOnChange = jest.fn();
     render(<MockComponent onValueChange={mockOnChange} />);
-    fireEvent.mouseDown(screen.getByText("firstTrigger"));
+    fireEvent.mouseDown(screen.getByText("firstLabel"));
     expect(mockOnChange).toBeCalled();
 
-    fireEvent.mouseDown(screen.getByText("secondTrigger"));
+    fireEvent.mouseDown(screen.getByText("secondLabel"));
     expect(mockOnChange).toBeCalledTimes(2);
   });
 });

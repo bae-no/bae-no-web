@@ -2,15 +2,11 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { Box } from "../Box";
 
-import Tab from "./Tab";
+import { TabContent, TabLabel, TabList } from "./TabComponent";
+import Tab from "./TabComponent/Tab";
 
 export default { component: Tab, title: "UI/Tab" } as ComponentMeta<typeof Tab>;
 
-const Template: ComponentStory<typeof Tab> = (args) => (
-  <Box style={{ width: "30rem" }}>
-    <Tab {...args} />
-  </Box>
-);
 const ContentComponent = () => (
   <Box backgroundColor="skyBlue1" justifyContent="center">
     <input />
@@ -21,43 +17,47 @@ const ContentComponent = () => (
   </Box>
 );
 
+const Template: ComponentStory<typeof Tab> = (args) => (
+  <Box style={{ width: "30rem" }}>
+    <Tab {...args}>
+      <TabList>
+        <TabLabel value="tap1">전체</TabLabel>
+        <TabLabel value="tap2">한식</TabLabel>
+        <TabLabel value="tap3">중식</TabLabel>
+        <TabLabel value="tap4">양식</TabLabel>
+        <TabLabel value="tap5">일식</TabLabel>
+        <TabLabel value="tap6">도시락</TabLabel>
+        <TabLabel value="tap7">분식</TabLabel>
+        <TabLabel value="tap8">햄버거</TabLabel>
+      </TabList>
+      <TabContent value="tap1">
+        전체전체전체전체전체전체전체전체전체전체전체전체전체전체전체전체전체전체전체전체전체
+      </TabContent>
+      <TabContent value="tap2">
+        한식한식한식한식한식한식한식한식한식한식한식한식한식한식한식한식
+      </TabContent>
+      <TabContent value="tap3">
+        중식중식중식중식중식중식중식중식중식중식중식중식중식중식
+        중식중식중식중식중식중식중식중식중식중식중식중식중식중식
+      </TabContent>
+      <TabContent value="tap4">
+        양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식양식
+      </TabContent>
+      <TabContent value="tap5">
+        일식일식일식일식일식일식일식일식일식일식일식일식일식일식일식일식일식일식일식일식일식일식일식일식일식일식일식
+      </TabContent>
+      <TabContent value="tap6">
+        도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락도시락
+      </TabContent>
+      <TabContent value="tap7">
+        분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식분식
+      </TabContent>
+      <TabContent value="tap8">
+        <ContentComponent />
+      </TabContent>
+    </Tab>
+  </Box>
+);
+
 export const Default = Template.bind({});
-Default.args = {
-  tab: [
-    {
-      content: <ContentComponent />,
-      label: "첫번째",
-      tabId: "첫번째아이디",
-    },
-    {
-      content: "두번째 클릭하면 나오는것이고 얘는 문자열입니다~",
-      label: "두번째",
-      tabId: "두번째아이디",
-    },
-    {
-      content: "세번째 클릭하면 나오는것이고 얘도 문자열입니다 :)",
-      label: "세번째",
-      tabId: "세번째아이디",
-    },
-    {
-      content: "44444444444444444444444444",
-      label: "네번째",
-      tabId: "네번째아이디",
-    },
-    {
-      content: "555555555555555555555555555",
-      label: "다섯번째",
-      tabId: "다섯번째번째아이디",
-    },
-    {
-      content: "66666666666666666666666666",
-      label: "여섯번째",
-      tabId: "여섯번째아이디",
-    },
-    {
-      content: "7777777777777777777777777",
-      label: "일곱번째",
-      tabId: "일곱번째아이디",
-    },
-  ],
-};
+Default.args = {};
