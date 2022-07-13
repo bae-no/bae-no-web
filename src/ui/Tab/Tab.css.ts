@@ -34,6 +34,8 @@ export const typographyCss = style([
     cursor: "pointer",
     minWidth: "fit",
     outline: "none",
+    px: "sm",
+    py: "xs",
   }),
   {
     borderRadius: "5rem",
