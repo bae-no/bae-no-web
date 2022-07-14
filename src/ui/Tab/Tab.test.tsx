@@ -1,46 +1,56 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 
-import { TabContent, TabLabel, TabList } from "./TabComponent";
-import Tab, { TabProps } from "./TabComponent/Tab";
+import Tab, { TabProps } from "./Tab";
 
 type MockComponentProps = Pick<TabProps, "defaultValue" | "onValueChange">;
 
 const MockComponent = ({ defaultValue, onValueChange }: MockComponentProps) => (
-  <Tab defaultValue={defaultValue} onValueChange={onValueChange}>
-    <TabList>
-      <TabLabel value="tabValue1">firstLabel</TabLabel>
-      <TabLabel value="tabValue2">secondLabel</TabLabel>
-    </TabList>
-    <TabContent value="tabValue1">fristContent</TabContent>
-    <TabContent value="tabValue2">secondContent</TabContent>
-  </Tab>
+  <Tab
+    defaultValue={defaultValue}
+    options={[
+      { label: "label1", value: "value1" },
+      { label: "label2", value: "value2" },
+    ]}
+    onValueChange={onValueChange}
+  />
 );
 
 describe("UI Tab Component", () => {
   it("should render trigger text", () => {
     render(<MockComponent />);
-    expect(screen.getByText("firstLabel"));
-    expect(screen.getByText("secondLabel"));
+    expect(screen.getByText("label1"));
+    expect(screen.getByText("label2"));
   });
 
   it("should render defaultValue", () => {
-    render(<MockComponent defaultValue="tabValue1" />);
-    expect(screen.getByText("fristContent"));
+    render(<MockComponent defaultValue="value1" />);
+    expect(screen.getByText("label1")).toHaveAttribute("data-state", "active");
   });
 
-  it("should click event", async () => {
+  it("should click event", () => {
     render(<MockComponent />);
-    fireEvent.mouseDown(screen.getByText("firstLabel"));
-    expect(screen.getByText("fristContent")).toBeInTheDocument();
+    fireEvent.mouseDown(screen.getByText("label1"));
+    expect(screen.getByText("label1")).toHaveAttribute("data-state", "active");
+    expect(screen.getByText("label2")).toHaveAttribute(
+      "data-state",
+      "inactive"
+    );
+
+    fireEvent.mouseDown(screen.getByText("label2"));
+    expect(screen.getByText("label1")).toHaveAttribute(
+      "data-state",
+      "inactive"
+    );
+    expect(screen.getByText("label2")).toHaveAttribute("data-state", "active");
   });
 
   it("should on value change", () => {
     const mockOnChange = jest.fn();
     render(<MockComponent onValueChange={mockOnChange} />);
-    fireEvent.mouseDown(screen.getByText("firstLabel"));
+    fireEvent.mouseDown(screen.getByText("label1"));
     expect(mockOnChange).toBeCalled();
 
-    fireEvent.mouseDown(screen.getByText("secondLabel"));
+    fireEvent.mouseDown(screen.getByText("label2"));
     expect(mockOnChange).toBeCalledTimes(2);
   });
 });
