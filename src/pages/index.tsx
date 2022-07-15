@@ -1,44 +1,23 @@
-import { keys, map, pipe, toArray } from "@fxts/core";
-import { dehydrate } from "react-query";
+import { keys, map, pipe, toArray } from '@fxts/core';
+import { usePreloadedQuery } from 'react-relay';
+import { RelayProps, withRelay } from 'relay-nextjs';
 
-import { AsyncBoundary } from "src/components/AsyncBoundary";
-import { getMeQuery } from "src/queries";
-import { queryClient } from "src/queryClient";
-import { Typography, Toggle, Popup } from "src/ui";
-import Icon from "src/ui/Icon/Icon";
-import { SVG_ICON_MAP } from "src/ui/Icon/iconMap";
-import { SERVER_BASE_URL, getServerSidePropsWithCookies } from "src/utils";
+import { AsyncBoundary } from 'src/components/AsyncBoundary';
+import { Typography, Toggle, Popup } from 'src/ui';
+import Icon from 'src/ui/Icon/Icon';
+import { SVG_ICON_MAP } from 'src/ui/Icon/iconMap';
+import { getClientEnvironment } from 'src/utils/relay/client_environment';
+import { createServerEnvironment } from 'src/utils/relay/server_environment';
 
-import type { NextPage } from "next";
-
-const Test = () => {
-  const { data } = getMeQuery.useQuery();
-
-  return (
-    <>
-      {data?.response?.user.email}
-      <Typography fontSize="body1-b">test</Typography>
-      <Toggle />
-      <button type="button" onClick={() => getMeQuery.fetchQuery()}>
-        test
-      </button>
-    </>
-  );
-};
+import { query } from '../components/RelayTest';
+import { RelayTestQuery } from '../queries/__generated__/RelayTestQuery.graphql';
 
 const LoadingComponent = () => <h1>...loading</h1>;
 const ErrorFallback = () => (
   <div>
     <Typography fontSize="body2-b">test</Typography>
     <Toggle />
-    <Popup
-      buttonDirection="column"
-      cancelText="tesaaaa"
-      confirmText="test"
-      description="fdsa"
-      title="fas"
-      onConfirm={() => {}}
-    >
+    <Popup buttonDirection="column" cancelText="tesaaaa" confirmText="test" description="fdsa" title="fas" onConfirm={() => {}}>
       <div>test</div>
     </Popup>
     {pipe(
@@ -47,29 +26,22 @@ const ErrorFallback = () => (
       map((key) => <Icon color="orange1" key={key} name={key} size="xxl" />),
       toArray
     )}
-    <a href={`${SERVER_BASE_URL}/v1/auths/google`}>구글</a>;
-    <a href={`${SERVER_BASE_URL}/v1/auths/kakao`}>카카오</a>;
   </div>
 );
 
-const Home: NextPage = () => (
-  <AsyncBoundary
-    errorFallback={ErrorFallback}
-    loadingFallback={LoadingComponent}
-  >
-    <Test />
+const Test = ({ preloadedQuery }: Omit<RelayProps<{}, RelayTestQuery>, 'CSN'>) => {
+  const data = usePreloadedQuery(query, preloadedQuery);
+  return <div>{data.allFilms?.films?.[0]?.title}</div>;
+};
+
+const Home = ({ preloadedQuery }: RelayProps<{}, RelayTestQuery>) => (
+  <AsyncBoundary errorFallback={ErrorFallback} loadingFallback={LoadingComponent}>
+    <Test preloadedQuery={preloadedQuery} />
   </AsyncBoundary>
 );
 
-export default Home;
-
-export const getServerSideProps = getServerSidePropsWithCookies(async () => {
-  getMeQuery.prefetchQuery();
-  const dehydratedState = dehydrate(queryClient);
-  return {
-    props: {
-      data: null,
-      dehydratedState,
-    },
-  };
+export default withRelay(Home, query, {
+  createClientEnvironment: () => getClientEnvironment()!,
+  createServerEnvironment: async () => createServerEnvironment(),
+  variablesFromContext: () => ({ first: 1 }),
 });
