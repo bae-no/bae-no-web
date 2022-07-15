@@ -27,6 +27,7 @@ specifiers:
   '@types/react-dom': ^18.0.5
   '@types/react-relay': ^13.0.2
   '@types/relay-runtime': ^13.0.3
+  '@types/relay-test-utils': ^6.0.5
   '@typescript-eslint/eslint-plugin': ^5.30.4
   '@typescript-eslint/parser': ^5.30.4
   '@vanilla-extract/babel-plugin': ^1.1.7
@@ -63,6 +64,7 @@ specifiers:
   relay-config: ^12.0.1
   relay-nextjs: ^0.8.0
   relay-runtime: ^14.0.0
+  relay-test-utils: ^14.0.0
   typescript: ^4.7.4
 
 dependencies:
@@ -110,6 +112,7 @@ devDependencies:
   '@types/react-dom': 18.0.5
   '@types/react-relay': 13.0.2
   '@types/relay-runtime': 13.0.3
+  '@types/relay-test-utils': 6.0.5
   '@typescript-eslint/eslint-plugin': 5.30.4_aye54oa67ofzrialru76zxwshi
   '@typescript-eslint/parser': 5.30.4_4x5o4skxv6sl53vpwefgt23khm
   babel-loader: 8.2.5_@babel+core@7.18.6
@@ -130,6 +133,7 @@ devDependencies:
   relay-compiler: 14.0.0
   relay-compiler-language-typescript: 15.0.1_iwi4kytymr24ob4q2zo7cwx2zi
   relay-config: 12.0.1
+  relay-test-utils: 14.0.0
   typescript: 4.7.4
 
 packages:
@@ -4899,6 +4903,14 @@ packages:
 
   /@types/relay-runtime/13.0.3:
     resolution: {integrity: sha512-LZr9fiWspAtiFIMDcj/6LarYFqxd3jh3ASXULtWL5Tl5CHoDe48Il2nIAF66XKLLCG3QvDgHR8yLX6ZVWKjkkw==}
+    dev: true
+
+  /@types/relay-test-utils/6.0.5:
+    resolution: {integrity: sha512-V7lHtLCW3fAsvHVb3LvwcUP8p983D0fUdAESSbMSgtDx75/GUP54zjRlNGif+J9ds/mk35ZunXPVy9wF4Fv3DA==}
+    dependencies:
+      '@types/react': 18.0.14
+      '@types/react-relay': 13.0.2
+      '@types/relay-runtime': 13.0.3
     dev: true
 
   /@types/scheduler/0.16.2:
@@ -13370,6 +13382,17 @@ packages:
       invariant: 2.2.4
     transitivePeerDependencies:
       - encoding
+
+  /relay-test-utils/14.0.0:
+    resolution: {integrity: sha512-jWklGWWTFx+ZxMIisle6+0eyGVYqnarKpGwpgCitwWhGLoqTRIy2ChmqTX4ZPKfU3fq4g6Vqb1CXyga1GrHHnQ==}
+    dependencies:
+      '@babel/runtime': 7.18.3
+      fbjs: 3.0.4
+      invariant: 2.2.4
+      relay-runtime: 14.0.0
+    transitivePeerDependencies:
+      - encoding
+    dev: true
 
   /release-zalgo/1.0.0:
     resolution: {integrity: sha512-gUAyHVHPPC5wdqX/LG4LWtRYtgjxyX78oanFNTMMyFEfOqdC54s3eE82imuWKbOeqYht2CrNf64Qb8vgmmtZGA==}
