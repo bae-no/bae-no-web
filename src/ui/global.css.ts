@@ -10,7 +10,13 @@ globalStyle("*", {
 });
 
 globalStyle("html, body", {
+  "@supports": {
+    "(-webkit-touch-callout: none)": {
+      maxHeight: "-webkit-fill-available",
+    },
+  },
   fontSize: "62.5%",
+  height: "100vh",
   margin: 0,
   padding: 0,
 });
