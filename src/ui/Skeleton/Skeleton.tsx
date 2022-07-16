@@ -1,30 +1,27 @@
-import { createElement, forwardRef } from 'react';
+import { forwardRef } from 'react';
 
-import clsx from 'clsx';
+import clsx, { ClassValue } from 'clsx';
 
-import { BoxProps } from '../Box';
+import { BoxProps, Box } from '../Box';
 import { base } from '../reset.css';
-import { sprinkles } from '../sprinkles.css';
-import { parseProps } from '../utils';
+import { sprinkles, Sprinkles } from '../sprinkles.css';
 
 import { skeletonCss } from './Skeleton.css';
 
-const Skeleton = forwardRef(({ display = 'flex', flexDirection = 'column', as = 'div', ...props }: BoxProps, ref) => {
-  const [atomProps] = parseProps(props);
+export interface SkeletonProps extends BoxProps, Pick<BoxProps, 'className' | 'height' | 'width' | 'borderRadius' | 'display' | 'flexDirection' | 'padding' | 'margin'>, Sprinkles {
+  className?: ClassValue;
+}
+
+const Skeleton = forwardRef(({ ...props }: SkeletonProps) => {
   const styles = clsx(
     sprinkles({
-      ...atomProps,
-      display,
-      flexDirection,
+      ...props,
     }),
     skeletonCss,
     base
   );
 
-  return createElement(as, {
-    className: styles,
-    ref,
-  });
+  return <Box className={styles} />;
 });
 
 export default Skeleton;
