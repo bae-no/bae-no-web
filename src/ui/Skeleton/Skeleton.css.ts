@@ -12,8 +12,10 @@ const shineKeyframe = keyframes({
 export const skeletonCss = style([
   sprinkles({
     bg: 'black10',
+    overflow: 'hidden',
+    position: 'relative',
   }),
-  style({
+  {
     '::after': {
       animation: `${shineKeyframe} 2s linear infinite`,
       background: `linear-gradient(90deg, ${theme.colors.black10}, ${theme.colors.black6}, ${theme.colors.black10})`,
@@ -23,7 +25,5 @@ export const skeletonCss = style([
       transform: 'translateX(-100%)',
       width: '100%',
     },
-    overflow: 'hidden',
-    position: 'relative',
-  }),
+  },
 ]);
