@@ -1,6 +1,6 @@
 import { Environment, Network, Store, RecordSource } from 'relay-runtime';
 
-const URL = 'http://localhost:60854';
+const URL = 'http://localhost:55894';
 
 export function createServerNetwork() {
   return Network.create(async (params, variables) => {
