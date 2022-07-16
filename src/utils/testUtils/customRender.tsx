@@ -1,21 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { ReactElement } from "react";
+import { ReactElement } from 'react';
 
-import { render, RenderOptions } from "@testing-library/react";
-import { QueryClientProvider } from "react-query";
-import { RecoilRoot } from "recoil";
+import { render, RenderOptions } from '@testing-library/react';
+import { RecoilRoot } from 'recoil';
 
-import { queryClient } from "src/queryClient";
-
+// TODO: relay provider 구현
 function wrapper({ children }: { children: ReactElement }) {
-  return (
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </RecoilRoot>
-  );
+  return <RecoilRoot>{children}</RecoilRoot>;
 }
 /**
  * 테스트 코드에서만 사용
  */
-export const customRender = (element: ReactElement, options?: RenderOptions) =>
-  render(element, { wrapper, ...options });
+export const customRender = (element: ReactElement, options?: RenderOptions) => render(element, { wrapper, ...options });

@@ -13,7 +13,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test-storybook": "test-storybook",
-    "chromatic": "npx chromatic"
+    "chromatic": "npx chromatic",
+    "relay": "relay-compiler"
   },
   "dependencies": {
     "@fxts/core": "^0.8.0",
@@ -30,15 +31,15 @@
     "@vanilla-extract/sprinkles": "^1.4.1",
     "clsx": "^1.2.0",
     "framer-motion": "^6.3.16",
-    "ky": "^0.31.0",
-    "ky-universal": "^0.10.1",
+    "graphql": "^16.5.0",
     "next": "^12.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^3.1.4",
-    "react-query": "^4.0.0-beta.11",
-    "react-query-toolkit": "^0.1.0",
-    "recoil": "^0.7.4"
+    "react-relay": "^14.0.0",
+    "recoil": "^0.7.4",
+    "relay-nextjs": "^0.8.0",
+    "relay-runtime": "^14.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
@@ -58,9 +59,13 @@
     "@types/node": "^18.0.1",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
+    "@types/react-relay": "^13.0.2",
+    "@types/relay-runtime": "^13.0.3",
+    "@types/relay-test-utils": "^6.0.5",
     "@typescript-eslint/eslint-plugin": "^5.30.4",
     "@typescript-eslint/parser": "^5.30.4",
     "babel-loader": "^8.2.5",
+    "babel-plugin-relay": "^14.0.0",
     "chromatic": "^6.7.0",
     "eslint": "^8.19.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -74,6 +79,9 @@
     "jest": "^28.1.2",
     "jest-environment-jsdom": "^28.1.2",
     "prettier": "^2.7.1",
+    "relay-compiler": "^14.0.0",
+    "relay-config": "^12.0.1",
+    "relay-test-utils": "^14.0.0",
     "typescript": "^4.7.4"
   }
 }

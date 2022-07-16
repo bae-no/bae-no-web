@@ -1,30 +1,34 @@
-import Head from "next/head";
-import { Hydrate, QueryClientProvider } from "react-query";
-import { RecoilRoot } from "recoil";
+import Head from 'next/head';
+import { RelayEnvironmentProvider } from 'react-relay/hooks';
+import { RecoilRoot } from 'recoil';
+import { getInitialPreloadedQuery, getRelayProps } from 'relay-nextjs/app';
 
-import { useInit } from "src/hooks";
-import { queryClient } from "src/queryClient";
+import { useInit } from 'src/hooks';
+import { getClientEnvironment } from 'src/utils/relay/client_environment';
 
-import type { AppProps } from "next/app";
+import type { AppProps } from 'next/app';
 
-import "src/ui/global.css";
+import 'src/ui/global.css';
+
+const clientEnv = getClientEnvironment();
+const initialPreloadedQuery = getInitialPreloadedQuery({
+  createClientEnvironment: () => getClientEnvironment()!,
+});
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const relayProps = getRelayProps(pageProps, initialPreloadedQuery);
+  const env = relayProps.preloadedQuery?.environment ?? clientEnv!;
+
   useInit();
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <RecoilRoot>
-          <Head>
-            <meta
-              content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover"
-              name="viewport"
-            />
-          </Head>
-          <Component {...pageProps} />
-        </RecoilRoot>
-      </Hydrate>
-    </QueryClientProvider>
+    <RelayEnvironmentProvider environment={env}>
+      <RecoilRoot>
+        <Head>
+          <meta content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover" name="viewport" />
+        </Head>
+        <Component {...pageProps} {...relayProps} />
+      </RecoilRoot>
+    </RelayEnvironmentProvider>
   );
 };
 
