@@ -39,7 +39,6 @@ export const typographyCss = style([
   }),
   {
     borderRadius: "5rem",
-    padding: "0.6rem 1.4rem",
     selectors: {
       '&[data-state="active"]': {
         border: `solid 1px ${theme.colors.orange2}`,
