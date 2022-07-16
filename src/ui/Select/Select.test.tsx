@@ -2,23 +2,18 @@ import { useState } from "react";
 
 import { fireEvent, render, RenderResult } from "@testing-library/react";
 
-import { SelectBottomDrawer } from "../BottomDrawer";
-
 import Select from "./Select";
 
 const MockComp = () => {
-  const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   return (
-    <SelectBottomDrawer
-      open={open}
+    <Select
       options={[
         { label: "test1", value: "testvalue1" },
         { label: "test2", value: "testvalue2" },
       ]}
-      trigger={<Select placeholder="trigger" />}
+      placeholder="trigger"
       value={value}
-      onOpenChange={(o) => setOpen(o)}
       onValueChange={(v) => setValue(v)}
     />
   );
@@ -39,6 +34,7 @@ describe("UI Select Component", () => {
 
   it("should render clicked value", () => {
     fireEvent.click(rendered.getByText("test1"));
-    expect(rendered.getByText("testvalue1")).toBeInTheDocument();
+    expect(rendered.getAllByText("test1").length).toEqual(2);
+    expect(rendered.getAllByText("test2").length).toEqual(1);
   });
 });

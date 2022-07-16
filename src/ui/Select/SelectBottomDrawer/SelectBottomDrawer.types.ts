@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { DialogProps } from "@radix-ui/react-dialog";
+import { PullToCloseBottomDrawerProps } from "src/ui/BottomDrawer/PullToCloseBottomDrawer";
 
 interface SelectOption {
   label: string;
@@ -14,7 +14,7 @@ export interface SelectItemProps
 }
 
 export interface SelectBottomDrawerProps
-  extends Required<Pick<DialogProps, "open" | "onOpenChange">> {
+  extends Omit<PullToCloseBottomDrawerProps, "children"> {
   onValueChange: (value: string) => void;
   options: Array<SelectOption>;
   title?: string;
