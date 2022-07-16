@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 
 import { DialogProps } from "@radix-ui/react-dialog";
 
@@ -18,6 +18,6 @@ export interface SelectBottomDrawerProps
   onValueChange: (value: string) => void;
   options: Array<SelectOption>;
   title?: string;
-  trigger?: ReactNode;
+  trigger?: ReactElement;
   value?: string;
 }

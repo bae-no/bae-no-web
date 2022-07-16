@@ -1,4 +1,4 @@
-import { KeyboardEvent, useRef } from "react";
+import { cloneElement, KeyboardEvent, useRef } from "react";
 
 import {
   Content,
@@ -59,7 +59,11 @@ const SelectBottomDrawer = ({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
+      {trigger && (
+        <DialogTrigger asChild>
+          {cloneElement(trigger, { value: currentValue })}
+        </DialogTrigger>
+      )}
       <AnimatePresence>
         {open && (
           <Portal forceMount>
