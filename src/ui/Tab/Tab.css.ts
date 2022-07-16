@@ -8,6 +8,7 @@ export const tabRootCss = sprinkles({
   display: "flex",
   flexDirection: "column",
   gap: "lg",
+  width: "full",
 });
 
 export const tabListCss = style([
@@ -21,6 +22,8 @@ export const tabListCss = style([
     "::-webkit-scrollbar": {
       display: "none",
     },
+    msOverflowStyle: "none",
+    scrollbarWidth: "none",
   },
 ]);
 
@@ -41,7 +44,7 @@ export const typographyCss = style([
     borderRadius: "5rem",
     selectors: {
       '&[data-state="active"]': {
-        border: `solid 1px ${theme.colors.orange2}`,
+        borderColor: theme.colors.orange2,
         color: theme.colors.orange2,
       },
     },
