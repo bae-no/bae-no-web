@@ -5031,7 +5031,6 @@ packages:
     dependencies:
       '@types/react': 18.0.15
       '@types/relay-runtime': 13.0.3
-
     dev: true
 
   /@types/react-syntax-highlighter/11.0.5:
@@ -5047,7 +5046,7 @@ packages:
       '@types/scheduler': 0.16.2
       csstype: 3.1.0
     dev: true
-    
+
   /@types/relay-runtime/13.0.3:
     resolution: {integrity: sha512-LZr9fiWspAtiFIMDcj/6LarYFqxd3jh3ASXULtWL5Tl5CHoDe48Il2nIAF66XKLLCG3QvDgHR8yLX6ZVWKjkkw==}
     dev: true
