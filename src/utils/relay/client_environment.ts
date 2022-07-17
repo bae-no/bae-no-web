@@ -2,7 +2,7 @@ import { getRelaySerializedState } from 'relay-nextjs';
 import { withHydrateDatetime } from 'relay-nextjs/date';
 import { Environment, Network, Store, RecordSource } from 'relay-runtime';
 
-const URL = 'http://localhost:60854';
+const URL = 'http://localhost:55894';
 
 export function createClientNetwork() {
   return Network.create(async (params, variables) => {

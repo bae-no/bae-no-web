@@ -14,3 +14,4 @@ export * from "./BottomDrawer";
 export * from "./Layout";
 export * from "./Select";
 export * from "./Tab";
+export * from "./Skeleton";
