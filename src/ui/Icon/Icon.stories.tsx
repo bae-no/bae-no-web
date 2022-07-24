@@ -1,14 +1,14 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { colors } from "../tokens/color";
-import { size } from "../tokens/size";
+import { space } from "../tokens/space";
 
 import Icon from "./Icon";
 
 export default {
   argTypes: {
     color: { control: "select", options: Object.keys(colors) },
-    size: { control: "select", options: Object.keys(size) },
+    size: { control: "select", options: Object.keys(space) },
   },
   component: Icon,
   title: "UI/Icon",
