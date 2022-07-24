@@ -12,7 +12,7 @@ globalStyle("*", {
 globalStyle("html, body", {
   "@supports": {
     "(-webkit-touch-callout: none)": {
-      height: "-webkit-fill-available",
+      maxHeight: "-webkit-fill-available",
     },
   },
   fontSize: "62.5%",
