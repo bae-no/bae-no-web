@@ -8,5 +8,5 @@ export const popupContentCss = style([
     width: "31.1rem",
   },
   contentCss,
-  sprinkles({ bg: "white", br: "sm", p: "lg", position: "fixed" }),
+  sprinkles({ bg: "white", br: "12", p: "24", position: "fixed" }),
 ]);

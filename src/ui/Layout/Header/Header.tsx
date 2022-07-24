@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 import { Box } from "src/ui/Box";
+import { Sprinkles } from "src/ui/sprinkles.css";
 import { Typography } from "src/ui/Typography";
 
 import Back from "./Back";
@@ -17,7 +18,7 @@ const Side = ({ children, position }: SideProps) => (
     position="absolute"
     top="half"
     transform="yHalfMinus"
-    {...{ [position]: "md" }}
+    {...{ [position]: "16" }}
   >
     {typeof children === "string" ? (
       <Typography color="black2" fontSize="body2-m">
@@ -30,6 +31,7 @@ const Side = ({ children, position }: SideProps) => (
 );
 
 interface HeaderBaseProps {
+  backgroundColor?: Sprinkles["backgroundColor"];
   leftNode?: ReactNode;
   rightNode?: ReactNode;
 }
@@ -46,15 +48,21 @@ interface HeaderWithNodeProps extends HeaderBaseProps {
 
 export type HeaderProps = HeaderWithTitleProps | HeaderWithNodeProps;
 
-const Header = ({ title, leftNode, rightNode, mainNode }: HeaderProps) => (
+const Header = ({
+  title,
+  leftNode,
+  rightNode,
+  mainNode,
+  backgroundColor = "white",
+}: HeaderProps) => (
   <Box
     align="center"
     as="header"
-    backgroundColor="white"
+    backgroundColor={backgroundColor}
     className={headerCss}
     justify="center"
     position="sticky"
-    top="none"
+    top="0"
   >
     {leftNode && <Side position="left">{leftNode}</Side>}
     {title ? <Typography fontSize="headline5">{title}</Typography> : mainNode}

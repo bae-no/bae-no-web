@@ -10,7 +10,7 @@ export const checkBoxRootCss = style([
     cursor: "pointer",
     display: "flex",
     justifyContent: "center",
-    padding: "none",
+    padding: "0",
   }),
   {
     border: "none",

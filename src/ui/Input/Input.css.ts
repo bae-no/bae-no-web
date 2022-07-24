@@ -87,13 +87,13 @@ export const inputContainerCss = recipe({
         {
           borderWidth: "0.1rem",
         },
-        sprinkles({ br: "xs", px: "md" }),
+        sprinkles({ br: "8", px: "16" }),
       ],
       underline: [
         {
           borderBottomWidth: "0.1rem",
         },
-        sprinkles({ paddingRight: "xs" }),
+        sprinkles({ paddingRight: "8" }),
       ],
     },
   },

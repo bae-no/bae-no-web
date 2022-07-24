@@ -29,13 +29,13 @@ const CheckBox = forwardRef(
       label,
       name,
     }: CheckBoxProp,
-    ref: ForwardedRef<HTMLButtonElement>
+    ref: ForwardedRef<HTMLButtonElement>,
   ) => {
     const fontSize = size === "large" ? "body1-b" : "body2-m";
     const id = useId();
 
     return (
-      <Box alignItems="center" flexDirection="row" gap="xs">
+      <Box alignItems="center" flexDirection="row" gap="8">
         <Root
           checked={checked}
           className={checkBoxRootCss}
@@ -47,7 +47,7 @@ const CheckBox = forwardRef(
           onCheckedChange={onCheckedChange}
         >
           <Indicator forceMount className={checkBoxIndicatorCss}>
-            <Icon className={checkBoxIconCss} name="checkbox" size="lg" />
+            <Icon className={checkBoxIconCss} name="checkbox" size="24" />
           </Indicator>
         </Root>
         <Typography
@@ -60,7 +60,7 @@ const CheckBox = forwardRef(
         </Typography>
       </Box>
     );
-  }
+  },
 );
 
 export default CheckBox;

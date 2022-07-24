@@ -5,22 +5,22 @@ import { sprinkles } from "../sprinkles.css";
 import { colors } from "../tokens/color";
 
 const defaultCss = sprinkles({
-  borderRadius: "xxs",
-  minWidth: "xxxl",
-  py: "xs",
+  borderRadius: "4",
+  minWidth: "64",
+  py: "4",
   textAlign: "center",
 });
 
 const borderCss = sprinkles({
-  borderRadius: "md",
-  py: "xxxs",
+  borderRadius: "16",
+  py: "2",
   width: "auto",
 });
 
 export const labelCss = recipe({
   base: [
     fontCss({ fontSize: "caption1-b" }),
-    sprinkles({ height: "fit", px: "xs" }),
+    sprinkles({ height: "fit", px: "8" }),
   ],
   defaultVariants: { color: "orange", variant: "default" },
   variants: {

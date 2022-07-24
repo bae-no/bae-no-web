@@ -21,7 +21,7 @@ const Input = forwardRef(
       leftNode,
       ...rest
     }: InputProps,
-    ref: ForwardedRef<HTMLInputElement>
+    ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const [focused, toggleFocused] = useToggle(false);
 
@@ -40,7 +40,7 @@ const Input = forwardRef(
 
     const handleClickClose = useCallback(() => {
       if (isValid) return;
-      onClearClick();
+      onClearClick?.();
     }, [onClearClick, isValid]);
 
     return (
@@ -48,7 +48,7 @@ const Input = forwardRef(
         alignItems="center"
         className={inputContainerCss({ disabled, size, state, variant })}
         flexDirection="row"
-        gap="xs"
+        gap="8"
       >
         {leftNode}
         <Box
@@ -78,13 +78,13 @@ const Input = forwardRef(
             <Icon
               color={iconColor}
               name={isValid ? "check" : "close-typing"}
-              size="lg"
+              size="24"
             />
           </Box>
         )}
       </Box>
     );
-  }
+  },
 );
 
 export default Input;

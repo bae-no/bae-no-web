@@ -18,9 +18,6 @@ interface AvatarProps
   text?: string;
 }
 
-/**
- * @param size - xs: 28, sm: 40, md: 48, lg: 56, xl: 80, xxl: 96
- */
 const Avatar = ({
   alt,
   src,

@@ -4,8 +4,8 @@ import { animationCss } from "../modalBase.css";
 import { sprinkles } from "../sprinkles.css";
 
 export const contentContainerCss = sprinkles({
-  bottom: "none",
-  left: "none",
+  bottom: "0",
+  left: "0",
   outline: "none",
   position: "fixed",
   width: "full",
@@ -14,10 +14,10 @@ export const contentContainerCss = sprinkles({
 export const contentCss = style([
   sprinkles({
     bg: "white",
-    borderTopRadius: "md",
+    borderTopRadius: "16",
     display: "flex",
     flexDirection: "column",
-    gap: "lg",
+    gap: "24",
     overflow: "hidden",
     position: "relative",
     width: "full",

@@ -34,10 +34,10 @@ describe("UI Avatar Component", () => {
     rendered = render(
       <Avatar
         alt={IMAGE_ALT_TEXT}
-        size="lg"
+        size="56"
         src="/test.jpg"
         text={FALLBACK_TEXT}
-      />
+      />,
     );
   });
 
@@ -65,7 +65,7 @@ describe("UI Avatar Component", () => {
   });
 
   it("should render the fallback text", () => {
-    const { getByText } = render(<Avatar size="lg" text="QWERTY" />);
+    const { getByText } = render(<Avatar size="56" text="QWERTY" />);
     expect(getByText("Q"));
   });
 });

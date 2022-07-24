@@ -24,7 +24,7 @@ const ErrorFallback = () => (
     {pipe(
       SVG_ICON_MAP,
       keys,
-      map((key) => <Icon color="orange1" key={key} name={key} size="xxl" />),
+      map((key) => <Icon color="orange1" key={key} name={key} size="48" />),
       toArray,
     )}
   </div>
@@ -36,8 +36,8 @@ const Home = () => (
       errorFallback={ErrorFallback}
       loadingFallback={LoadingComponent}
     >
-      <Skeleton height="sm" width="full" />
-      <Skeleton borderRadius="md" height="lg" width="lg" />
+      <Skeleton height="12" width="full" />
+      <Skeleton borderRadius="16" height="24" width="24" />
     </AsyncBoundary>
   </Layout>
 );

@@ -11,10 +11,10 @@ interface InputBaseProps
     >,
     ComponentBaseProps {
   leftNode?: ReactElement;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onClearClick: VoidFunction;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onClearClick?: VoidFunction;
   placeholder?: string;
-  value: string;
+  value?: string;
 }
 
 export type InputProps = InputCss & InputBaseProps;

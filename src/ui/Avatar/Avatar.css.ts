@@ -14,28 +14,27 @@ const avatarRootBaseCss = style({
 });
 
 const rootSize = {
-  lg: {
-    height: "5.6rem",
-    width: "5.6rem",
-  },
-
-  md: {
-    height: "4.8rem",
-    width: "4.8rem",
-  },
-  sm: {
-    height: "4.0rem",
-    width: "4.0rem",
-  },
-  xl: {
-    height: "8.0rem",
-    width: "8.0rem",
-  },
-  xs: {
+  "28": {
     height: "2.8rem",
     width: "2.8rem",
   },
-  xxl: {
+  "40": {
+    height: "4.0rem",
+    width: "4.0rem",
+  },
+  "48": {
+    height: "4.8rem",
+    width: "4.8rem",
+  },
+  "56": {
+    height: "5.6rem",
+    width: "5.6rem",
+  },
+  "80": {
+    height: "8.0rem",
+    width: "8.0rem",
+  },
+  "96": {
     height: "9.6rem",
     width: "9.6rem",
   },
@@ -67,15 +66,15 @@ const avatarFallbackBaseCss = style({
 
 export const avatarFallbackCss = recipe({
   base: avatarFallbackBaseCss,
-  defaultVariants: { size: "md", type: "none" },
+  defaultVariants: { size: "48", type: "none" },
   variants: {
     size: {
-      lg: fontCss({ fontSize: "headline2" }),
-      md: fontCss({ fontSize: "headline3" }),
-      sm: fontCss({ fontSize: "headline4" }),
-      xl: fontCss({ fontSize: "headline1" }),
-      xs: fontCss({ fontSize: "body1-b" }),
-      xxl: fontCss({ fontSize: "headline1" }),
+      "28": fontCss({ fontSize: "body1-b" }),
+      "40": fontCss({ fontSize: "headline4" }),
+      "48": fontCss({ fontSize: "headline3" }),
+      "56": fontCss({ fontSize: "headline2" }),
+      "80": fontCss({ fontSize: "headline1" }),
+      "96": fontCss({ fontSize: "headline1" }),
     },
     type: {
       none: {

@@ -17,11 +17,11 @@ const BottomTabItemItem = ({ iconName, tabName, href }: BottomTabItemProps) => {
   const color = isActive ? "orange2" : "black6";
   return (
     <Link passHref replace href={href}>
-      <Box align="center" as="a" flex={1} gap="xxs">
+      <Box align="center" as="a" flex={1} gap="4">
         <Icon
           color={color}
           name={`${iconName}-${isActive ? "solid" : "outline"}`}
-          size="lg"
+          size="24"
         />
         <Typography color={color} fontSize="caption1-m">
           {tabName}

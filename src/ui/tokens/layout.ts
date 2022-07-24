@@ -1,4 +1,4 @@
-import { size } from "./size";
+import { space } from "./space";
 
 export const layout = {
   auto: "auto",
@@ -7,6 +7,5 @@ export const layout = {
   half: "50%",
   max: "max-content",
   min: "min-content",
-  none: "0",
-  ...size,
+  ...space,
 };
