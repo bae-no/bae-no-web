@@ -77,6 +77,7 @@ const responsiveProperties = defineProperties({
     borderBottomRadius: ["borderTopLeftRadius", "borderTopRightRadius"],
     borderTopRadius: ["borderTopLeftRadius", "borderTopRightRadius"],
     br: ["borderRadius"],
+    direction: ["flexDirection"],
     justify: ["justifyContent"],
     m: ["margin"],
     maxSize: ["maxWidth", "maxHeight"],
