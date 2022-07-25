@@ -1,6 +1,8 @@
-import ChattingRooms from "src/modules/home/ChattingRooms";
-import HomeHead from "src/modules/home/HomeHead";
-import { useHeaderBackgroundColor } from "src/modules/home/hooks";
+import {
+  useHeaderBackgroundColor,
+  ChattingRooms,
+  HomeHead,
+} from "src/modules/home";
 import { Box, Header, Layout } from "src/ui";
 
 const Home = () => {
