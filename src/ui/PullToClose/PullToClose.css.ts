@@ -9,10 +9,10 @@ export const barCss = style([
     width: "4.1rem",
   },
   sprinkles({
-    height: "xxs",
+    height: "4",
     left: "half",
     position: "absolute",
-    top: "sm",
+    top: "12",
     transform: "xHalfMinus",
   }),
 ]);

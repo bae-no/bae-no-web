@@ -9,9 +9,22 @@ import { FontCss, fontCss } from "../fontBase.css";
 import { Sprinkles } from "../sprinkles.css";
 
 type TypographyProps = ComponentBaseProps &
-  Pick<Sprinkles, "color" | "textAlign"> &
+  Pick<Sprinkles, "color" | "textAlign" | "whiteSpace" | "wordBreak"> &
   FontCss & {
-    as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "label" | "span";
+    as?:
+      | "h1"
+      | "h2"
+      | "h3"
+      | "h4"
+      | "h5"
+      | "h6"
+      | "p"
+      | "label"
+      | "span"
+      | "em"
+      | "strong"
+      | "del"
+      | "pre";
     children: ReactNode;
     className?: ClassValue;
     htmlFor?: string;
@@ -26,9 +39,10 @@ const Typography = forwardRef(
       fontSize,
       className,
       textAlign,
+      whiteSpace = "pre-wrap",
       ...rest
     }: TypographyProps,
-    ref
+    ref,
   ) => (
     <Box
       {...rest}
@@ -40,12 +54,14 @@ const Typography = forwardRef(
         className,
       ]}
       color={color}
+      display="inline"
       ref={ref}
       textAlign={textAlign}
+      whiteSpace={whiteSpace}
     >
       {children}
     </Box>
-  )
+  ),
 );
 
 export default Typography;

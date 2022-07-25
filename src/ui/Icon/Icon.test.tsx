@@ -27,10 +27,10 @@ describe("UI Icon Component", () => {
   });
 
   it("could have size", () => {
-    const { container } = render(<Icon name="close" size="xxl" />);
+    const { container } = render(<Icon name="close" size="48" />);
     expect(container).toHaveStyle({
-      height: theme.size.xxl,
-      width: theme.size.xxl,
+      height: theme.space["48"],
+      width: theme.space["48"],
     });
   });
 });

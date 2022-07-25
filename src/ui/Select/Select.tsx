@@ -26,14 +26,14 @@ const Select = (
     onValueChange,
     ...rest
   }: SelectProps,
-  ref: ForwardedRef<HTMLDivElement>
+  ref: ForwardedRef<HTMLDivElement>,
 ) => {
   const [open, setOpen] = useState(false);
   const isSmall = size === "small";
 
   const selectLabel = useMemo(
     () => options.find(({ value: v }) => v === value)?.label,
-    [value, options]
+    [value, options],
   );
 
   return (
@@ -46,14 +46,14 @@ const Select = (
           align="center"
           backgroundColor={isSmall ? "black10" : "white"}
           borderColor="black7"
-          borderRadius="xs"
+          borderRadius="8"
           borderStyle="solid"
-          borderWidth={isSmall ? "none" : "xxxxs"}
+          borderWidth={isSmall ? "0" : "1"}
           flexDirection="row"
-          gap="xxs"
+          gap="4"
           justify="space-between"
-          px={isSmall ? "sm" : "md"}
-          py={isSmall ? "xxs" : "sm"}
+          px={isSmall ? "12" : "16"}
+          py={isSmall ? "4" : "12"}
           ref={ref}
           width={!isSmall ? "full" : "fit"}
           {...rest}

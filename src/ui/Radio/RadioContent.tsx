@@ -12,7 +12,7 @@ import { RadioContentValueProps } from "./Radio.type";
 export const RadioContent = ({ label, value }: RadioContentValueProps) => {
   const id = useId();
   return (
-    <Box alignItems="center" flexDirection="row" gap="md" key={label}>
+    <Box alignItems="center" flexDirection="row" gap="16" key={label}>
       <Item className={radioItemCss} id={id} value={value || label}>
         <Indicator className={radioIndicatorCss} />
       </Item>

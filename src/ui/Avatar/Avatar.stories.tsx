@@ -14,15 +14,15 @@ export const Image = Template.bind({});
 export const Text = Template.bind({});
 
 Default.args = {
-  size: "lg",
+  size: "56",
 };
 
 Image.args = {
-  size: "lg",
+  size: "56",
   src: "https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80",
 };
 
 Text.args = {
-  size: "lg",
+  size: "56",
   text: "A",
 };

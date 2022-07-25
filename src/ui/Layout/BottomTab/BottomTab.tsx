@@ -14,21 +14,21 @@ const BottomTab = () => (
   <Box as="nav" className={bottomTabContainerCss}>
     <Box
       backgroundColor="white"
-      borderTopRadius="lg"
+      borderTopRadius="24"
       className={bottomTabCss}
       flexDirection="row"
-      gap="xxs"
+      gap="4"
       justify="space-between"
-      paddingBottom="lg"
-      paddingTop="xs"
+      paddingBottom="24"
+      paddingTop="8"
       position="fixed"
-      px="md"
+      px="16"
       width="full"
     >
       <BottomTabItem href="/" iconName="home" tabName="홈" />
       <BottomTabItem href="/search" iconName="search" tabName="검색" />
       <Link passHref href="/create-chat">
-        <Box as="a" className={addIconCss} position="relative" top="none">
+        <Box as="a" className={addIconCss} position="relative" top="0">
           <Icon name="add" />
         </Box>
       </Link>

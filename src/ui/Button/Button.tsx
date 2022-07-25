@@ -23,7 +23,7 @@ const Button = forwardRef(
       disabled,
       ...rest
     }: ButtonProps,
-    ref: ForwardedRef<HTMLButtonElement>
+    ref: ForwardedRef<HTMLButtonElement>,
   ) => {
     const renderButton = () => (
       <Box
@@ -43,7 +43,7 @@ const Button = forwardRef(
         {...rest}
       >
         {leftIconName && (
-          <Icon name={leftIconName} size={size === "l" ? "lg" : "md"} />
+          <Icon name={leftIconName} size={size === "l" ? "24" : "16"} />
         )}
         {children}
       </Box>
@@ -58,7 +58,7 @@ const Button = forwardRef(
     }
 
     return renderButton();
-  }
+  },
 );
 
 export default Button;

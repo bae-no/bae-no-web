@@ -7,14 +7,14 @@ export const tabRootCss = sprinkles({
   alignItems: "center",
   display: "flex",
   flexDirection: "column",
-  gap: "lg",
+  gap: "24",
   width: "full",
 });
 
 export const tabListCss = style([
   sprinkles({
     display: "flex",
-    gap: "xs",
+    gap: "8",
     overflow: "scroll",
     width: "full",
   }),
@@ -32,13 +32,13 @@ export const typographyCss = style([
     backgroundColor: "white",
     borderColor: "black7",
     borderStyle: "solid",
-    borderWidth: "xxxxs",
+    borderWidth: "1",
     color: "black3",
     cursor: "pointer",
     minWidth: "fit",
     outline: "none",
-    px: "sm",
-    py: "xs",
+    px: "12",
+    py: "8",
   }),
   {
     borderRadius: "5rem",

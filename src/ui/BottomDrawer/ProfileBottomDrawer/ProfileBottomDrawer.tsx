@@ -23,8 +23,8 @@ const ProfileBottomDrawer = ({
   is방장,
 }: ProfileBottomDrawerProps) => (
   <BottomDrawer open={open} trigger={trigger} onOpenChange={onOpenChange}>
-    <Box gap="lg">
-      <Box align="center" gap="md">
+    <Box gap="24">
+      <Box align="center" gap="16">
         <ProfileAvatar
           avatarProps={avatarProps}
           isMine={isMine}

@@ -16,7 +16,7 @@ const ProfileAvatar = ({
   isMine,
 }: ProfileAvatarProps) => (
   <Box position="relative">
-    <Avatar size="xl" {...avatarProps} />
+    <Avatar size="80" {...avatarProps} />
     {isMine && (
       <Box
         aria-label="프로필 수정"
@@ -25,11 +25,11 @@ const ProfileAvatar = ({
         borderColor="black7"
         borderRadius="half"
         borderStyle="solid"
-        borderWidth="xxxxs"
-        bottom="none"
-        p="xxs"
+        borderWidth="1"
+        bottom="0"
+        p="4"
         position="absolute"
-        right="none"
+        right="0"
         type="button"
         onClick={onClickEditProfile}
       >

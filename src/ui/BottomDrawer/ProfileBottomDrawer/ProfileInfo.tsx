@@ -17,8 +17,8 @@ const ProfileInfo = ({
   isMine,
   is방장,
 }: ProfileInfoProps) => (
-  <Box align="center" gap="xxs">
-    <Box align="center" flexDirection="row" gap="xxs">
+  <Box align="center" gap="4">
+    <Box align="center" flexDirection="row" gap="4">
       {is방장 && (
         <Label color="skyblue" variant="border">
           방장

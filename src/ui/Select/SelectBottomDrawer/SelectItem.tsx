@@ -25,15 +25,15 @@ export const SelectItem = ({
         flexDirection="row"
         justifyContent="space-between"
         outline="none"
-        px="md"
-        py="xs"
+        px="16"
+        py="8"
         role="option"
         onClick={handleClick}
       >
         <Typography color={selected ? "orange2" : "black3"} fontSize="body1-m">
           {label}
         </Typography>
-        {selected && <Icon color="orange2" name="check" size="lg" />}
+        {selected && <Icon color="orange2" name="check" size="24" />}
       </Box>
     </DialogClose>
   );

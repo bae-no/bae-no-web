@@ -36,7 +36,7 @@ const FormField = ({
     (state === "invalid" && invalidMessage);
 
   return (
-    <Box gap="xxs">
+    <Box gap="4">
       {label && (
         <Typography
           as="label"
