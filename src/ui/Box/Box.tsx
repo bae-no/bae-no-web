@@ -30,23 +30,23 @@ const Box = forwardRef(
     {
       children,
       display = "flex",
-      flexDirection = "column",
+      direction = "column",
       as = "div",
       className = "",
       ...props
     }: BoxProps,
-    ref
+    ref,
   ) => {
     const [atomProps, nativeProps] = parseProps(props);
     const styles = clsx(
       sprinkles({
         ...atomProps,
+        direction,
         display,
-        flexDirection,
       }),
       base,
       element[as as keyof typeof element],
-      className
+      className,
     );
 
     return createElement(
@@ -56,9 +56,9 @@ const Box = forwardRef(
         ...nativeProps,
         ref,
       },
-      children
+      children,
     );
-  }
+  },
 );
 
 export default Box;

@@ -63,6 +63,7 @@ const Header = ({
     justify="center"
     position="sticky"
     top="0"
+    zIndex={1}
   >
     {leftNode && <Side position="left">{leftNode}</Side>}
     {title ? <Typography fontSize="headline5">{title}</Typography> : mainNode}
