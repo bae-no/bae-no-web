@@ -21,6 +21,7 @@ const Button = forwardRef(
       size = "l",
       href,
       disabled,
+      className,
       ...rest
     }: ButtonProps,
     ref: ForwardedRef<HTMLButtonElement>,
@@ -31,6 +32,7 @@ const Button = forwardRef(
         as={href ? "a" : "button"}
         className={[
           element.button,
+          className,
           buttonCss({ color, size, variant }),
           disabled && "disabled",
         ]}
