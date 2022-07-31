@@ -83,7 +83,6 @@ jobs:
                 createSummaryInfo("accessibility"),
                 createSummaryInfo("best-practices"),
                 createSummaryInfo("seo"),
-                createSummaryInfo("pwa"),
               ].join("\n");
 
               const detail = [
