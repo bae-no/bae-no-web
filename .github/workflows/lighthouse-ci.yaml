@@ -58,30 +58,40 @@ jobs:
               const { audits } = details;
 
               const details = JSON.parse(fs.readFileSync(jsonPath));
-              const formatResult = (res) => Math.round(res * 100);
 
-              Object.keys(summary).forEach(
-                (key) => (summary[key] = formatResult(summary[key]))
-              );
               const score = (res) => (res >= 90 ? "🟢" : res >= 50 ? "🟠" : "🔴");
+
+              const createSummaryInfo = (field) => {
+                const value = formatResult(summary[field]);
+                `| ${score(value)} ${field} | ${value} |`;
+              };
+
+              const createAuditsInfo = (field) => {
+                const target = audits[field];
+                const value = formatResult(target.score);
+                `| ${score(value)} ${field} | ${target.displayValue} |`;
+              };
 
               const comment = [
                 `⚡️ Lighthouse report!`,
                 `| Category | Score |`,
                 `| --- | --- |`,
-                `| ${score(summary.performance)} Performance | ${summary.performance} |`,
-                { ... }
+                createSummaryInfo("performance"),
+                createSummaryInfo("accessibility"),
+                createSummaryInfo("best-practices"),
+                createSummaryInfo("seo"),
+                createSummaryInfo("pwa"),
               ].join("\n");
 
               const detail = [
                 `| Category | Score |`,
                 `| --- | --- |`,
-                `| ${score(
-                  audits["first-contentful-paint"].score * 100
-                )} First Contentful Paint | ${
-                  audits["first-contentful-paint"].displayValue
-                } |`,
-                { ... }
+                createAuditsInfo("first-contentful-paint"),
+                createAuditsInfo("largest-contentful-paint"),
+                createAuditsInfo("first-meaningful-paint"),
+                createAuditsInfo("total-blocking-time"),
+                createAuditsInfo("cumulative-layout-shift"),
+                createAuditsInfo("interactive"),
               ].join("\n");
               comments += comment + "\n" + detail + "\n";
             });
