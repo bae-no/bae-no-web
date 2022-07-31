@@ -106,3 +106,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           msg: ${{ steps.format_lighthouse_score.outputs.comments}}
+          check_for_duplicate_msg: false
