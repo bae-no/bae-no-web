@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { RelayEnvironmentProvider } from "react-relay/hooks";
-import { RecoilRoot } from "recoil";
 import { getInitialPreloadedQuery, getRelayProps } from "relay-nextjs/app";
 
 import { useInit } from "src/hooks";
@@ -22,15 +21,13 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   useInit();
   return (
     <RelayEnvironmentProvider environment={env}>
-      <RecoilRoot>
-        <Head>
-          <meta
-            content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover"
-            name="viewport"
-          />
-        </Head>
-        <Component {...pageProps} {...relayProps} />
-      </RecoilRoot>
+      <Head>
+        <meta
+          content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover"
+          name="viewport"
+        />
+      </Head>
+      <Component {...pageProps} {...relayProps} />
     </RelayEnvironmentProvider>
   );
 };

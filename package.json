@@ -39,7 +39,6 @@
     "react-dom": "^18.2.0",
     "react-error-boundary": "^3.1.4",
     "react-relay": "^14.0.0",
-    "recoil": "^0.7.4",
     "relay-nextjs": "^0.8.0",
     "relay-runtime": "^14.0.0"
   },
