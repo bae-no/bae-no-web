@@ -6,13 +6,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2.0.1
+      - uses: pnpm/action-setup@v2.2.2
         with:
-          version: 7.0.0-rc.9
+          version: 7
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
           cache: pnpm
+
+      - name: Get npm cache directory
+        id: pnpm-cache-dir
+        run: |
+          echo "::set-output name=dir::$(pnpm config get cache)"
+
+      - uses: actions/cache@v3
+        id: pnpm-cache
+        with:
+          path: ${{ steps.pnpm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -28,5 +41,5 @@ jobs:
 
       - name: run Lighthouse CI
         run: |
-          pnpm install -g @lhci/cli@0.8.x
+          npm install -g @lhci/cli@0.8.x
           lhci autorun
