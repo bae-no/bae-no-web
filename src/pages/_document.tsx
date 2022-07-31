@@ -1,5 +1,11 @@
-import NextDocument, { Html, Head, DocumentContext, Main, NextScript } from 'next/document';
-import { createRelayDocument, RelayDocument } from 'relay-nextjs/document';
+import NextDocument, {
+  Html,
+  Head,
+  DocumentContext,
+  Main,
+  NextScript,
+} from "next/document";
+import { createRelayDocument, RelayDocument } from "relay-nextjs/document";
 
 interface DocumentProps {
   relayDocument: RelayDocument;
@@ -27,9 +33,8 @@ class MyDocument extends NextDocument<DocumentProps> {
     const { relayDocument } = this.props;
 
     return (
-      <Html>
+      <Html lang="ko">
         <Head>
-          <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" type="text/css" />
           <relayDocument.Script />
         </Head>
         <body>

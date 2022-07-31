@@ -4,8 +4,8 @@ import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 
 const Notification = () => (
-  <Link href="/notification">
-    <Box aria-label="알림" as="a">
+  <Link passHref href="/notification">
+    <Box as="a" title="알림페이지">
       <Icon name="bell-alarm" />
     </Box>
   </Link>

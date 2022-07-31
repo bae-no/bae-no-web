@@ -28,7 +28,13 @@ const BottomTab = () => (
       <BottomTabItem href="/" iconName="home" tabName="홈" />
       <BottomTabItem href="/search" iconName="search" tabName="검색" />
       <Link passHref href="/create-chat">
-        <Box as="a" className={addIconCss} position="relative" top="0">
+        <Box
+          as="a"
+          className={addIconCss}
+          position="relative"
+          title="채팅방 생성"
+          top="0"
+        >
           <Icon name="add" />
         </Box>
       </Link>

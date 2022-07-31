@@ -1,14 +1,14 @@
-import Head from 'next/head';
-import { RelayEnvironmentProvider } from 'react-relay/hooks';
-import { RecoilRoot } from 'recoil';
-import { getInitialPreloadedQuery, getRelayProps } from 'relay-nextjs/app';
+import Head from "next/head";
+import { RelayEnvironmentProvider } from "react-relay/hooks";
+import { RecoilRoot } from "recoil";
+import { getInitialPreloadedQuery, getRelayProps } from "relay-nextjs/app";
 
-import { useInit } from 'src/hooks';
-import { getClientEnvironment } from 'src/utils/relay/client_environment';
+import { useInit } from "src/hooks";
+import { getClientEnvironment } from "src/utils/relay/client_environment";
 
-import type { AppProps } from 'next/app';
+import type { AppProps } from "next/app";
 
-import 'src/ui/global.css';
+import "src/ui/global.css";
 
 const clientEnv = getClientEnvironment();
 const initialPreloadedQuery = getInitialPreloadedQuery({
@@ -24,7 +24,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <RelayEnvironmentProvider environment={env}>
       <RecoilRoot>
         <Head>
-          <meta content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover" name="viewport" />
+          <meta
+            content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover"
+            name="viewport"
+          />
         </Head>
         <Component {...pageProps} {...relayProps} />
       </RecoilRoot>
