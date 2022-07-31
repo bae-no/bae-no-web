@@ -1,5 +1,5 @@
 name: ci
-on: [pull_request]
+on: [push]
 
 jobs:
   build:
@@ -38,10 +38,3 @@ jobs:
 
       - name: Test
         run: pnpm test
-
-      - name: run Lighthouse CI
-        run: |
-          npm install -g @lhci/cli@0.8.x
-          lhci autorun
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
