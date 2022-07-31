@@ -1,5 +1,7 @@
 import { MouseEvent, ReactNode } from "react";
 
+import { ClassValue } from "clsx";
+
 import { ComponentBaseProps } from "src/types";
 
 import { SvgIconKey } from "../Icon/iconMap";
@@ -8,6 +10,7 @@ import { ButtonCss } from "./Button.css";
 
 interface ButtonBaseProps extends ComponentBaseProps {
   children: ReactNode;
+  className?: ClassValue;
   disabled?: boolean;
   leftIconName?: SvgIconKey;
 }
