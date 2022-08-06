@@ -1,55 +1,57 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
+
+import { map, remove } from "lodash";
 import { FormProvider, useForm } from "react-hook-form";
+
 import { useToggle } from "src/hooks";
 import ChattingList from "src/modules/Chat/ChattingList";
-import { map, remove } from "lodash";
 import { Box, Button, Header, Layout, Popup, Typography } from "src/ui";
 
 const MOCK_CHATTINGS = [
   {
     avatarSrc: "a",
     chattingId: "2",
-    ended: false,
-    title: "나는 피자가 좋다",
-    lastChat: "마지막 대화내용이 ..... 내용",
     date: "2022.04.12",
+    ended: false,
+    lastChat: "마지막 대화내용이 ..... 내용",
     notReadMessage: 9,
+    title: "나는 피자가 좋다",
   },
   {
     avatarSrc: "a",
     chattingId: "1",
-    ended: false,
-    title: "나는 치킨이 좋다",
-    lastChat: "마지막 대화내용이 ..... 내용",
     date: "2022.04.12",
+    ended: false,
+    lastChat: "마지막 대화내용이 ..... 내용",
     notReadMessage: 10,
+    title: "나는 치킨이 좋다",
   },
   {
     avatarSrc: "a",
     chattingId: "3",
-    ended: false,
-    title: "나는 햄버거가 좋다",
-    lastChat: "마지막 대화내용이 ..... 내용",
     date: "2022.04.12",
+    ended: false,
+    lastChat: "마지막 대화내용이 ..... 내용",
     notReadMessage: 51,
+    title: "나는 햄버거가 좋다",
   },
   {
     avatarSrc: "a",
     chattingId: "5",
-    ended: false,
-    title: "나는 보쌈이 좋다",
-    lastChat: "마지막 대화내용이 ..... 내용",
     date: "2022.04.12",
+    ended: false,
+    lastChat: "마지막 대화내용이 ..... 내용",
     notReadMessage: 99,
+    title: "나는 보쌈이 좋다",
   },
   {
     avatarSrc: "a",
     chattingId: "6",
-    ended: false,
-    title: "나는 감자이 좋다",
-    lastChat: "마지막 대화내용이 ..... 내용",
     date: "2022.04.12",
+    ended: false,
+    lastChat: "마지막 대화내용이 ..... 내용",
     notReadMessage: 103,
+    title: "나는 감자이 좋다",
   },
 ];
 
@@ -57,20 +59,20 @@ const MOCK_CHATTINGS_END = [
   {
     avatarSrc: "a",
     chattingId: "2",
-    ended: true,
-    title: "나는 피자가 좋다",
-    lastChat: "마지막 대화내용이 ..... 내용",
     date: "2022.04.12",
+    ended: true,
+    lastChat: "마지막 대화내용이 ..... 내용",
     notReadMessage: 10,
+    title: "나는 피자가 좋다",
   },
   {
     avatarSrc: "a",
     chattingId: "1",
-    ended: true,
-    title: "나는 치킨이 좋다",
-    lastChat: "마지막 대화내용이 ..... 내용",
     date: "2022.04.12",
+    ended: true,
+    lastChat: "마지막 대화내용이 ..... 내용",
     notReadMessage: 10,
+    title: "나는 치킨이 좋다",
   },
 ];
 
@@ -94,19 +96,19 @@ const Chat = () => {
       (value, key) => value && remove(MOCK_CHATTINGS, { chattingId: key }),
     );
     methods.reset();
-  }, [methods, toggleDeleteModal]);
+  }, [methods, toggleDeleteModal, setDeleteMode]);
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <Layout
-          showBottomTab={!deleteMode}
           headerProps={{
             rightNode: (
               <Header.Delete visible={deleteMode} onClick={toggleDelete} />
             ),
             title: "채팅",
           }}
+          showBottomTab={!deleteMode}
         >
           <Box gap="24" px="16">
             <Button color="gray">공유딜 이용 가이드 보기</Button>
@@ -137,13 +139,11 @@ const Chat = () => {
           cancelText="취소"
           confirmText="나가기"
           description="채팅방에서 나가실건가요? 나가게되면 대화내용이 모두 삭제되고 채팅목록에서도 삭제됩니다."
-          onConfirm={onConfirm}
-          onCancel={onCancel}
-          title="채딩방 나가기"
           open={deleteModal}
-        >
-          <></>
-        </Popup>
+          title="채딩방 나가기"
+          onCancel={onCancel}
+          onConfirm={onConfirm}
+        />
       </form>
     </FormProvider>
   );

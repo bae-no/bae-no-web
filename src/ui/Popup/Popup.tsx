@@ -36,11 +36,11 @@ const AlertDialogContent = ({
 interface PopupProps extends Pick<AlertDialogProps, "open" | "onOpenChange"> {
   buttonDirection?: "row" | "column";
   cancelText?: string;
-  children: ReactNode;
+  children?: ReactNode;
   confirmText: string;
   description: string;
-  onConfirm?: () => void;
   onCancel?: () => void;
+  onConfirm?: () => void;
   title: string;
 }
 
@@ -57,7 +57,7 @@ const Popup = ({
   onOpenChange,
 }: PopupProps) => (
   <AlertDialog open={open} onOpenChange={onOpenChange}>
-    <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
+    {children && <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>}
     <AlertDialogContent>
       <Box gap={buttonDirection === "column" ? "32" : "24"}>
         <Box alignItems="center" gap="8">
@@ -86,7 +86,7 @@ const Popup = ({
             </AlertDialogCancel>
           )}
           <AlertDialogAction asChild>
-            <Button onClick={onConfirm} type="submit">
+            <Button type="submit" onClick={onConfirm}>
               {confirmText}
             </Button>
           </AlertDialogAction>

@@ -1,6 +1,7 @@
 import { memo } from "react";
-import { useFormContext } from "react-hook-form";
 
+import "react-swipeable-list/dist/styles.css";
+import { useFormContext } from "react-hook-form";
 import {
   SwipeableList,
   SwipeableListItem,
@@ -8,7 +9,6 @@ import {
   TrailingActions,
   Type as ListType,
 } from "react-swipeable-list";
-import "react-swipeable-list/dist/styles.css";
 
 import { Avatar, Box, CheckBox, Label, Typography } from "src/ui";
 
@@ -16,14 +16,14 @@ const trailingActions = ({ onClick }: { onClick: () => void }) => (
   <TrailingActions>
     <SwipeAction onClick={onClick}>
       <Box
+        align="center"
         as="button"
         backgroundColor="danger1"
         color="white"
-        width="64"
         height="full"
-        align="center"
         justify="center"
         paddingBottom="16"
+        width="64"
       >
         나가기
       </Box>
@@ -34,28 +34,28 @@ const trailingActions = ({ onClick }: { onClick: () => void }) => (
 export interface ChattingItemProps {
   avatarSrc: string;
   chattingId: string;
-  ended: boolean;
-  title: string;
+  checkbox?: boolean;
   date: string;
+  ended: boolean;
   lastChat: string;
   notReadMessage: number;
-  checkbox?: boolean;
+  title: string;
 }
 
 const ChattingItem = ({
   avatarSrc,
-  title,
-  ended,
   chattingId,
-  lastChat,
-  date,
-  notReadMessage,
   checkbox,
+  date,
+  ended,
+  lastChat,
+  notReadMessage,
+  title,
 }: ChattingItemProps) => {
   const { setValue } = useFormContext();
   const onClickDelete = () => setValue(chattingId, true);
   return (
-    <SwipeableList type={ListType.IOS} threshold={0.3}>
+    <SwipeableList threshold={0.3} type={ListType.IOS}>
       <SwipeableListItem
         trailingActions={trailingActions({ onClick: onClickDelete })}
       >
@@ -63,10 +63,10 @@ const ChattingItem = ({
           align="center"
           as="li"
           direction="row"
-          justify="space-between"
-          width="full"
           gap="32"
+          justify="space-between"
           key={chattingId}
+          width="full"
         >
           <Box align="center" direction="row" gap="16" width="max">
             {checkbox && (
@@ -79,19 +79,19 @@ const ChattingItem = ({
             <Avatar size="48" src={avatarSrc} />
             <Box as="span" gap="2">
               <Typography fontSize="body1-b">{title}</Typography>
-              <Typography fontSize="body2-m" color="black2">
+              <Typography color="black2" fontSize="body2-m">
                 {lastChat}
               </Typography>
             </Box>
           </Box>
           <Box
-            as="span"
             align="flex-end"
-            justify="space-between"
+            as="span"
             gap="5.5"
+            justify="space-between"
             {...(ended && { paddingBottom: "32" })}
           >
-            <Typography fontSize="caption1-m" color="black4">
+            <Typography color="black4" fontSize="caption1-m">
               {date}
             </Typography>
             {!ended && (
