@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export const useToggle = (
   initialState = false,
-  onToggle?: (value: boolean) => void
+  onToggle?: (value: boolean) => void,
 ) => {
   const [state, setState] = useState(initialState);
 
@@ -13,5 +13,5 @@ export const useToggle = (
       return !prev;
     });
   };
-  return [state, toggle] as const;
+  return [state, toggle, setState] as const;
 };

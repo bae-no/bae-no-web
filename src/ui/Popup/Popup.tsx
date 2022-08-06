@@ -40,6 +40,7 @@ interface PopupProps extends Pick<AlertDialogProps, "open" | "onOpenChange"> {
   confirmText: string;
   description: string;
   onConfirm?: () => void;
+  onCancel?: () => void;
   title: string;
 }
 
@@ -50,6 +51,7 @@ const Popup = ({
   confirmText,
   cancelText,
   onConfirm,
+  onCancel,
   buttonDirection = "row",
   open,
   onOpenChange,
@@ -78,11 +80,15 @@ const Popup = ({
         >
           {cancelText && (
             <AlertDialogCancel asChild>
-              <Button color="white">{cancelText}</Button>
+              <Button color="white" onClick={onCancel}>
+                {cancelText}
+              </Button>
             </AlertDialogCancel>
           )}
           <AlertDialogAction asChild>
-            <Button onClick={onConfirm}>{confirmText}</Button>
+            <Button onClick={onConfirm} type="submit">
+              {confirmText}
+            </Button>
           </AlertDialogAction>
         </Box>
       </Box>

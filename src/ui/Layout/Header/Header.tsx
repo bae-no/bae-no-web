@@ -5,6 +5,7 @@ import { Sprinkles } from "src/ui/sprinkles.css";
 import { Typography } from "src/ui/Typography";
 
 import Back from "./Back";
+import Delete from "./Delete";
 import { headerCss } from "./Header.css";
 import Notification from "./Notification";
 
@@ -73,5 +74,6 @@ const Header = ({
 
 Header.Back = Back;
 Header.Notification = Notification;
+Header.Delete = Delete;
 
 export default Header;

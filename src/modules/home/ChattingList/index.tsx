@@ -7,14 +7,12 @@ import ChattingItem, { ChattingItemProps } from "./ChattingItem";
 interface ChattingListProps {
   chattings: ChattingItemProps[];
   fetchMore: (lastId: ChattingItemProps["chattingId"]) => void;
-  checkbox?: boolean;
   gap?: Sprinkles["gap"];
 }
 
 const ChattingList = ({
   chattings,
   fetchMore,
-  checkbox,
   gap = "16",
 }: ChattingListProps) => {
   const handleFetchMore: IntersectionObserverCallback = ([
@@ -28,13 +26,8 @@ const ChattingList = ({
   return (
     <Box as="ol" gap={gap}>
       {chattings.map((chatting) => (
-        <ChattingItem
-          key={chatting.chattingId}
-          checkbox={checkbox}
-          {...chatting}
-        />
+        <ChattingItem key={chatting.chattingId} {...chatting} />
       ))}
-
       <IntersectionArea onIntersect={handleFetchMore}>
         <div />
       </IntersectionArea>

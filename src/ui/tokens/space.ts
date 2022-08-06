@@ -11,4 +11,5 @@ export const space = {
   "56": "5.6rem",
   "64": "6.4rem",
   "8": "0.8rem",
+  "5.5": "0.55rem",
 };
