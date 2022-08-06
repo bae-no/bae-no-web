@@ -30,8 +30,8 @@ export const radioItemCss = style([
     bg: "white",
     borderRadius: "half",
     cursor: "pointer",
-    padding: "none",
-    size: "lg",
+    padding: "0",
+    size: "24",
   }),
   style({
     border: `solid 1px ${colors.black7}`,

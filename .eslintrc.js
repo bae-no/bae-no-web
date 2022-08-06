@@ -22,6 +22,8 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   ignorePatterns: ["**/*.js", "**/*.d.ts"],
   rules: {
+    "class-methods-use-this": "off",
+    "no-constructor-return": "off",
     "import/no-extraneous-dependencies": [
       "error",
       { devDependencies: ["**/*.stories.*", "**/*.test.*", "jest.*"] },
@@ -83,5 +85,8 @@ module.exports = {
     "react/require-default-props": "off",
     "object-curly-newline": "off",
     "consistent-return": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    "react/prop-types": "off",
   },
 };

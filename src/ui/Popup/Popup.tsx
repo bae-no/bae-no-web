@@ -57,8 +57,8 @@ const Popup = ({
   <AlertDialog open={open} onOpenChange={onOpenChange}>
     <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
     <AlertDialogContent>
-      <Box gap={buttonDirection === "column" ? "xl" : "lg"}>
-        <Box alignItems="center" gap="xs">
+      <Box gap={buttonDirection === "column" ? "32" : "24"}>
+        <Box alignItems="center" gap="8">
           <AlertDialogTitle asChild>
             <Typography as="h2" fontSize="headline4">
               {title}
@@ -74,7 +74,7 @@ const Popup = ({
           flexDirection={
             buttonDirection === "column" ? "column-reverse" : "row"
           }
-          gap={buttonDirection === "column" ? "xs" : undefined}
+          gap={buttonDirection === "column" ? "8" : undefined}
         >
           {cancelText && (
             <AlertDialogCancel asChild>

@@ -50,7 +50,7 @@ const outlineStyle = style({
 });
 
 export const buttonCss = recipe({
-  base: sprinkles({ borderRadius: "xs" }),
+  base: sprinkles({ borderRadius: "8" }),
   defaultVariants: { color: "orange", size: "l", variant: "default" },
   variants: {
     color: {
@@ -84,15 +84,15 @@ export const buttonCss = recipe({
     },
     size: {
       l: [
-        sprinkles({ gap: "xs", py: "sm", width: "full" }),
+        sprinkles({ gap: "8", py: "12", width: "full" }),
         fontCss({ fontSize: "body1-m" }),
       ],
       m: [
-        sprinkles({ gap: "xs", px: "md", py: "xs", width: "fit" }),
+        sprinkles({ gap: "8", px: "16", py: "8", width: "fit" }),
         fontCss({ fontSize: "body2-m" }),
       ],
       s: [
-        sprinkles({ gap: "xxs", px: "xs", py: "xxs", width: "fit" }),
+        sprinkles({ gap: "4", px: "8", py: "4", width: "fit" }),
         fontCss({ fontSize: "body3-m" }),
       ],
     },

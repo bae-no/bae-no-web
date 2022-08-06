@@ -4,7 +4,7 @@ import clsx, { ClassValue } from "clsx";
 
 import { ComponentBaseProps } from "src/types";
 
-import { base } from "../reset.css";
+import { base, element } from "../reset.css";
 import { sprinkles, Sprinkles } from "../sprinkles.css";
 import { parseProps } from "../utils";
 
@@ -30,22 +30,23 @@ const Box = forwardRef(
     {
       children,
       display = "flex",
-      flexDirection = "column",
+      direction = "column",
       as = "div",
       className = "",
       ...props
     }: BoxProps,
-    ref
+    ref,
   ) => {
     const [atomProps, nativeProps] = parseProps(props);
     const styles = clsx(
       sprinkles({
         ...atomProps,
+        direction,
         display,
-        flexDirection,
       }),
       base,
-      className
+      element[as as keyof typeof element],
+      className,
     );
 
     return createElement(
@@ -55,9 +56,9 @@ const Box = forwardRef(
         ...nativeProps,
         ref,
       },
-      children
+      children,
     );
-  }
+  },
 );
 
 export default Box;

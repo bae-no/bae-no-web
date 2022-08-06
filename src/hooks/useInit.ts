@@ -1,14 +1,11 @@
-import { useEffect } from "react";
-
-import { getToken } from "src/utils";
-
-import { useMounted } from "./useMounted";
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
+import { useWindowSize } from './useWindowSize';
 
 export const useInit = () => {
-  const mounted = useMounted();
-  useEffect(() => {
-    if (mounted) {
-      getToken();
-    }
-  }, [mounted]);
+  const { height } = useWindowSize();
+
+  useIsomorphicLayoutEffect(() => {
+    if (!height) return;
+    document.body.style.height = `${height / 10}rem`;
+  }, [height]);
 };

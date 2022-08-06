@@ -6,9 +6,9 @@ import { theme } from "../tokens";
 export const toggleRootStyle = style([
   sprinkles({
     bg: "black7",
-    br: "md",
-    minSize: "lg",
-    p: "xxxs",
+    br: "16",
+    minSize: "24",
+    p: "2",
   }),
   style({
     selectors: {
@@ -26,7 +26,7 @@ export const toggleThumbStyle = style([
     bg: "white",
     br: "half",
     display: "block",
-    size: "lg",
+    size: "24",
   }),
   {
     selectors: {

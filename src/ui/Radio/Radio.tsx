@@ -10,7 +10,7 @@ import { RadioContent } from "./RadioContent";
 const Radio = forwardRef(
   (
     { contentValue, onValueChange, defaultValue, ...rest }: RadioProps,
-    ref: ForwardedRef<HTMLDivElement>
+    ref: ForwardedRef<HTMLDivElement>,
   ) => (
     <Root
       {...rest}
@@ -18,13 +18,13 @@ const Radio = forwardRef(
       ref={ref}
       onValueChange={onValueChange}
     >
-      <Box gap="lg">
+      <Box gap="24">
         {contentValue.map(({ label, value }) => (
           <RadioContent key={label} label={label} value={value} />
         ))}
       </Box>
     </Root>
-  )
+  ),
 );
 
 export default Radio;
