@@ -1,6 +1,6 @@
 import { ComponentProps, ReactNode, useRef } from "react";
 
-import { motion, PanInfo } from "framer-motion";
+import { LazyMotion, m, PanInfo } from "framer-motion";
 
 import { useStateWithProp } from "src/hooks";
 
@@ -9,8 +9,11 @@ import { Sprinkles } from "../sprinkles.css";
 
 import { barCss } from "./PullToClose.css";
 
+const loadDomMax = () =>
+  import("./framerDomMax").then((module) => module.default);
+
 interface PullToCloseProps
-  extends Pick<ComponentProps<typeof motion.div>, "dragSnapToOrigin"> {
+  extends Pick<ComponentProps<typeof m.div>, "dragSnapToOrigin"> {
   barStyle?: Sprinkles;
   children: ReactNode;
   className?: string;
@@ -59,26 +62,28 @@ const PullToClose = ({
   };
 
   return (
-    <motion.div
-      animate={{ y: "0%" }}
-      className={className}
-      drag="y"
-      dragConstraints={{ top: 0 }}
-      dragElastic={0}
-      dragSnapToOrigin={snapToOrigin}
-      exit={{ y: "100%" }}
-      initial={{ y: "100%" }}
-      ref={ref}
-      transition={{
-        duration: !snapToOrigin ? 0.1 : 0.2,
-        type: "tween",
-      }}
-      onDrag={handleDrag}
-      onDragEnd={handleDragEnd}
-    >
-      <Box className={barCss} {...barStyle} />
-      {children}
-    </motion.div>
+    <LazyMotion features={loadDomMax}>
+      <m.div
+        animate={{ y: "0%" }}
+        className={className}
+        drag="y"
+        dragConstraints={{ top: 0 }}
+        dragElastic={0}
+        dragSnapToOrigin={snapToOrigin}
+        exit={{ y: "100%" }}
+        initial={{ y: "100%" }}
+        ref={ref}
+        transition={{
+          duration: !snapToOrigin ? 0.1 : 0.2,
+          type: "tween",
+        }}
+        onDrag={handleDrag}
+        onDragEnd={handleDragEnd}
+      >
+        <Box className={barCss} {...barStyle} />
+        {children}
+      </m.div>
+    </LazyMotion>
   );
 };
 

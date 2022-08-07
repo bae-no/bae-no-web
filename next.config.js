@@ -8,6 +8,10 @@ require("./scripts/generateIcon");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+  swcMinify: true,
   reactStrictMode: true,
   experimental: {
     runtime: "nodejs",

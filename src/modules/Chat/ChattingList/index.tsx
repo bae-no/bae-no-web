@@ -29,7 +29,7 @@ const ChattingList = ({
         <ChattingItem key={chatting.chattingId} {...chatting} />
       ))}
       <IntersectionArea onIntersect={handleFetchMore}>
-        <div />
+        <li />
       </IntersectionArea>
     </Box>
   );
