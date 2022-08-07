@@ -24,24 +24,33 @@ describe("UI Tab Component", () => {
 
   it("should render defaultValue", () => {
     render(<MockComponent defaultValue="value1" />);
-    expect(screen.getByText("label1")).toHaveAttribute("data-state", "active");
+    expect(screen.getByText("label1").parentNode).toHaveAttribute(
+      "data-state",
+      "active",
+    );
   });
 
   it("should click event", () => {
     render(<MockComponent />);
     fireEvent.mouseDown(screen.getByText("label1"));
-    expect(screen.getByText("label1")).toHaveAttribute("data-state", "active");
-    expect(screen.getByText("label2")).toHaveAttribute(
+    expect(screen.getByText("label1").parentNode).toHaveAttribute(
       "data-state",
-      "inactive"
+      "active",
+    );
+    expect(screen.getByText("label2").parentNode).toHaveAttribute(
+      "data-state",
+      "inactive",
     );
 
     fireEvent.mouseDown(screen.getByText("label2"));
-    expect(screen.getByText("label1")).toHaveAttribute(
+    expect(screen.getByText("label1").parentNode).toHaveAttribute(
       "data-state",
-      "inactive"
+      "inactive",
     );
-    expect(screen.getByText("label2")).toHaveAttribute("data-state", "active");
+    expect(screen.getByText("label2").parentNode).toHaveAttribute(
+      "data-state",
+      "active",
+    );
   });
 
   it("should on value change", () => {
