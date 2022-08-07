@@ -7,6 +7,8 @@ import {
 
 import { Typography } from "src/ui/Typography";
 
+import { Box } from "../Box";
+
 import { tabListCss, tabRootCss, typographyCss } from "./Tab.css";
 
 export interface TabProps extends RadixUiTabsProps {
@@ -22,9 +24,9 @@ const Tab = ({ options, onValueChange, defaultValue }: TabProps) => (
     <List className={tabListCss}>
       {options.map((option) => (
         <Trigger asChild key={option.value} value={option.value}>
-          <Typography className={typographyCss} fontSize="body2-m">
-            {option.label}
-          </Typography>
+          <Box aria-controls="" as="button" className={typographyCss}>
+            <Typography fontSize="body2-m">{option.label}</Typography>
+          </Box>
         </Trigger>
       ))}
     </List>

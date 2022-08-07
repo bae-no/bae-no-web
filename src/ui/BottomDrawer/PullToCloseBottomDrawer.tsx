@@ -8,14 +8,14 @@ import {
   Overlay,
   Portal,
 } from "@radix-ui/react-dialog";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 
 import { overlayCss } from "../modalBase.css";
 import { PullToClose } from "../PullToClose";
 
 import { contentContainerCss, contentCss } from "./BottomDrawer.css";
 
-const MotionOverlay = motion(Overlay);
+const MotionOverlay = m(Overlay);
 
 export interface PullToCloseBottomDrawerProps
   extends Required<Pick<DialogProps, "open" | "onOpenChange">> {

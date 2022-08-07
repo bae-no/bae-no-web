@@ -18,7 +18,7 @@ const UserInfo = () => (
         원 아꼈어요.
       </Typography>
     </Box>
-    <Box as="span">
+    <Box aria-hidden="true" as="span">
       <Image height={82} layout="fixed" src={userInfoImage} width={106} />
     </Box>
   </Box>

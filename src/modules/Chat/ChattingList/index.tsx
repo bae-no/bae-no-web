@@ -36,7 +36,7 @@ const ChattingList = ({
       ))}
 
       <IntersectionArea onIntersect={handleFetchMore}>
-        <div />
+        <li />
       </IntersectionArea>
     </Box>
   );
