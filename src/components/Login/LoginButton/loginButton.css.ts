@@ -1,4 +1,4 @@
-import { keyframes } from "@vanilla-extract/css";
+import { keyframes, createVar } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 
 import { theme } from "src/ui/tokens";
@@ -14,27 +14,38 @@ const buttonKeyframes = keyframes({
   "70%": { opacity: "0", transform: "translate3d(0, 100%, 0)" },
 });
 
+const buttonColor = createVar();
+
 export const buttonCss = recipe({
   base: {
-    animation: `${buttonKeyframes} 5s`,
+    animation: `${buttonKeyframes} 4.5s`,
   },
   variants: {
     type: {
       apple: {
-        ":active": { backgroundColor: black1 },
-        backgroundColor: black1,
+        ":active": { backgroundColor: buttonColor },
+        backgroundColor: buttonColor,
         color: white,
+        vars: {
+          [buttonColor]: black1,
+        },
       },
       google: {
-        ":active": { backgroundColor: white },
-        backgroundColor: white,
+        ":active": { backgroundColor: buttonColor },
+        backgroundColor: buttonColor,
         border: `solid ${space} ${black1}`,
         color: black1,
+        vars: {
+          [buttonColor]: white,
+        },
       },
       kakao: {
-        ":active": { backgroundColor: "#FAE64C" },
-        backgroundColor: "#FAE64C",
+        ":active": { backgroundColor: buttonColor },
+        backgroundColor: buttonColor,
         color: black1,
+        vars: {
+          [buttonColor]: "#FAE64C",
+        },
       },
     },
   },
