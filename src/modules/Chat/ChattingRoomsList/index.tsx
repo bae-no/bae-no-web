@@ -2,19 +2,21 @@ import { IntersectionArea } from "src/components";
 import { Box } from "src/ui";
 import { Sprinkles } from "src/ui/sprinkles.css";
 
-import ChattingItem, { ChattingItemProps } from "./ChattingItem";
+import ChattingRoomsItem, { ChattingRoomsItemProps } from "./ChattingRoomsItem";
 
-interface ChattingListProps {
-  chattings: ChattingItemProps[];
-  fetchMore: (lastId: ChattingItemProps["chattingId"]) => void;
+interface ChattingRoomsListProps {
+  chattings: ChattingRoomsItemProps[];
+  checkbox?: boolean;
+  fetchMore: (lastId: ChattingRoomsItemProps["chattingId"]) => void;
   gap?: Sprinkles["gap"];
 }
 
-const ChattingList = ({
+const ChattingRoomsList = ({
   chattings,
+  checkbox,
   fetchMore,
   gap = "16",
-}: ChattingListProps) => {
+}: ChattingRoomsListProps) => {
   const handleFetchMore: IntersectionObserverCallback = ([
     { isIntersecting },
   ]) => {
@@ -26,13 +28,18 @@ const ChattingList = ({
   return (
     <Box as="ol" gap={gap}>
       {chattings.map((chatting) => (
-        <ChattingItem key={chatting.chattingId} {...chatting} />
+        <ChattingRoomsItem
+          checkbox={checkbox}
+          key={chatting.chattingId}
+          {...chatting}
+        />
       ))}
+
       <IntersectionArea onIntersect={handleFetchMore}>
-        <div />
+        <li />
       </IntersectionArea>
     </Box>
   );
 };
 
-export default ChattingList;
+export default ChattingRoomsList;

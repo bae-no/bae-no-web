@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Box, Select, Tab, Typography } from "src/ui";
 
-import ChattingList from "./ChattingList";
+import ChattingList from "../Chat/ChattingList";
 
 const MOCK_CATEGORIES = [
   {

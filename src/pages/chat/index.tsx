@@ -1,13 +1,12 @@
 import { useCallback } from "react";
 
-import { map, remove } from "lodash";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { useToggle } from "src/hooks";
-import ChattingList from "src/modules/Chat/ChattingList";
+import ChattingRoomsList from "src/modules/Chat/ChattingRoomsList";
 import { Box, Button, Header, Layout, Popup, Typography } from "src/ui";
 
-const MOCK_CHATTINGS = [
+let MOCK_CHATTINGS = [
   {
     avatarSrc: "a",
     chattingId: "2",
@@ -91,10 +90,15 @@ const Chat = () => {
   const onConfirm = useCallback(() => {
     toggleDeleteModal();
     setDeleteMode(false);
-    map(
-      methods.watch(),
-      (value, key) => value && remove(MOCK_CHATTINGS, { chattingId: key }),
-    );
+
+    Object.entries(methods.watch()).map((x) => {
+      if (x[1]) {
+        MOCK_CHATTINGS = MOCK_CHATTINGS.filter((y) => y.chattingId !== x[0]);
+        return x;
+      }
+      return x;
+    });
+
     methods.reset();
   }, [methods, toggleDeleteModal, setDeleteMode]);
 
@@ -115,7 +119,7 @@ const Chat = () => {
             <Typography as="h3" fontSize="body1-b">
               진행중인 딜
             </Typography>
-            <ChattingList
+            <ChattingRoomsList
               chattings={MOCK_CHATTINGS}
               checkbox={deleteMode}
               fetchMore={() => {
@@ -125,7 +129,7 @@ const Chat = () => {
             <Typography as="h3" fontSize="body1-b">
               완료된 딜
             </Typography>
-            <ChattingList
+            <ChattingRoomsList
               chattings={MOCK_CHATTINGS_END}
               checkbox={deleteMode}
               fetchMore={() => {

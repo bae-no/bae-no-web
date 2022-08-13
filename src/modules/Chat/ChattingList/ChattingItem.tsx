@@ -1,109 +1,50 @@
 import { memo } from "react";
 
-import "react-swipeable-list/dist/styles.css";
-import { useFormContext } from "react-hook-form";
-import {
-  SwipeableList,
-  SwipeableListItem,
-  SwipeAction,
-  TrailingActions,
-  Type as ListType,
-} from "react-swipeable-list";
-
-import { Avatar, Box, CheckBox, Label, Typography } from "src/ui";
-
-const trailingActions = ({ onClick }: { onClick: () => void }) => (
-  <TrailingActions>
-    <SwipeAction onClick={onClick}>
-      <Box
-        align="center"
-        as="button"
-        backgroundColor="danger1"
-        color="white"
-        height="full"
-        justify="center"
-        paddingBottom="16"
-        width="64"
-      >
-        나가기
-      </Box>
-    </SwipeAction>
-  </TrailingActions>
-);
+import { Avatar, Box, Label, Typography } from "src/ui";
 
 export interface ChattingItemProps {
   avatarSrc: string;
+  category: string;
   chattingId: string;
-  checkbox?: boolean;
-  date: string;
+  currentAttendee: number;
+  deliveryFee: number;
+  distance: number;
   ended: boolean;
-  lastChat: string;
-  notReadMessage: number;
+  maxAttendee: number;
   title: string;
 }
 
 const ChattingItem = ({
   avatarSrc,
-  chattingId,
-  checkbox,
-  date,
-  ended,
-  lastChat,
-  notReadMessage,
+  category,
+  currentAttendee,
+  deliveryFee,
+  distance,
+  maxAttendee,
   title,
-}: ChattingItemProps) => {
-  const { setValue } = useFormContext();
-  const onClickDelete = () => setValue(chattingId, true);
-  return (
-    <SwipeableList threshold={0.3} type={ListType.IOS}>
-      <SwipeableListItem
-        trailingActions={trailingActions({ onClick: onClickDelete })}
-      >
-        <Box
-          align="center"
-          as="li"
-          direction="row"
-          gap="32"
-          justify="space-between"
-          key={chattingId}
-          width="full"
-        >
-          <Box align="center" direction="row" gap="16" width="max">
-            {checkbox && (
-              <CheckBox
-                id={chattingId}
-                value={chattingId}
-                onCheckedChange={() => setValue("chats", chattingId)}
-              />
-            )}
-            <Avatar size="48" src={avatarSrc} />
-            <Box as="span" gap="2">
-              <Typography fontSize="body1-b">{title}</Typography>
-              <Typography color="black2" fontSize="body2-m">
-                {lastChat}
-              </Typography>
-            </Box>
-          </Box>
-          <Box
-            align="flex-end"
-            as="span"
-            gap="5.5"
-            justify="space-between"
-            {...(ended && { paddingBottom: "32" })}
-          >
-            <Typography color="black4" fontSize="caption1-m">
-              {date}
-            </Typography>
-            {!ended && (
-              <Label color="primary" variant="border">
-                <Typography fontSize="caption1-m">{notReadMessage}</Typography>
-              </Label>
-            )}
-          </Box>
-        </Box>
-      </SwipeableListItem>
-    </SwipeableList>
-  );
-};
+  ended,
+  chattingId,
+}: ChattingItemProps) => (
+  <Box
+    align="center"
+    as="li"
+    direction="row"
+    justify="space-between"
+    key={chattingId}
+  >
+    <Box align="center" direction="row" gap="16">
+      <Avatar size="48" src={avatarSrc} />
+      <Box as="span">
+        <Typography fontSize="body1-b">{title}</Typography>
+        <Typography color="black4" fontSize="caption1-m">
+          {category}・배달비 {deliveryFee.toLocaleString()}원・거리 {distance}km
+        </Typography>
+      </Box>
+    </Box>
+    <Label color={ended ? "gray" : "orange"}>
+      {ended ? "마감" : `${currentAttendee}명 / ${maxAttendee}명`}
+    </Label>
+  </Box>
+);
 
 export default memo(ChattingItem);
