@@ -72,6 +72,15 @@ export const buttonCss = recipe({
           [fontColorVar]: colors.white,
         },
       },
+      red: {
+        vars: {
+          [activeColorVar]: colors.danger5,
+          [defaultColorVar]: colors.danger1,
+          [disableFontColorVar]: colors.white,
+          [disabledColorVar]: colors.danger2,
+          [fontColorVar]: colors.white,
+        },
+      },
       white: {
         vars: {
           [activeColorVar]: colors.white,

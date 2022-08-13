@@ -1,20 +1,14 @@
 import { IntersectionArea } from "src/components";
 import { Box } from "src/ui";
-import { Sprinkles } from "src/ui/sprinkles.css";
 
 import ChattingItem, { ChattingItemProps } from "./ChattingItem";
 
 interface ChattingListProps {
   chattings: ChattingItemProps[];
   fetchMore: (lastId: ChattingItemProps["chattingId"]) => void;
-  gap?: Sprinkles["gap"];
 }
 
-const ChattingList = ({
-  chattings,
-  fetchMore,
-  gap = "16",
-}: ChattingListProps) => {
+const ChattingList = ({ chattings, fetchMore }: ChattingListProps) => {
   const handleFetchMore: IntersectionObserverCallback = ([
     { isIntersecting },
   ]) => {
@@ -24,12 +18,12 @@ const ChattingList = ({
   };
 
   return (
-    <Box as="ol" gap={gap}>
+    <Box as="ol">
       {chattings.map((chatting) => (
         <ChattingItem key={chatting.chattingId} {...chatting} />
       ))}
       <IntersectionArea onIntersect={handleFetchMore}>
-        <li />
+        <div />
       </IntersectionArea>
     </Box>
   );
