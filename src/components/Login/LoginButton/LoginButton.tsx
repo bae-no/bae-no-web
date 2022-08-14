@@ -6,7 +6,7 @@ import Apple from "./svgs/apple.svg";
 import Google from "./svgs/google.svg";
 import Kakao from "./svgs/kakao.svg";
 
-export const loginButtonObject = {
+const loginButtonObject = {
   apple: {
     icon: <Apple />,
     text: "Apple로 계속하기",
@@ -25,9 +25,12 @@ interface LoginButtonProps extends Pick<ButtonProps, "onClick"> {
   loginType: "google" | "kakao" | "apple";
 }
 
-export const LoginButton = ({ loginType, onClick }: LoginButtonProps) => (
-  <Button className={buttonCss({ type: loginType })} onClick={onClick}>
-    {loginButtonObject[loginType].icon}
-    <Typography>{loginButtonObject[loginType].text}</Typography>
-  </Button>
-);
+export const LoginButton = ({ loginType, onClick }: LoginButtonProps) => {
+  const { icon, text } = loginButtonObject[loginType];
+  return (
+    <Button className={buttonCss({ type: loginType })} onClick={onClick}>
+      {icon}
+      <Typography as="span">{text}</Typography>
+    </Button>
+  );
+};

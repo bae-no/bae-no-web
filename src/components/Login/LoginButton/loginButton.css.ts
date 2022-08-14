@@ -18,21 +18,19 @@ const buttonColor = createVar();
 
 export const buttonCss = recipe({
   base: {
+    ":active": { backgroundColor: buttonColor },
     animation: `${buttonKeyframes} 4.5s`,
+    backgroundColor: buttonColor,
   },
   variants: {
     type: {
       apple: {
-        ":active": { backgroundColor: buttonColor },
-        backgroundColor: buttonColor,
         color: white,
         vars: {
           [buttonColor]: black1,
         },
       },
       google: {
-        ":active": { backgroundColor: buttonColor },
-        backgroundColor: buttonColor,
         border: `solid ${space} ${black1}`,
         color: black1,
         vars: {
@@ -40,8 +38,6 @@ export const buttonCss = recipe({
         },
       },
       kakao: {
-        ":active": { backgroundColor: buttonColor },
-        backgroundColor: buttonColor,
         color: black1,
         vars: {
           [buttonColor]: "#FAE64C",
