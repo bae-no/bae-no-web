@@ -41,7 +41,6 @@
     "react-hook-form": "^7.34.0",
     "react-relay": "^14.0.0",
     "react-swipeable-list": "^1.5.1",
-    "recoil": "^0.7.4",
     "relay-nextjs": "^0.8.0",
     "relay-runtime": "^14.0.0"
   },

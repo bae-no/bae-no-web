@@ -12,6 +12,17 @@ import {
 
 import { Avatar, Box, CheckBox, Label, Typography } from "src/ui";
 
+export interface ChattingRoomsItemProps {
+  avatarSrc: string;
+  chattingId: string;
+  checkbox?: boolean;
+  date: string;
+  ended: boolean;
+  lastChat: string;
+  notReadMessage: number;
+  title: string;
+}
+
 const trailingActions = ({ onClick }: { onClick: () => void }) => (
   <TrailingActions>
     <SwipeAction onClick={onClick}>
@@ -29,17 +40,6 @@ const trailingActions = ({ onClick }: { onClick: () => void }) => (
     </SwipeAction>
   </TrailingActions>
 );
-
-export interface ChattingRoomsItemProps {
-  avatarSrc: string;
-  chattingId: string;
-  checkbox?: boolean;
-  date: string;
-  ended: boolean;
-  lastChat: string;
-  notReadMessage: number;
-  title: string;
-}
 
 const ChattingRoomsItem = ({
   avatarSrc,

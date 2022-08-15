@@ -61,7 +61,6 @@ specifiers:
   react-hook-form: ^7.34.0
   react-relay: ^14.0.0
   react-swipeable-list: ^1.5.1
-  recoil: ^0.7.4
   relay-compiler: ^14.0.0
   relay-config: ^12.0.1
   relay-nextjs: ^0.8.0
@@ -93,7 +92,6 @@ dependencies:
   react-hook-form: 7.34.1_react@18.2.0
   react-relay: 14.0.0_react@18.2.0
   react-swipeable-list: 1.5.1
-  recoil: 0.7.5_react-dom@18.2.0+react@18.2.0
   relay-nextjs: 0.8.0
   relay-runtime: 14.0.0
 
@@ -9230,10 +9228,6 @@ packages:
       duplexer: 0.1.2
     dev: true
 
-  /hamt_plus/1.0.2:
-    resolution: {integrity: sha1-4hwlKWjH4zsg9qGwlM2FeHomVgE=}
-    dev: false
-
   /handlebars/4.7.7:
     resolution: {integrity: sha512-aAcXm5OAfE/8IXkcZvCepKU3VzW1/39Fb5ZuqMtgI/hT8X2YgoMvBY5dLhq/cpOvw7Lk1nK/UF71aLG/ZnVYRA==}
     engines: {node: '>=0.4.7'}
@@ -13104,23 +13098,6 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
-
-  /recoil/0.7.5_react-dom@18.2.0+react@18.2.0:
-    resolution: {integrity: sha512-GVShsj5+M/2GULWBs5WBJGcsNis/d3YvDiaKjYh3mLKXftjtmk9kfaQ8jwjoIXySCwn8/RhgJ4Sshwgzj2UpFA==}
-    peerDependencies:
-      react: '>=16.13.1'
-      react-dom: '*'
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-    dependencies:
-      hamt_plus: 1.0.2
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    dev: false
 
   /redent/1.0.0:
     resolution: {integrity: sha512-qtW5hKzGQZqKoh6JNSD+4lfitfPKGz42e6QwiRmPM5mmKtR0N41AbJRYu0xJi7nhOJ4WDgRkKvAk6tw4WIwR4g==}

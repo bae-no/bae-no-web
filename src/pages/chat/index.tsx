@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { useToggle } from "src/hooks";
-import ChattingRoomsList from "src/modules/Chat/ChattingRoomsList";
+import ChattingList from "src/modules/Chat/ChattingList";
 import { Box, Button, Header, Layout, Popup, Typography } from "src/ui";
 
 let MOCK_CHATTINGS = [
@@ -119,22 +119,24 @@ const Chat = () => {
             <Typography as="h3" fontSize="body1-b">
               진행중인 딜
             </Typography>
-            <ChattingRoomsList
+            <ChattingList
               chattings={MOCK_CHATTINGS}
               checkbox={deleteMode}
               fetchMore={() => {
                 // TODO: 추가 로드 기능 구현
               }}
+              type="roomList"
             />
             <Typography as="h3" fontSize="body1-b">
               완료된 딜
             </Typography>
-            <ChattingRoomsList
+            <ChattingList
               chattings={MOCK_CHATTINGS_END}
               checkbox={deleteMode}
               fetchMore={() => {
                 // TODO: 추가 로드 기능 구현
               }}
+              type="roomList"
             />
             {deleteMode && <Button>나가기</Button>}
           </Box>
