@@ -61,7 +61,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@types/react-relay": "^13.0.2",
-    "@types/relay-runtime": "^13.0.3",
+    "@types/relay-runtime": "^14.1.1",
     "@types/relay-test-utils": "^6.0.5",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
