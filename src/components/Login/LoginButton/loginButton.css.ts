@@ -33,9 +33,6 @@ export const buttonCss = recipe({
       google: {
         border: `solid ${space} ${black1}`,
         color: black1,
-        vars: {
-          [buttonColor]: white,
-        },
       },
       kakao: {
         color: black1,
