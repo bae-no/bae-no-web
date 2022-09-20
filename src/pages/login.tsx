@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 import Lottie from "lottie-web";
 
-import { LoginButton } from "src/components/Login/LoginButton/LoginButton";
+import { LoginButton } from "src/modules/Login/LoginButton/LoginButton";
 import { loginCss } from "src/pageStyle/login/login.css";
 import { Box } from "src/ui";
 
@@ -10,7 +10,7 @@ const Login = () => {
   const ref = useRef();
 
   useEffect(() => {
-    import("../components/Login/loginIconAnimation.json").then((data) => {
+    import("../modules/Login/loginIconAnimation.json").then((data) => {
       if (ref.current !== undefined) {
         Lottie.loadAnimation({
           animationData: data.default,
