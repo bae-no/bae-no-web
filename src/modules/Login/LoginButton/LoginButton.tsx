@@ -4,7 +4,7 @@ import { buttonCss } from "./loginButton.css";
 import Apple from "./svgs/apple.svg";
 import Google from "./svgs/google.svg";
 import Kakao from "./svgs/kakao.svg";
-// `https://accounts.google.com/o/oauth2/auth?client_id=${process.env.NEXT_PUBLIC_DEVELOPMENT_GOOGLE_CLIENT_ID}&redirect_uri=http://localhost:3000/login/acess&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`
+
 const loginButtonObject = {
   apple: {
     icon: <Apple />,
@@ -14,12 +14,12 @@ const loginButtonObject = {
   google: {
     icon: <Google />,
     text: "구글로 계속하기",
-    url: `https://accounts.google.com/o/oauth2/auth?client_id=${process.env.NEXT_PUBLIC_DEVELOPMENT_GOOGLE_CLIENT_ID}&redirect_uri=http://localhost:3000/login/acess&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`,
+    url: `https://accounts.google.com/o/oauth2/auth?client_id=${process.env.NEXT_PUBLIC_DEVELOPMENT_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_DEVELOPMENT_DEFAULT_URL}/login/acess&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`,
   },
   kakao: {
     icon: <Kakao />,
     text: "카카오톡으로 계속하기",
-    url: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_DEVELOPMENT_KAKAO_CLIENT_ID}&redirect_uri=http://localhost:3000/login/kakao`,
+    url: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_DEVELOPMENT_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_DEVELOPMENT_DEFAULT_URL}/login/kakao`,
   },
 };
 
