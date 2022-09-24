@@ -44,6 +44,7 @@ const Select = (
       trigger={
         <Box
           align="center"
+          as="button"
           backgroundColor={isSmall ? "black10" : "white"}
           borderColor="black7"
           borderRadius="8"

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Box, Icon, Input } from "src/ui";
 
 const SearchBar = () => (
-  <Link href="search-detail">
+  <Link passHref href="search-detail">
     <Box as="a" position="relative" px="16" transform="yHalfPlus">
       <Input
         leftNode={<Icon name="icon_search" />}
