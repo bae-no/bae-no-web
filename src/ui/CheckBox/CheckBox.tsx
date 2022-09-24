@@ -14,7 +14,7 @@ import {
 } from "./CheckBox.css";
 
 interface CheckBoxProp extends CheckboxProps {
-  label: string;
+  label?: string;
   size?: "large" | "small";
 }
 
@@ -50,14 +50,16 @@ const CheckBox = forwardRef(
             <Icon className={checkBoxIconCss} name="checkbox" size="24" />
           </Indicator>
         </Root>
-        <Typography
-          as="label"
-          className={sprinkles({ cursor: "pointer" })}
-          fontSize={fontSize}
-          htmlFor={id}
-        >
-          {label}
-        </Typography>
+        {label && (
+          <Typography
+            as="label"
+            className={sprinkles({ cursor: "pointer" })}
+            fontSize={fontSize}
+            htmlFor={id}
+          >
+            {label}
+          </Typography>
+        )}
       </Box>
     );
   },
