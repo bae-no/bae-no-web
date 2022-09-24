@@ -14,7 +14,7 @@ const loginButtonObject = {
   google: {
     icon: <Google />,
     text: "구글로 계속하기",
-    url: `https://accounts.google.com/o/oauth2/auth?client_id=${process.env.NEXT_PUBLIC_DEVELOPMENT_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_DEVELOPMENT_DEFAULT_URL}/login/acess&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`,
+    url: `https://accounts.google.com/o/oauth2/auth?client_id=${process.env.NEXT_PUBLIC_DEVELOPMENT_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_DEVELOPMENT_DEFAULT_URL}/login/google&response_type=code&scope=openid`,
   },
   kakao: {
     icon: <Kakao />,
