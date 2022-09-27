@@ -53,6 +53,7 @@ specifiers:
   graphql: ^16.5.0
   jest: ^28.1.3
   jest-environment-jsdom: ^28.1.3
+  lottie-web: ^5.9.6
   next: ^12.2.3
   prettier: ^2.7.1
   react: ^18.2.0
@@ -85,6 +86,7 @@ dependencies:
   clsx: 1.2.1
   framer-motion: 6.5.1_react-dom@18.2.0+react@18.2.0
   graphql: 16.5.0
+  lottie-web: 5.9.6
   next: 12.2.3_850d4ee91924e701c20cec04912e6240
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -11137,6 +11139,10 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+
+  /lottie-web/5.9.6:
+    resolution: {integrity: sha512-JFs7KsHwflugH5qIXBpB4905yC1Sub2MZWtl/elvO/QC6qj1ApqbUZJyjzJseJUtVpgiDaXQLjBlIJGS7UUUXA==}
+    dev: false
 
   /loud-rejection/1.6.0:
     resolution: {integrity: sha512-RPNliZOFkqFumDhvYqOaNY4Uz9oJM2K9tC6JWsJJsNdhuONW4LQHRBpb0qf4pJApVffI5N39SwzWZJuEhfd7eQ==}
