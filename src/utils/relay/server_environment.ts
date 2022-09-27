@@ -1,6 +1,6 @@
-import { Environment, Network, Store, RecordSource } from 'relay-runtime';
+import { Environment, Network, Store, RecordSource } from "relay-runtime";
 
-const URL = 'http://localhost:55894';
+const URL = "https://bae-no-server.fly.dev/graphql";
 
 export function createServerNetwork() {
   return Network.create(async (params, variables) => {
@@ -10,9 +10,9 @@ export function createServerNetwork() {
         variables,
       }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      method: 'POST',
+      method: "POST",
     });
 
     return response.json();

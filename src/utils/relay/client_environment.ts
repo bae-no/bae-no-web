@@ -1,8 +1,8 @@
-import { getRelaySerializedState } from 'relay-nextjs';
-import { withHydrateDatetime } from 'relay-nextjs/date';
-import { Environment, Network, Store, RecordSource } from 'relay-runtime';
+import { getRelaySerializedState } from "relay-nextjs";
+import { withHydrateDatetime } from "relay-nextjs/date";
+import { Environment, Network, Store, RecordSource } from "relay-runtime";
 
-const URL = 'http://localhost:55894';
+const URL = "https://bae-no-server.fly.dev/graphql";
 
 export function createClientNetwork() {
   return Network.create(async (params, variables) => {
@@ -12,10 +12,10 @@ export function createClientNetwork() {
         variables,
       }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      method: 'POST',
-      mode: 'cors',
+      method: "POST",
+      mode: "cors",
     });
 
     const json = await response.text();
@@ -26,7 +26,7 @@ export function createClientNetwork() {
 
 let clientEnv: Environment | undefined;
 export function getClientEnvironment() {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === "undefined") return null;
 
   if (clientEnv == null) {
     clientEnv = new Environment({
