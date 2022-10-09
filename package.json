@@ -19,7 +19,7 @@
     "generate": "graphql-codegen"
   },
   "dependencies": {
-    "@fxts/core": "^0.9.0",
+    "@fxts/core": "^0.10.0",
     "@radix-ui/react-alert-dialog": "^1.0.0",
     "@radix-ui/react-avatar": "^1.0.0",
     "@radix-ui/react-checkbox": "^1.0.0",
