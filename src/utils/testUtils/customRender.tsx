@@ -3,7 +3,6 @@ import { ReactElement } from "react";
 
 import { render, RenderOptions } from "@testing-library/react";
 
-// TODO: relay provider 구현
 function wrapper({ children }: { children: ReactElement }) {
   return children;
 }

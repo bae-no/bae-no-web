@@ -1,49 +1,19 @@
-import NextDocument, {
-  Html,
-  Head,
-  DocumentContext,
-  Main,
-  NextScript,
-} from "next/document";
-import { createRelayDocument, RelayDocument } from "relay-nextjs/document";
+import { Html, Head, Main, NextScript } from "next/document";
 
-interface DocumentProps {
-  relayDocument: RelayDocument;
-}
+const Document = () => (
+  <Html lang="ko">
+    <Head>
+      <link
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+        rel="stylesheet"
+        type="text/css"
+      />
+    </Head>
+    <body>
+      <Main />
+      <NextScript />
+    </body>
+  </Html>
+);
 
-class MyDocument extends NextDocument<DocumentProps> {
-  static async getInitialProps(ctx: DocumentContext) {
-    const relayDocument = createRelayDocument();
-
-    const { renderPage } = ctx;
-    ctx.renderPage = () =>
-      renderPage({
-        enhanceApp: (App) => relayDocument.enhance(App),
-      });
-
-    const initialProps = await NextDocument.getInitialProps(ctx);
-
-    return {
-      ...initialProps,
-      relayDocument,
-    };
-  }
-
-  render() {
-    const { relayDocument } = this.props;
-
-    return (
-      <Html lang="ko">
-        <Head>
-          <relayDocument.Script />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
-}
-
-export default MyDocument;
+export default Document;

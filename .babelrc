@@ -1,4 +1,4 @@
 {
   "presets": ["next/babel"],
-  "plugins": ["@vanilla-extract/babel-plugin", "relay"]
+  "plugins": ["@vanilla-extract/babel-plugin"]
 }
