@@ -13,13 +13,7 @@ const nextConfig = {
   },
   swcMinify: true,
   reactStrictMode: true,
-  experimental: {
-    runtime: "nodejs",
-  },
-};
-
-module.exports = withBundleAnalyzer({
-  webpack(config, option) {
+  webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
@@ -39,7 +33,8 @@ module.exports = withBundleAnalyzer({
         },
       ],
     });
-
-    return withVanillaExtract(nextConfig).webpack(config, option);
+    return config;
   },
-});
+};
+
+module.exports = withVanillaExtract(withBundleAnalyzer(nextConfig));
