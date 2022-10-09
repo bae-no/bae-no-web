@@ -1,0 +1,7 @@
+query Sample($sampleId: ID!) {
+  sample(id: $sampleId) {
+    email
+    id
+    name
+  }
+}
