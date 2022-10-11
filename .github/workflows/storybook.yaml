@@ -2,7 +2,7 @@ name: deploy-storybook
 on:
   pull_request:
     branches:
-      - main
+      - develop
 
 jobs:
   deploy-storybook:
