@@ -33,6 +33,7 @@ const Acess = () => {
     });
   }, [acess, isReady, code, acessMutation]);
   if (typeof window !== "undefined" && acessMutationResult.data) {
+    document.cookie = `token=${acessMutationResult.data.signIn.accessToken}`;
     localStorage.setItem("token", acessMutationResult.data.signIn.accessToken);
   }
 
