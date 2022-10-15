@@ -1,6 +1,7 @@
+import dynamic from "next/dynamic";
+
 import { LoginButton } from "src/modules/Login/LoginButton/LoginButton";
 import { loginCss } from "src/pageStyle/login/login.css";
-import dynamic from "next/dynamic";
 import { Box } from "src/ui";
 
 const Animation = dynamic(() =>

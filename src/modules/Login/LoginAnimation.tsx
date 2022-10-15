@@ -1,6 +1,9 @@
-import Lottie from "lottie-web";
 import { useEffect, useRef } from "react";
+
+import Lottie from "lottie-web";
+
 import { Box } from "src/ui";
+
 import animationData from "./loginIconAnimation.json";
 
 export const LoginAnimation = () => {
