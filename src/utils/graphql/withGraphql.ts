@@ -52,7 +52,7 @@ export const withGraphql = withUrqlClient(
       fetchExchange,
     ],
     suspense: true,
-    url: "https://bae-no-server.fly.dev/graphql",
+    url: process.env.NEXT_PUBLIC_DEVELOPMENT_SERVER_URL as string,
   }),
   {
     ssr: true,
