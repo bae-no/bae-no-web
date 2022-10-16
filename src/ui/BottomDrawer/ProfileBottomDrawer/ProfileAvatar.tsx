@@ -16,7 +16,7 @@ const ProfileAvatar = ({
   isMine,
 }: ProfileAvatarProps) => (
   <Box position="relative">
-    <Avatar size="80" {...avatarProps} />
+    <Avatar {...avatarProps} iconName={undefined} size="80" />
     {isMine && (
       <Box
         aria-label="프로필 수정"
