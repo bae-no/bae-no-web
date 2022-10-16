@@ -15,22 +15,30 @@ import {
   RootSizeType,
 } from "./Avatar.css";
 
-interface AvatarProps
+interface AvatarBaseProps
   extends Pick<AvatarImageProps, "alt" | "src" | "onLoadingStatusChange"> {
-  iconNmae?: SvgIconKey;
   size: RootSizeType;
+}
+
+interface AvatarTextProps extends AvatarBaseProps {
+  iconName?: undefined;
   text?: string;
+}
+
+interface AvatarIconProps extends AvatarBaseProps {
+  iconName?: SvgIconKey;
+  text?: undefined;
 }
 
 const Avatar = ({
   alt,
   src,
   text,
+  iconName,
   size,
-  iconNmae,
   onLoadingStatusChange,
-}: AvatarProps) => {
-  const type = text ? "text" : "none";
+}: AvatarTextProps | AvatarIconProps) => {
+  const type = iconName ? "none" : "text";
 
   return (
     <Root className={avatarRootCss({ rootSize: size })}>
@@ -41,7 +49,8 @@ const Avatar = ({
         onLoadingStatusChange={onLoadingStatusChange}
       />
       <Fallback className={avatarFallbackCss({ size, type })}>
-        {text?.[0]} {iconNmae && <Icon name={iconNmae} size="24" />}
+        {iconName && <Icon name={iconName} size="24" />}
+        {text && text[0]}
       </Fallback>
     </Root>
   );

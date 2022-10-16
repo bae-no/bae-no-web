@@ -6,7 +6,7 @@ import { Box } from "src/ui";
 
 import animationData from "./loginIconAnimation.json";
 
-export const LoginAnimation = () => {
+const LoginAnimation = () => {
   const ref = useRef();
   useEffect(() => {
     if (ref.current === undefined) return;
@@ -20,3 +20,5 @@ export const LoginAnimation = () => {
   }, []);
   return <Box justifyContent="center" maxHeight="half" ref={ref} />;
 };
+
+export default LoginAnimation;

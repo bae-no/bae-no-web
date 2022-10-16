@@ -17,12 +17,12 @@ export const LabelContent = ({
   children,
 }: LabelContentProps) => (
   <Box gap="8">
-    <Typography color="orange2" fontSize="body1-b">
+    <Typography as="h2" color="orange2" fontSize="body1-b">
       {label}
     </Typography>
     <Box alignItems="center" flexDirection="row" gap="16">
-      {iconName && <Avatar alt={alt} iconNmae={iconName} size="48" />}
-      <Box>{children}</Box>
+      {iconName && <Avatar alt={alt} iconName={iconName} size="48" />}
+      {children}
     </Box>
   </Box>
 );
