@@ -1,3 +1,4 @@
+import { reastorage } from "@reastorage/react";
 import { authExchange } from "@urql/exchange-auth";
 import { withUrqlClient } from "next-urql";
 import {
@@ -6,8 +7,6 @@ import {
   cacheExchange,
   fetchExchange,
 } from "urql";
-
-import { localStorageHelper } from "../localStorage/helper";
 
 export const withGraphql = withUrqlClient(
   (ssrExchange) => ({
@@ -37,8 +36,7 @@ export const withGraphql = withUrqlClient(
           error.graphQLErrors.some((e) => e.extensions?.code === "FORBIDDEN"),
         getAuth: async ({ authState }) => {
           if (!authState) {
-            const { get } = localStorageHelper<string>("token");
-            const token = get();
+            const token = reastorage("token", "").get();
 
             if (!token) return null;
             return {

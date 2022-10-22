@@ -16,6 +16,7 @@ specifiers:
   '@radix-ui/react-radio-group': ^1.0.0
   '@radix-ui/react-switch': ^1.0.0
   '@radix-ui/react-tabs': ^1.0.0
+  '@reastorage/react': ^1.2.1
   '@storybook/addon-actions': ^6.5.12
   '@storybook/addon-essentials': ^6.5.12
   '@storybook/addon-interactions': ^6.5.12
@@ -79,6 +80,7 @@ dependencies:
   '@radix-ui/react-radio-group': 1.0.0_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-switch': 1.0.0_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-tabs': 1.0.0_biqbaboplfbrettd7655fr4n2y
+  '@reastorage/react': 1.2.1_react@18.2.0
   '@urql/core': 3.0.3_graphql@16.6.0
   '@urql/exchange-auth': 1.0.0_graphql@16.6.0
   '@vanilla-extract/babel-plugin': 1.2.0
@@ -3947,6 +3949,20 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@reastorage/core/1.2.0:
+    resolution: {integrity: sha512-cUyVtNYWK+lYFRS+Oi5K5yk3FDtTpSRzdaEgggnbvKeQOv5bWsSTjbx6PImgCnJlvFA9ckDWFEOJ4SXI63XyDQ==}
+    dev: false
+
+  /@reastorage/react/1.2.1_react@18.2.0:
+    resolution: {integrity: sha512-dbF2ygm4m3ilOvJnIPFXMBaOZHPgPEJo2AVf/VZoLqvuNy/g9vbfODRsUWYNDw7MgbWhpUHH/RF+j4R0CydCUQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      '@reastorage/core': 1.2.0
+      react: 18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
   /@rushstack/eslint-patch/1.1.3:
     resolution: {integrity: sha512-WiBSI6JBIhC6LRIsB2Kwh8DsGTlbBU+mLRxJmAe3LjHTdkDpwIbEOZgoXBbZilk/vlfjK8i6nKRAvIRn1XaIMw==}
     dev: true
@@ -6026,6 +6042,7 @@ packages:
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
+    dev: true
 
   /@types/qs/6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
@@ -6043,9 +6060,11 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
       csstype: 3.1.0
+    dev: true
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
+    dev: true
 
   /@types/source-list-map/0.1.2:
     resolution: {integrity: sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==}
@@ -10958,6 +10977,7 @@ packages:
   /graphql/16.6.0:
     resolution: {integrity: sha512-KPIBPDlW7NxrbT/eh4qPXz5FiFdL5UbaA0XUNz2Rp3Z3hqBSkbj0GVjwFDztsWVauZUWsbKHgMg++sk8UX0bkw==}
     engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
+    dev: false
 
   /gzip-size/6.0.0:
     resolution: {integrity: sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==}
@@ -14984,6 +15004,7 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
 
   /react-element-to-jsx-string/14.3.4_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-t4ZwvV6vwNxzujDQ+37bspnLwA4JlgUPWhLjBJWsNIDceAf6ZKUTCjdm08cN6WeZ5pTMKiCJkmAYnpmR4Bm+dg==}
@@ -15117,6 +15138,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
 
   /read-pkg-up/1.0.1:
     resolution: {integrity: sha512-WD9MTlNtI55IwYUS27iHh9tK3YoIVhxis8yKhLpTqWtml739uXc9NWTpxoHkfZf3+DkCCsXox94/VWZniuZm6A==}
@@ -15625,6 +15647,7 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
 
   /schema-utils/1.0.0:
     resolution: {integrity: sha512-i27Mic4KovM/lnGsy8whRCHhc7VicJajAjTrYg11K9zfZXnYIt4k5F+kZkwjnrhKzLic/HLU4j11mjsz2G/75g==}

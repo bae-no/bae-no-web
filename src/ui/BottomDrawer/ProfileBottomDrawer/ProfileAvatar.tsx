@@ -5,7 +5,7 @@ import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 
 export interface ProfileAvatarProps {
-  avatarProps: Omit<ComponentProps<typeof Avatar>, "size" | "text">;
+  avatarProps: Omit<ComponentProps<typeof Avatar>, "size" | "iconName">;
   isMine?: boolean;
   onClickEditProfile?: VoidFunction;
 }

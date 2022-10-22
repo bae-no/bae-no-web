@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 
+import { reastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 
 import { useSignInMutation, AuthType } from "src/graphql";
 import { UserAccessPermissionInfo } from "src/modules/Login/Acess/UserAccessPermissionInfo";
 import { Typography, Box, Button } from "src/ui";
 import { withGraphql } from "src/utils/graphql/withGraphql";
-import { localStorageHelper } from "src/utils/localStorage/helper";
 
 const Acess = () => {
   const router = useRouter();
@@ -31,9 +31,8 @@ const Acess = () => {
       },
     }).then(({ data }) => {
       if (data?.signIn.accessToken === undefined) return;
-      const { set } = localStorageHelper<string>("token");
+      reastorage("token", "").set(data?.signIn.accessToken);
       document.cookie = `token=${data?.signIn.accessToken}`;
-      set(data?.signIn.accessToken);
     });
   }, [acess, router.isReady, code, acessMutation]);
 
