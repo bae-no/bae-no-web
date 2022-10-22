@@ -9,7 +9,7 @@ import { Sprinkles, sprinkles } from "../sprinkles.css";
 import { SvgIconKey, SVG_ICON_MAP } from "./iconMap";
 
 interface IconProps
-  extends Pick<Sprinkles, "color" | "size">,
+  extends Pick<Sprinkles, "color" | "size" | "zIndex">,
     ComponentBaseProps {
   className?: ClassValue;
   name: SvgIconKey;
@@ -19,6 +19,7 @@ const Icon = ({
   className,
   name,
   size,
+  zIndex,
   color = "black2",
   ...rest
 }: IconProps) => {
@@ -26,7 +27,7 @@ const Icon = ({
 
   return (
     <IconComponent
-      className={clsx(sprinkles({ color, size }), className)}
+      className={clsx(sprinkles({ color, size, zIndex }), className)}
       {...rest}
     />
   );
