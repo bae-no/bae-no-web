@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@fxts/core": "^0.10.0",
+    "@r2don/react-naver-map": "^0.0.10",
     "@radix-ui/react-alert-dialog": "^1.0.0",
     "@radix-ui/react-avatar": "^1.0.0",
     "@radix-ui/react-checkbox": "^1.0.0",
@@ -69,6 +70,7 @@
     "@svgr/webpack": "^6.4.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+    "@types/navermaps": "^3.0.17",
     "@types/node": "^18.8.3",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
