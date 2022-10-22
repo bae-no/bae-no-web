@@ -1,17 +1,17 @@
 import { ReactNode } from "react";
 
 import {
-  Portal,
-  Overlay,
-  Content,
-  AlertDialogContentProps,
   AlertDialog,
-  AlertDialogProps,
-  AlertDialogTrigger,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogCancel,
   AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContentProps,
+  AlertDialogDescription,
+  AlertDialogProps,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+  Content,
+  Overlay,
+  Portal,
 } from "@radix-ui/react-alert-dialog";
 
 import { Box } from "../Box";
@@ -21,7 +21,7 @@ import { Typography } from "../Typography";
 
 import { popupContentCss } from "./Popup.css";
 
-const AlertDialogContent = ({
+export const AlertDialogContent = ({
   children,
   ...props
 }: AlertDialogContentProps) => (

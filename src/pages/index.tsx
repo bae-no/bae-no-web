@@ -1,4 +1,5 @@
 import MetaTags from "src/components/MetaTags";
+import GuideModal from "src/modules/Chat/GuideModal";
 import {
   useHeaderBackgroundColor,
   ChattingRooms,
@@ -21,6 +22,7 @@ const Home = () => {
         }}
       >
         <Box gap="56">
+          <GuideModal />
           <HomeHead ref={ref} />
           <ChattingRooms />
         </Box>
