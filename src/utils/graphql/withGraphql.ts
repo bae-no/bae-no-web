@@ -7,6 +7,8 @@ import {
   fetchExchange,
 } from "urql";
 
+import { localStorageHelper } from "../localStorage/helper";
+
 export const withGraphql = withUrqlClient(
   (ssrExchange) => ({
     exchanges: [
@@ -35,7 +37,8 @@ export const withGraphql = withUrqlClient(
           error.graphQLErrors.some((e) => e.extensions?.code === "FORBIDDEN"),
         getAuth: async ({ authState }) => {
           if (!authState) {
-            const token = localStorage.getItem("token");
+            const { get } = localStorageHelper<string>("token");
+            const token = get();
 
             if (!token) return null;
             return {
