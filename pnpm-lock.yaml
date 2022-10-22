@@ -16,6 +16,7 @@ specifiers:
   '@radix-ui/react-radio-group': ^1.0.0
   '@radix-ui/react-switch': ^1.0.0
   '@radix-ui/react-tabs': ^1.0.0
+  '@reastorage/react': ^1.2.1
   '@storybook/addon-actions': ^6.5.12
   '@storybook/addon-essentials': ^6.5.12
   '@storybook/addon-interactions': ^6.5.12
@@ -79,6 +80,7 @@ dependencies:
   '@radix-ui/react-radio-group': 1.0.0_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-switch': 1.0.0_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-tabs': 1.0.0_biqbaboplfbrettd7655fr4n2y
+  '@reastorage/react': 1.2.1_react@18.2.0
   '@urql/core': 3.0.3_graphql@16.6.0
   '@urql/exchange-auth': 1.0.0_graphql@16.6.0
   '@vanilla-extract/babel-plugin': 1.2.0
@@ -3945,6 +3947,20 @@ packages:
       '@babel/runtime': 7.18.3
       '@radix-ui/react-use-layout-effect': 1.0.0_react@18.2.0
       react: 18.2.0
+    dev: false
+
+  /@reastorage/core/1.2.0:
+    resolution: {integrity: sha512-cUyVtNYWK+lYFRS+Oi5K5yk3FDtTpSRzdaEgggnbvKeQOv5bWsSTjbx6PImgCnJlvFA9ckDWFEOJ4SXI63XyDQ==}
+    dev: false
+
+  /@reastorage/react/1.2.1_react@18.2.0:
+    resolution: {integrity: sha512-dbF2ygm4m3ilOvJnIPFXMBaOZHPgPEJo2AVf/VZoLqvuNy/g9vbfODRsUWYNDw7MgbWhpUHH/RF+j4R0CydCUQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      '@reastorage/core': 1.2.0
+      react: 18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
   /@rushstack/eslint-patch/1.1.3:
