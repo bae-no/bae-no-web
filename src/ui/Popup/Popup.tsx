@@ -4,34 +4,17 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
-  AlertDialogContentProps,
   AlertDialogDescription,
   AlertDialogProps,
   AlertDialogTitle,
   AlertDialogTrigger,
-  Content,
-  Overlay,
-  Portal,
 } from "@radix-ui/react-alert-dialog";
 
 import { Box } from "../Box";
 import { Button } from "../Button";
-import { overlayCss } from "../modalBase.css";
 import { Typography } from "../Typography";
 
-import { popupContentCss } from "./Popup.css";
-
-export const AlertDialogContent = ({
-  children,
-  ...props
-}: AlertDialogContentProps) => (
-  <Portal>
-    <Overlay className={overlayCss} />
-    <Content className={popupContentCss} {...props}>
-      {children}
-    </Content>
-  </Portal>
-);
+import { AlertDialogContent } from "./Contents";
 
 interface PopupProps extends Pick<AlertDialogProps, "open" | "onOpenChange"> {
   buttonDirection?: "row" | "column";
