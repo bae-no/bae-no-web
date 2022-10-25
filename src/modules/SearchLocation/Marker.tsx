@@ -36,6 +36,13 @@ export const Marker = ({
             longitude,
           });
           getLocationAddress();
+          return;
+        }
+        if (status === 400) {
+          throw new Error("Bad Request Exception");
+        }
+        if (status === 500) {
+          throw new Error("Unexpected Error");
         }
       },
     );

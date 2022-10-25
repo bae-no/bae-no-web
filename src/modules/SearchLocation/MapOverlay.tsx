@@ -27,9 +27,16 @@ export const MapOverlay = ({
         location: getCenter(),
       },
       (status: number, response: any) => {
-        if (status !== 200) return;
-        const { jibunAddress, roadAddress } = response.v2.address;
-        setLocationInMap({ jibunAddress, roadAddress });
+        if (status === 200) {
+          const { jibunAddress, roadAddress } = response.v2.address;
+          setLocationInMap({ jibunAddress, roadAddress });
+        }
+        if (status === 400) {
+          throw new Error("invalid request");
+        }
+        if (status === 500) {
+          throw new Error("unknown error / io error");
+        }
       },
     );
   }, [setLocationInMap, getCenter]);
