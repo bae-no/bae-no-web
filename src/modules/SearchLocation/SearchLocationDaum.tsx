@@ -14,7 +14,7 @@ declare global {
   }
 }
 
-const themeObj = {
+const THEME_OBJ = {
   bgColor: colors.black9,
   contentBgColor: colors.white,
   emphTextColor: colors.info1,
@@ -58,7 +58,7 @@ export const SearchLocationDaum = ({
         setIsSearchLocationDaumOpen(false);
         back();
       },
-      theme: themeObj,
+      theme: THEME_OBJ,
       width,
     }).embed(daumLocationSearchRef.current);
   }, [back, height, width, setLocation, setIsSearchLocationDaumOpen]);
