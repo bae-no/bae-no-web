@@ -4,30 +4,27 @@ import { useCenter, useMapContext } from "@r2don/react-naver-map";
 
 import { Box, Icon } from "src/ui";
 
+import { Marker } from "./Marker";
 import { Location } from "./type";
 
-interface MapChildrenProps {
+interface MapOverlayProps {
   location: Location;
   setIsSearchLocationMapOpen: Dispatch<SetStateAction<boolean>>;
   setLocationInMap: Dispatch<SetStateAction<Location>>;
 }
 
-export const MapChildren = ({
+export const MapOverlay = ({
   setIsSearchLocationMapOpen,
   location,
   setLocationInMap,
-}: MapChildrenProps) => {
-  const { setCenter, getCenter } = useCenter();
+}: MapOverlayProps) => {
+  const { getCenter, setCenter } = useCenter();
   const map = useMapContext();
 
   const getLocationAddress = useCallback(() => {
     window.naver.maps.Service.reverseGeocode(
       {
         location: getCenter(),
-        orders: [
-          window.naver.maps.Service.OrderType.ADDR,
-          window.naver.maps.Service.OrderType.ROAD_ADDR,
-        ].join(","),
       },
       (status: number, response: any) => {
         if (status !== 200) return;
@@ -37,32 +34,9 @@ export const MapChildren = ({
     );
   }, [setLocationInMap, getCenter]);
 
-  const getPosition = useCallback(() => {
-    if (!location.roadAddress || !location.jibunAddress) return;
-    window.naver.maps.Service.geocode(
-      {
-        query: location.roadAddress ?? location.jibunAddress,
-      },
-      (status: number, response: any) => {
-        if (status === 200) {
-          const [latitude, longitude] = [
-            response.v2.addresses[0].y,
-            response.v2.addresses[0].x,
-          ];
-          setCenter({
-            latitude,
-            longitude,
-          });
-          getLocationAddress();
-        }
-      },
-    );
-  }, [
-    location.roadAddress,
-    location.jibunAddress,
-    setCenter,
-    getLocationAddress,
-  ]);
+  const handleBack = () => {
+    setIsSearchLocationMapOpen(false);
+  };
 
   const getLocationThroughCurrentPosition = useCallback(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -71,23 +45,6 @@ export const MapChildren = ({
       getLocationAddress();
     });
   }, [setCenter, getLocationAddress]);
-
-  const handleBack = () => {
-    setIsSearchLocationMapOpen(false);
-  };
-
-  useEffect(() => {
-    if (location.jibunAddress !== "" || location.roadAddress !== "") {
-      getPosition();
-      return;
-    }
-    getLocationThroughCurrentPosition();
-  }, [
-    getPosition,
-    getLocationThroughCurrentPosition,
-    location.jibunAddress,
-    location.roadAddress,
-  ]);
 
   useEffect(() => {
     const listener = map.addListener("dragend", () => {
@@ -108,16 +65,13 @@ export const MapChildren = ({
       >
         <Icon name="arrow-left" />
       </Box>
+      <Marker
+        getLocationAddress={getLocationAddress}
+        getLocationThroughCurrentPosition={getLocationThroughCurrentPosition}
+        location={location}
+      />
       <Box
-        alignItems="center"
-        height="full"
-        justifyContent="center"
-        width="full"
-      >
-        <Icon color="orange2" name="mapMarker" zIndex={1} />
-      </Box>
-      <Box
-        bottom="2"
+        bottom="232"
         flexDirection="row-reverse"
         position="fixed"
         px="16"

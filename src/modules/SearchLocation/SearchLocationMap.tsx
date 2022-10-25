@@ -4,7 +4,7 @@ import { Map as NaverMap } from "@r2don/react-naver-map";
 
 import { BottomDrawer, Typography, Label, Button, Box } from "src/ui";
 
-import { MapChildren } from "./MapChildren";
+import { MapOverlay } from "./MapOverlay";
 import { Location } from "./type";
 
 declare global {
@@ -46,7 +46,7 @@ export const SearchLocationMap = ({
   return (
     <>
       <NaverMap style={{ height, width }} zoom={40}>
-        <MapChildren
+        <MapOverlay
           location={location}
           setIsSearchLocationMapOpen={setIsSearchLocationMapOpen}
           setLocationInMap={setLocationInMap}
