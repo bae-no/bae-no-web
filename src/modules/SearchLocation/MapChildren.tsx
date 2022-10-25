@@ -64,7 +64,7 @@ export const MapChildren = ({
     getLocationAddress,
   ]);
 
-  const handleCurrentLocation = useCallback(() => {
+  const getLocationThroughCurrentPosition = useCallback(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       setCenter({ latitude, longitude });
@@ -81,10 +81,10 @@ export const MapChildren = ({
       getPosition();
       return;
     }
-    handleCurrentLocation();
+    getLocationThroughCurrentPosition();
   }, [
     getPosition,
-    handleCurrentLocation,
+    getLocationThroughCurrentPosition,
     location.jibunAddress,
     location.roadAddress,
   ]);
@@ -117,7 +117,7 @@ export const MapChildren = ({
         <Icon color="orange2" name="mapMarker" zIndex={1} />
       </Box>
       <Box
-        bottom="208"
+        bottom="2"
         flexDirection="row-reverse"
         position="fixed"
         px="16"
@@ -131,7 +131,7 @@ export const MapChildren = ({
           cursor="pointer"
           justifyContent="center"
           size="48"
-          onClick={handleCurrentLocation}
+          onClick={getLocationThroughCurrentPosition}
         >
           <Icon name="gps" />
         </Box>
