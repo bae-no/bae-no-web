@@ -4,7 +4,6 @@ import { useNaverMapInit } from "@r2don/react-naver-map";
 import { useRouter } from "next/router";
 import Script from "next/script";
 
-import { useWindowSize } from "src/hooks";
 import { SearchLocationDaum } from "src/modules/SearchLocation/SearchLocationDaum";
 import { Typography, Icon, Box, Input } from "src/ui";
 
@@ -32,7 +31,6 @@ const SetLocation = ({
   const { isLoaded } = useNaverMapInit({
     ncpClientId: clientId ?? "",
   });
-  const { height, width } = useWindowSize();
 
   const router = useRouter();
 
@@ -154,12 +152,10 @@ const SetLocation = ({
       )}
       {isSearchLocationMapOpen && (
         <SearchLocationMap
-          height={height}
           isLoaded={isLoaded}
           location={location}
           setIsSearchLocationMapOpen={setIsSearchLocationMapOpen}
           setLocation={setLocation}
-          width={width}
         />
       )}
     </>

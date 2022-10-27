@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 import { Map as NaverMap } from "@r2don/react-naver-map";
 
+import { useWindowSize } from "src/hooks";
 import { BottomDrawer, Typography, Label, Button, Box } from "src/ui";
 
 import { MapOverlay } from "./MapOverlay";
@@ -14,19 +15,15 @@ declare global {
 }
 
 interface SearchLocationMapProps {
-  height: number;
   isLoaded: boolean;
   location: Location;
   setIsSearchLocationMapOpen: Dispatch<SetStateAction<boolean>>;
   setLocation: Dispatch<SetStateAction<Location>>;
-  width: number;
 }
 
 export const SearchLocationMap = ({
   setIsSearchLocationMapOpen,
   isLoaded,
-  height,
-  width,
   setLocation,
   location,
 }: SearchLocationMapProps) => {
@@ -34,6 +31,7 @@ export const SearchLocationMap = ({
     jibunAddress: "",
     roadAddress: "",
   });
+  const { width, height } = useWindowSize();
 
   const handleClick = () => {
     if (!locationInMap) return;
@@ -41,7 +39,7 @@ export const SearchLocationMap = ({
     setIsSearchLocationMapOpen(false);
   };
 
-  if (!isLoaded) return null;
+  if (!isLoaded || width === 0 || height === 0) return null;
 
   return (
     <>
