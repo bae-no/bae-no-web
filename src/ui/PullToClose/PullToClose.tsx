@@ -10,7 +10,7 @@ import { Sprinkles } from "../sprinkles.css";
 import { barCss } from "./PullToClose.css";
 
 const loadDomMax = () =>
-  import("./framerDomMax").then((module) => module.default);
+  import("src/utils/framerDomMax").then((module) => module.default);
 
 interface PullToCloseProps
   extends Pick<ComponentProps<typeof m.div>, "dragSnapToOrigin"> {

@@ -1,8 +1,8 @@
 import MetaTags from "src/components/MetaTags";
 import {
-  useHeaderBackgroundColor,
   ChattingRooms,
   HomeHead,
+  useHeaderBackgroundColor,
 } from "src/modules/home";
 import { Box, Header, Layout } from "src/ui";
 
