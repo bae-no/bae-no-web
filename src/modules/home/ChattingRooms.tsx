@@ -1,6 +1,9 @@
 import { useState } from "react";
 
-import { Box, Select, Tab, Typography } from "src/ui";
+import { Box } from "src/ui/Box";
+import { Select } from "src/ui/Select";
+import { Tab } from "src/ui/Tab";
+import { Typography } from "src/ui/Typography";
 
 import ChattingList from "../Chat/ChattingList";
 

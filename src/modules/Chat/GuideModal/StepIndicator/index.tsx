@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { LazyMotion, m } from "framer-motion";
 
-import { Box } from "src/ui";
+import { Box } from "src/ui/Box";
 
 import { stepIndicatorCss } from "./StepIndicator.css";
 

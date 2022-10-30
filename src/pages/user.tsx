@@ -1,4 +1,4 @@
-import { BottomTab } from "src/ui";
+import { BottomTab } from "src/ui/Layout";
 
 const User = () => (
   <div>

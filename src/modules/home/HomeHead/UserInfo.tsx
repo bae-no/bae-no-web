@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-import { Box, Typography } from "src/ui";
+import { Box } from "src/ui/Box";
+import { Typography } from "src/ui/Typography";
 
 import userInfoImage from "./userInfoImage.png";
 

@@ -4,8 +4,10 @@ import * as AlertDialogPrimitives from "@radix-ui/react-alert-dialog";
 import { reastorage, useSetReastorage } from "@reastorage/react";
 import dynamic from "next/dynamic";
 
-import { useToggle } from "src/hooks";
-import { Box, Button, CheckBox } from "src/ui";
+import { useToggle } from "src/hooks/useToggle";
+import { Box } from "src/ui/Box";
+import { Button } from "src/ui/Button";
+import { CheckBox } from "src/ui/CheckBox";
 import { AlertDialogContent } from "src/ui/Popup/Contents";
 
 import StepIndicator from "./StepIndicator";

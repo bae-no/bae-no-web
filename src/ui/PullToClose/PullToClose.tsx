@@ -2,7 +2,7 @@ import { ComponentProps, ReactNode, useRef } from "react";
 
 import { LazyMotion, m, PanInfo } from "framer-motion";
 
-import { useStateWithProp } from "src/hooks";
+import { useStateWithProp } from "src/hooks/useStateWithProp";
 
 import { Box } from "../Box";
 import { Sprinkles } from "../sprinkles.css";

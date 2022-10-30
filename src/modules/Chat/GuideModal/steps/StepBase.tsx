@@ -6,7 +6,8 @@ import {
 } from "@radix-ui/react-alert-dialog";
 
 import Lottie from "src/components/Lottie";
-import { Box, Typography } from "src/ui";
+import { Box } from "src/ui/Box";
+import { Typography } from "src/ui/Typography";
 
 import { stepContainerCss } from "./StepBase.css";
 

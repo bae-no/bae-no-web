@@ -1,6 +1,6 @@
 import { ForwardedRef, forwardRef, useCallback, useMemo } from "react";
 
-import { useToggle } from "src/hooks";
+import { useToggle } from "src/hooks/useToggle";
 
 import { Box } from "../Box";
 import { Icon } from "../Icon";

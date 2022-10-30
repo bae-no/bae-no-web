@@ -1,6 +1,8 @@
 import Link from "next/link";
 
-import { Box, Icon, Input } from "src/ui";
+import { Box } from "src/ui/Box";
+import { Icon } from "src/ui/Icon";
+import { Input } from "src/ui/Input";
 
 const SearchBar = () => (
   <Box

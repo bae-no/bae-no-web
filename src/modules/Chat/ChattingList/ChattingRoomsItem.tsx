@@ -10,7 +10,11 @@ import {
   Type as ListType,
 } from "react-swipeable-list";
 
-import { Avatar, Box, CheckBox, Label, Typography } from "src/ui";
+import { Avatar } from "src/ui/Avatar";
+import { Box } from "src/ui/Box";
+import { CheckBox } from "src/ui/CheckBox";
+import { Label } from "src/ui/Label";
+import { Typography } from "src/ui/Typography";
 
 export interface ChattingRoomsItemProps {
   avatarSrc: string;
