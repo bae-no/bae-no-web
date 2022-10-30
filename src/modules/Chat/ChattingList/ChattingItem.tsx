@@ -1,6 +1,9 @@
 import { memo } from "react";
 
-import { Avatar, Box, Label, Typography } from "src/ui";
+import { Avatar } from "src/ui/Avatar";
+import { Box } from "src/ui/Box";
+import { Label } from "src/ui/Label";
+import { Typography } from "src/ui/Typography";
 
 export interface ChattingItemProps {
   avatarSrc: string;

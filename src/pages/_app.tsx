@@ -1,7 +1,7 @@
 import { LazyMotion, domAnimation } from "framer-motion";
 import Head from "next/head";
 
-import { useInit } from "src/hooks";
+import { useInit } from "src/hooks/useInit";
 
 import type { AppProps } from "next/app";
 

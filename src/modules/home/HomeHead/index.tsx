@@ -1,6 +1,6 @@
 import { ForwardedRef, forwardRef } from "react";
 
-import { Box } from "src/ui";
+import { Box } from "src/ui/Box";
 
 import SearchBar from "./SearchBar";
 import UserInfo from "./UserInfo";
