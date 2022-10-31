@@ -5,7 +5,7 @@ import { reastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 import Script from "next/script";
 
-import { useWindowSize } from "src/hooks";
+import { useWindowSize } from "src/hooks/useWindowSize";
 import { MapOverlay } from "src/modules/SearchLocation/MapOverlay";
 import { BottomDrawer } from "src/ui/BottomDrawer";
 import { Box } from "src/ui/Box";

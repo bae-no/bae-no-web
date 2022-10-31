@@ -4,7 +4,7 @@ import { reastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 import Script from "next/script";
 
-import { useWindowSize } from "src/hooks";
+import { useWindowSize } from "src/hooks/useWindowSize";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 import { colors } from "src/ui/tokens/color";
