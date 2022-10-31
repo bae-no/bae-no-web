@@ -31,6 +31,7 @@ specifiers:
   '@swc/jest': ^0.2.23
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.4.0
+  '@types/navermaps': ^3.0.17
   '@types/node': ^18.11.7
   '@types/react': ^18.0.24
   '@types/react-dom': ^18.0.8
@@ -75,7 +76,7 @@ specifiers:
 
 dependencies:
   '@fxts/core': 0.10.1
-  '@r2don/react-naver-map': 0.0.10_biqbaboplfbrettd7655fr4n2y
+  '@r2don/react-naver-map': 0.0.10_ytyhg2ekiyybrzgarlxgnkapru
   '@radix-ui/react-alert-dialog': 1.0.2_knhnagtyfncgg2hpin7s37uixq
   '@radix-ui/react-avatar': 1.0.1_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-checkbox': 1.0.1_biqbaboplfbrettd7655fr4n2y
@@ -125,6 +126,7 @@ devDependencies:
   '@swc/jest': 0.2.23_@swc+core@1.3.11
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
+  '@types/navermaps': 3.0.17
   '@types/node': 18.11.8
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
@@ -4164,13 +4166,14 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@r2don/react-naver-map/0.0.10_biqbaboplfbrettd7655fr4n2y:
+  /@r2don/react-naver-map/0.0.10_ytyhg2ekiyybrzgarlxgnkapru:
     resolution: {integrity: sha512-r+OPp+ih6fEU6nVHdP6eyMAAo8WrL6zO9nIqxZXmezvB3T0AJkcZWvftSMrzAiEAgqKREuJt7f7vhYaieflWvQ==}
     peerDependencies:
       '@types/navermaps': '>=3.0.16'
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
+      '@types/navermaps': 3.0.17
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       uuid: 8.3.2
@@ -6745,6 +6748,10 @@ packages:
 
   /@types/minimatch/3.0.5:
     resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
+    dev: true
+
+  /@types/navermaps/3.0.17:
+    resolution: {integrity: sha512-NK6z7Cw/X5n6RxduS2o4J2ImluqGjc5EREHZYryoHF5/cSYBao9xpSOXKGKzgrbmJRdC8hwHp6YzTt8Iaju32Q==}
     dev: true
 
   /@types/node-fetch/2.6.1:
