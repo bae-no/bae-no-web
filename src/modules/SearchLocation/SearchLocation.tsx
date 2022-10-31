@@ -3,7 +3,10 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect } from "react";
 import { reastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 
-import { Typography, Icon, Box, Input } from "src/ui";
+import { Box } from "src/ui/Box";
+import { Icon } from "src/ui/Icon";
+import { Input } from "src/ui/Input";
+import { Typography } from "src/ui/Typography";
 
 import { Location } from "./type";
 
