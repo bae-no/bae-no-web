@@ -1,24 +1,22 @@
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 
 import { useCenter, useMapContext } from "@r2don/react-naver-map";
+import { useRouter } from "next/router";
 
 import { Box, Icon } from "src/ui";
 
 import { Marker } from "./Marker";
+import { gpsIconBoxCss } from "./searchLocation.css";
 import { Location } from "./type";
 
 interface MapOverlayProps {
   location: Location;
-  setIsSearchLocationMapOpen: Dispatch<SetStateAction<boolean>>;
   setLocationInMap: Dispatch<SetStateAction<Location>>;
 }
 
-export const MapOverlay = ({
-  setIsSearchLocationMapOpen,
-  location,
-  setLocationInMap,
-}: MapOverlayProps) => {
+export const MapOverlay = ({ location, setLocationInMap }: MapOverlayProps) => {
   const { getCenter, setCenter } = useCenter();
+  const router = useRouter();
   const map = useMapContext();
 
   const getLocationAddress = useCallback(() => {
@@ -42,7 +40,7 @@ export const MapOverlay = ({
   }, [setLocationInMap, getCenter]);
 
   const handleBack = () => {
-    setIsSearchLocationMapOpen(false);
+    router.back();
   };
 
   const getLocationThroughCurrentPosition = useCallback(() => {
@@ -54,9 +52,23 @@ export const MapOverlay = ({
   }, [setCenter, getLocationAddress]);
 
   useEffect(() => {
-    const listener = map.addListener("dragend", () => {
-      getLocationAddress();
+    let listener: {
+      eventName: string;
+      listener: (event: any) => any;
+      listenerId: string;
+      target: any;
+    };
+
+    let timer: NodeJS.Timeout;
+    map.addListener("dragend", () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(() => {
+        getLocationAddress();
+      }, 500);
     });
+
     return () => map.removeListener(listener);
   }, [map, getLocationAddress]);
 
@@ -89,6 +101,7 @@ export const MapOverlay = ({
           alignItems="center"
           backgroundColor="white"
           br="half"
+          className={gpsIconBoxCss}
           cursor="pointer"
           justifyContent="center"
           size="48"

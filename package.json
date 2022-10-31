@@ -28,6 +28,7 @@
     "@radix-ui/react-radio-group": "^1.0.0",
     "@radix-ui/react-switch": "^1.0.0",
     "@radix-ui/react-tabs": "^1.0.0",
+    "@reastorage/react": "^1.2.1",
     "@urql/core": "^3.0.3",
     "@urql/exchange-auth": "^1.0.0",
     "@vanilla-extract/babel-plugin": "^1.2.0",

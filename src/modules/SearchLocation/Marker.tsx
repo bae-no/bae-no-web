@@ -20,7 +20,6 @@ export const Marker = ({
   const { setCenter } = useCenter();
 
   const getPosition = useCallback(() => {
-    if (!location.roadAddress || !location.jibunAddress) return;
     window.naver.maps.Service.geocode(
       {
         query: location.roadAddress ?? location.jibunAddress,
