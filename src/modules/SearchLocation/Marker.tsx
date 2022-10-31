@@ -2,7 +2,8 @@ import { useCallback, useEffect } from "react";
 
 import { useCenter } from "@r2don/react-naver-map";
 
-import { Box, Icon } from "src/ui";
+import { Box } from "src/ui/Box";
+import { Icon } from "src/ui/Icon";
 
 import { Location } from "./type";
 

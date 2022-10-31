@@ -3,7 +3,8 @@ import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 import { useCenter, useMapContext } from "@r2don/react-naver-map";
 import { useRouter } from "next/router";
 
-import { Box, Icon } from "src/ui";
+import { Box } from "src/ui/Box";
+import { Icon } from "src/ui/Icon";
 
 import { Marker } from "./Marker";
 import { gpsIconBoxCss } from "./searchLocation.css";

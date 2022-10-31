@@ -7,7 +7,11 @@ import Script from "next/script";
 
 import { useWindowSize } from "src/hooks";
 import { MapOverlay } from "src/modules/SearchLocation/MapOverlay";
-import { BottomDrawer, Typography, Label, Button, Box } from "src/ui";
+import { BottomDrawer } from "src/ui/BottomDrawer";
+import { Box } from "src/ui/Box";
+import { Button } from "src/ui/Button";
+import { Label } from "src/ui/Label";
+import { Typography } from "src/ui/Typography";
 
 import { Location } from "../../modules/SearchLocation/type";
 

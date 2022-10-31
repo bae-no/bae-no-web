@@ -5,7 +5,8 @@ import { useRouter } from "next/router";
 import Script from "next/script";
 
 import { useWindowSize } from "src/hooks";
-import { Box, Icon } from "src/ui";
+import { Box } from "src/ui/Box";
+import { Icon } from "src/ui/Icon";
 import { colors } from "src/ui/tokens/color";
 
 declare global {
