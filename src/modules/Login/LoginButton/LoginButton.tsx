@@ -1,4 +1,5 @@
-import { Button, Typography } from "src/ui";
+import { Button } from "src/ui/Button";
+import { Typography } from "src/ui/Typography";
 
 import { buttonCss } from "./loginButton.css";
 import Apple from "./svgs/apple.svg";

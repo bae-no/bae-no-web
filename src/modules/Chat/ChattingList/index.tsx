@@ -1,5 +1,5 @@
-import { IntersectionArea } from "src/components";
-import { Box } from "src/ui";
+import { IntersectionArea } from "src/components/IntersectionArea";
+import { Box } from "src/ui/Box";
 import { Sprinkles } from "src/ui/sprinkles.css";
 
 import ChattingItem, { ChattingItemProps } from "./ChattingItem";

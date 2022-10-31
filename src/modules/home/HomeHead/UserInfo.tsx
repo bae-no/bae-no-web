@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-import { Box, Typography } from "src/ui";
+import { Box } from "src/ui/Box";
+import { Typography } from "src/ui/Typography";
 
 import userInfoImage from "./userInfoImage.png";
 
@@ -19,7 +20,7 @@ const UserInfo = () => (
       </Typography>
     </Box>
     <Box aria-hidden="true" as="span">
-      <Image height={82} layout="fixed" src={userInfoImage} width={106} />
+      <Image alt="" height={82} src={userInfoImage} width={106} />
     </Box>
   </Box>
 );
