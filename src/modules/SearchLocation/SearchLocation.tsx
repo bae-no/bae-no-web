@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 import { reastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
@@ -42,28 +42,6 @@ const SearchLocation = ({
     setLocation({ jibunAddress, roadAddress });
   }, [setLocation, nextUrl]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value, id },
-    } = e;
-    setLocation((prev) => {
-      if (id === "roadAddress") {
-        reastorage("location", { jibunAddress: "", roadAddress: "" }).set({
-          jibunAddress: "",
-          roadAddress: value,
-        });
-        return { ...prev, roadAddress: value };
-      }
-      if (id === "jibunAddress") {
-        reastorage("location", { jibunAddress: "", roadAddress: "" }).set({
-          jibunAddress: value,
-          roadAddress: "",
-        });
-        return { ...prev, jibunAddress: value };
-      }
-      return prev;
-    });
-  };
   const handleClear = () => {
     setLocation({ jibunAddress: "", roadAddress: "" });
     reastorage("location", { jibunAddress: "", roadAddress: "" }).reset();
@@ -116,7 +94,6 @@ const SearchLocation = ({
             placeholder="도로명, 건물명 또는 지번으로 검색"
             value={getInputValue()}
             variant="underline"
-            onChange={handleChange}
             onClearClick={handleClear}
             onClick={handleInputClick}
           />
