@@ -54,11 +54,11 @@ export const Marker = ({
   ]);
 
   useEffect(() => {
-    if (location.jibunAddress !== "" || location.roadAddress !== "") {
-      getPosition();
+    if (!location.jibunAddress && !location.roadAddress) {
+      getLocationThroughCurrentPosition();
       return;
     }
-    getLocationThroughCurrentPosition();
+    getPosition();
   }, [
     getPosition,
     getLocationThroughCurrentPosition,
@@ -66,7 +66,13 @@ export const Marker = ({
     location.roadAddress,
   ]);
   return (
-    <Box alignItems="center" height="full" justifyContent="center" width="full">
+    <Box
+      alignItems="center"
+      bottom="half"
+      justifyContent="center"
+      left="half"
+      position="fixed"
+    >
       <Icon color="orange2" name="mapMarker" zIndex={1} />
     </Box>
   );

@@ -35,11 +35,7 @@ const SearchLocation = ({
 
   useEffect(() => {
     reastorage("nextUrl", "").set(nextUrl);
-    const { jibunAddress, roadAddress } = reastorage("location", {
-      jibunAddress: "",
-      roadAddress: "",
-    }).get();
-    setLocation({ jibunAddress, roadAddress });
+    reastorage("location", "").reset();
   }, [setLocation, nextUrl]);
 
   const handleClear = () => {

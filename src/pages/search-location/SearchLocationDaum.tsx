@@ -43,11 +43,11 @@ const SearchLocationDaum = () => {
 
   useEffect(() => {
     if (!daumLocationSearchRef.current || !isScriptLoading) return;
+    const nextUrl = reastorage("nextUrl", "").get();
     new window.daum.Postcode({
       height: `${height - height * 0.1}`,
       onclose(state: "FORCE_CLOSE" | "COMPLETE_CLOSE") {
         if (state === "COMPLETE_CLOSE") {
-          router.back();
           router.back();
         }
       },
@@ -58,6 +58,7 @@ const SearchLocationDaum = () => {
           roadAddress,
         });
         router.back();
+        router.push(nextUrl);
       },
       theme: THEME_OBJ,
       width,

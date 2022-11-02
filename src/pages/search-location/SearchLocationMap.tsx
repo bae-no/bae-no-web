@@ -73,7 +73,7 @@ const SearchLocationMap = () => {
     );
   return (
     <>
-      <NaverMap style={{ height, width }} zoom={40}>
+      <NaverMap style={{ height, width }} zoom={20}>
         <MapOverlay
           location={{ jibunAddress, roadAddress }}
           setLocationInMap={setLocationInMap}
