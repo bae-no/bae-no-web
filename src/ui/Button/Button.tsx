@@ -6,7 +6,7 @@ import { Box } from "../Box";
 import { Icon } from "../Icon";
 import { element } from "../reset.css";
 
-import { buttonCss } from "./Button.css";
+import { buttonCss, linkCss } from "./Button.css";
 import { ButtonProps } from "./Button.type";
 
 const Button = forwardRef(
@@ -29,7 +29,7 @@ const Button = forwardRef(
     const renderButton = () => (
       <Box
         alignItems="center"
-        as={href ? "a" : "button"}
+        as="button"
         className={[
           element.button,
           className,
@@ -53,7 +53,7 @@ const Button = forwardRef(
 
     if (href && !disabled) {
       return (
-        <Link passHref href={href}>
+        <Link passHref className={linkCss} href={href}>
           {renderButton()}
         </Link>
       );

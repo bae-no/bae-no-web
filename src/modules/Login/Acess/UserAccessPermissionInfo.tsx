@@ -1,4 +1,5 @@
-import { Box, Typography } from "src/ui";
+import { Box } from "src/ui/Box";
+import { Typography } from "src/ui/Typography";
 
 import { LabelContent } from "./LabelAndContent";
 

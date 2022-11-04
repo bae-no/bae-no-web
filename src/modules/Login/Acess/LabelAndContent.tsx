@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
 
-import { Typography, Avatar, Box } from "src/ui";
+import { Avatar } from "src/ui/Avatar";
+import { Box } from "src/ui/Box";
 import { SvgIconKey } from "src/ui/Icon/iconMap";
+import { Typography } from "src/ui/Typography";
 
 interface LabelContentProps {
   alt?: string;
