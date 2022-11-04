@@ -1,6 +1,7 @@
+import { LazyMotion, domAnimation } from "framer-motion";
 import Head from "next/head";
 
-import { useInit } from "src/hooks";
+import { useInit } from "src/hooks/useInit";
 
 import type { AppProps } from "next/app";
 
@@ -10,7 +11,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   useInit();
 
   return (
-    <>
+    <LazyMotion strict features={domAnimation}>
       <Head>
         <meta
           content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover"
@@ -18,7 +19,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <Component {...pageProps} />
-    </>
+    </LazyMotion>
   );
 };
 

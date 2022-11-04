@@ -1,4 +1,10 @@
-import { AllHTMLAttributes, createElement, forwardRef } from "react";
+import {
+  AllHTMLAttributes,
+  ComponentType,
+  createElement,
+  ElementType,
+  forwardRef,
+} from "react";
 
 import clsx, { ClassValue } from "clsx";
 
@@ -20,9 +26,12 @@ export interface BoxProps
       | "height"
       | "cursor"
       | "size"
+      | "as"
     >,
     Sprinkles {
+  as?: ElementType | ComponentType;
   className?: ClassValue;
+  replace?: boolean; // FIXME: next 13 migration 중 임시처리
 }
 
 const Box = forwardRef(

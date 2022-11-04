@@ -2,7 +2,7 @@ import { ComponentProps, useState } from "react";
 
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { useStateWithProp } from "src/hooks";
+import { useStateWithProp } from "src/hooks/useStateWithProp";
 
 import SelectBottomDrawer from "./SelectBottomDrawer";
 

@@ -1,61 +1,24 @@
 import { reastorage } from "@reastorage/react";
-import { authExchange } from "@urql/exchange-auth";
 import { withUrqlClient } from "next-urql";
-import {
-  makeOperation,
-  dedupExchange,
-  cacheExchange,
-  fetchExchange,
-} from "urql";
+import { cacheExchange, dedupExchange, fetchExchange } from "urql";
 
-export const withGraphql = withUrqlClient(
-  (ssrExchange) => ({
-    exchanges: [
-      authExchange<{ token: string }>({
-        addAuthToOperation: ({ authState, operation }) => {
-          if (!authState || !authState.token) {
-            return operation;
-          }
+import { authExchange } from "./authExchange";
 
-          const fetchOptions =
-            typeof operation.context.fetchOptions === "function"
-              ? operation.context.fetchOptions()
-              : operation.context.fetchOptions || {};
-          return makeOperation(operation.kind, operation, {
-            ...operation.context,
-            fetchOptions: {
-              ...fetchOptions,
-              headers: {
-                ...fetchOptions.headers,
-                Authorization: authState.token,
-              },
-            },
-          });
-        },
-        didAuthError: ({ error }) =>
-          error.graphQLErrors.some((e) => e.extensions?.code === "FORBIDDEN"),
-        getAuth: async ({ authState }) => {
-          if (!authState) {
-            const token = reastorage("token", "").get();
+// FIXME: 위치 변경 필요
+export const accessTokenStorage = reastorage("accessToken", "");
 
-            if (!token) return null;
-            return {
-              token: `Bearer ${token}`,
-            };
-          }
+export const withGraphql = withUrqlClient((ssr) => ({
+  exchanges: [
+    ssr,
+    dedupExchange,
+    cacheExchange,
+    authExchange(() => {
+      if (typeof window === "undefined") return "";
 
-          return null;
-        },
-      }),
-      dedupExchange,
-      cacheExchange,
-      ssrExchange,
-      fetchExchange,
-    ],
-    suspense: true,
-    url: process.env.NEXT_PUBLIC_DEVELOPMENT_SERVER_URL as string,
-  }),
-  {
-    ssr: true,
-  },
-);
+      return accessTokenStorage.get();
+    }),
+    fetchExchange,
+  ],
+  suspense: true,
+  url: process.env.NEXT_PUBLIC_SERVER_URL as string,
+}));

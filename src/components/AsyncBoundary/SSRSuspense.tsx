@@ -1,6 +1,6 @@
 import { ReactElement, ReactNode, Suspense } from "react";
 
-import { useMounted } from "src/hooks";
+import { useMounted } from "src/hooks/useMounted";
 
 interface SSRSafeSuspenseProps {
   children: ReactNode;

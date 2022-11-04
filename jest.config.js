@@ -13,7 +13,19 @@ module.exports = {
   testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/"],
   testEnvironment: "jsdom",
   transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }],
+    "\\.css\\.ts$": "@vanilla-extract/jest-transform",
+    "^.+\\.(js|jsx|ts|tsx)$": [
+      "@swc/jest",
+      {
+        jsc: {
+          transform: {
+            react: {
+              runtime: "automatic",
+            },
+          },
+        },
+      },
+    ],
   },
   transformIgnorePatterns: [
     "/node_modules/(?!ky-universal)/",

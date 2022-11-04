@@ -16,18 +16,16 @@ const BottomTabItemItem = ({ iconName, tabName, href }: BottomTabItemProps) => {
   const isActive = router.pathname === href;
   const color = isActive ? "orange2" : "black6";
   return (
-    <Link passHref replace href={href}>
-      <Box align="center" as="a" flex={1} gap="4">
-        <Icon
-          color={color}
-          name={`${iconName}-${isActive ? "solid" : "outline"}`}
-          size="24"
-        />
-        <Typography color={color} fontSize="caption1-m">
-          {tabName}
-        </Typography>
-      </Box>
-    </Link>
+    <Box replace align="center" as={Link} flex={1} gap="4" href={href}>
+      <Icon
+        color={color}
+        name={`${iconName}-${isActive ? "solid" : "outline"}`}
+        size="24"
+      />
+      <Typography color={color} fontSize="caption1-m">
+        {tabName}
+      </Typography>
+    </Box>
   );
 };
 
