@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 import { Button } from "src/ui/Button";
 import { Typography } from "src/ui/Typography";
 
@@ -30,9 +32,13 @@ interface LoginButtonProps {
 
 export const LoginButton = ({ loginType }: LoginButtonProps) => {
   const { icon, text, url } = loginButtonObject[loginType];
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(url);
+  };
 
   return (
-    <Button className={buttonCss({ type: loginType })} href={`${url}`}>
+    <Button className={buttonCss({ type: loginType })} onClick={handleClick}>
       {icon}
       <Typography as="span">{text}</Typography>
     </Button>

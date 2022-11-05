@@ -29,7 +29,7 @@ const Button = forwardRef(
     const renderButton = () => (
       <Box
         alignItems="center"
-        as="button"
+        as={href ? "a" : "button"}
         className={[
           element.button,
           className,
