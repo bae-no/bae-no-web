@@ -102,7 +102,7 @@ describe("ConditionalRender", () => {
     expect(getByText("A")).toBeInTheDocument();
   });
 
-  it("should handle nullable string case", () => {
+  it("should handle undefined case", () => {
     const { getByText } = render(<UndefinedCase />);
 
     expect(getByText("Undefined")).toBeInTheDocument();
