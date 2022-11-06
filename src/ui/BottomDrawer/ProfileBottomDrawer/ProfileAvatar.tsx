@@ -5,7 +5,7 @@ import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 
 export interface ProfileAvatarProps {
-  avatarProps: Omit<ComponentProps<typeof Avatar>, "size">;
+  avatarProps: Omit<ComponentProps<typeof Avatar>, "size" | "iconName">;
   isMine?: boolean;
   onClickEditProfile?: VoidFunction;
 }
@@ -16,7 +16,7 @@ const ProfileAvatar = ({
   isMine,
 }: ProfileAvatarProps) => (
   <Box position="relative">
-    <Avatar size="80" {...avatarProps} />
+    <Avatar {...avatarProps} size="80" />
     {isMine && (
       <Box
         aria-label="프로필 수정"
