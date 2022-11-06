@@ -1,11 +1,9 @@
-import { reastorage } from "@reastorage/react";
 import { withUrqlClient } from "next-urql";
 import { cacheExchange, dedupExchange, fetchExchange } from "urql";
 
-import { authExchange } from "./authExchange";
+import { token } from "src/store/token";
 
-// FIXME: 위치 변경 필요
-const accessToken = reastorage("token", "").get();
+import { authExchange } from "./authExchange";
 
 export const withGraphql = withUrqlClient((ssr) => ({
   exchanges: [
@@ -15,7 +13,7 @@ export const withGraphql = withUrqlClient((ssr) => ({
     authExchange(() => {
       if (typeof window === "undefined") return "";
 
-      return accessToken;
+      return token.get();
     }),
     fetchExchange,
   ],
