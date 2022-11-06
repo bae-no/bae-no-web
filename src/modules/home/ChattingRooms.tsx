@@ -1,11 +1,13 @@
 import { useState } from "react";
 
+import List from "src/components/List";
 import { Box } from "src/ui/Box";
+import { Container } from "src/ui/Container";
 import { Select } from "src/ui/Select";
 import { Tab } from "src/ui/Tab";
 import { Typography } from "src/ui/Typography";
 
-import ChattingList from "../Chat/ChattingList";
+import ChattingItem from "../Chat/ChattingList/ChattingItem";
 
 const MOCK_CATEGORIES = [
   {
@@ -149,7 +151,7 @@ const ChattingRooms = () => {
   const handleSortChange = (value: string) => setSort(value);
 
   return (
-    <Box gap="24" px="16">
+    <Container gap="24">
       <Box gap="16">
         <Tab
           defaultValue={category}
@@ -175,13 +177,18 @@ const ChattingRooms = () => {
           />
         </Box>
       </Box>
-      <ChattingList
-        chattings={MOCK_CHATTINGS}
+      <List
+        as="ol"
+        css={{ gap: "16" }}
         fetchMore={() => {
           // TODO: 추가 로드 기능 구현
         }}
+        list={MOCK_CHATTINGS}
+        renderItem={(chatting) => (
+          <ChattingItem {...chatting} key={chatting.chattingId} />
+        )}
       />
-    </Box>
+    </Container>
   );
 };
 

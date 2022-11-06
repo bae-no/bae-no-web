@@ -1,4 +1,6 @@
-import { cloneElement, ReactElement } from "react";
+import { ReactElement } from "react";
+
+import { Box } from "../Box";
 
 import { BottomTab } from "./BottomTab";
 import { Header } from "./Header";
@@ -13,7 +15,9 @@ interface LayoutProps {
 const Layout = ({ children, showBottomTab, headerProps }: LayoutProps) => (
   <>
     <Header {...headerProps} />
-    {cloneElement(children, { as: "main" })}
+    <Box as="main" height="full">
+      {children}
+    </Box>
     {showBottomTab && <BottomTab />}
   </>
 );
