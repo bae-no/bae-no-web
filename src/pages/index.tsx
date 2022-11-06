@@ -1,7 +1,11 @@
+import {
+  HeadWithBackgroundColor,
+  useHeaderBackgroundColor,
+} from "src/components/HeadWithBackgroundColor";
 import MetaTags from "src/components/MetaTags";
 import ChattingRooms from "src/modules/home/ChattingRooms";
-import HomeHead from "src/modules/home/HomeHead";
-import { useHeaderBackgroundColor } from "src/modules/home/hooks";
+import SearchBar from "src/modules/home/HomeHead/SearchBar";
+import UserInfo from "src/modules/home/HomeHead/UserInfo";
 import { Box } from "src/ui/Box";
 import { Header, Layout } from "src/ui/Layout";
 
@@ -20,7 +24,13 @@ const Home = () => {
         }}
       >
         <Box gap="56">
-          <HomeHead ref={ref} />
+          <HeadWithBackgroundColor
+            css={{ gap: "8", paddingTop: "32" }}
+            ref={ref}
+          >
+            <UserInfo />
+            <SearchBar />
+          </HeadWithBackgroundColor>
           <ChattingRooms />
         </Box>
       </Layout>

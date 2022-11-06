@@ -1,4 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, ReactNode, useEffect, useRef, useState } from "react";
+
+import { Box } from "src/ui/Box";
+import { Sprinkles } from "src/ui/sprinkles.css";
 
 const HEADER_HEIGHT = 60;
 
@@ -32,3 +35,18 @@ export const useHeaderBackgroundColor = () => {
 
   return [ref, color] as const;
 };
+
+interface HeadWithBackgroundColorProps {
+  children: ReactNode;
+  css?: Sprinkles;
+}
+
+export const HeadWithBackgroundColor = forwardRef<
+  HTMLDivElement,
+  HeadWithBackgroundColorProps
+>(({ children, css }, ref) => (
+  <Box {...css} position="relative" ref={ref}>
+    <Box backgroundColor="orange6" inset="0" position="absolute" zIndex={-1} />
+    {children}
+  </Box>
+));

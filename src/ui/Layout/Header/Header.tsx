@@ -8,6 +8,7 @@ import Back from "./Back";
 import Delete from "./Delete";
 import { headerCss } from "./Header.css";
 import Notification from "./Notification";
+import Setting from "./Setting";
 
 interface SideProps {
   children: ReactNode;
@@ -32,6 +33,7 @@ const Side = ({ children, position }: SideProps) => (
 );
 
 interface HeaderBaseProps {
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   backgroundColor?: Sprinkles["backgroundColor"];
   leftNode?: ReactNode;
   rightNode?: ReactNode;
@@ -51,6 +53,7 @@ export type HeaderProps = HeaderWithTitleProps | HeaderWithNodeProps;
 
 const Header = ({
   title,
+  as = "h1",
   leftNode,
   rightNode,
   mainNode,
@@ -67,7 +70,13 @@ const Header = ({
     zIndex={1}
   >
     {leftNode && <Side position="left">{leftNode}</Side>}
-    {title ? <Typography fontSize="headline5">{title}</Typography> : mainNode}
+    {title ? (
+      <Typography as={as} fontSize="headline5">
+        {title}
+      </Typography>
+    ) : (
+      mainNode
+    )}
     {rightNode && <Side position="right">{rightNode}</Side>}
   </Box>
 );
@@ -75,5 +84,6 @@ const Header = ({
 Header.Back = Back;
 Header.Notification = Notification;
 Header.Delete = Delete;
+Header.Setting = Setting;
 
 export default Header;
