@@ -40,5 +40,6 @@ globalStyle("html, body", {
 });
 
 globalStyle("#__next", {
-  height: "100%",
+  display: "flex",
+  flexDirection: "column",
 });

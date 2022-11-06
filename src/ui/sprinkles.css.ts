@@ -49,6 +49,8 @@ const responsiveProperties = defineProperties({
     minWidth: layout,
     outline: ["none"],
     overflow: ["visible", "hidden", "scroll", "auto"],
+    overflowX: ["visible", "hidden", "scroll", "auto"],
+    overflowY: ["visible", "hidden", "scroll", "auto"],
     padding: space,
     paddingBottom: space,
     paddingLeft: space,
