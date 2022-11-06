@@ -30,6 +30,7 @@ const THEME_OBJ = {
 const SearchLocationDaum = () => {
   const daumLocationSearchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const { nextUrl } = router.query as { [key: string]: string };
   const [isScriptLoading, setIsScriptLoading] = useState(false);
 
   const { width, height } = useWindowSize();
@@ -43,7 +44,6 @@ const SearchLocationDaum = () => {
 
   useEffect(() => {
     if (!daumLocationSearchRef.current || !isScriptLoading) return;
-    const nextUrl = reastorage("nextUrl", "").get();
     new window.daum.Postcode({
       height: `${height - height * 0.1}`,
       onclose(state: "FORCE_CLOSE" | "COMPLETE_CLOSE") {
@@ -63,7 +63,7 @@ const SearchLocationDaum = () => {
       theme: THEME_OBJ,
       width,
     }).embed(daumLocationSearchRef.current);
-  }, [height, router, width, isScriptLoading]);
+  }, [height, isScriptLoading, nextUrl, router, width]);
   return (
     <>
       <Script

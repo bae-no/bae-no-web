@@ -24,6 +24,7 @@ const clientId = process.env.NEXT_PUBLIC_DEVELOPMENT_NAVER_CLIENT_ID;
 
 const SearchLocationMap = () => {
   const router = useRouter();
+  const { nextUrl } = router.query as { [key: string]: string };
   const [locationInMap, setLocationInMap] = useState<Location>({
     jibunAddress: "",
     roadAddress: "",
@@ -53,7 +54,6 @@ const SearchLocationMap = () => {
       jibunAddress: locationInMap.jibunAddress ?? "",
       roadAddress: locationInMap.roadAddress ?? "",
     });
-    const nextUrl = reastorage("nextUrl", "").get();
     router.push(nextUrl);
   };
 

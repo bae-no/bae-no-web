@@ -27,14 +27,7 @@ const SearchLocation = ({
 }: SetLocationProps) => {
   const router = useRouter();
 
-  const getInputValue = () => {
-    if (location?.roadAddress) return location?.roadAddress;
-    if (location?.jibunAddress) return location?.jibunAddress;
-    return "";
-  };
-
   useEffect(() => {
-    reastorage("nextUrl", "").set(nextUrl);
     reastorage("location", "").reset();
   }, [setLocation, nextUrl]);
 
@@ -44,22 +37,32 @@ const SearchLocation = ({
   };
 
   const handleSearchIconClick = () => {
-    router.push("/search-location/SearchLocationDaum");
+    router.push({
+      pathname: "/search-location/SearchLocationDaum",
+      query: { nextUrl },
+    });
   };
 
   const handleMapOpen = () => {
-    router.push("/search-location/SearchLocationMap");
+    router.push({
+      pathname: "/search-location/SearchLocationMap",
+      query: { nextUrl },
+    });
   };
 
   const handleInputClick = () => {
     if (location.roadAddress || location.jibunAddress) return;
-    router.push("/search-location/SearchLocationDaum");
+    router.push({
+      pathname: "/search-location/SearchLocationDaum",
+      query: { nextUrl },
+    });
   };
 
   const handleBack = () => {
     reastorage("location", null).reset();
     router.back();
   };
+
   return (
     <Box gap="32" zIndex={5}>
       <Box>
@@ -88,7 +91,6 @@ const SearchLocation = ({
               </Box>
             }
             placeholder="도로명, 건물명 또는 지번으로 검색"
-            value={getInputValue()}
             variant="underline"
             onClearClick={handleClear}
             onClick={handleInputClick}
