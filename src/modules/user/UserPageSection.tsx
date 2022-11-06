@@ -8,8 +8,8 @@ import { Popup } from "src/ui/Popup";
 import { Typography } from "src/ui/Typography";
 
 type SectionItemProps = ConditionalProps<
-  { href?: undefined; onClick?: VoidFunction },
-  { href?: string; onClick?: undefined }
+  { onClick?: VoidFunction },
+  { href?: string }
 > & {
   name: string;
   suffix?: string;
