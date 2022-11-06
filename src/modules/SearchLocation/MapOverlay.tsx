@@ -76,9 +76,12 @@ export const MapOverlay = ({ location, setLocationInMap }: MapOverlayProps) => {
   return (
     <Box height="full" width="full">
       <Box
+        aria-label="뒤로가는 버튼"
+        as="button"
         cursor="pointer"
         px="16"
         py="20"
+        type="button"
         width="fit"
         zIndex={1}
         onClick={handleBack}
@@ -100,12 +103,15 @@ export const MapOverlay = ({ location, setLocationInMap }: MapOverlayProps) => {
       >
         <Box
           alignItems="center"
+          aria-label="현재위치로 이동하는 버튼"
+          as="button"
           backgroundColor="white"
           br="half"
           className={gpsIconBoxCss}
           cursor="pointer"
           justifyContent="center"
           size="48"
+          type="button"
           onClick={getLocationThroughCurrentPosition}
         >
           <Icon name="gps" />
