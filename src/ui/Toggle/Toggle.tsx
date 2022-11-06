@@ -3,8 +3,6 @@ import { ForwardedRef, forwardRef } from "react";
 import { Root, Thumb } from "@radix-ui/react-switch";
 import clsx from "clsx";
 
-import { base } from "../reset.css";
-
 import { toggleRootStyle, toggleThumbStyle } from "./Toggle.css";
 
 interface ToggleProps {
@@ -18,9 +16,9 @@ interface ToggleProps {
 }
 
 const Toggle = (props: ToggleProps, ref: ForwardedRef<HTMLButtonElement>) => (
-    <Root {...props} className={clsx([toggleRootStyle, base])} ref={ref}>
-      <Thumb className={toggleThumbStyle} />
-    </Root>
-  )
+  <Root {...props} className={clsx([toggleRootStyle])} ref={ref}>
+    <Thumb className={toggleThumbStyle} />
+  </Root>
+);
 
 export default forwardRef(Toggle);
