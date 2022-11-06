@@ -6,9 +6,11 @@ import { useRouter } from "next/router";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 
-import { Marker } from "./Marker";
-import { gpsIconBoxCss } from "./searchLocation.css";
-import { Location } from "./type";
+import { Marker } from "../Marker";
+import { gpsIconBoxCss } from "../searchLocation.css";
+import { Location } from "../type";
+
+import { currentPositionIconBoxCss } from "./mapOverlay.css";
 
 interface MapOverlayProps {
   location: Location;
@@ -94,7 +96,7 @@ export const MapOverlay = ({ location, setLocationInMap }: MapOverlayProps) => {
         location={location}
       />
       <Box
-        bottom="232"
+        className={currentPositionIconBoxCss}
         flexDirection="row-reverse"
         position="fixed"
         px="16"
