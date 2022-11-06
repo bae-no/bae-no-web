@@ -2,22 +2,25 @@ import { forwardRef, ReactNode } from "react";
 
 import Link from "next/link";
 
+import { ConditionalProps } from "src/types/ConditionalProps";
 import { Box } from "src/ui/Box";
 import { Popup } from "src/ui/Popup";
 import { Typography } from "src/ui/Typography";
 
-interface SectionItemProps {
-  href?: string;
+type SectionItemProps = ConditionalProps<
+  { href?: undefined; onClick?: VoidFunction },
+  { href?: string; onClick?: undefined }
+> & {
   name: string;
-  onClick?: () => void;
   suffix?: string;
-}
+};
 
 const SectionItem = forwardRef(
   ({ name, onClick, suffix, href }: SectionItemProps, ref) => (
     <Box
       align="center"
       as={href ? Link : "div"}
+      cursor={onClick || href ? "pointer" : undefined}
       flexDirection="row"
       height="48"
       href={href}
