@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 import { useCenter, useMapContext } from "@r2don/react-naver-map";
 import { useRouter } from "next/router";
 
+import { useDebouncedCallback } from "src/hooks/useDebouncedCallback";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 
@@ -20,7 +21,6 @@ interface MapOverlayProps {
 export const MapOverlay = ({ location, setLocationInMap }: MapOverlayProps) => {
   const { getCenter, setCenter } = useCenter();
   const router = useRouter();
-  const map = useMapContext();
 
   const getLocationAddress = useCallback(() => {
     window.naver.maps.Service.reverseGeocode(
@@ -42,6 +42,9 @@ export const MapOverlay = ({ location, setLocationInMap }: MapOverlayProps) => {
     );
   }, [setLocationInMap, getCenter]);
 
+  const debouncedCallback = useDebouncedCallback(getLocationAddress, 500);
+  const map = useMapContext();
+
   const handleBack = () => {
     router.back();
   };
@@ -62,18 +65,12 @@ export const MapOverlay = ({ location, setLocationInMap }: MapOverlayProps) => {
       target: any;
     };
 
-    let timer: NodeJS.Timeout;
     map.addListener("dragend", () => {
-      if (timer) {
-        clearTimeout(timer);
-      }
-      timer = setTimeout(() => {
-        getLocationAddress();
-      }, 500);
+      debouncedCallback();
     });
 
     return () => map.removeListener(listener);
-  }, [map, getLocationAddress]);
+  }, [debouncedCallback, map]);
 
   return (
     <Box height="full" width="full">
