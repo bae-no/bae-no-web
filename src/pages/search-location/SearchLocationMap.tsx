@@ -5,7 +5,6 @@ import { reastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 import Script from "next/script";
 
-import { useWindowSize } from "src/hooks/useWindowSize";
 import { MapOverlay } from "src/modules/SearchLocation/MapOverlay";
 import { BottomDrawer } from "src/ui/BottomDrawer";
 import { Box } from "src/ui/Box";
@@ -41,7 +40,6 @@ const SearchLocationMap = () => {
     roadAddress: "",
   }).get();
 
-  const { width, height } = useWindowSize();
   useNaverMapInit({
     ncpClientId: clientId ?? "",
   });
@@ -59,7 +57,7 @@ const SearchLocationMap = () => {
     router.push(nextUrl);
   };
 
-  if (width === 0 || height === 0 || !isScriptLoad)
+  if (!isScriptLoad)
     return (
       <Script
         src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${clientId}&submodules=geocoder`}
@@ -68,7 +66,7 @@ const SearchLocationMap = () => {
     );
   return (
     <>
-      <NaverMap style={{ height, width }} zoom={20}>
+      <NaverMap style={{ height: "100vh" }} zoom={20}>
         <MapOverlay
           location={{ jibunAddress, roadAddress }}
           setLocationInMap={setLocationInMap}
