@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
 
-import { reastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 
+import { locationStorage } from "src/store/location";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 import { Input } from "src/ui/Input";
@@ -28,12 +28,12 @@ const SearchLocation = ({
   const router = useRouter();
 
   useEffect(() => {
-    reastorage("location", "").reset();
+    locationStorage.reset();
   }, [setLocation, nextUrl]);
 
   const handleClear = () => {
     setLocation({ jibunAddress: "", roadAddress: "" });
-    reastorage("location", { jibunAddress: "", roadAddress: "" }).reset();
+    locationStorage.reset();
   };
 
   const handleSearchIconClick = () => {
@@ -59,7 +59,7 @@ const SearchLocation = ({
   };
 
   const handleBack = () => {
-    reastorage("location", null).reset();
+    locationStorage.reset();
     router.back();
   };
 

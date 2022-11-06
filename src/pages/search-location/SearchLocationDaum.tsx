@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
-import { reastorage } from "@reastorage/react";
+import { useSetReastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 import Script from "next/script";
 
 import { useWindowSize } from "src/hooks/useWindowSize";
+import { locationStorage } from "src/store/location";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 import { colors } from "src/ui/tokens/color";
@@ -30,6 +31,7 @@ const THEME_OBJ = {
 const SearchLocationDaum = () => {
   const daumLocationSearchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const setLocation = useSetReastorage(locationStorage);
   const { nextUrl } = router.query as { [key: string]: string };
   const [isScriptLoading, setIsScriptLoading] = useState(false);
 
@@ -53,7 +55,7 @@ const SearchLocationDaum = () => {
       },
       oncomplete(data: { address: string; jibunAddress: string }) {
         const { address: roadAddress, jibunAddress } = data;
-        reastorage("location", { jibunAddress: "", roadAddress: "" }).set({
+        setLocation({
           jibunAddress,
           roadAddress,
         });
@@ -63,7 +65,7 @@ const SearchLocationDaum = () => {
       theme: THEME_OBJ,
       width,
     }).embed(daumLocationSearchRef.current);
-  }, [height, isScriptLoading, nextUrl, router, width]);
+  }, [height, isScriptLoading, nextUrl, router, setLocation, width]);
   return (
     <>
       <Script

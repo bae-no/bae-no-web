@@ -1,11 +1,12 @@
 import { useState } from "react";
 
 import { Map as NaverMap, useNaverMapInit } from "@r2don/react-naver-map";
-import { reastorage } from "@reastorage/react";
+import { useReastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 import Script from "next/script";
 
 import { MapOverlay } from "src/modules/SearchLocation/MapOverlay";
+import { locationStorage } from "src/store/location";
 import { BottomDrawer } from "src/ui/BottomDrawer";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
@@ -24,6 +25,8 @@ const clientId = process.env.NEXT_PUBLIC_DEVELOPMENT_NAVER_CLIENT_ID;
 
 const SearchLocationMap = () => {
   const router = useRouter();
+  const [location, setLocation] = useReastorage(locationStorage);
+  const { jibunAddress, roadAddress } = location;
   const { nextUrl } = router.query as { [key: string]: string };
   const [locationInMap, setLocationInMap] = useState<Location>({
     jibunAddress: "",
@@ -36,21 +39,13 @@ const SearchLocationMap = () => {
     setIsScriptLoad(true);
   };
 
-  const { roadAddress, jibunAddress } = reastorage("location", {
-    jibunAddress: "",
-    roadAddress: "",
-  }).get();
-
   useNaverMapInit({
     ncpClientId: clientId ?? "",
   });
 
   const handleClick = () => {
     if (!locationInMap) return;
-    reastorage("location", {
-      jibunAddress: "",
-      roadAddress: "",
-    }).set({
+    setLocation({
       jibunAddress: locationInMap.jibunAddress ?? "",
       roadAddress: locationInMap.roadAddress ?? "",
     });

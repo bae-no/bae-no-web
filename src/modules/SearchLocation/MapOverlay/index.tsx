@@ -58,16 +58,7 @@ export const MapOverlay = ({ location, setLocationInMap }: MapOverlayProps) => {
   }, [setCenter, getLocationAddress]);
 
   useEffect(() => {
-    let listener: {
-      eventName: string;
-      listener: (event: any) => any;
-      listenerId: string;
-      target: any;
-    };
-
-    map.addListener("dragend", () => {
-      debouncedCallback();
-    });
+    const listener = map.addListener("dragend", debouncedCallback);
 
     return () => map.removeListener(listener);
   }, [debouncedCallback, map]);
