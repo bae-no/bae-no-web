@@ -50,7 +50,7 @@ const Popup = ({
             </Typography>
           </AlertDialogTitle>
           <AlertDialogDescription asChild>
-            <Typography color="black3" fontSize="body1-m">
+            <Typography color="black3" fontSize="body1-m" textAlign="center">
               {description}
             </Typography>
           </AlertDialogDescription>

@@ -4,7 +4,7 @@ import { Root, Indicator, CheckboxProps } from "@radix-ui/react-checkbox";
 
 import { Box } from "../Box";
 import { Icon } from "../Icon";
-import { sprinkles } from "../sprinkles.css";
+import { Sprinkles, sprinkles } from "../sprinkles.css";
 import { Typography } from "../Typography";
 
 import {
@@ -14,6 +14,7 @@ import {
 } from "./CheckBox.css";
 
 interface CheckBoxProp extends CheckboxProps {
+  css?: Sprinkles;
   label?: string;
   size?: "large" | "small";
 }
@@ -28,6 +29,7 @@ const CheckBox = forwardRef(
       value,
       label,
       name,
+      css,
     }: CheckBoxProp,
     ref: ForwardedRef<HTMLButtonElement>,
   ) => {
@@ -35,7 +37,7 @@ const CheckBox = forwardRef(
     const id = useId();
 
     return (
-      <Box alignItems="center" flexDirection="row" gap="8">
+      <Box alignItems="center" flexDirection="row" gap="8" {...css}>
         <Root
           checked={checked}
           className={checkBoxRootCss}

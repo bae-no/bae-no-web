@@ -15,6 +15,7 @@ const BottomTab = () => (
     <Box
       backgroundColor="white"
       borderTopRadius="24"
+      bottom="0"
       className={bottomTabCss}
       flexDirection="row"
       gap="4"

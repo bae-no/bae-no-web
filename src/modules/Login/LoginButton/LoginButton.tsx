@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 import { Button } from "src/ui/Button";
 import { Typography } from "src/ui/Typography";
 
@@ -20,7 +22,7 @@ const loginButtonObject = {
   kakao: {
     icon: <Kakao />,
     text: "카카오톡으로 계속하기",
-    url: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_DEVELOPMENT_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_DEVELOPMENT_DEFAULT_URL}/login/kakao`,
+    url: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_DEVELOPMENT_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_DEVELOPMENT_DEFAULT_URL}/login/access?type=kakao`,
   },
 };
 
@@ -30,9 +32,13 @@ interface LoginButtonProps {
 
 export const LoginButton = ({ loginType }: LoginButtonProps) => {
   const { icon, text, url } = loginButtonObject[loginType];
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(url);
+  };
 
   return (
-    <Button className={buttonCss({ type: loginType })} href={`${url}`}>
+    <Button className={buttonCss({ type: loginType })} onClick={handleClick}>
       {icon}
       <Typography as="span">{text}</Typography>
     </Button>

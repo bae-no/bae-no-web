@@ -2,8 +2,12 @@ import { useCallback } from "react";
 
 import { FormProvider, useForm } from "react-hook-form";
 
+import { ConditionalRender } from "src/components/ConditionalRender";
+import List from "src/components/List";
 import { useToggle } from "src/hooks/useToggle";
-import ChattingList from "src/modules/Chat/ChattingList";
+import ChattingRoomsItem, {
+  ChattingRoomsItemProps,
+} from "src/modules/Chat/ChattingList/ChattingRoomsItem";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { Header, Layout } from "src/ui/Layout";
@@ -78,6 +82,26 @@ const MOCK_CHATTINGS_END = [
     title: "나는 치킨이 좋다",
   },
 ];
+interface ChattingRoomsProps {
+  deleteMode: boolean;
+  list: ChattingRoomsItemProps[];
+}
+const ChattingRooms = ({ list, deleteMode }: ChattingRoomsProps) => (
+  <List
+    as="ol"
+    fetchMore={() => {
+      // TODO: 추가 로드 기능 구현
+    }}
+    list={list}
+    renderItem={(item) => (
+      <ChattingRoomsItem
+        checkbox={deleteMode}
+        key={item.chattingId}
+        {...item}
+      />
+    )}
+  />
+);
 
 const Chat = () => {
   const methods = useForm();
@@ -112,7 +136,19 @@ const Chat = () => {
         <Layout
           headerProps={{
             rightNode: (
-              <Header.Delete visible={deleteMode} onClick={toggleDelete} />
+              <ConditionalRender
+                condition={deleteModal}
+                renderCase={{
+                  false: <Header.Delete onClick={toggleDelete} />,
+                  true: (
+                    <Box as="button" type="button" onClick={toggleDelete}>
+                      <Typography color="black2" fontSize="body2-m">
+                        선택해제
+                      </Typography>
+                    </Box>
+                  ),
+                }}
+              />
             ),
             title: "채팅",
           }}
@@ -123,25 +159,11 @@ const Chat = () => {
             <Typography as="h3" fontSize="body1-b">
               진행중인 딜
             </Typography>
-            <ChattingList
-              chattings={MOCK_CHATTINGS}
-              checkbox={deleteMode}
-              fetchMore={() => {
-                // TODO: 추가 로드 기능 구현
-              }}
-              type="roomList"
-            />
+            <ChattingRooms deleteMode={deleteMode} list={MOCK_CHATTINGS} />
             <Typography as="h3" fontSize="body1-b">
               완료된 딜
             </Typography>
-            <ChattingList
-              chattings={MOCK_CHATTINGS_END}
-              checkbox={deleteMode}
-              fetchMore={() => {
-                // TODO: 추가 로드 기능 구현
-              }}
-              type="roomList"
-            />
+            <ChattingRooms deleteMode={deleteMode} list={MOCK_CHATTINGS_END} />
             {deleteMode && <Button>나가기</Button>}
           </Box>
         </Layout>

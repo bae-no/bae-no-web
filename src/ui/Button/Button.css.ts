@@ -112,4 +112,8 @@ export const buttonCss = recipe({
   },
 });
 
+export const linkCss = style({
+  textDecoration: "none",
+});
+
 export type ButtonCss = RecipeVariants<typeof buttonCss>;
