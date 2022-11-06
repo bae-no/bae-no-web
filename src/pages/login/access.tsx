@@ -1,45 +1,46 @@
 import { useEffect } from "react";
 
-import { reastorage, useSetReastorage } from "@reastorage/react";
+import { useSetReastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 
 import { useSignInMutation, AuthType } from "src/graphql";
 import { UserAccessPermissionInfo } from "src/modules/Login/Acess/UserAccessPermissionInfo";
+import { token } from "src/store/token";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { Typography } from "src/ui/Typography";
 import { withGraphql } from "src/utils/graphql/withGraphql";
 
+type AuthProvider = "Kakao" | "Google" | "Apple";
+
+const isAuthProvider = (arg: string): arg is AuthProvider =>
+  ["Kakao", "Google", "Apple"].some((authProvider) => authProvider !== arg);
+
 const Acess = () => {
   const router = useRouter();
-  const { acess, code } = router.query;
+  const { type, code } = router.query as { [key: string]: string };
   const [acessMutationResult, acessMutation] = useSignInMutation();
-  const acessToken = reastorage("token", "");
-  const setAcessToken = useSetReastorage(acessToken);
+  const setAcessToken = useSetReastorage(token);
 
   useEffect(() => {
-    if (!router.isReady || typeof acess !== "string") return;
+    if (!router.isReady) return;
     Notification.requestPermission();
-    const pascalMutationType = acess.replace(/^[a-z]/, (char) =>
+    const pascalMutationType = type.replace(/^[a-z]/, (char) =>
       char.toUpperCase(),
     );
-    if (
-      typeof code !== "string" ||
-      pascalMutationType !== ("Kakao" || "Google" || "Apple")
-    )
-      return;
-    acessMutation({
-      input: {
-        code,
-        type: AuthType[pascalMutationType],
-      },
-    }).then(({ data }) => {
-      if (data?.signIn.accessToken === undefined) return;
-      setAcessToken(data?.signIn.accessToken);
-      document.cookie = `token=${data?.signIn.accessToken}`;
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [acess, acessMutation, code, router.isReady]);
+    if (isAuthProvider(pascalMutationType)) {
+      acessMutation({
+        input: {
+          code,
+          type: AuthType[pascalMutationType],
+        },
+      }).then(({ data }) => {
+        if (data?.signIn.accessToken === undefined) return;
+        setAcessToken(data?.signIn.accessToken);
+        document.cookie = `token=${data?.signIn.accessToken}`;
+      });
+    }
+  }, [type, acessMutation, code, router.isReady, setAcessToken]);
 
   const handleClick = () => {
     router.push("verification");

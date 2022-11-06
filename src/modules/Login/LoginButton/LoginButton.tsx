@@ -22,7 +22,7 @@ const loginButtonObject = {
   kakao: {
     icon: <Kakao />,
     text: "카카오톡으로 계속하기",
-    url: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_DEVELOPMENT_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_DEVELOPMENT_DEFAULT_URL}/login/kakao`,
+    url: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_DEVELOPMENT_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_DEVELOPMENT_DEFAULT_URL}/login/access?type=kakao`,
   },
 };
 
