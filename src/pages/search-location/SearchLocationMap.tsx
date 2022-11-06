@@ -42,7 +42,7 @@ const SearchLocationMap = () => {
   }).get();
 
   const { width, height } = useWindowSize();
-  const { isLoaded } = useNaverMapInit({
+  useNaverMapInit({
     ncpClientId: clientId ?? "",
   });
 
@@ -59,12 +59,7 @@ const SearchLocationMap = () => {
     router.push(nextUrl);
   };
 
-  if (
-    (!isLoaded && !isScriptLoad) ||
-    width === 0 ||
-    height === 0 ||
-    (isLoaded && !isScriptLoad)
-  )
+  if (width === 0 || height === 0 || !isScriptLoad)
     return (
       <Script
         src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${clientId}&submodules=geocoder`}
