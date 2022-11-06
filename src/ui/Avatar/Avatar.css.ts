@@ -2,12 +2,15 @@ import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 
 import { fontCss } from "../fontBase.css";
+import { sprinkles } from "../sprinkles.css";
 import { theme } from "../tokens";
 
-const avatarRootBaseCss = style({
+const avatarRootBaseCss = sprinkles({
   alignItems: "center",
-  border: `solid 1px ${theme.colors.black7}`,
-  borderRadius: "100%",
+  borderColor: "black7",
+  borderRadius: "full",
+  borderStyle: "solid",
+  borderWidth: "1",
   display: "flex",
   justifyContent: "center",
   overflow: "hidden",
@@ -47,21 +50,22 @@ export const avatarRootCss = recipe({
   },
 });
 
-// const a = sprinkles({});
-export const avatarImageCss = style({
-  borderRadius: "100%",
-  height: "100%",
-  objectFit: "cover",
-  width: "100%",
-});
+export const avatarImageCss = style([
+  sprinkles({
+    borderRadius: "full",
+    size: "full",
+  }),
+  {
+    objectFit: "cover",
+  },
+]);
 
-const avatarFallbackBaseCss = style({
+const avatarFallbackBaseCss = sprinkles({
   alignItems: "center",
-  color: theme.colors.white,
+  color: "white",
   display: "flex",
-  height: "100%",
   justifyContent: "center",
-  width: "100%",
+  size: "full",
 });
 
 export const avatarFallbackCss = recipe({
