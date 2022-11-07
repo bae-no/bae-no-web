@@ -20,7 +20,7 @@ const UserPage = () => {
         title: "마이페이지",
       }}
     >
-      <Box gap="32">
+      <Box gap="32" paddingBottom="16">
         <HeadWithBackgroundColor
           css={{ gap: "8", paddingBottom: "32", paddingTop: "16" }}
           ref={ref}
