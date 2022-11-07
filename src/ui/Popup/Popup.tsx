@@ -59,7 +59,7 @@ const Popup = ({
           flexDirection={
             buttonDirection === "column" ? "column-reverse" : "row"
           }
-          gap={buttonDirection === "column" ? "8" : undefined}
+          gap={buttonDirection === "column" ? "8" : "16"}
         >
           {cancelText && (
             <AlertDialogCancel asChild>

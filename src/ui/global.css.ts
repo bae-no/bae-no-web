@@ -33,13 +33,16 @@ globalStyle("html, body", {
       maxHeight: "-webkit-fill-available",
     },
   },
+  display: "flex",
+  flexDirection: "column",
   fontSize: "62.5%",
-  height: "100vh",
+  height: "100%",
   margin: 0,
   padding: 0,
 });
 
 globalStyle("#__next", {
   display: "flex",
+  flex: 1,
   flexDirection: "column",
 });
