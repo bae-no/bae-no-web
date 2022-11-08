@@ -25,7 +25,11 @@ export const MapOverlay = ({ location, setLocationInMap }: MapOverlayProps) => {
   const getLocationAddress = useCallback(() => {
     window.naver.maps.Service.reverseGeocode(
       {
-        location: getCenter(),
+        coords: getCenter(),
+        orders: [
+          naver.maps.Service.OrderType.ADDR,
+          naver.maps.Service.OrderType.ROAD_ADDR,
+        ].join(","),
       },
       (status: number, response: any) => {
         if (status === 200) {
