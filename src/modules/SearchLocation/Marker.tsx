@@ -19,6 +19,11 @@ export const Marker = ({
   getLocationThroughCurrentPosition,
 }: MarkerProps) => {
   const { setCenter } = useCenter();
+  const getPositionQuery = () => {
+    if (location.roadAddress) return location.roadAddress;
+    if (location.jibunAddress) return location.jibunAddress;
+    return "";
+  };
 
   useEffect(() => {
     if (!location.jibunAddress && !location.roadAddress) {
@@ -28,7 +33,7 @@ export const Marker = ({
     const getPosition = () => {
       window.naver.maps.Service.geocode(
         {
-          query: location.roadAddress ?? location.jibunAddress,
+          query: getPositionQuery(),
         },
         (status: number, response: any) => {
           if (status === 200) {
