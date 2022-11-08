@@ -1,0 +1,3 @@
+mutation SendPhoneVerificationCode($input: SendPhoneVerificationCodeInput!) {
+  sendPhoneVerificationCode(input: $input)
+}
