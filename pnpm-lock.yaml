@@ -31,6 +31,7 @@ specifiers:
   '@swc/jest': ^0.2.23
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.4.0
+  '@types/daum-postcode': ^2.0.0
   '@types/navermaps': ^3.0.17
   '@types/node': ^18.11.9
   '@types/react': ^18.0.25
@@ -87,6 +88,7 @@ dependencies:
   '@radix-ui/react-switch': 1.0.1_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-tabs': 1.0.1_biqbaboplfbrettd7655fr4n2y
   '@reastorage/react': 1.2.1_react@18.2.0
+  '@types/daum-postcode': 2.0.0
   '@urql/core': 3.0.5_graphql@16.6.0
   '@urql/exchange-auth': 1.0.0_graphql@16.6.0
   '@vanilla-extract/css': 1.9.1
@@ -6592,6 +6594,10 @@ packages:
     dependencies:
       '@babel/types': 7.20.0
     dev: true
+
+  /@types/daum-postcode/2.0.0:
+    resolution: {integrity: sha512-QIbzoOpwD/+AjwB0pq1L6kwjPkzDMQFCM+BTTZv+oNyxf245BQIc3wjKfd+KH629jNvuy+Dugqq5DsiTdeET4Q==}
+    dev: false
 
   /@types/eslint-scope/3.7.3:
     resolution: {integrity: sha512-PB3ldyrcnAicT35TWPs5IcwKD8S333HMaa2VVv4+wdvebJkjWuW/xESoB8IwRcog8HYVYamb1g/R31Qv5Bx03g==}

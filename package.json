@@ -19,8 +19,8 @@
     "generate": "graphql-codegen"
   },
   "dependencies": {
-    "@r2don/react-naver-map": "^0.0.10",
     "@fxts/core": "^0.11.0",
+    "@r2don/react-naver-map": "^0.0.10",
     "@radix-ui/react-alert-dialog": "^1.0.2",
     "@radix-ui/react-avatar": "^1.0.1",
     "@radix-ui/react-checkbox": "^1.0.1",
@@ -29,6 +29,7 @@
     "@radix-ui/react-switch": "^1.0.1",
     "@radix-ui/react-tabs": "^1.0.1",
     "@reastorage/react": "^1.2.1",
+    "@types/daum-postcode": "^2.0.0",
     "@urql/core": "^3.0.4",
     "@urql/exchange-auth": "^1.0.0",
     "@vanilla-extract/css": "^1.9.1",
@@ -79,8 +80,8 @@
     "@typescript-eslint/parser": "^5.42.0",
     "@vanilla-extract/jest-transform": "^1.0.1",
     "@vanilla-extract/next-plugin": "^2.1.1",
-    "concurrently": "^7.5.0",
     "chromatic": "^6.11.4",
+    "concurrently": "^7.5.0",
     "eslint": "^8.26.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",

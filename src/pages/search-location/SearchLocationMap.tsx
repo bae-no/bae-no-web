@@ -15,12 +15,6 @@ import { Typography } from "src/ui/Typography";
 
 import { Location } from "../../modules/SearchLocation/type";
 
-declare global {
-  interface Window {
-    naver: any;
-  }
-}
-
 const clientId = process.env.NEXT_PUBLIC_DEVELOPMENT_NAVER_CLIENT_ID;
 
 const SearchLocationMap = () => {

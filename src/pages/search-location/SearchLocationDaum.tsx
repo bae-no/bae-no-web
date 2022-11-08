@@ -10,12 +10,6 @@ import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 import { colors } from "src/ui/tokens/color";
 
-declare global {
-  interface Window {
-    daum: any;
-  }
-}
-
 const THEME_OBJ = {
   bgColor: colors.black9,
   contentBgColor: colors.white,
