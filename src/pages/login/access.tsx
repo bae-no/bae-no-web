@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import { useSignInMutation, AuthType } from "src/graphql";
 import { UserAccessPermissionInfo } from "src/modules/Login/Acess/UserAccessPermissionInfo";
-import { token } from "src/store/token";
+import { tokenStorage } from "src/store/token";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { Typography } from "src/ui/Typography";
@@ -20,7 +20,7 @@ const Acess = () => {
   const router = useRouter();
   const { type, code } = router.query as { [key: string]: string };
   const [acessMutationResult, acessMutation] = useSignInMutation();
-  const setAcessToken = useSetReastorage(token);
+  const setAcessToken = useSetReastorage(tokenStorage);
 
   useEffect(() => {
     if (!router.isReady) return;

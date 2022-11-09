@@ -2,13 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 const Document = () => (
   <Html lang="ko">
-    <Head>
-      <link
-        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
-        rel="stylesheet"
-        type="text/css"
-      />
-    </Head>
+    <Head />
     <body>
       <Main />
       <NextScript />

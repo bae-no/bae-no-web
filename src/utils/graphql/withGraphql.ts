@@ -1,7 +1,7 @@
 import { withUrqlClient } from "next-urql";
 import { cacheExchange, dedupExchange, fetchExchange } from "urql";
 
-import { token } from "src/store/token";
+import { tokenStorage } from "src/store/token";
 
 import { authExchange } from "./authExchange";
 
@@ -13,7 +13,7 @@ export const withGraphql = withUrqlClient((ssr) => ({
     authExchange(() => {
       if (typeof window === "undefined") return "";
 
-      return token.get();
+      return tokenStorage.get();
     }),
     fetchExchange,
   ],
