@@ -1,17 +1,20 @@
-import { cloneElement, ReactElement, useId } from "react";
+import { cloneElement, ReactElement, ReactNode, useId } from "react";
 
 import { ComponentBaseProps } from "src/types";
 
 import { Box } from "../Box";
+import { FontSize } from "../fontBase.css";
 import { Typography } from "../Typography";
 
 type State = "valid" | "invalid";
 
 interface WithLabelProps {
+  Suffix?: ReactNode;
   children: ReactElement<ComponentBaseProps & { state?: State }>;
+  defaultMessage?: string;
+  fontSize?: FontSize;
   invalidMessage?: string;
   label?: string;
-  size?: "large" | "small";
   state?: State;
   validMessage?: string;
 }
@@ -22,14 +25,15 @@ const FormField = ({
   validMessage,
   invalidMessage,
   state,
-  size = "large",
+  fontSize = "caption1-m",
+  defaultMessage,
+  Suffix,
 }: WithLabelProps) => {
   const childId = useId();
   const labelId = useId();
   const messageId = useId();
 
   const isValid = state === "valid";
-  const isLarge = size === "large";
 
   const renderMessageCondition =
     (state === "valid" && validMessage) ||
@@ -53,16 +57,32 @@ const FormField = ({
         id: childId,
         state,
       })}
-      {renderMessageCondition && (
-        <Typography
-          as="span"
-          color={isValid ? "success1" : "danger1"}
-          fontSize={`caption${isLarge ? "1-m" : "2-r"}`}
-          id={messageId}
-        >
-          {isValid ? validMessage : invalidMessage}
-        </Typography>
-      )}
+      <Box
+        alignItems="center"
+        flexDirection="row"
+        justifyContent="space-between"
+      >
+        {renderMessageCondition ? (
+          <Typography
+            as="span"
+            color={isValid ? "success1" : "danger1"}
+            fontSize={fontSize}
+            id={messageId}
+          >
+            {isValid ? validMessage : invalidMessage}
+          </Typography>
+        ) : (
+          <Typography
+            as="span"
+            color="black5"
+            fontSize={fontSize}
+            id={messageId}
+          >
+            {defaultMessage}
+          </Typography>
+        )}
+        {Suffix}
+      </Box>
     </Box>
   );
 };

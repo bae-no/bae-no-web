@@ -22,10 +22,10 @@ const fonts = pipe(
   flatMap(([key, value]) =>
     map(
       (v) => [`${key}-${v}`, { ...value, fontWeight: fontWeights[v] }] as const,
-      keys(fontWeights)
-    )
+      keys(fontWeights),
+    ),
   ),
-  fromEntries
+  fromEntries,
 );
 
 const fontSize = {
@@ -50,3 +50,4 @@ export const fontCss = recipe({
 });
 
 export type FontCss = RecipeVariants<typeof fontCss>;
+export type FontSize = keyof typeof fontSize;

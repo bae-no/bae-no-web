@@ -9,6 +9,7 @@ import {
 import { useVerifyPhoneVerificationCodeMutation } from "src/graphql";
 import { useDebouncedCallback } from "src/hooks/useDebouncedCallback";
 import { Box } from "src/ui/Box";
+import { FormField } from "src/ui/Form";
 import { Input } from "src/ui/Input";
 import { Typography } from "src/ui/Typography";
 
@@ -122,26 +123,31 @@ export const LoginVerificationInput = ({
 
   return (
     <Box gap="8">
-      <Input
-        placeholder="인증번호 4자리를 입력해주세요."
-        size="large"
+      <FormField
         state={descriptionState.inputState}
-        type="tel"
-        value={inputValue}
-        variant="underline"
-        onChange={handleOnChange}
-        onClearClick={handleOnClearClick}
-      />
-      <Box px="4">
-        <Typography color={descriptionState.color} fontSize="body1-m">
-          {descriptionText}
-        </Typography>
-        <Typography color="danger1" fontSize="caption1-m">
-          {!verificationResult.data?.verifyPhoneVerificationCode && time !== 0
-            ? `${minute}분 ${second}초`
-            : ""}
-        </Typography>
-      </Box>
+        invalidMessage={descriptionText}
+        validMessage=" "
+        fontSize="body1-m"
+        defaultMessage="인증번호가 전송되었습니다."
+        Suffix={
+          <Typography color="danger1" fontSize="caption1-m">
+            {!verificationResult.data?.verifyPhoneVerificationCode && time !== 0
+              ? `${minute}분 ${second}초`
+              : ""}
+          </Typography>
+        }
+      >
+        <Input
+          placeholder="인증번호 4자리를 입력해주세요."
+          size="large"
+          state={descriptionState.inputState}
+          type="tel"
+          value={inputValue}
+          variant="underline"
+          onChange={handleOnChange}
+          onClearClick={handleOnClearClick}
+        />
+      </FormField>
     </Box>
   );
 };
