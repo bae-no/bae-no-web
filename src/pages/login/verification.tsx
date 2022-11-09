@@ -36,14 +36,13 @@ const Verification = () => {
             setShowCertification={setShowVerification}
             start={start}
           />
-          {showVerification && (
+          {showVerification ? (
             <LoginVerificationInput
               isEnd={isEnd}
               setButtonDisabled={setButtonDisabled}
               time={time}
             />
-          )}
-          {!showVerification && (
+          ) : (
             <Typography color="black4" fontSize="caption1-m">
               타인의 개인정보를 도용하여 가입한 경우, 서비스 이용 제한 및 법적
               제재를 받으실 수 있습니다.
