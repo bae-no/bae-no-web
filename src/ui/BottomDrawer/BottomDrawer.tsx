@@ -20,6 +20,7 @@ import {
 export interface BottomDrawerProps
   extends Pick<DialogProps, "open" | "onOpenChange"> {
   children: ReactNode;
+  modal?: boolean;
   trigger?: ReactNode;
 }
 
@@ -28,8 +29,9 @@ const BottomDrawer = ({
   trigger,
   open,
   onOpenChange,
+  modal,
 }: BottomDrawerProps) => (
-  <Dialog open={open} onOpenChange={onOpenChange}>
+  <Dialog modal={modal} open={open} onOpenChange={onOpenChange}>
     {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
     <Portal>
       <Overlay className={overlayCss} />
