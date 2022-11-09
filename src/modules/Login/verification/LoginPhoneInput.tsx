@@ -10,18 +10,17 @@ import { useSendPhoneVerificationCodeMutation } from "src/graphql";
 import { Box } from "src/ui/Box";
 import { Input } from "src/ui/Input";
 import { Typography } from "src/ui/Typography";
+import { formatPhoneNumber } from "src/utils/formatPhoneNumber";
 
 interface LoginPhoneInputProps {
-  reTimer: () => void;
+  reRunTimer: () => void;
   setShowCertification: Dispatch<SetStateAction<boolean>>;
   start: () => void;
 }
 
-const REGEXP_NUMBER = /[^0-9]/;
-
 export const LoginPhoneInput = ({
   setShowCertification,
-  reTimer,
+  reRunTimer,
   start,
 }: LoginPhoneInputProps) => {
   const [phoneValue, setphoneValue] = useState("");
@@ -33,21 +32,20 @@ export const LoginPhoneInput = ({
     const {
       target: { value },
     } = e;
-    if (REGEXP_NUMBER.test(value)) return;
-    setphoneValue(value.slice(0, 11));
+    setphoneValue(value.slice(0, 13));
   };
   useEffect(() => {
-    if (phoneValue.length !== 11) return;
+    if (phoneValue.length !== 13) return;
     setPostText("전송");
   }, [phoneValue]);
-
   const handleOnClearClick = () => {
     setphoneValue("");
   };
+
   const handleloginCertificationChildOnClick = () => {
     sendPhoneVerificationMutation({
       input: {
-        phoneNumber: phoneValue,
+        phoneNumber: phoneValue.replaceAll("-", ""),
       },
     });
     if (postText === "전송") {
@@ -57,7 +55,7 @@ export const LoginPhoneInput = ({
       return;
     }
     if (postText === "재전송") {
-      reTimer();
+      reRunTimer();
     }
   };
 
@@ -79,7 +77,7 @@ export const LoginPhoneInput = ({
       size="large"
       state={phoneValue.length === 11 ? "valid" : undefined}
       type="tel"
-      value={phoneValue}
+      value={formatPhoneNumber(phoneValue)}
       variant="underline"
       onChange={handleOnChange}
       onClearClick={handleOnClearClick}
