@@ -124,11 +124,6 @@ export const LoginVerificationInput = ({
   return (
     <Box gap="8">
       <FormField
-        state={descriptionState.inputState}
-        invalidMessage={descriptionText}
-        validMessage=" "
-        fontSize="body1-m"
-        defaultMessage="인증번호가 전송되었습니다."
         Suffix={
           <Typography color="danger1" fontSize="caption1-m">
             {!verificationResult.data?.verifyPhoneVerificationCode && time !== 0
@@ -136,6 +131,11 @@ export const LoginVerificationInput = ({
               : ""}
           </Typography>
         }
+        defaultMessage="인증번호가 전송되었습니다."
+        fontSize="body1-m"
+        invalidMessage={descriptionText}
+        state={descriptionState.inputState}
+        validMessage=" "
       >
         <Input
           placeholder="인증번호 4자리를 입력해주세요."
