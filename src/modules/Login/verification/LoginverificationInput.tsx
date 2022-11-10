@@ -51,7 +51,7 @@ export const LoginVerificationInput = ({
 
   const isVerificationError = verificationResult.error;
 
-  const callback = (verificationValue: string) => {
+  const sendVerificationCodeCallback = (verificationValue: string) => {
     verificationMutation({
       input: {
         code: verificationValue,
@@ -59,7 +59,10 @@ export const LoginVerificationInput = ({
     });
   };
 
-  const deboundedCallback = useDebouncedCallback(callback, 500);
+  const sendVerification = useDebouncedCallback(
+    sendVerificationCodeCallback,
+    500,
+  );
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
@@ -67,7 +70,7 @@ export const LoginVerificationInput = ({
     } = e;
     if (REGEXP_NUMBER.test(value) || isVerificationSuccess) return;
     setInputValue(value.slice(0, 4));
-    deboundedCallback(value.slice(0, 4));
+    sendVerification(value.slice(0, 4));
   };
 
   const handleOnClearClick = () => {
