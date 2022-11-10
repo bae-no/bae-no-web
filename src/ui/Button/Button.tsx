@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { Box } from "../Box";
 import { Icon } from "../Icon";
-import { element } from "../reset.css";
 
 import { buttonCss, linkCss } from "./Button.css";
 import { ButtonProps } from "./Button.type";
@@ -31,7 +30,6 @@ const Button = forwardRef(
         alignItems="center"
         as={href ? "a" : "button"}
         className={[
-          element.button,
           className,
           buttonCss({ color, size, variant }),
           disabled && "disabled",
