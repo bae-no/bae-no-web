@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
 import { useSendPhoneVerificationCodeMutation } from "src/graphql";
 import { Box } from "src/ui/Box";
@@ -32,12 +26,15 @@ export const LoginPhoneInput = ({
     const {
       target: { value },
     } = e;
-    setphoneValue(value.slice(0, 13));
+    const limitedLength13Value = value.slice(0, 13);
+    setphoneValue(limitedLength13Value);
+    if (limitedLength13Value.length === 13) {
+      setPostText("전송");
+      return;
+    }
+    setPostText("");
   };
-  useEffect(() => {
-    if (phoneValue.length !== 13) return;
-    setPostText("전송");
-  }, [phoneValue]);
+
   const handleOnClearClick = () => {
     setphoneValue("");
   };
