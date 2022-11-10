@@ -8,6 +8,7 @@ import {
 
 import { useVerifyPhoneVerificationCodeMutation } from "src/graphql";
 import { useDebouncedCallback } from "src/hooks/useDebouncedCallback";
+import { TimeState } from "src/hooks/useTimer";
 import { Box } from "src/ui/Box";
 import { FormField } from "src/ui/Form";
 import { Input } from "src/ui/Input";
@@ -17,9 +18,9 @@ const WAITTING = 160000;
 const REGEXP_NUMBER = /[^0-9]/;
 
 interface LoginverificationProps {
-  isEnd: boolean;
   setButtonDisabled: Dispatch<SetStateAction<boolean>>;
   time: number;
+  timeState: TimeState;
 }
 
 interface DescriptionState {
@@ -29,7 +30,7 @@ interface DescriptionState {
 
 export const LoginVerificationInput = ({
   setButtonDisabled,
-  isEnd,
+  timeState,
   time,
 }: LoginverificationProps) => {
   const [inputValue, setInputValue] = useState("");
@@ -84,7 +85,7 @@ export const LoginVerificationInput = ({
       return;
     }
 
-    if (isEnd && !isVerificationSuccess) {
+    if (timeState === "end" && !isVerificationSuccess) {
       setDescriptionText("인증시간을 초과하였습다. 재인증을 시도해주세요.");
       setDescriptionState({
         color: "danger1",
@@ -93,7 +94,7 @@ export const LoginVerificationInput = ({
       setButtonDisabled(true);
       return;
     }
-    if (isVerificationError && !isEnd) {
+    if (isVerificationError && timeState !== "end") {
       setDescriptionText(
         "인증 번호가 잘못되었습니다. 다시 한 번 확인해주세요.",
       );
@@ -113,12 +114,11 @@ export const LoginVerificationInput = ({
       setButtonDisabled(false);
     }
   }, [
-    isEnd,
     isVerificationError,
     isVerificationSuccess,
     setButtonDisabled,
     time,
-    verificationResult.data,
+    timeState,
   ]);
 
   return (
@@ -133,6 +133,7 @@ export const LoginVerificationInput = ({
         }
         defaultMessage="인증번호가 전송되었습니다."
         fontSize="body1-m"
+        gap="8"
         invalidMessage={descriptionText}
         state={descriptionState.inputState}
         validMessage=" "

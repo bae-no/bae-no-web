@@ -14,7 +14,7 @@ const WAITTING = 160000;
 const Verification = () => {
   const [showVerification, setShowVerification] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  const { time, isEnd, reTimer, start } = useTimer(WAITTING);
+  const { time, reRunTimer, start, timeState } = useTimer(WAITTING);
 
   return (
     <Box
@@ -32,15 +32,15 @@ const Verification = () => {
         </Typography>
         <Box as="main" gap="8">
           <LoginPhoneInput
-            reTimer={reTimer}
+            reRunTimer={reRunTimer}
             setShowCertification={setShowVerification}
             start={start}
           />
           {showVerification ? (
             <LoginVerificationInput
-              isEnd={isEnd}
               setButtonDisabled={setButtonDisabled}
               time={time}
+              timeState={timeState}
             />
           ) : (
             <Typography color="black4" fontSize="caption1-m">

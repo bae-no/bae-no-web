@@ -4,6 +4,7 @@ import { ComponentBaseProps } from "src/types";
 
 import { Box } from "../Box";
 import { FontSize } from "../fontBase.css";
+import { space } from "../tokens/space";
 import { Typography } from "../Typography";
 
 type State = "valid" | "invalid";
@@ -13,6 +14,7 @@ interface WithLabelProps {
   children: ReactElement<ComponentBaseProps & { state?: State }>;
   defaultMessage?: string;
   fontSize?: FontSize;
+  gap?: keyof typeof space;
   invalidMessage?: string;
   label?: string;
   state?: State;
@@ -28,6 +30,7 @@ const FormField = ({
   fontSize = "caption1-m",
   defaultMessage,
   Suffix,
+  gap = "4",
 }: WithLabelProps) => {
   const childId = useId();
   const labelId = useId();
@@ -40,7 +43,7 @@ const FormField = ({
     (state === "invalid" && invalidMessage);
 
   return (
-    <Box gap="4">
+    <Box gap={gap}>
       {label && (
         <Typography
           as="label"

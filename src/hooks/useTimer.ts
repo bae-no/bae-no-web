@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react";
 
+export type TimeState = "idle" | "running" | "end";
+
 export const useTimer = (initialState: number, howOften: number = 1000) => {
   const [time, setTime] = useState<number>(initialState);
-  const [isEnd, setIsEnd] = useState(false);
-  const [isStart, setIsStart] = useState(false);
-  const reTimer = () => {
+  const [timeState, setTimeState] = useState<TimeState>("idle");
+  const reRunTimer = () => {
+    if (timeState === "idle") return;
     setTime(initialState);
-    setIsEnd(false);
+    setTimeState("running");
   };
   const start = () => {
-    setIsStart(true);
+    if (timeState !== "idle") return;
+    setTimeState("running");
   };
 
   useEffect(() => {
-    if (!isStart) return;
+    if (timeState !== "running") return;
 
     const timer = setInterval(() => {
       setTime((prev) => {
         if (prev === 0) {
-          setIsEnd(true);
+          setTimeState("end");
           clearInterval(timer);
           return prev;
         }
@@ -26,6 +29,7 @@ export const useTimer = (initialState: number, howOften: number = 1000) => {
       });
     }, howOften);
     return () => clearInterval(timer);
-  }, [setTime, howOften, isEnd, isStart]);
-  return { isEnd, reTimer, start, time };
+  }, [howOften, timeState]);
+
+  return { reRunTimer, start, time, timeState };
 };
