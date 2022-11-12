@@ -1,3 +1,4 @@
+import { devtoolsExchange } from "@urql/devtools";
 import { DocumentNode } from "graphql";
 import { GetServerSidePropsContext } from "next";
 import { initUrqlClient } from "next-urql";
@@ -14,7 +15,7 @@ import { authExchange } from "./authExchange";
 export const prefetchQueryOnServerSide =
   (
     document: DocumentNode,
-    variables: (context: GetServerSidePropsContext) => AnyVariables,
+    variables?: (context: GetServerSidePropsContext) => AnyVariables,
   ) =>
   async (context: GetServerSidePropsContext) => {
     const ssrCache = ssrExchange({ isClient: false });
@@ -26,13 +27,14 @@ export const prefetchQueryOnServerSide =
           cacheExchange,
           ssrCache,
           fetchExchange,
+          devtoolsExchange,
         ],
         url: process.env.NEXT_PUBLIC_SERVER_URL as string,
       },
       false,
     );
 
-    await client?.query(document, variables(context)).toPromise();
+    await client?.query(document, variables?.(context)).toPromise();
 
     return {
       props: {

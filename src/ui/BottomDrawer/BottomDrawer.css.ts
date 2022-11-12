@@ -9,6 +9,7 @@ export const contentContainerCss = sprinkles({
   outline: "none",
   position: "fixed",
   width: "full",
+  zIndex: 2,
 });
 
 export const contentCss = style([
