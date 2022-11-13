@@ -61,15 +61,17 @@ export const LoginPhoneInput = ({
       pattern="\d*"
       placeholder="휴대폰 번호를 입력해주세요."
       rightNode={
-        <Box
-          cursor="pointer"
-          minWidth="fit"
-          onClick={handleloginCertificationChildOnClick}
-        >
-          <Typography color="black2" fontSize="body3-m">
-            {postText}
-          </Typography>
-        </Box>
+        postText ? (
+          <Box
+            cursor="pointer"
+            minWidth="fit"
+            onClick={handleloginCertificationChildOnClick}
+          >
+            <Typography color="black2" fontSize="body3-m">
+              {postText}
+            </Typography>
+          </Box>
+        ) : undefined
       }
       size="large"
       state={phoneValue.length === 11 ? "valid" : undefined}
