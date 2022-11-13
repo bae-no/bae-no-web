@@ -26,9 +26,13 @@ export const LoginPhoneInput = ({
     const {
       target: { value },
     } = e;
-    const limitedLength13Value = value.slice(0, 13);
+
+    const replaceHyphenValue = value.replaceAll("-", "");
+    const limitedLength13Value = replaceHyphenValue.slice(0, 11);
+    if (Number.isNaN(Number(limitedLength13Value))) return;
+
     setphoneValue(limitedLength13Value);
-    setPostText(limitedLength13Value.length === 13 ? "전송" : "");
+    setPostText(limitedLength13Value.length === 11 ? "전송" : "");
   };
 
   const handleOnClearClick = () => {
@@ -38,7 +42,7 @@ export const LoginPhoneInput = ({
   const handleloginCertificationChildOnClick = () => {
     sendPhoneVerificationMutation({
       input: {
-        phoneNumber: phoneValue.replaceAll("-", ""),
+        phoneNumber: phoneValue,
       },
     });
     if (postText === "전송") {
