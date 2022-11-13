@@ -10,7 +10,6 @@ import { Typography } from "../Typography";
 type State = "valid" | "invalid";
 
 interface WithLabelProps {
-  Suffix?: ReactNode;
   children: ReactElement<ComponentBaseProps & { state?: State }>;
   defaultMessage?: string;
   fontSize?: FontSize;
@@ -18,6 +17,7 @@ interface WithLabelProps {
   invalidMessage?: string;
   label?: string;
   state?: State;
+  suffix?: ReactNode;
   validMessage?: string;
 }
 
@@ -29,7 +29,7 @@ const FormField = ({
   state,
   fontSize = "caption1-m",
   defaultMessage,
-  Suffix,
+  suffix: Suffix,
   gap = "4",
 }: WithLabelProps) => {
   const childId = useId();
@@ -65,7 +65,7 @@ const FormField = ({
         flexDirection="row"
         justifyContent="space-between"
       >
-        {renderMessageCondition ? (
+        {renderMessageCondition && (
           <Typography
             as="span"
             color={isValid ? "success1" : "danger1"}
@@ -74,7 +74,8 @@ const FormField = ({
           >
             {isValid ? validMessage : invalidMessage}
           </Typography>
-        ) : (
+        )}
+        {defaultMessage && !renderMessageCondition && (
           <Typography
             as="span"
             color="black5"

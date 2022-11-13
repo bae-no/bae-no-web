@@ -127,18 +127,18 @@ export const LoginVerificationInput = ({
   return (
     <Box gap="8">
       <FormField
-        Suffix={
+        defaultMessage="인증번호가 전송되었습니다."
+        fontSize="body1-m"
+        gap="8"
+        invalidMessage={descriptionText}
+        state={descriptionState.inputState}
+        suffix={
           <Typography color="danger1" fontSize="caption1-m">
             {!verificationResult.data?.verifyPhoneVerificationCode && time !== 0
               ? `${minute}분 ${second}초`
               : ""}
           </Typography>
         }
-        defaultMessage="인증번호가 전송되었습니다."
-        fontSize="body1-m"
-        gap="8"
-        invalidMessage={descriptionText}
-        state={descriptionState.inputState}
         validMessage=" "
       >
         <Input
