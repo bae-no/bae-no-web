@@ -1,3 +1,4 @@
+import { devtoolsExchange } from "@urql/devtools";
 import { withUrqlClient } from "next-urql";
 import { cacheExchange, dedupExchange, fetchExchange } from "urql";
 
@@ -16,7 +17,8 @@ export const withGraphql = withUrqlClient((ssr) => ({
       return tokenStorage.get();
     }),
     fetchExchange,
+    devtoolsExchange,
   ],
   suspense: true,
-  url: process.env.NEXT_PUBLIC_DEVELOPMENT_SERVER_URL as string,
+  url: process.env.NEXT_PUBLIC_SERVER_URL as string,
 }));

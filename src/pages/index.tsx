@@ -3,11 +3,14 @@ import {
   useHeaderBackgroundColor,
 } from "src/components/HeadWithBackgroundColor";
 import MetaTags from "src/components/MetaTags";
+import { HomeStaticDocument } from "src/graphql";
 import ChattingRooms from "src/modules/home/ChattingRooms";
 import SearchBar from "src/modules/home/HomeHead/SearchBar";
 import UserInfo from "src/modules/home/HomeHead/UserInfo";
 import { Box } from "src/ui/Box";
 import { Header, Layout } from "src/ui/Layout";
+import { prefetchQueryOnServerSide } from "src/utils/graphql/prefetchQueryOnServerSide";
+import { withGraphql } from "src/utils/graphql/withGraphql";
 
 const Home = () => {
   const [ref, backgroundColor] = useHeaderBackgroundColor();
@@ -38,4 +41,6 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withGraphql(Home);
+
+export const getServerSideProps = prefetchQueryOnServerSide(HomeStaticDocument);
