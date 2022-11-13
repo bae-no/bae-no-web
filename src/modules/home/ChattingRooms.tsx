@@ -109,13 +109,12 @@ const MOCK_CHATTINGS = [
 
 const ChattingRooms = () => {
   const [{ data }] = useHomeStaticQuery();
-  const [category, setCategory] = useState(
-    data?.categories.foodCatalog[0].code,
-  );
+  const { foodCatalog, shareDealSort } = data?.categories || {};
+  const [category, setCategory] = useState(foodCatalog?.[0].code);
   const handleCategoryChange = (value: string) =>
     setCategory(value as FoodCategory);
 
-  const [sort, setSort] = useState(data?.categories.shareDealSort[0].code);
+  const [sort, setSort] = useState(shareDealSort?.[0].code);
   const handleSortChange = (value: string) =>
     setSort(value as ShareDealSortType);
 
@@ -124,12 +123,10 @@ const ChattingRooms = () => {
       <Box gap="16">
         <Tab
           defaultValue={category}
-          options={(data?.categories.foodCatalog || []).map(
-            ({ name, code }) => ({
-              label: name,
-              value: code,
-            }),
-          )}
+          options={(foodCatalog || []).map(({ name, code }) => ({
+            label: name,
+            value: code,
+          }))}
           onValueChange={handleCategoryChange}
         />
       </Box>
@@ -143,12 +140,10 @@ const ChattingRooms = () => {
             개의 공유딜
           </Typography>
           <Select
-            options={(data?.categories.shareDealSort || []).map(
-              ({ name, code }) => ({
-                label: name,
-                value: code,
-              }),
-            )}
+            options={(shareDealSort || []).map(({ name, code }) => ({
+              label: name,
+              value: code,
+            }))}
             placeholder=""
             size="small"
             value={sort}
