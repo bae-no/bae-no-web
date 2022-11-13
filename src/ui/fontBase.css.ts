@@ -50,3 +50,4 @@ export const fontCss = recipe({
 });
 
 export type FontCss = RecipeVariants<typeof fontCss>;
+export type FontSize = keyof typeof fontSize;
