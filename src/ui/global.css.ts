@@ -46,3 +46,21 @@ globalStyle("#__next", {
   flex: 1,
   flexDirection: "column",
 });
+
+globalStyle("*", {
+  border: 0,
+  boxSizing: "border-box",
+  margin: 0,
+  padding: 0,
+  textDecoration: "none",
+});
+
+globalStyle("button", {
+  WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
+  background: "none",
+  cursor: "pointer",
+});
+
+globalStyle("ol, ul", {
+  listStyle: "none",
+});

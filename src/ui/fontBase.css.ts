@@ -28,7 +28,7 @@ const fonts = pipe(
   fromEntries,
 );
 
-const fontSize = {
+export const fontSize = {
   headline1: { fontSize: "3.2rem", fontWeight: "700", lineHeight: "4.2rem" },
   headline2: { fontSize: "2.8rem", fontWeight: "700", lineHeight: "3.8rem" },
   headline3: { fontSize: "2.4rem", fontWeight: "700", lineHeight: "3.2rem" },
