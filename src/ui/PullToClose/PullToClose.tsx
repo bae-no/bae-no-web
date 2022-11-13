@@ -1,16 +1,14 @@
 import { ComponentProps, ReactNode, useRef } from "react";
 
-import { LazyMotion, m, PanInfo } from "framer-motion";
+import { m, PanInfo } from "framer-motion";
 
+import LazyDomMaxMotion from "src/components/LazyDomMaxMotion";
 import { useStateWithProp } from "src/hooks/useStateWithProp";
 
 import { Box } from "../Box";
 import { Sprinkles } from "../sprinkles.css";
 
 import { barCss } from "./PullToClose.css";
-
-const loadDomMax = () =>
-  import("src/utils/framerDomMax").then((module) => module.default);
 
 interface PullToCloseProps
   extends Pick<ComponentProps<typeof m.div>, "dragSnapToOrigin"> {
@@ -62,7 +60,7 @@ const PullToClose = ({
   };
 
   return (
-    <LazyMotion features={loadDomMax}>
+    <LazyDomMaxMotion>
       <m.div
         animate={{ y: "0%" }}
         className={className}
@@ -83,7 +81,7 @@ const PullToClose = ({
         <Box className={barCss} {...barStyle} />
         {children}
       </m.div>
-    </LazyMotion>
+    </LazyDomMaxMotion>
   );
 };
 

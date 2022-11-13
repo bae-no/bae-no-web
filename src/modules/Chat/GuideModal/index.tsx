@@ -1,4 +1,4 @@
-import { startTransition, useState } from "react";
+import { ReactNode, startTransition, useState } from "react";
 
 import * as AlertDialogPrimitives from "@radix-ui/react-alert-dialog";
 import { reastorage, useSetReastorage } from "@reastorage/react";
@@ -25,7 +25,12 @@ const STEP_MAP = [
 
 const TOTAL_STEPS = STEP_MAP.length;
 
-const GuideModal = () => {
+interface GuideModalProps
+  extends Pick<AlertDialogPrimitives.AlertDialogProps, "defaultOpen"> {
+  trigger: ReactNode;
+}
+
+const GuideModal = ({ defaultOpen, trigger }: GuideModalProps) => {
   const setNeverShowAgain = useSetReastorage(guideStorage);
   const [step, setStep] = useState(0);
   const StepComponent = STEP_MAP[step];
@@ -48,7 +53,10 @@ const GuideModal = () => {
   };
 
   return (
-    <AlertDialogPrimitives.Root defaultOpen>
+    <AlertDialogPrimitives.Root defaultOpen={defaultOpen}>
+      <AlertDialogPrimitives.Trigger asChild>
+        {trigger}
+      </AlertDialogPrimitives.Trigger>
       <AlertDialogContent>
         <Box align="center">
           <>
