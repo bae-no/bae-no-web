@@ -23,10 +23,35 @@ interface LoginverificationProps {
   timeState: TimeState;
 }
 
-interface DescriptionState {
-  color?: "black5" | "danger1";
-  inputState?: "valid" | "invalid";
-}
+type VerificationStateObject = {
+  [key in "initial" | "invalid" | "valid"]: {
+    color: "black5" | "danger1";
+    inputState?: "valid" | "invalid";
+    text?: string;
+  };
+};
+
+const verificationStateObject = (
+  timeState: TimeState,
+): VerificationStateObject => ({
+  initial: {
+    color: "black5",
+    inputState: undefined,
+    text: "인증번호가 전송되었습니다.",
+  },
+  invalid: {
+    color: "danger1",
+    inputState: "invalid",
+    text:
+      timeState === "end"
+        ? "인증시간을 초과하였습다. 재인증을 시도해주세요."
+        : "인증 번호가 잘못되었습니다. 다시 한 번 확인해주세요.",
+  },
+  valid: {
+    color: "black5",
+    inputState: "valid",
+  },
+});
 
 export const LoginVerificationInput = ({
   setButtonDisabled,
@@ -39,12 +64,10 @@ export const LoginVerificationInput = ({
 
   const [verificationResult, verificationMutation] =
     useVerifyPhoneVerificationCodeMutation();
-  const [descriptionText, setDescriptionText] =
-    useState("인증번호가 전송되었습니다.");
-  const [descriptionState, setDescriptionState] = useState<DescriptionState>({
-    color: "black5",
-    inputState: undefined,
-  });
+
+  const { initial, valid, invalid } = verificationStateObject(timeState);
+
+  const [verificationState, setVerificationState] = useState(initial);
 
   const isVerificationSuccess =
     verificationResult.data?.verifyPhoneVerificationCode;
@@ -74,49 +97,32 @@ export const LoginVerificationInput = ({
 
   useEffect(() => {
     if (time === WAITTING) {
-      setDescriptionText("인증번호가 전송되었습니다.");
-      setDescriptionState({
-        color: "black5",
-        inputState: undefined,
-      });
+      setVerificationState(initial);
       setButtonDisabled(true);
       return;
     }
 
-    if (timeState === "end" && !isVerificationSuccess) {
-      setDescriptionText("인증시간을 초과하였습다. 재인증을 시도해주세요.");
-      setDescriptionState({
-        color: "danger1",
-        inputState: "invalid",
-      });
-      setButtonDisabled(true);
-      return;
-    }
-    if (isVerificationError && timeState !== "end") {
-      setDescriptionText(
-        "인증 번호가 잘못되었습니다. 다시 한 번 확인해주세요.",
-      );
-      setDescriptionState({
-        color: "danger1",
-        inputState: "invalid",
-      });
+    if (
+      (timeState === "end" && !isVerificationSuccess) ||
+      (isVerificationError && timeState !== "end")
+    ) {
+      setVerificationState(invalid);
       setButtonDisabled(true);
       return;
     }
     if (isVerificationSuccess) {
-      setDescriptionState({
-        color: "black5",
-        inputState: "valid",
-      });
-      setDescriptionText("");
+      setVerificationState(valid);
       setButtonDisabled(false);
     }
   }, [
+    initial,
+    invalid,
     isVerificationError,
     isVerificationSuccess,
     setButtonDisabled,
     time,
     timeState,
+    valid,
   ]);
 
   return (
@@ -125,8 +131,8 @@ export const LoginVerificationInput = ({
         defaultMessage="인증번호가 전송되었습니다."
         fontSize="body1-m"
         gap="8"
-        invalidMessage={descriptionText}
-        state={descriptionState.inputState}
+        invalidMessage={verificationState.text}
+        state={verificationState.inputState}
         suffix={
           <Typography color="danger1" fontSize="caption1-m">
             {!verificationResult.data?.verifyPhoneVerificationCode && time !== 0
@@ -139,7 +145,7 @@ export const LoginVerificationInput = ({
         <Input
           placeholder="인증번호 4자리를 입력해주세요."
           size="large"
-          state={descriptionState.inputState}
+          state={verificationState.inputState}
           type="tel"
           value={inputValue}
           variant="underline"
