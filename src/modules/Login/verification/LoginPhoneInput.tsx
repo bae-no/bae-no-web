@@ -28,11 +28,7 @@ export const LoginPhoneInput = ({
     } = e;
     const limitedLength13Value = value.slice(0, 13);
     setphoneValue(limitedLength13Value);
-    if (limitedLength13Value.length === 13) {
-      setPostText("전송");
-      return;
-    }
-    setPostText("");
+    setPostText(limitedLength13Value.length === 13 ? "전송" : "");
   };
 
   const handleOnClearClick = () => {
