@@ -51,18 +51,13 @@ export const LoginVerificationInput = ({
 
   const isVerificationError = verificationResult.error;
 
-  const sendVerificationCodeCallback = (verificationValue: string) => {
+  const sendVerification = useDebouncedCallback((verificationValue: string) => {
     verificationMutation({
       input: {
         code: verificationValue,
       },
     });
-  };
-
-  const sendVerification = useDebouncedCallback(
-    sendVerificationCodeCallback,
-    500,
-  );
+  }, 500);
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
