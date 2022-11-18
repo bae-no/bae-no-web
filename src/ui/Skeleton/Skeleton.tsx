@@ -13,10 +13,18 @@ export type SkeletonProps = Pick<
   | "borderRadius"
   | "padding"
   | "margin"
+  | "size"
 >;
 
-const Skeleton = forwardRef(({ className, ...props }: SkeletonProps, ref) => (
-  <Box className={[skeletonCss, className]} ref={ref} {...props} />
-));
+const Skeleton = forwardRef(
+  ({ className, borderRadius = "4", ...props }: SkeletonProps, ref) => (
+    <Box
+      borderRadius={borderRadius}
+      className={[skeletonCss, className]}
+      ref={ref}
+      {...props}
+    />
+  ),
+);
 
 export default Skeleton;

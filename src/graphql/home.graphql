@@ -1,0 +1,12 @@
+query homeStatic {
+  categories {
+    shareDealSort {
+      code
+      name
+    }
+    foodCatalog {
+      code
+      name
+    }
+  }
+}

@@ -16,6 +16,7 @@ const Input = forwardRef(
       variant,
       state,
       onClearClick,
+      rightNode,
       value,
       disabled,
       leftNode,
@@ -63,7 +64,7 @@ const Input = forwardRef(
           onFocus={toggleFocused}
           {...rest}
         />
-        {focused && (
+        {focused && !rightNode && (
           <Box
             aria-hidden={!isValid}
             aria-label="입력 내용 삭제"
@@ -82,6 +83,7 @@ const Input = forwardRef(
             />
           </Box>
         )}
+        {rightNode}
       </Box>
     );
   },

@@ -1,6 +1,12 @@
 import { useState } from "react";
 
+import SSRSafeSuspense from "src/components/AsyncBoundary/SSRSuspense";
 import List from "src/components/List";
+import {
+  FoodCategory,
+  ShareDealSortType,
+  useHomeStaticQuery,
+} from "src/graphql";
 import { Box } from "src/ui/Box";
 import { Container } from "src/ui/Container";
 import { Select } from "src/ui/Select";
@@ -8,49 +14,7 @@ import { Tab } from "src/ui/Tab";
 import { Typography } from "src/ui/Typography";
 
 import ChattingItem from "../Chat/ChattingList/ChattingItem";
-
-const MOCK_CATEGORIES = [
-  {
-    label: "전체",
-    value: "all",
-  },
-  {
-    label: "카테고리1",
-    value: "category1",
-  },
-  {
-    label: "카테고리2",
-    value: "category2",
-  },
-  {
-    label: "카테고리3",
-    value: "category3",
-  },
-  {
-    label: "카테고리4",
-    value: "category4",
-  },
-  {
-    label: "카테고리5",
-    value: "category5",
-  },
-  {
-    label: "카테고리6",
-    value: "category6",
-  },
-  {
-    label: "카테고리7",
-    value: "category7",
-  },
-];
-
-const SORT_OPTIONS = [
-  {
-    label: "등록순",
-    value: "CREATED_ASC",
-  },
-  { label: "인기순", value: "POPULAR_ASC" },
-];
+import ChattingListSkeleton from "../Chat/ChattingList/ChattingListSkeleton";
 
 const MOCK_CHATTINGS = [
   {
@@ -144,18 +108,25 @@ const MOCK_CHATTINGS = [
 ];
 
 const ChattingRooms = () => {
-  const [category, setCategory] = useState(MOCK_CATEGORIES[0].value);
-  const handleCategoryChange = (value: string) => setCategory(value);
+  const [{ data }] = useHomeStaticQuery();
+  const { foodCatalog, shareDealSort } = data?.categories || {};
+  const [category, setCategory] = useState(foodCatalog?.[0].code);
+  const handleCategoryChange = (value: string) =>
+    setCategory(value as FoodCategory);
 
-  const [sort, setSort] = useState(SORT_OPTIONS[0].value);
-  const handleSortChange = (value: string) => setSort(value);
+  const [sort, setSort] = useState(shareDealSort?.[0].code);
+  const handleSortChange = (value: string) =>
+    setSort(value as ShareDealSortType);
 
   return (
     <Container gap="24">
       <Box gap="16">
         <Tab
           defaultValue={category}
-          options={MOCK_CATEGORIES}
+          options={(foodCatalog || []).map(({ name, code }) => ({
+            label: name,
+            value: code,
+          }))}
           onValueChange={handleCategoryChange}
         />
       </Box>
@@ -169,7 +140,10 @@ const ChattingRooms = () => {
             개의 공유딜
           </Typography>
           <Select
-            options={SORT_OPTIONS}
+            options={(shareDealSort || []).map(({ name, code }) => ({
+              label: name,
+              value: code,
+            }))}
             placeholder=""
             size="small"
             value={sort}
@@ -177,17 +151,19 @@ const ChattingRooms = () => {
           />
         </Box>
       </Box>
-      <List
-        as="ol"
-        css={{ gap: "16" }}
-        fetchMore={() => {
-          // TODO: 추가 로드 기능 구현
-        }}
-        list={MOCK_CHATTINGS}
-        renderItem={(chatting) => (
-          <ChattingItem {...chatting} key={chatting.chattingId} />
-        )}
-      />
+      <SSRSafeSuspense fallback={<ChattingListSkeleton />}>
+        <List
+          as="ol"
+          css={{ gap: "16" }}
+          fetchMore={() => {
+            // TODO: 추가 로드 기능 구현
+          }}
+          list={MOCK_CHATTINGS}
+          renderItem={(chatting) => (
+            <ChattingItem {...chatting} key={chatting.chattingId} />
+          )}
+        />
+      </SSRSafeSuspense>
     </Container>
   );
 };
