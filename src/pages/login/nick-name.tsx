@@ -5,7 +5,7 @@ import { useSetReastorage } from "@reastorage/react";
 import { useHasAlreadyNicknameQuery } from "src/graphql";
 import { useDebouncedCallback } from "src/hooks/useDebouncedCallback";
 import { pageMarginTopMarginBottom } from "src/pageStyle/login/nickName.css";
-import { nickName } from "src/store/nickName";
+import { nickNameStorage } from "src/store/nickName";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { Input } from "src/ui/Input";
@@ -15,15 +15,7 @@ import { withGraphql } from "src/utils/graphql/withGraphql";
 const NO_SPACE_STRING = /(\s*)/g;
 const MIN_NICKNAME = 2;
 
-interface VerifiedStateObject {
-  [key: string]: {
-    color: "black4" | "danger1" | "success1";
-    inputState: undefined | "invalid" | "valid";
-    text: string;
-  };
-}
-
-const verifiedStateObject: VerifiedStateObject = {
+const verifiedStateObject = {
   initial: {
     color: "black4",
     inputState: undefined,
@@ -39,10 +31,10 @@ const verifiedStateObject: VerifiedStateObject = {
     inputState: "valid",
     text: "사용하실 수 있는 닉네임입니다.",
   },
-};
+} as const;
 
 const NickName = () => {
-  const setNickNameLocationStorage = useSetReastorage(nickName);
+  const setNickNameLocationStorage = useSetReastorage(nickNameStorage);
   const [inputValue, setInputValue] = useState("");
   const [queryPause, setQueryPause] = useState(true);
   const [verifiedState, setVerifiedState] =
