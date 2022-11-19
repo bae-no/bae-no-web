@@ -4,7 +4,6 @@ import { useSetReastorage } from "@reastorage/react";
 
 import { useHasAlreadyNicknameQuery } from "src/graphql";
 import { useDebouncedCallback } from "src/hooks/useDebouncedCallback";
-import { pageMarginTopMarginBottom } from "src/pageStyle/login/nickName.css";
 import { nickNameStorage } from "src/store/nickName";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
@@ -34,7 +33,7 @@ const verifiedStateObject = {
 } as const;
 
 const NickName = () => {
-  const setNickNameLocationStorage = useSetReastorage(nickNameStorage);
+  const setNickNameStorage = useSetReastorage(nickNameStorage);
   const [inputValue, setInputValue] = useState("");
   const [queryPause, setQueryPause] = useState(true);
   const [verifiedState, setVerifiedState] =
@@ -89,15 +88,16 @@ const NickName = () => {
   }, [hasAlreadyNicknameResult.data, inputValue.length]);
 
   const handleNextpage = () => {
-    setNickNameLocationStorage(inputValue);
+    setNickNameStorage(inputValue);
     // 다음페이지로 route
   };
 
   return (
     <Box
-      className={pageMarginTopMarginBottom}
       height="full"
       justifyContent="space-between"
+      marginBottom="48"
+      marginTop="136"
       px="16"
     >
       <Box gap="40">

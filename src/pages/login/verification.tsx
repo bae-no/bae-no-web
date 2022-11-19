@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useTimer } from "src/hooks/useTimer";
 import { LoginPhoneInput } from "src/modules/Login/verification/LoginPhoneInput";
 import { LoginVerificationInput } from "src/modules/Login/verification/LoginverificationInput";
-import { verificationCss } from "src/pageStyle/login/verification.css";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { Typography } from "src/ui/Typography";
@@ -18,9 +17,9 @@ const Verification = () => {
 
   return (
     <Box
-      className={verificationCss}
       height="full"
       justifyContent="space-between"
+      marginTop="136"
       paddingBottom="48"
       px="16"
       width="full"
