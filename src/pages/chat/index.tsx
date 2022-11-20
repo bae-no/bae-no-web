@@ -8,6 +8,7 @@ import { useToggle } from "src/hooks/useToggle";
 import ChattingRoomsItem, {
   ChattingRoomsItemProps,
 } from "src/modules/Chat/ChattingList/ChattingRoomsItem";
+import GuideModal from "src/modules/Chat/GuideModal";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { Header, Layout } from "src/ui/Layout";
@@ -155,7 +156,9 @@ const Chat = () => {
           showBottomTab={!deleteMode}
         >
           <Box gap="24" px="16">
-            <Button color="gray">공유딜 이용 가이드 보기</Button>
+            <GuideModal
+              trigger={<Button color="gray">공유딜 이용 가이드 보기</Button>}
+            />
             <Typography as="h3" fontSize="body1-b">
               진행중인 딜
             </Typography>

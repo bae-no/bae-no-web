@@ -1,17 +1,12 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 
-import "react-swipeable-list/dist/styles.css";
+import { PanInfo } from "framer-motion";
 import { useFormContext } from "react-hook-form";
-import {
-  SwipeableList,
-  SwipeableListItem,
-  SwipeAction,
-  TrailingActions,
-  Type as ListType,
-} from "react-swipeable-list";
 
+import LazyDomMaxMotion from "src/components/LazyDomMaxMotion";
 import { Avatar } from "src/ui/Avatar";
 import { Box } from "src/ui/Box";
+import { MotionBox } from "src/ui/Box/MotionBox";
 import { CheckBox } from "src/ui/CheckBox";
 import { Label } from "src/ui/Label";
 import { Typography } from "src/ui/Typography";
@@ -27,24 +22,6 @@ export interface ChattingRoomsItemProps {
   title: string;
 }
 
-const trailingActions = ({ onClick }: { onClick: () => void }) => (
-  <TrailingActions>
-    <SwipeAction onClick={onClick}>
-      <Box
-        align="center"
-        as="button"
-        backgroundColor="danger1"
-        color="white"
-        justify="center"
-        paddingBottom="16"
-        width="64"
-      >
-        나가기
-      </Box>
-    </SwipeAction>
-  </TrailingActions>
-);
-
 const ChattingRoomsItem = ({
   avatarSrc,
   chattingId,
@@ -56,56 +33,92 @@ const ChattingRoomsItem = ({
   title,
 }: ChattingRoomsItemProps) => {
   const { setValue } = useFormContext();
-  const onClickDelete = () => setValue(chattingId, true);
+  const [show나가기, setShow나가기] = useState(false);
+
+  const handleDragEnd = (_: any, { offset }: PanInfo) => {
+    if (offset.x < -44) {
+      setShow나가기(true);
+    } else {
+      setShow나가기(false);
+    }
+  };
+
+  const animation = (() => {
+    if (show나가기) return { x: -72 };
+    if (checkbox) return { x: "0.4rem" };
+    return { x: 0 };
+  })();
+
   return (
-    <Box as="li" gap="32">
-      <SwipeableList threshold={0.3} type={ListType.IOS}>
-        <SwipeableListItem
-          trailingActions={trailingActions({ onClick: onClickDelete })}
+    <Box as="li" flexDirection="row" position="relative">
+      <LazyDomMaxMotion>
+        {checkbox && (
+          <CheckBox
+            id={chattingId}
+            value={chattingId}
+            onCheckedChange={(checked) => setValue(chattingId, checked)}
+          />
+        )}
+        <MotionBox
+          dragSnapToOrigin
+          align="center"
+          animate={animation}
+          backgroundColor="white"
+          boxSizing="content-box"
+          direction="row"
+          drag={!checkbox && "x"}
+          dragConstraints={{ left: -88, right: 0 }}
+          dragElastic={0.2}
+          height="64"
+          justify="space-between"
+          px="16"
+          py="4"
+          width="full"
+          onDragEnd={handleDragEnd}
         >
-          <Box
-            align="center"
-            direction="row"
-            justify="space-between"
-            width="full"
-          >
-            <Box align="center" direction="row" gap="16" width="max">
-              {checkbox && (
-                <CheckBox
-                  id={chattingId}
-                  value={chattingId}
-                  onCheckedChange={(checked) => setValue(chattingId, checked)}
-                />
-              )}
-              <Avatar size="48" src={avatarSrc} />
-              <Box as="span" gap="2">
-                <Typography fontSize="body1-b">{title}</Typography>
-                <Typography color="black2" fontSize="body2-m">
-                  {lastChat}
-                </Typography>
-              </Box>
-            </Box>
-            <Box
-              align="flex-end"
-              as="span"
-              gap="5.5"
-              justify="space-between"
-              {...(ended && { paddingBottom: "32" })}
-            >
-              <Typography color="black4" fontSize="caption1-m">
-                {date}
+          <Box align="center" direction="row" gap="16" width="max">
+            <Avatar size="48" src={avatarSrc} />
+            <Box as="span" gap="2">
+              <Typography fontSize="body1-b">{title}</Typography>
+              <Typography color="black2" fontSize="body2-m">
+                {lastChat}
               </Typography>
-              {!ended && (
-                <Label color="primary" variant="border">
-                  <Typography fontSize="caption1-m">
-                    {notReadMessage}
-                  </Typography>
-                </Label>
-              )}
             </Box>
           </Box>
-        </SwipeableListItem>
-      </SwipeableList>
+          <Box
+            align="flex-end"
+            as="span"
+            gap="5.5"
+            justify="space-between"
+            {...(ended && { paddingBottom: "32" })}
+          >
+            <Typography color="black4" fontSize="caption1-m">
+              {date}
+            </Typography>
+            {!ended && (
+              <Label color="primary" variant="border">
+                <Typography fontSize="caption1-m">{notReadMessage}</Typography>
+              </Label>
+            )}
+          </Box>
+        </MotionBox>
+      </LazyDomMaxMotion>
+      <Box
+        align="center"
+        as="button"
+        backgroundColor="danger1"
+        boxSizing="content-box"
+        justify="center"
+        p="4"
+        position="absolute"
+        right="0"
+        size="64"
+        zIndex={-1}
+      >
+        <Typography as="span" color="white" fontSize="body2-m">
+          나가기
+        </Typography>
+      </Box>
     </Box>
   );
 };
