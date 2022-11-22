@@ -46,11 +46,7 @@ const NickName = () => {
     });
 
   const isFetching = hasAlreadyNicknameResult.fetching;
-
-  const sendHasAlreadyNickname = useDebouncedCallback(
-    hasAlreadyNicknameQuery,
-    500,
-  );
+  useDebouncedCallback(hasAlreadyNicknameQuery, 500);
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
@@ -61,7 +57,6 @@ const NickName = () => {
     setInputValue(noSpaceInputValue);
     if (noSpaceInputValue.length > MIN_NICKNAME) {
       setQueryPause(false);
-      sendHasAlreadyNickname();
       return;
     }
     setQueryPause(true);
