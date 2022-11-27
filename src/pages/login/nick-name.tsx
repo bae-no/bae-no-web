@@ -3,6 +3,7 @@ import { useState, ChangeEvent, useEffect } from "react";
 import { useSetReastorage } from "@reastorage/react";
 
 import { useHasAlreadyNicknameQuery } from "src/graphql";
+import { pageMarginTop136 } from "src/pageStyle/login/common.css";
 import { nickNameStorage } from "src/store/nickName";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
@@ -86,14 +87,14 @@ const NickName = () => {
 
   return (
     <Box
+      className={pageMarginTop136}
       height="full"
       justifyContent="space-between"
       marginBottom="48"
-      marginTop="136"
       px="16"
     >
       <Box gap="40">
-        <Typography fontSize="headline2">
+        <Typography as="h1" fontSize="headline2">
           배달비 노노에서 사용할 닉네임을 입력해주세요.
         </Typography>
         <Box gap="8">
@@ -106,6 +107,7 @@ const NickName = () => {
             onClearClick={handleOnClearClick}
           />
           <Typography
+            as="span"
             color={verifiedStateObject[verifiedState].color}
             fontSize="caption1-m"
           >
