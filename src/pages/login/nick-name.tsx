@@ -3,7 +3,6 @@ import { useState, ChangeEvent, useEffect } from "react";
 import { useSetReastorage } from "@reastorage/react";
 
 import { useHasAlreadyNicknameQuery } from "src/graphql";
-import { useDebouncedCallback } from "src/hooks/useDebouncedCallback";
 import { nickNameStorage } from "src/store/nickName";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
@@ -39,14 +38,12 @@ const NickName = () => {
   const [verifiedState, setVerifiedState] =
     useState<keyof typeof verifiedStateObject>("initial");
 
-  const [hasAlreadyNicknameResult, hasAlreadyNicknameQuery] =
-    useHasAlreadyNicknameQuery({
-      pause: queryPause,
-      variables: { nickname: inputValue },
-    });
+  const [hasAlreadyNicknameResult] = useHasAlreadyNicknameQuery({
+    pause: queryPause,
+    variables: { nickname: inputValue },
+  });
 
   const isFetching = hasAlreadyNicknameResult.fetching;
-  useDebouncedCallback(hasAlreadyNicknameQuery, 500);
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
