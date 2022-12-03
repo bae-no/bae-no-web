@@ -1,6 +1,9 @@
+import { GetStaticProps } from "next";
+
+import { useCategoriesQuery } from "src/graphql";
 import CreateChat from "src/modules/Chat/Create";
 import { Header, Layout } from "src/ui/Layout";
-import { withGraphql } from "src/utils/graphql/withGraphql";
+import { prefetchQueryOnServerSide } from "src/utils/prefetchQueryOnServerSide";
 
 const CreateChatPage = () => (
   <Layout
@@ -13,4 +16,16 @@ const CreateChatPage = () => (
   </Layout>
 );
 
-export default withGraphql(CreateChatPage);
+export default CreateChatPage;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const { dehydratedState } = await prefetchQueryOnServerSide(
+    useCategoriesQuery.getKey(),
+    useCategoriesQuery.fetcher(),
+  );
+  return {
+    props: {
+      dehydratedState,
+    },
+  };
+};

@@ -10,14 +10,12 @@ const Category = () => {
   const { control } = useCreateChatFormContext();
   const { field } = useController({ control, name: "category" });
 
-  const [{ data }] = useCategoriesQuery();
-
-  if (!data) return null;
+  const { data } = useCategoriesQuery(undefined, { staleTime: Infinity });
 
   return (
     <FormField label="카테고리">
       <Select
-        options={data.categories.foodCatalog.map(({ name, code }) => ({
+        options={(data?.categories.foodCatalog || []).map(({ name, code }) => ({
           label: name,
           value: code,
         }))}

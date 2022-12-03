@@ -1,4 +1,4 @@
-query categories {
+query categoriesQuery {
   categories {
     foodCatalog {
       code
