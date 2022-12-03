@@ -1,0 +1,3 @@
+query hasAlreadyNickname($nickname: String!) {
+  hasNickname(nickname: $nickname)
+}
