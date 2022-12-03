@@ -1,0 +1,8 @@
+query categories {
+  categories {
+    foodCatalog {
+      code
+      name
+    }
+  }
+}
