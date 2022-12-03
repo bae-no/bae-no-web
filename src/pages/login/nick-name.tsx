@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, useEffect } from "react";
 
 import { useSetReastorage } from "@reastorage/react";
+import { useRouter } from "next/router";
 
 import { useHasAlreadyNicknameQuery } from "src/graphql";
 import { pageMarginTop136 } from "src/pageStyle/login/common.css";
@@ -32,6 +33,7 @@ const verifiedStateObject = {
 } as const;
 
 const NickName = () => {
+  const router = useRouter();
   const setNickNameStorage = useSetReastorage(nickNameStorage);
   const [inputValue, setInputValue] = useState("");
   const [queryPause, setQueryPause] = useState(true);
@@ -81,7 +83,7 @@ const NickName = () => {
 
   const handleNextpage = () => {
     setNickNameStorage(inputValue);
-    // 다음페이지로 route
+    router.push("/search-location");
   };
 
   return (
