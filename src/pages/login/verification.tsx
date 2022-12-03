@@ -7,7 +7,6 @@ import { pageMarginTop136 } from "src/pageStyle/login/common.css";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { Typography } from "src/ui/Typography";
-import { withGraphql } from "src/utils/graphql/withGraphql";
 
 const WAITTING = 160000;
 
@@ -57,4 +56,4 @@ const Verification = () => {
   );
 };
 
-export default withGraphql(Verification);
+export default Verification;

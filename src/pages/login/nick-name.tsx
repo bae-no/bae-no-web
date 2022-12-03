@@ -9,7 +9,6 @@ import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { Input } from "src/ui/Input";
 import { Typography } from "src/ui/Typography";
-import { withGraphql } from "src/utils/graphql/withGraphql";
 
 const NO_SPACE_STRING = /(\s*)/g;
 const MIN_NICKNAME = 2;
@@ -39,12 +38,15 @@ const NickName = () => {
   const [verifiedState, setVerifiedState] =
     useState<keyof typeof verifiedStateObject>("initial");
 
-  const [hasAlreadyNicknameResult] = useHasAlreadyNicknameQuery({
-    pause: queryPause,
-    variables: { nickname: inputValue },
-  });
-
-  const isFetching = hasAlreadyNicknameResult.fetching;
+  const { isFetching, data } = useHasAlreadyNicknameQuery(
+    {
+      nickname: inputValue,
+    },
+    {
+      enabled: !queryPause,
+      suspense: false,
+    },
+  );
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
@@ -65,20 +67,17 @@ const NickName = () => {
   };
 
   useEffect(() => {
-    if (
-      hasAlreadyNicknameResult.data === undefined ||
-      inputValue.length <= MIN_NICKNAME
-    ) {
+    if (data === undefined || inputValue.length <= MIN_NICKNAME) {
       setVerifiedState("initial");
       return;
     }
-    const { hasNickname } = hasAlreadyNicknameResult.data;
+    const { hasNickname } = data;
 
     if (hasNickname) {
       setVerifiedState("invalid");
     }
     setVerifiedState("valid");
-  }, [hasAlreadyNicknameResult.data, inputValue.length]);
+  }, [data, inputValue.length]);
 
   const handleNextpage = () => {
     setNickNameStorage(inputValue);
@@ -125,4 +124,4 @@ const NickName = () => {
   );
 };
 
-export default withGraphql(NickName);
+export default NickName;

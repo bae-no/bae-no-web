@@ -1,16 +1,17 @@
+import { GetServerSideProps } from "next";
+
 import {
   HeadWithBackgroundColor,
   useHeaderBackgroundColor,
 } from "src/components/HeadWithBackgroundColor";
 import MetaTags from "src/components/MetaTags";
-import { HomeStaticDocument } from "src/graphql";
+import { useHomeStaticQuery } from "src/graphql";
 import ChattingRooms from "src/modules/home/ChattingRooms";
 import SearchBar from "src/modules/home/HomeHead/SearchBar";
 import UserInfo from "src/modules/home/HomeHead/UserInfo";
 import { Box } from "src/ui/Box";
 import { Header, Layout } from "src/ui/Layout";
-import { prefetchQueryOnServerSide } from "src/utils/graphql/prefetchQueryOnServerSide";
-import { withGraphql } from "src/utils/graphql/withGraphql";
+import { prefetchQueryOnServerSide } from "src/utils/prefetchQueryOnServerSide";
 
 const Home = () => {
   const [ref, backgroundColor] = useHeaderBackgroundColor();
@@ -41,6 +42,17 @@ const Home = () => {
   );
 };
 
-export default withGraphql(Home);
+export default Home;
 
-export const getServerSideProps = prefetchQueryOnServerSide(HomeStaticDocument);
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { dehydratedState } = await prefetchQueryOnServerSide(
+    useHomeStaticQuery.getKey(),
+    useHomeStaticQuery.fetcher(),
+  );
+
+  return {
+    props: {
+      dehydratedState,
+    },
+  };
+};

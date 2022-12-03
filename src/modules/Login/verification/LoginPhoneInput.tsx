@@ -19,8 +19,7 @@ export const LoginPhoneInput = ({
 }: LoginPhoneInputProps) => {
   const [phoneValue, setphoneValue] = useState("");
   const [postText, setPostText] = useState("");
-  const [, sendPhoneVerificationMutation] =
-    useSendPhoneVerificationCodeMutation();
+  const { mutate } = useSendPhoneVerificationCodeMutation();
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
@@ -40,7 +39,7 @@ export const LoginPhoneInput = ({
   };
 
   const handleloginCertificationChildOnClick = () => {
-    sendPhoneVerificationMutation({
+    mutate({
       input: {
         phoneNumber: phoneValue,
       },
