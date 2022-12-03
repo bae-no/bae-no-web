@@ -43,7 +43,8 @@ const NickName = () => {
       nickname: inputValue,
     },
     {
-      enabled: queryPause,
+      enabled: !queryPause,
+      suspense: false,
     },
   );
 
