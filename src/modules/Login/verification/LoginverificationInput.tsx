@@ -51,20 +51,20 @@ export const LoginVerificationInput = ({
   const minute = Math.floor(time / 60000);
   const second = Math.floor(time % 60000) / 1000;
 
-  const [verificationResult, verificationMutation] =
-    useVerifyPhoneVerificationCodeMutation();
+  const {
+    mutate,
+    isError: isVerificationError,
+    data,
+  } = useVerifyPhoneVerificationCodeMutation();
 
   const [verificationState, setVerificationState] =
     useState<keyof typeof verificationStateObject>("initial");
   const { text, inputState } = verificationStateObject[verificationState];
 
-  const isVerificationSuccess =
-    verificationResult.data?.verifyPhoneVerificationCode;
-
-  const isVerificationError = verificationResult.error;
+  const isVerificationSuccess = data?.verifyPhoneVerificationCode;
 
   const sendVerification = useDebouncedCallback((verificationValue: string) => {
-    verificationMutation({
+    mutate({
       input: {
         code: verificationValue,
       },
@@ -123,7 +123,7 @@ export const LoginVerificationInput = ({
         state={inputState}
         suffix={
           <Typography color="danger1" fontSize="caption1-m">
-            {!verificationResult.data?.verifyPhoneVerificationCode && time !== 0
+            {!data?.verifyPhoneVerificationCode && time !== 0
               ? `${minute}분 ${second}초`
               : ""}
           </Typography>
