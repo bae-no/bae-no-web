@@ -9,18 +9,23 @@ import { tokenStorage } from "src/store/token";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { Typography } from "src/ui/Typography";
-import { withGraphql } from "src/utils/graphql/withGraphql";
 
 type AuthProvider = "Kakao" | "Google" | "Apple";
 
 const isAuthProvider = (arg: string): arg is AuthProvider =>
   ["Kakao", "Google", "Apple"].some((authProvider) => authProvider !== arg);
 
-const Acess = () => {
+const AccessPage = () => {
   const router = useRouter();
   const { type, code } = router.query as { [key: string]: string };
-  const [acessMutationResult, acessMutation] = useSignInMutation();
-  const setAcessToken = useSetReastorage(tokenStorage);
+  const setAccessToken = useSetReastorage(tokenStorage);
+  const { mutate, isLoading } = useSignInMutation({
+    onSuccess: (data) => {
+      if (data?.signIn.accessToken === undefined) return;
+      setAccessToken(data?.signIn.accessToken);
+      document.cookie = `token=${data?.signIn.accessToken}`;
+    },
+  });
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -29,18 +34,14 @@ const Acess = () => {
       char.toUpperCase(),
     );
     if (isAuthProvider(pascalMutationType)) {
-      acessMutation({
+      mutate({
         input: {
           code,
           type: AuthType[pascalMutationType],
         },
-      }).then(({ data }) => {
-        if (data?.signIn.accessToken === undefined) return;
-        setAcessToken(data?.signIn.accessToken);
-        document.cookie = `token=${data?.signIn.accessToken}`;
       });
     }
-  }, [type, acessMutation, code, router.isReady, setAcessToken]);
+  }, [type, mutate, code, router.isReady]);
 
   const handleClick = () => {
     router.push("verification");
@@ -55,11 +56,11 @@ const Acess = () => {
         </Typography>
         <UserAccessPermissionInfo />
       </Box>
-      <Button disabled={acessMutationResult.fetching} onClick={handleClick}>
+      <Button disabled={isLoading} onClick={handleClick}>
         확인
       </Button>
     </Box>
   );
 };
 
-export default withGraphql(Acess);
+export default AccessPage;
