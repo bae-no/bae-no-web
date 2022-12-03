@@ -7,6 +7,7 @@ generates:
       - typescript
       - typescript-operations
       - typescript-react-query
+      - add
     config:
       fetcher:
         func: "src/utils/fetchGraphql#fetchGraphql"
@@ -16,3 +17,4 @@ generates:
       exposeDocument: true
       exposeQueryKeys: true
       exposeFetcher: true
+      content: "// @ts-nocheck"
