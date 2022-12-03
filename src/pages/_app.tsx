@@ -1,6 +1,13 @@
+import {
+  DehydratedState,
+  Hydrate,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import dayjs from "dayjs";
-import { LazyMotion, domAnimation } from "framer-motion";
+import { domAnimation, LazyMotion } from "framer-motion";
 import Head from "next/head";
+
+import { queryClient } from "src/utils/queryClient";
 
 import type { AppProps } from "next/app";
 
@@ -18,7 +25,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
         name="viewport"
       />
     </Head>
-    <Component {...pageProps} />
+    <QueryClientProvider client={queryClient}>
+      <Hydrate
+        state={
+          (pageProps as { dehydratedState: DehydratedState }).dehydratedState
+        }
+      >
+        <Component {...pageProps} />
+      </Hydrate>
+    </QueryClientProvider>
   </LazyMotion>
 );
 

@@ -108,7 +108,7 @@ const MOCK_CHATTINGS = [
 ];
 
 const ChattingRooms = () => {
-  const [{ data }] = useHomeStaticQuery();
+  const { data } = useHomeStaticQuery();
   const { foodCatalog, shareDealSort } = data?.categories || {};
   const [category, setCategory] = useState(foodCatalog?.[0].code);
   const handleCategoryChange = (value: string) =>
