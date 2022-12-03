@@ -16,7 +16,6 @@
     "test-storybook": "test-storybook",
     "chromatic": "npx chromatic",
     "serve:lhci": "pnpm start",
-    "type-check": "tsc --noEmit",
     "generate": "graphql-codegen"
   },
   "dependencies": {
@@ -49,6 +48,7 @@
     "react-is": "^18.2.0"
   },
   "devDependencies": {
+    "@graphql-codegen/add": "^3.2.1",
     "@graphql-codegen/cli": "^2.15.0",
     "@graphql-codegen/client-preset": "^1.2.1",
     "@graphql-codegen/typescript": "^2.8.3",

@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@fxts/core': ^0.11.0
+  '@graphql-codegen/add': ^3.2.1
   '@graphql-codegen/cli': ^2.15.0
   '@graphql-codegen/client-preset': ^1.2.1
   '@graphql-codegen/typescript': ^2.8.3
@@ -103,6 +104,7 @@ dependencies:
   react-is: 18.2.0
 
 devDependencies:
+  '@graphql-codegen/add': 3.2.1_graphql@16.6.0
   '@graphql-codegen/cli': 2.15.0_bgnarrohf6om3oikkm6cszexyq
   '@graphql-codegen/client-preset': 1.2.1_graphql@16.6.0
   '@graphql-codegen/typescript': 2.8.3_graphql@16.6.0
