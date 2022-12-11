@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import { useHasAlreadyNicknameQuery } from "src/graphql";
 import { pageMarginTop136 } from "src/pageStyle/login/common.css";
-import { nickNameStorage } from "src/store/nickName";
+import { nickNameStorage } from "src/store/login";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { Input } from "src/ui/Input";

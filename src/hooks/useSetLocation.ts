@@ -1,7 +1,15 @@
 import { useReastorage } from "@reastorage/react";
 
-import { locationStorage } from "src/store/location";
-import { positionStorage } from "src/store/position";
+import { locationStorage, positionStorage } from "src/store/login";
+
+const errorHandling = (status: number) => {
+  if (status === 400) {
+    throw new Error("invalid request");
+  }
+  if (status === 500) {
+    throw new Error("unknown error / io error");
+  }
+};
 
 export const useSetLocation = () => {
   const [location, setLocation] = useReastorage(locationStorage);
@@ -29,12 +37,7 @@ export const useSetLocation = () => {
             longitude: coords.x,
           });
         }
-        if (status === 400) {
-          throw new Error("invalid request");
-        }
-        if (status === 500) {
-          throw new Error("unknown error / io error");
-        }
+        errorHandling(status);
       },
     );
     return location;
@@ -53,8 +56,8 @@ export const useSetLocation = () => {
             response.v2.addresses[0].x,
           ];
           setPosition({
-            latitude: resultLatitude,
-            longitude: resultLongitude,
+            latitude: Number(resultLatitude),
+            longitude: Number(resultLongitude),
           });
           setLocation((prev) => {
             if (type === "road") return { ...prev, roadAddress: query };
@@ -62,12 +65,7 @@ export const useSetLocation = () => {
             return { ...prev, jibunAddress: query };
           });
         }
-        if (status === 400) {
-          throw new Error("Bad Request Exception");
-        }
-        if (status === 500) {
-          throw new Error("Unexpected Error");
-        }
+        errorHandling(status);
       },
     );
     return position;

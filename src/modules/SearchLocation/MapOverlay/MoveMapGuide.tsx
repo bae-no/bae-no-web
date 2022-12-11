@@ -1,21 +1,16 @@
-import { useEffect, useState } from "react";
-
 import { useReastorageValue } from "@reastorage/react";
 
-import { locationStorage } from "src/store/location";
+import { locationStorage } from "src/store/login";
 import { Box } from "src/ui/Box";
 import { Typography } from "src/ui/Typography";
 
 export const MoveMapGuide = () => {
   const { jibunAddress, roadAddress } = useReastorageValue(locationStorage);
-  const [guideText, setGuideTest] = useState(
-    "지도를 움직여 주소지를 설정해주세요.",
-  );
-  useEffect(() => {
-    if (jibunAddress || roadAddress) {
-      setGuideTest("입력하신 주소지를 확인해주세요");
-    }
-  }, [jibunAddress, roadAddress]);
+
+  const guideText =
+    jibunAddress || roadAddress
+      ? "입력하신 주소지를 확인해주세요"
+      : "지도를 움직여 주소지를 설정해주세요.";
 
   return (
     <Box

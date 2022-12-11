@@ -1,7 +1,12 @@
+import { useController, useFormContext } from "react-hook-form";
+
+import { AddressType } from "src/graphql";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
+import { Input } from "src/ui/Input";
 import { Typography } from "src/ui/Typography";
 
+import { EnrollParams } from "./detailLocationType";
 import { locationTypeBoxSizeCss } from "./locationTypeBox.css";
 
 const typeObject = {
@@ -19,17 +24,17 @@ const typeObject = {
   },
 } as const;
 
-interface LocationTypeBoxProps {
+interface LocationTypeProps {
   isSelect: boolean;
   onClick: () => void;
   type: "HOME" | "WORK" | "ETC";
 }
 
-export const LocationTypeBox = ({
+export const LocationType = ({
   isSelect,
   type,
   onClick,
-}: LocationTypeBoxProps) => {
+}: LocationTypeProps) => {
   const color = isSelect ? "orange2" : "black5";
   const { name, title } = typeObject[type];
 
@@ -43,6 +48,7 @@ export const LocationTypeBox = ({
       className={locationTypeBoxSizeCss}
       cursor="pointer"
       justifyContent="center"
+      width="full"
       onClick={onClick}
     >
       <Box alignItems="center" gap="4">
@@ -51,6 +57,57 @@ export const LocationTypeBox = ({
           {title}
         </Typography>
       </Box>
+    </Box>
+  );
+};
+
+const { Etc, Home, Work } = AddressType;
+
+export const LocationTypeBox = () => {
+  const { setValue, register, resetField, control } =
+    useFormContext<EnrollParams>();
+  const { field } = useController<EnrollParams>({
+    control,
+    name: "addressType",
+    rules: {
+      required: true,
+    },
+  });
+
+  const handleTypeBoxClick = (type: AddressType) => {
+    field.onChange(type);
+    setValue("addressAlias", "");
+  };
+
+  return (
+    <Box gap="16">
+      <Box
+        flexDirection="row"
+        gap="16"
+        justifyContent="space-between"
+        width="full"
+      >
+        {[Home, Work, Etc].map((type) => (
+          <LocationType
+            isSelect={field.value === type}
+            key={type}
+            type={type}
+            onClick={() => {
+              handleTypeBoxClick(type);
+            }}
+          />
+        ))}
+      </Box>
+      {field.value === Etc && (
+        <Input
+          placeholder="주소 별명"
+          variant="underline"
+          onClearClick={() => resetField("addressAlias")}
+          {...register("addressAlias", {
+            required: field.value === Etc,
+          })}
+        />
+      )}
     </Box>
   );
 };

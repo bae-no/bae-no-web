@@ -18,7 +18,7 @@ export const MapOverlay = () => {
   const { getAddress } = useSetLocation();
   const router = useRouter();
 
-  const debouncedCallback = useDebouncedCallback(() => {
+  const getAddressByDebounce = useDebouncedCallback(() => {
     getAddress(getCenter());
   }, 500);
   const map = useMapContext();
@@ -36,10 +36,10 @@ export const MapOverlay = () => {
   }, [setCenter, getAddress, getCenter]);
 
   useEffect(() => {
-    const listener = map.addListener("dragend", debouncedCallback);
+    const listener = map.addListener("dragend", getAddressByDebounce);
 
     return () => map.removeListener(listener);
-  }, [debouncedCallback, map]);
+  }, [getAddressByDebounce, map]);
 
   return (
     <Box height="full" width="full">

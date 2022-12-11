@@ -1,6 +1,7 @@
-import { AddressInput } from "src/graphql";
+import { AddressType } from "src/graphql";
 
 export interface EnrollParams {
-  address: AddressInput;
-  nickname: string;
+  addressAlias: string;
+  addressDetail: string;
+  addressType: AddressType;
 }

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useReastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 
-import { locationStorage } from "src/store/location";
+import { locationStorage } from "src/store/login";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 import { Input } from "src/ui/Input";

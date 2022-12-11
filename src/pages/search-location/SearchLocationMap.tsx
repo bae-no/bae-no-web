@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Script from "next/script";
 
 import { MapOverlay } from "src/modules/SearchLocation/MapOverlay";
-import { locationStorage } from "src/store/location";
+import { locationStorage } from "src/store/login";
 import { BottomDrawer } from "src/ui/BottomDrawer";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";

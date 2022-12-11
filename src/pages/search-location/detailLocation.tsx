@@ -1,170 +1,83 @@
-import { useEffect } from "react";
-
-import { useReastorageValue } from "@reastorage/react";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
   AddressSystem,
-  AddressType,
-  useEnrollUserLocationNickname,
+  useEnrollUserLocationNicknameMutation,
 } from "src/graphql";
-import { DetailLocationHeader } from "src/modules/SearchLocation/DetailLocation/DetailLocationHeader";
+import { ConfirmLocationInMap } from "src/modules/SearchLocation/DetailLocation/ConfirmLocationInMap";
+import { DetailLocationFormButton } from "src/modules/SearchLocation/DetailLocation/DetailLocationFormButton";
 import { DetailLocationInputBox } from "src/modules/SearchLocation/DetailLocation/DetailLocationInputBox";
 import { EnrollParams } from "src/modules/SearchLocation/DetailLocation/detailLocationType";
 import { LocationTypeBox } from "src/modules/SearchLocation/DetailLocation/LocationTypeBox";
-import { locationStorage } from "src/store/location";
-import { nickNameStorage } from "src/store/nickName";
-import { positionStorage } from "src/store/position";
+import {
+  locationStorage,
+  nickNameStorage,
+  positionStorage,
+} from "src/store/login";
 import { Box } from "src/ui/Box";
-import { Button } from "src/ui/Button";
-import { Icon } from "src/ui/Icon";
-import { Input } from "src/ui/Input";
-import { Typography } from "src/ui/Typography";
+import { Header, Layout } from "src/ui/Layout";
 
 const DetailLocation = () => {
   const router = useRouter();
-  const location = useReastorageValue(locationStorage);
-  const position = useReastorageValue(positionStorage);
-  const nickname = useReastorageValue(nickNameStorage);
-
-  const { latitude, longitude } = position;
-
-  const methods = useForm<EnrollParams>();
-
-  const { setValue, watch, register, getValues, reset, resetField } = methods;
-  const { Etc, Home, Work } = AddressType;
-  const addressType = watch("address.type");
-  const { mutate, isSuccess, isLoading } = useEnrollUserLocationNickname();
-
-  useEffect(() => {
-    if (isSuccess) {
+  const { mutate, isLoading } = useEnrollUserLocationNicknameMutation({
+    onSuccess: () => {
       router.push("/");
-    }
-    reset({
-      address: {
-        coordinate: {
-          latitude: Number(latitude),
-          longitude: Number(longitude),
-        },
-        path: location.roadAddress ?? location.jibunAddress,
-        system: location.roadAddress ? AddressSystem.Road : AddressSystem.Jibun,
-      },
-      nickname,
-    });
-  }, [
-    isSuccess,
-    latitude,
-    location.jibunAddress,
-    location.roadAddress,
-    longitude,
-    nickname,
-    reset,
-    router,
-  ]);
-
-  const handleButtonClick = () => {
-    const { coordinate, detail, path, system, type, alias } =
-      getValues().address;
+    },
+  });
+  const methods = useForm<EnrollParams>();
+  const handleSubmit = methods.handleSubmit((data) => {
+    const location = locationStorage.get();
+    const nickname = nickNameStorage.get();
+    const position = positionStorage.get();
+    const { addressAlias, addressType, addressDetail } = data;
+    const { Jibun, Road } = AddressSystem;
     mutate({
       input: {
         address: {
-          alias,
-          coordinate,
-          detail,
-          path,
-          system,
-          type,
+          alias: addressAlias,
+          coordinate: position,
+          detail: addressDetail,
+          path: location.roadAddress ?? location.jibunAddress,
+          system: location.roadAddress ? Road : Jibun,
+          type: addressType,
         },
         nickname,
       },
     });
-  };
-
-  const getButtonDisabled = () => {
-    if (isLoading) return true;
-    if (
-      watch("address.coordinate.latitude") &&
-      watch("address.coordinate.longitude") &&
-      watch("address.detail") &&
-      addressType &&
-      watch("address.path") &&
-      watch("address.system")
-    ) {
-      if (addressType === Etc && !watch("address.alias")) return true;
-      return false;
-    }
-    return true;
-  };
-
-  const handleTypeBoxClick = (type: AddressType) => {
-    setValue("address.type", type);
-    setValue("address.alias", "");
-  };
+  });
 
   return (
     <FormProvider {...methods}>
       <Box
+        as="form"
         height="full"
         justifyContent="space-between"
         marginBottom="48"
         px="16"
+        onSubmit={handleSubmit}
       >
         <Box gap="24">
           <Box gap="32">
-            <DetailLocationHeader />
             <DetailLocationInputBox />
           </Box>
-          <Box gap="16">
-            <Box flexDirection="row" justifyContent="space-between">
-              {[Home, Work, Etc].map((type) => (
-                <LocationTypeBox
-                  isSelect={addressType === type}
-                  key={type}
-                  type={type}
-                  onClick={() => handleTypeBoxClick(type)}
-                />
-              ))}
-            </Box>
-            {addressType === Etc && (
-              <Input
-                placeholder="주소 별명"
-                variant="underline"
-                onClearClick={() => resetField("address.alias")}
-                {...register("address.alias")}
-              />
-            )}
-          </Box>
-          <Box
-            alignItems="center"
-            cursor="pointer"
-            flexDirection="row"
-            gap="12"
-            justifyContent="space-between"
-            onClick={() => {
-              router.push({
-                pathname: "/search-location/SearchLocationMap",
-                query: {
-                  nextUrl:
-                    "http://localhost:3000/search-location/detailLocation",
-                },
-              });
-            }}
-          >
-            <Box flexDirection="row" gap="8">
-              <Icon name="map" />
-              <Typography color="black2" fontSize="body1-m">
-                또는 현재 위치로 설정
-              </Typography>
-            </Box>
-            <Icon name="arrow-right" size="24" />
-          </Box>
+          <LocationTypeBox />
+          <ConfirmLocationInMap />
         </Box>
-        <Button disabled={getButtonDisabled()} onClick={handleButtonClick}>
-          확인
-        </Button>
+        <DetailLocationFormButton isLoading={isLoading} />
       </Box>
     </FormProvider>
   );
 };
-export default DetailLocation;
+
+const DetailLocationPage = () => (
+  <Layout
+    headerProps={{
+      leftNode: <Header.Back />,
+      title: "주소 상세 정보 입력",
+    }}
+  >
+    <DetailLocation />
+  </Layout>
+);
+export default DetailLocationPage;
