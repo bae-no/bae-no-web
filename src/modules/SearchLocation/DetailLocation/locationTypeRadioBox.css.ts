@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
 
-export const locationTypeBoxSizeCss = style({
+export const locationTypeBoxRadioSizeCss = style({
   height: "8rem",
 });

@@ -9,7 +9,7 @@ import { ConfirmLocationInMap } from "src/modules/SearchLocation/DetailLocation/
 import { DetailLocationFormButton } from "src/modules/SearchLocation/DetailLocation/DetailLocationFormButton";
 import { DetailLocationInputBox } from "src/modules/SearchLocation/DetailLocation/DetailLocationInputBox";
 import { EnrollParams } from "src/modules/SearchLocation/DetailLocation/detailLocationType";
-import { LocationTypeBox } from "src/modules/SearchLocation/DetailLocation/LocationTypeBox";
+import { LocationTypeRadioBox } from "src/modules/SearchLocation/DetailLocation/LocationTypeRadioBox";
 import {
   locationStorage,
   nickNameStorage,
@@ -61,7 +61,7 @@ const DetailLocation = () => {
           <Box gap="32">
             <DetailLocationInputBox />
           </Box>
-          <LocationTypeBox />
+          <LocationTypeRadioBox />
           <ConfirmLocationInMap />
         </Box>
         <DetailLocationFormButton isLoading={isLoading} />

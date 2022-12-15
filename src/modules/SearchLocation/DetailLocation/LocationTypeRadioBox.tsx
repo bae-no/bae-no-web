@@ -7,7 +7,7 @@ import { Input } from "src/ui/Input";
 import { Typography } from "src/ui/Typography";
 
 import { EnrollParams } from "./detailLocationType";
-import { locationTypeBoxSizeCss } from "./locationTypeBox.css";
+import { locationTypeBoxRadioSizeCss } from "./locationTypeRadioBox.css";
 
 const typeObject = {
   ETC: {
@@ -30,7 +30,7 @@ interface LocationTypeProps {
   type: "HOME" | "WORK" | "ETC";
 }
 
-export const LocationType = ({
+export const LocationTypeRadio = ({
   isSelect,
   type,
   onClick,
@@ -45,7 +45,7 @@ export const LocationType = ({
       borderStyle="solid"
       borderWidth="2"
       br="8"
-      className={locationTypeBoxSizeCss}
+      className={locationTypeBoxRadioSizeCss}
       cursor="pointer"
       justifyContent="center"
       width="full"
@@ -63,7 +63,7 @@ export const LocationType = ({
 
 const { Etc, Home, Work } = AddressType;
 
-export const LocationTypeBox = () => {
+export const LocationTypeRadioBox = () => {
   const { setValue, register, resetField, control } =
     useFormContext<EnrollParams>();
   const { field } = useController<EnrollParams>({
@@ -88,7 +88,7 @@ export const LocationTypeBox = () => {
         width="full"
       >
         {[Home, Work, Etc].map((type) => (
-          <LocationType
+          <LocationTypeRadio
             isSelect={field.value === type}
             key={type}
             type={type}
