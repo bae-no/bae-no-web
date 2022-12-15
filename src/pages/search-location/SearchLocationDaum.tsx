@@ -38,11 +38,8 @@ const SearchLocationDaum = () => {
     router.back();
   };
 
-  const handleDaumPostcode = () => {
-    setIsScriptLoading((prev) => ({ ...prev, daum: true }));
-  };
-  const handleNaverGeocode = () => {
-    setIsScriptLoading((prev) => ({ ...prev, naver: true }));
+  const handleLoadEnd = (key: keyof typeof isScriptLoading) => () => {
+    setIsScriptLoading((prev) => ({ ...prev, [key]: true }));
   };
 
   useEffect(() => {
@@ -72,11 +69,15 @@ const SearchLocationDaum = () => {
     <>
       <Script
         src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
-        onReady={handleDaumPostcode}
+        onReady={() => {
+          handleLoadEnd("daum");
+        }}
       />
       <Script
         src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${clientId}&submodules=geocoder`}
-        onReady={handleNaverGeocode}
+        onReady={() => {
+          handleLoadEnd("naver");
+        }}
       />
       <Box>
         <Box cursor="pointer" px="16" py="20" width="fit" onClick={handleBack}>
