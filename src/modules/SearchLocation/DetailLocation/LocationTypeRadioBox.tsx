@@ -41,6 +41,7 @@ export const LocationTypeRadio = ({
   return (
     <Box
       alignItems="center"
+      aria-checked={isSelect}
       borderColor={color}
       borderStyle="solid"
       borderWidth="2"
@@ -48,6 +49,7 @@ export const LocationTypeRadio = ({
       className={locationTypeBoxRadioSizeCss}
       cursor="pointer"
       justifyContent="center"
+      role="radio"
       width="full"
       onClick={onClick}
     >
@@ -82,6 +84,7 @@ export const LocationTypeRadioBox = () => {
   return (
     <Box gap="16">
       <Box
+        aria-label="상세 주소 타입 선택"
         flexDirection="row"
         gap="16"
         justifyContent="space-between"

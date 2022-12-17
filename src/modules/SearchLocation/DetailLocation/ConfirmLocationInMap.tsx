@@ -10,6 +10,7 @@ export const ConfirmLocationInMap = () => {
   return (
     <Box
       alignItems="center"
+      as="button"
       cursor="pointer"
       flexDirection="row"
       gap="12"
