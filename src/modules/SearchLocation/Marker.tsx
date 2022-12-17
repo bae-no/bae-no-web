@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { useCenter } from "@r2don/react-naver-map";
 
-import { useSetLocation } from "src/hooks/useSetLocation";
+import { useLocationConvert } from "src/hooks/useLocationConvert";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 
@@ -12,7 +12,7 @@ interface MarkerProps {
 
 export const Marker = ({ getLocationThroughCurrentPosition }: MarkerProps) => {
   const { setCenter } = useCenter();
-  const { getPosition, location } = useSetLocation();
+  const { getPosition, location } = useLocationConvert();
 
   useEffect(() => {
     const getPositionQuery = () => {

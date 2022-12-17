@@ -11,7 +11,7 @@ const errorHandling = (status: number) => {
   }
 };
 
-export const useSetLocation = () => {
+export const useLocationConvert = () => {
   const [location, setLocation] = useReastorage(locationStorage);
   const [position, setPosition] = useReastorage(positionStorage);
 

@@ -4,7 +4,7 @@ import { useCenter, useMapContext } from "@r2don/react-naver-map";
 import { useRouter } from "next/router";
 
 import { useDebouncedCallback } from "src/hooks/useDebouncedCallback";
-import { useSetLocation } from "src/hooks/useSetLocation";
+import { useLocationConvert } from "src/hooks/useLocationConvert";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 
@@ -15,7 +15,7 @@ import { currentPositionIconBoxCss } from "./mapOverlay.css";
 
 export const MapOverlay = () => {
   const { getCenter, setCenter } = useCenter();
-  const { getAddress } = useSetLocation();
+  const { getAddress } = useLocationConvert();
   const router = useRouter();
 
   const getAddressByDebounce = useDebouncedCallback(() => {

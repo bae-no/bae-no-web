@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Script from "next/script";
 
-import { useSetLocation } from "src/hooks/useSetLocation";
+import { useLocationConvert } from "src/hooks/useLocationConvert";
 import { useWindowSize } from "src/hooks/useWindowSize";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
@@ -26,7 +26,7 @@ const THEME_OBJ = {
 const SearchLocationDaum = () => {
   const daumLocationSearchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const { getPosition } = useSetLocation();
+  const { getPosition } = useLocationConvert();
   const { nextUrl } = router.query as { [key: string]: string };
   const [isScriptLoading, setIsScriptLoading] = useState({
     daum: false,
