@@ -30,7 +30,7 @@ export const useLocationConvert = () => {
     locationParams,
     positionParams,
   }: SetLocationPositionStateParams) => {
-    setLocation((prev) => ({ ...prev, locationParams }));
+    setLocation((prev) => ({ ...prev, ...locationParams }));
     setPosition(positionParams);
   };
 
@@ -46,10 +46,7 @@ export const useLocationConvert = () => {
       },
       (status: number, response: any) => {
         if (status === 200) {
-          const { locationParams } = response.v2.address as Pick<
-            SetLocationPositionStateParams,
-            "locationParams"
-          >;
+          const locationParams = response.v2.address;
           const positionParams = {
             latitude: coords.y,
             longitude: coords.x,
@@ -86,5 +83,6 @@ export const useLocationConvert = () => {
     );
     return position;
   };
+
   return { getAddress, getPosition, location, position };
 };
