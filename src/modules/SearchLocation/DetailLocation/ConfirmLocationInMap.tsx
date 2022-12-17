@@ -19,7 +19,7 @@ export const ConfirmLocationInMap = () => {
         router.push({
           pathname: "/search-location/SearchLocationMap",
           query: {
-            nextUrl: "http://localhost:3000/search-location/detailLocation",
+            nextUrl: "/search-location/detail",
           },
         });
       }}
