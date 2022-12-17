@@ -9,7 +9,7 @@ import { Typography } from "src/ui/Typography";
 import { EnrollParams } from "./detailLocationType";
 import { locationTypeBoxRadioSizeCss } from "./locationTypeRadioBox.css";
 
-const typeObject = {
+const TYPE_OBJECT = {
   ETC: {
     name: "location",
     title: "기타",
@@ -36,7 +36,7 @@ export const LocationTypeRadio = ({
   onClick,
 }: LocationTypeProps) => {
   const color = isSelect ? "orange2" : "black5";
-  const { name, title } = typeObject[type];
+  const { name, title } = TYPE_OBJECT[type];
 
   return (
     <Box
