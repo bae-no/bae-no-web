@@ -14,11 +14,13 @@ import {
 } from "./useEditProfileForm";
 
 const NickNameField = () => {
-  const { register, setValue } = useEditProfileFormContext();
-  const handleClear = () => setValue("nickname", "");
+  const { register, resetField } = useEditProfileFormContext();
   return (
     <FormField label="닉네임">
-      <Input {...register("nickname")} onClearClick={handleClear} />
+      <Input
+        {...register("nickname")}
+        onClearClick={() => resetField("nickname")}
+      />
     </FormField>
   );
 };
@@ -27,7 +29,6 @@ const PhoneNumberField = () => {
   const { control } = useEditProfileFormContext();
   const { field } = useController({ control, name: "phoneNumber" });
 
-  const handleClear = () => field.onChange("");
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     if (value.length > 13) return;
@@ -39,7 +40,7 @@ const PhoneNumberField = () => {
       <Input
         inputMode="numeric"
         maxLength={13}
-        onClearClick={handleClear}
+        onClearClick={() => field.onChange("")}
         {...field}
         onChange={handleChange}
       />
@@ -74,7 +75,13 @@ const EditProfileForm = () => {
 
   return (
     <FormProvider {...form}>
-      <Box as="form" gap="16" width="full" onSubmit={handleSubmit}>
+      <Box
+        as="form"
+        gap="16"
+        marginBottom="128"
+        width="full"
+        onSubmit={handleSubmit}
+      >
         <NickNameField />
         <PhoneNumberField />
         <DescField />
