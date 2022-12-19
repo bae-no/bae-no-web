@@ -56,7 +56,6 @@ export const useLocationConvert = () => {
         errorHandling(status);
       },
     );
-    return location;
   };
 
   const getPosition = (query: string, type: "road" | "jibun") => {
@@ -81,7 +80,6 @@ export const useLocationConvert = () => {
         errorHandling(status);
       },
     );
-    return position;
   };
 
   return { getAddress, getPosition, location, position };
