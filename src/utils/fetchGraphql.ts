@@ -1,4 +1,4 @@
-import { tokenStorage } from "src/store/token";
+import { getCookie } from "./cookie";
 
 export const fetchGraphql =
   <TData, TVariables>(
@@ -11,9 +11,10 @@ export const fetchGraphql =
     const authHeader =
       typeof document !== "undefined"
         ? {
-            Authorization: `Bearer ${tokenStorage.get()}`,
+            Authorization: `Bearer ${getCookie("token")}`,
           }
         : null;
+
     const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL as string, {
       body: JSON.stringify({
         query,
