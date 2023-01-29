@@ -7,6 +7,7 @@ import { PullToCloseBottomDrawer } from "src/ui/BottomDrawer";
 import { Box } from "../../Box";
 import { Typography } from "../../Typography";
 
+import { selectBodyCss } from "./SelectBottomDrawer.css";
 import { SelectBottomDrawerProps } from "./SelectBottomDrawer.types";
 import { SelectItem } from "./SelectItem";
 
@@ -25,7 +26,7 @@ const SelectBottomDrawer = ({
     if (!listRef.current) return;
 
     const targetIndex = options.findIndex(
-      ({ value }) => value === currentValue
+      ({ value }) => value === currentValue,
     );
     if (e.key === "ArrowUp") {
       if (targetIndex === 0) return;
@@ -50,7 +51,12 @@ const SelectBottomDrawer = ({
             {title}
           </Typography>
         </DialogTitle>
-        <Box ref={listRef} role="listbox" onKeyDown={handleKeyDown}>
+        <Box
+          className={selectBodyCss}
+          ref={listRef}
+          role="listbox"
+          onKeyDown={handleKeyDown}
+        >
           {options.map(({ label, value }) => (
             <SelectItem
               currentValue={currentValue}

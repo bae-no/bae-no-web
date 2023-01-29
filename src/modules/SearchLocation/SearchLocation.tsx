@@ -1,31 +1,27 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { useEffect } from "react";
 
+import { useReastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 
-import { locationStorage } from "src/store/location";
+import { locationStorage } from "src/store/login";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 import { Input } from "src/ui/Input";
 import { Typography } from "src/ui/Typography";
 
-import { Location } from "./type";
-
 interface SetLocationProps {
   additionalExplanation?: string;
-  location: Location;
   nextUrl: string;
-  setLocation: Dispatch<SetStateAction<Location>>;
   title: string;
 }
 
 const SearchLocation = ({
-  location,
-  setLocation,
   title,
   additionalExplanation,
   nextUrl,
 }: SetLocationProps) => {
   const router = useRouter();
+  const [location, setLocation] = useReastorage(locationStorage);
 
   useEffect(() => {
     locationStorage.reset();
