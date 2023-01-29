@@ -64,6 +64,7 @@ specifiers:
   graphql-tag: ^2.12.6
   jest: ^29.3.1
   jest-environment-jsdom: ^29.3.1
+  jest-transformer-svg: ^2.0.0
   lottie-web: ^5.10.0
   mini-css-extract-plugin: ^2.7.1
   next: ^13.0.6
@@ -148,6 +149,7 @@ devDependencies:
   eslint-plugin-typescript-sort-keys: 2.1.0_txmweb6yn7coi7nfrp22gpyqmy
   jest: 29.3.1_@types+node@18.11.18
   jest-environment-jsdom: 29.3.1
+  jest-transformer-svg: 2.0.0_jest@29.3.1+react@18.2.0
   mini-css-extract-plugin: 2.7.2
   prettier: 2.8.1
   typescript: 4.9.4
@@ -14070,6 +14072,16 @@ packages:
       semver: 7.3.8
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /jest-transformer-svg/2.0.0_jest@29.3.1+react@18.2.0:
+    resolution: {integrity: sha512-+f6er7UZTiHTeel9nma1i0NTAU8AjbEvhK2RYUoMxTNihwo98z2rrrDBIbppZI6ACDzeul3bhRmI9M6d25J/Nw==}
+    peerDependencies:
+      jest: ^28.1.0
+      react: ^17.0.0 || ^18.0.0
+    dependencies:
+      jest: 29.3.1_@types+node@18.11.18
+      react: 18.2.0
     dev: true
 
   /jest-util/26.6.2:

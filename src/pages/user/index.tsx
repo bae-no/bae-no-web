@@ -2,7 +2,7 @@ import {
   HeadWithBackgroundColor,
   useHeaderBackgroundColor,
 } from "src/components/HeadWithBackgroundColor";
-import { useUserProfileQuery } from "src/graphql";
+import { useMyProfileQuery } from "src/graphql";
 import UserHead from "src/modules/user/UserHead";
 import UserPageSection from "src/modules/user/UserPageSection";
 import { Box } from "src/ui/Box";
@@ -41,6 +41,6 @@ export default UserPage;
 
 export const getServerSideProps = prefetchQueriesOnServerSideWithAuth([
   {
-    queryHook: useUserProfileQuery,
+    queryHook: useMyProfileQuery,
   },
 ]);
