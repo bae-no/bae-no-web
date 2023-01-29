@@ -1,6 +1,21 @@
-query userProfileQuery {
-  profile {
+query myProfileQuery {
+  myProfile {
     nickname
   }
   myEndDealCount
+}
+
+query userAddressQuery {
+  addresses {
+    alias
+    coordinate {
+      latitude
+      longitude
+    }
+    detail
+    key
+    path
+    system
+    type
+  }
 }

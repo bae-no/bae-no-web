@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Script from "next/script";
 
+import SSRSafeSuspense from "src/components/AsyncBoundary/SSRSuspense";
 import { useLocationConvert } from "src/hooks/useLocationConvert";
 import { useWindowSize } from "src/hooks/useWindowSize";
 import { Box } from "src/ui/Box";
@@ -38,7 +39,7 @@ const SearchLocationDaum = () => {
     router.back();
   };
 
-  const handleLoadEnd = (key: keyof typeof isScriptLoading) => () => {
+  const handleLoadEnd = (key: keyof typeof isScriptLoading) => {
     setIsScriptLoading((prev) => ({ ...prev, [key]: true }));
   };
 
@@ -81,7 +82,9 @@ const SearchLocationDaum = () => {
       />
       <Box>
         <Box cursor="pointer" px="16" py="20" width="fit" onClick={handleBack}>
-          <Icon name="arrow-left" />
+          <SSRSafeSuspense fallback={null}>
+            <Icon name="arrow-left" />
+          </SSRSafeSuspense>
         </Box>
         <div ref={daumLocationSearchRef} />
       </Box>
