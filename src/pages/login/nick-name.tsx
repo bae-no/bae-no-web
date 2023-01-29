@@ -83,7 +83,6 @@ const NickName = () => {
     setNickNameStorage(inputValue);
     // 다음페이지로 route
   };
-
   return (
     <Box
       className={pageMarginTop136}
