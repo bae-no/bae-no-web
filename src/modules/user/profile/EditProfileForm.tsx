@@ -14,10 +14,13 @@ import {
 } from "./useEditProfileForm";
 
 const NickNameField = () => {
-  const { register } = useEditProfileFormContext();
+  const { register, resetField } = useEditProfileFormContext();
   return (
     <FormField label="닉네임">
-      <Input {...register("nickname")} />
+      <Input
+        {...register("nickname")}
+        onClearClick={() => resetField("nickname")}
+      />
     </FormField>
   );
 };
@@ -37,6 +40,7 @@ const PhoneNumberField = () => {
       <Input
         inputMode="numeric"
         maxLength={13}
+        onClearClick={() => field.onChange("")}
         {...field}
         onChange={handleChange}
       />
@@ -45,10 +49,11 @@ const PhoneNumberField = () => {
 };
 
 const DescField = () => {
-  const { register } = useEditProfileFormContext();
+  const { register, setValue } = useEditProfileFormContext();
+  const handleClear = () => setValue("desc", "");
   return (
     <FormField label="자기소개">
-      <Input {...register("desc")} />
+      <Input {...register("desc")} onClearClick={handleClear} />
     </FormField>
   );
 };
@@ -70,11 +75,25 @@ const EditProfileForm = () => {
 
   return (
     <FormProvider {...form}>
-      <Box as="form" gap="16" width="full" onSubmit={handleSubmit}>
+      <Box
+        as="form"
+        gap="16"
+        marginBottom="128"
+        width="full"
+        onSubmit={handleSubmit}
+      >
         <NickNameField />
         <PhoneNumberField />
         <DescField />
-        <Box bottom="48" left="0" padding="16" position="fixed" width="full">
+        <Box
+          backgroundColor="white"
+          bottom="0"
+          left="0"
+          padding="16"
+          paddingBottom="48"
+          position="fixed"
+          width="full"
+        >
           <Button type="submit">확인</Button>
         </Box>
       </Box>

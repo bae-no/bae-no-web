@@ -3,6 +3,7 @@ import {
   Hydrate,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import dayjs from "dayjs";
 import { domAnimation, LazyMotion } from "framer-motion";
 import Head from "next/head";
@@ -33,6 +34,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
       >
         <Component {...pageProps} />
       </Hydrate>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </LazyMotion>
 );

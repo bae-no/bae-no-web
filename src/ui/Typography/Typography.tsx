@@ -9,7 +9,10 @@ import { FontCss, fontCss } from "../fontBase.css";
 import { Sprinkles } from "../sprinkles.css";
 
 type TypographyProps = ComponentBaseProps &
-  Pick<Sprinkles, "color" | "textAlign" | "whiteSpace" | "wordBreak"> &
+  Pick<
+    Sprinkles,
+    "color" | "textAlign" | "whiteSpace" | "wordBreak" | "textDecoration"
+  > &
   FontCss & {
     as?:
       | "h1"
@@ -39,6 +42,7 @@ const Typography = forwardRef(
       fontSize,
       className,
       textAlign,
+      textDecoration,
       whiteSpace = "pre-wrap",
       ...rest
     }: TypographyProps,
@@ -57,6 +61,7 @@ const Typography = forwardRef(
       display="inline"
       ref={ref}
       textAlign={textAlign}
+      textDecoration={textDecoration}
       whiteSpace={whiteSpace}
     >
       {children}
