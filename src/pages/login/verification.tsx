@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { useRouter } from "next/router";
+
 import { useTimer } from "src/hooks/useTimer";
 import { LoginPhoneInput } from "src/modules/Login/verification/LoginPhoneInput";
 import { LoginVerificationInput } from "src/modules/Login/verification/LoginverificationInput";
@@ -13,6 +15,7 @@ const WAITTING = 160000;
 const Verification = () => {
   const [showVerification, setShowVerification] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const router = useRouter();
   const { time, reRunTimer, start, timeState } = useTimer(WAITTING);
 
   return (
@@ -50,7 +53,12 @@ const Verification = () => {
         </Box>
       </Box>
       <Box as="footer" bottom="48">
-        <Button disabled={buttonDisabled}>확인</Button>
+        <Button
+          disabled={buttonDisabled}
+          onClick={() => router.push("/login/nick-name")}
+        >
+          확인
+        </Button>
       </Box>
     </Box>
   );

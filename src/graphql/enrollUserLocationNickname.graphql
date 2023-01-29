@@ -1,0 +1,3 @@
+mutation enrollUserLocationNicknameMutation($input: EnrollUserInput!) {
+  enrollUser(input: $input)
+}

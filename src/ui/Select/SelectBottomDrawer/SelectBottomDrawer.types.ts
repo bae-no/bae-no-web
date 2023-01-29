@@ -16,7 +16,7 @@ export interface SelectItemProps
 export interface SelectBottomDrawerProps
   extends Omit<PullToCloseBottomDrawerProps, "children"> {
   onValueChange: (value: string) => void;
-  options: Array<SelectOption>;
+  options: Array<SelectOption> | ReadonlyArray<SelectOption>;
   title?: string;
   trigger?: ReactElement;
   value?: string;
