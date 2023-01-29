@@ -1,6 +1,8 @@
 import { dehydrate, QueryClient, QueryKey } from "@tanstack/react-query";
 import { GetServerSidePropsContext, GetStaticPropsContext } from "next";
 
+import { getCookie } from "./cookie";
+
 type InferVariables<T> = T extends (
   variables: infer V,
   options?: RequestInit["headers"],
@@ -49,6 +51,8 @@ interface GetServerSideQuery<
 export const prefetchQueriesOnServerSide = <TQueryHook extends QueryHook, TContext extends  GetServerSidePropsContext | GetStaticPropsContext>(
   queryObjects: Array<GetServerSideQuery<TQueryHook,TContext>>,
 ) => async (context: TContext) => {
+  const token = getCookie('token', (context as GetServerSidePropsContext).req?.cookies);
+  
   const { dehydratedState } = await prefetchQueryOnServerSide(
     queryObjects.map(({ queryHook, getParams }) => {
       const {
@@ -56,7 +60,7 @@ export const prefetchQueriesOnServerSide = <TQueryHook extends QueryHook, TConte
         variables,
       } = getParams?.(context) ?? {};
       return {
-        fetch: queryHook.fetcher(variables, options),
+        fetch: queryHook.fetcher(variables, {...options, ...(token ? { Authorization: `Bearer ${token}` } : {})}),
         key: queryHook.getKey(variables),
       };
     }),
