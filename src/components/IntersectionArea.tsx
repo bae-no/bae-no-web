@@ -6,7 +6,7 @@ import {
   useRef,
 } from "react";
 
-interface IntersectionAreaProps {
+export interface IntersectionAreaProps {
   children: ReactElement<{ ref: RefObject<HTMLElement> }>;
   onIntersect: IntersectionObserverCallback;
   options?: IntersectionObserverInit;

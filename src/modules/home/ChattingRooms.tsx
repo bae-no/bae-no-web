@@ -3,114 +3,104 @@ import { useState } from "react";
 import SSRSafeSuspense from "src/components/AsyncBoundary/SSRSuspense";
 import List from "src/components/List";
 import {
+  FindShareDealQuery,
   FoodCategory,
   ShareDealSortType,
+  useInfiniteFindShareDealQuery,
   useHomeStaticQuery,
 } from "src/graphql";
 import { Box } from "src/ui/Box";
 import { Container } from "src/ui/Container";
 import { Select } from "src/ui/Select";
+import { Skeleton } from "src/ui/Skeleton";
 import { Tab } from "src/ui/Tab";
 import { Typography } from "src/ui/Typography";
 
 import ChattingItem from "../Chat/ChattingList/ChattingItem";
 import ChattingListSkeleton from "../Chat/ChattingList/ChattingListSkeleton";
 
-const MOCK_CHATTINGS = [
-  {
-    avatarSrc: "a",
-    category: "피자",
-    chattingId: "2",
-    currentAttendee: 1,
-    deliveryFee: 10000,
-    distance: 1,
-    ended: false,
-    maxAttendee: 10,
-    title: "나는 피자가 좋다",
-  },
-  {
-    avatarSrc: "a",
-    category: "치킨",
-    chattingId: "1",
-    currentAttendee: 1,
-    deliveryFee: 10000,
-    distance: 1,
-    ended: false,
-    maxAttendee: 10,
-    title: "나는 치킨이 좋다",
-  },
-  {
-    avatarSrc: "a",
-    category: "햄버거",
-    chattingId: "3",
-    currentAttendee: 1,
-    deliveryFee: 10000,
-    distance: 1,
-    ended: false,
-    maxAttendee: 10,
-    title: "나는 햄버거가 좋다",
-  },
-  {
-    avatarSrc: "a",
-    category: "보쌈",
-    chattingId: "5",
-    currentAttendee: 1,
-    deliveryFee: 10000,
-    distance: 1,
-    ended: false,
-    maxAttendee: 10,
-    title: "나는 보쌈이 좋다",
-  },
-  {
-    avatarSrc: "a",
-    category: "감자",
-    chattingId: "6",
-    currentAttendee: 1,
-    deliveryFee: 10000,
-    distance: 1,
-    ended: false,
-    maxAttendee: 10,
-    title: "나는 감자이 좋다",
-  },
-  {
-    avatarSrc: "a",
-    category: "감자",
-    chattingId: "7",
-    currentAttendee: 1,
-    deliveryFee: 10000,
-    distance: 1,
-    ended: false,
-    maxAttendee: 10,
-    title: "나는 감자이 좋다",
-  },
-  {
-    avatarSrc: "a",
-    category: "감자",
-    chattingId: "8",
-    currentAttendee: 1,
-    deliveryFee: 10000,
-    distance: 1,
-    ended: false,
-    maxAttendee: 10,
-    title: "나는 감자이 좋다",
-  },
-  {
-    avatarSrc: "a",
-    category: "감자",
-    chattingId: "9",
-    currentAttendee: 1,
-    deliveryFee: 10000,
-    distance: 1,
-    ended: false,
-    maxAttendee: 10,
-    title: "나는 감자이 좋다",
-  },
-];
+interface ShareDealListProps {
+  category?: FoodCategory | "";
+  onSortChange: (value: string) => void;
+  sortList?: Array<{ code: ShareDealSortType; name: string }>;
+  sortType?: ShareDealSortType;
+}
+
+const PAGE_SIZE = 10;
+
+const ShareDealList = ({
+  category,
+  sortType,
+  onSortChange,
+  sortList,
+}: ShareDealListProps) => {
+  const queryInput = {
+    category: category || undefined,
+    page: 0,
+    size: PAGE_SIZE,
+    sortType,
+  };
+  const { data, hasNextPage, fetchNextPage } = useInfiniteFindShareDealQuery(
+    "input",
+    {
+      input: queryInput,
+    },
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        if (lastPage.shareDeals.items.length === PAGE_SIZE) {
+          return { ...queryInput, page: allPages.length };
+        }
+      },
+    },
+  );
+
+  return (
+    <>
+      <Box>
+        <Box direction="row" justify="space-between">
+          <Typography as="span" fontSize="body1-b">
+            총{" "}
+            <Typography as="strong" color="orange2" fontSize="body1-b">
+              0
+            </Typography>
+            개의 공유딜
+          </Typography>
+          <Select
+            options={(sortList || []).map(({ name, code }) => ({
+              label: name,
+              value: code,
+            }))}
+            placeholder=""
+            size="small"
+            value={sortType}
+            onValueChange={onSortChange}
+          />
+        </Box>
+      </Box>
+      <List
+        as="ul"
+        css={{
+          gap: "16",
+        }}
+        fetchMore={() => {
+          if (!hasNextPage) return;
+          fetchNextPage();
+        }}
+        list={data?.pages as FindShareDealQuery[]}
+        renderItem={(page) =>
+          page.shareDeals?.items.map((shareDeal) => (
+            <ChattingItem key={shareDeal.id} shareDeal={shareDeal} />
+          ))
+        }
+      />
+    </>
+  );
+};
 
 const ChattingRooms = () => {
-  const { data } = useHomeStaticQuery();
+  const { data } = useHomeStaticQuery(undefined, { staleTime: 5000 });
   const { foodCatalog, shareDealSort } = data?.categories || {};
-  const [category, setCategory] = useState(foodCatalog?.[0].code);
+  const [category, setCategory] = useState<FoodCategory | "">("");
   const handleCategoryChange = (value: string) =>
     setCategory(value as FoodCategory);
 
@@ -123,45 +113,32 @@ const ChattingRooms = () => {
       <Box gap="16">
         <Tab
           defaultValue={category}
-          options={(foodCatalog || []).map(({ name, code }) => ({
+          options={(foodCatalog
+            ? [{ code: "", name: "전체" }, ...foodCatalog]
+            : []
+          ).map(({ name, code }) => ({
             label: name,
             value: code,
           }))}
           onValueChange={handleCategoryChange}
         />
       </Box>
-      <Box>
-        <Box direction="row" justify="space-between">
-          <Typography as="span" fontSize="body1-b">
-            총{" "}
-            <Typography as="strong" color="orange2" fontSize="body1-b">
-              0
-            </Typography>
-            개의 공유딜
-          </Typography>
-          <Select
-            options={(shareDealSort || []).map(({ name, code }) => ({
-              label: name,
-              value: code,
-            }))}
-            placeholder=""
-            size="small"
-            value={sort}
-            onValueChange={handleSortChange}
-          />
-        </Box>
-      </Box>
-      <SSRSafeSuspense fallback={<ChattingListSkeleton />}>
-        <List
-          as="ol"
-          css={{ gap: "16" }}
-          fetchMore={() => {
-            // TODO: 추가 로드 기능 구현
-          }}
-          list={MOCK_CHATTINGS}
-          renderItem={(chatting) => (
-            <ChattingItem {...chatting} key={chatting.chattingId} />
-          )}
+      <SSRSafeSuspense
+        fallback={
+          <Box gap="24">
+            <Box direction="row" justify="space-between">
+              <Skeleton height="24" width="128" />
+              <Skeleton height="24" width="64" />
+            </Box>
+            <ChattingListSkeleton />
+          </Box>
+        }
+      >
+        <ShareDealList
+          category={category}
+          sortList={shareDealSort}
+          sortType={sort}
+          onSortChange={handleSortChange}
         />
       </SSRSafeSuspense>
     </Container>

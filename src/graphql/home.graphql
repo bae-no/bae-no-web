@@ -10,3 +10,23 @@ query homeStaticQuery {
     }
   }
 }
+
+query findShareDealQuery($input: FindShareDealInput!) {
+  shareDeals(input: $input) {
+    items {
+      category
+      currentParticipants
+      maxParticipants
+      id
+      orderPrice
+      status
+      thumbnail
+      title
+      coordinate {
+        latitude
+        longitude
+      }
+    }
+    total
+  }
+}
