@@ -59,6 +59,7 @@ const responsiveProperties = defineProperties({
     position: ["absolute", "relative", "fixed", "sticky"],
     right: layout,
     textAlign: ["center", "left", "right"],
+    textDecoration: ["overLine", "underLine"],
     top: layout,
     transform,
     whiteSpace: [
