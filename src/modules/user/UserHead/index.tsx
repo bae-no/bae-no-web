@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { useUserProfileQuery } from "src/graphql";
+import { useMyProfileQuery } from "src/graphql";
 import { Avatar } from "src/ui/Avatar";
 import { Box } from "src/ui/Box";
 import { Container } from "src/ui/Container";
@@ -10,9 +10,9 @@ import { Typography } from "src/ui/Typography";
 import Character from "./character.svg";
 
 const UserHead = () => {
-  const { data } = useUserProfileQuery();
-  const { myEndDealCount, profile } = data ?? {};
-  const { nickname } = profile ?? {};
+  const { data } = useMyProfileQuery();
+  const { myEndDealCount, myProfile } = data ?? {};
+  const { nickname } = myProfile ?? {};
   return (
     <Container gap="16">
       <Box
