@@ -38,6 +38,7 @@ export const Marker = ({ getLocationThroughCurrentPosition }: MarkerProps) => {
       justifyContent="center"
       left="half"
       position="fixed"
+      transform="xHalfMinus"
     >
       <Icon color="orange2" name="mapMarker" zIndex={1} />
     </Box>
