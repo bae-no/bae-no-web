@@ -1,20 +1,30 @@
 import { ReactElement } from "react";
 
-import { IntersectionArea } from "src/components/IntersectionArea";
+import {
+  IntersectionArea,
+  IntersectionAreaProps,
+} from "src/components/IntersectionArea";
 import { MaybePromise } from "src/types";
 import { Box } from "src/ui/Box";
 import { Sprinkles } from "src/ui/sprinkles.css";
 
-interface ListProps<T> {
+interface ListProps<T> extends Pick<IntersectionAreaProps, "options"> {
   as: "ol" | "ul";
   css?: Sprinkles;
   fetchMore: (lastItem: T) => MaybePromise<void>;
   list: T[];
-  renderItem: (item: T) => ReactElement;
+  renderItem: (item: T) => ReactElement | ReactElement[];
 }
 
 // eslint-disable-next-line react/function-component-definition
-function List<T>({ list, as, css, renderItem, fetchMore }: ListProps<T>) {
+function List<T>({
+  list,
+  as,
+  css,
+  renderItem,
+  fetchMore,
+  options,
+}: ListProps<T>) {
   const handleFetchMore: IntersectionObserverCallback = ([
     { isIntersecting },
   ]) => {
@@ -26,7 +36,7 @@ function List<T>({ list, as, css, renderItem, fetchMore }: ListProps<T>) {
   return (
     <Box as={as} {...css}>
       {list.map((chatting) => renderItem(chatting))}
-      <IntersectionArea onIntersect={handleFetchMore}>
+      <IntersectionArea options={options} onIntersect={handleFetchMore}>
         <li />
       </IntersectionArea>
     </Box>
