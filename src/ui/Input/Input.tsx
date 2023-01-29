@@ -76,11 +76,13 @@ const Input = forwardRef(
             onClick={handleClickClose}
             onMouseDown={(e) => e.preventDefault()}
           >
-            <Icon
-              color={iconColor}
-              name={isValid ? "check" : "close-typing"}
-              size="24"
-            />
+            {onClearClick ? (
+              <Icon
+                color={iconColor}
+                name={isValid ? "check" : "close-typing"}
+                size="24"
+              />
+            ) : null}
           </Box>
         )}
         {rightNode}

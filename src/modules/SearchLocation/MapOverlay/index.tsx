@@ -1,52 +1,26 @@
-import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 import { useCenter, useMapContext } from "@r2don/react-naver-map";
 import { useRouter } from "next/router";
 
 import { useDebouncedCallback } from "src/hooks/useDebouncedCallback";
+import { useLocationConvert } from "src/hooks/useLocationConvert";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 
 import { Marker } from "../Marker";
 import { gpsIconBoxCss } from "../searchLocation.css";
-import { Location } from "../type";
 
 import { currentPositionIconBoxCss } from "./mapOverlay.css";
 
-interface MapOverlayProps {
-  location: Location;
-  setLocationInMap: Dispatch<SetStateAction<Location>>;
-}
-
-export const MapOverlay = ({ location, setLocationInMap }: MapOverlayProps) => {
+export const MapOverlay = () => {
   const { getCenter, setCenter } = useCenter();
+  const { getAddress } = useLocationConvert();
   const router = useRouter();
 
-  const getLocationAddress = useCallback(() => {
-    window.naver.maps.Service.reverseGeocode(
-      {
-        coords: getCenter(),
-        orders: [
-          naver.maps.Service.OrderType.ADDR,
-          naver.maps.Service.OrderType.ROAD_ADDR,
-        ].join(","),
-      },
-      (status: number, response: any) => {
-        if (status === 200) {
-          const { jibunAddress, roadAddress } = response.v2.address;
-          setLocationInMap({ jibunAddress, roadAddress });
-        }
-        if (status === 400) {
-          throw new Error("invalid request");
-        }
-        if (status === 500) {
-          throw new Error("unknown error / io error");
-        }
-      },
-    );
-  }, [setLocationInMap, getCenter]);
-
-  const debouncedCallback = useDebouncedCallback(getLocationAddress, 500);
+  const getAddressByDebounce = useDebouncedCallback(() => {
+    getAddress(getCenter());
+  }, 500);
   const map = useMapContext();
 
   const handleBack = () => {
@@ -57,15 +31,15 @@ export const MapOverlay = ({ location, setLocationInMap }: MapOverlayProps) => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       setCenter({ latitude, longitude });
-      getLocationAddress();
+      getAddress(getCenter());
     });
-  }, [setCenter, getLocationAddress]);
+  }, [setCenter, getAddress, getCenter]);
 
   useEffect(() => {
-    const listener = map.addListener("dragend", debouncedCallback);
+    const listener = map.addListener("dragend", getAddressByDebounce);
 
     return () => map.removeListener(listener);
-  }, [debouncedCallback, map]);
+  }, [getAddressByDebounce, map]);
 
   return (
     <Box height="full" width="full">
@@ -83,9 +57,7 @@ export const MapOverlay = ({ location, setLocationInMap }: MapOverlayProps) => {
         <Icon name="arrow-left" />
       </Box>
       <Marker
-        getLocationAddress={getLocationAddress}
         getLocationThroughCurrentPosition={getLocationThroughCurrentPosition}
-        location={location}
       />
       <Box
         className={currentPositionIconBoxCss}
