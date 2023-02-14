@@ -19,7 +19,7 @@
     "generate": "graphql-codegen"
   },
   "dependencies": {
-    "@fxts/core": "^0.11.0",
+    "@fxts/core": "^0.12.1",
     "@r2don/react-naver-map": "^0.0.10",
     "@radix-ui/react-alert-dialog": "^1.0.2",
     "@radix-ui/react-avatar": "^1.0.1",
