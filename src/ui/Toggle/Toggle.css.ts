@@ -7,6 +7,7 @@ export const toggleRootStyle = style([
   sprinkles({
     bg: "black7",
     br: "16",
+    height: "fit",
     minSize: "24",
     p: "2",
   }),
