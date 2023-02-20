@@ -1,5 +1,4 @@
-import { pipe, map, fromEntries } from "@fxts/core";
-import { GetServerSidePropsContext } from "next";
+import { fromEntries, map, pipe } from "@fxts/core";
 import { NextApiRequestCookies } from "next/dist/server/api-utils";
 
 export function parseCookie() {

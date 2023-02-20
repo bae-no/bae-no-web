@@ -50,6 +50,8 @@ const Input = forwardRef(
         className={inputContainerCss({ disabled, size, state, variant })}
         flexDirection="row"
         gap="8"
+        onBlur={toggleFocused}
+        onFocus={toggleFocused}
       >
         {leftNode}
         <Box
@@ -60,8 +62,6 @@ const Input = forwardRef(
           ref={ref}
           size="full"
           value={value}
-          onBlur={toggleFocused}
-          onFocus={toggleFocused}
           {...rest}
         />
         {focused && !rightNode && (

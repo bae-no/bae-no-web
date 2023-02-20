@@ -16,7 +16,8 @@ import { Typography } from "../Typography";
 
 import { AlertDialogContent } from "./Contents";
 
-interface PopupProps extends Pick<AlertDialogProps, "open" | "onOpenChange"> {
+export interface PopupProps
+  extends Pick<AlertDialogProps, "open" | "onOpenChange"> {
   buttonDirection?: "row" | "column";
   cancelText?: string;
   children?: ReactNode;

@@ -1,7 +1,9 @@
+import { useMyProfileQuery } from "src/graphql";
 import EditProfileForm from "src/modules/user/profile/EditProfileForm";
 import { Avatar } from "src/ui/Avatar";
 import { Container } from "src/ui/Container";
 import { Header, Layout } from "src/ui/Layout";
+import { prefetchQueriesOnServerSideWithAuth } from "src/utils/prefetchQueryOnServerSide";
 
 const ProfilePage = () => (
   <Layout
@@ -18,3 +20,9 @@ const ProfilePage = () => (
 );
 
 export default ProfilePage;
+
+export const getServerSideProps = prefetchQueriesOnServerSideWithAuth([
+  {
+    queryHook: useMyProfileQuery,
+  },
+]);

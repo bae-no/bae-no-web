@@ -1,6 +1,8 @@
 query myProfileQuery {
   myProfile {
+    introduce
     nickname
+    phoneNumber
   }
   myEndDealCount
 }
@@ -18,4 +20,8 @@ query userAddressQuery {
     system
     type
   }
+}
+
+mutation updateProfileMutation($input: UpdateProfileInput!) {
+  updateProfile(input: $input)
 }
