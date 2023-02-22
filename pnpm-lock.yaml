@@ -65,6 +65,7 @@ specifiers:
   jest: ^29.3.1
   jest-environment-jsdom: ^29.3.1
   jest-transformer-svg: ^2.0.0
+  jotai: ^2.0.2
   lottie-web: ^5.10.0
   mini-css-extract-plugin: ^2.7.1
   next: ^13.0.6
@@ -98,6 +99,7 @@ dependencies:
   framer-motion: 7.10.3_biqbaboplfbrettd7655fr4n2y
   graphql: 16.6.0
   graphql-tag: 2.12.6_graphql@16.6.0
+  jotai: 2.0.2_react@18.2.0
   lottie-web: 5.10.0
   next: 13.1.1_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
@@ -14274,6 +14276,18 @@ packages:
       '@sideway/formula': 3.0.1
       '@sideway/pinpoint': 2.0.0
     dev: true
+
+  /jotai/2.0.2_react@18.2.0:
+    resolution: {integrity: sha512-0yOked08Swa84LUbBjtj7ZLZrE05n3u50rHeZ+bsT86thUjcy0kFgQz9GmEWhYbQDFoT1G8Ww6edSj/MBJHO4A==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /js-sdsl/4.2.0:
     resolution: {integrity: sha512-dyBIzQBDkCqCu+0upx25Y2jGdbTGxE9fshMsCdK0ViOongpV+n5tXRcZY9v7CaVQ79AGS9KA1KHtojxiM7aXSQ==}

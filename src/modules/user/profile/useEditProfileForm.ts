@@ -7,9 +7,7 @@ import {
 } from "react-hook-form";
 
 export type EditProfileForm = {
-  desc: string;
-  nickname: string;
-  phoneNumber: string;
+  introduce: string;
 };
 
 export const useEditProfileForm: <

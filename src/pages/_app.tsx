@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import { domAnimation, LazyMotion } from "framer-motion";
 import Head from "next/head";
 
+import GlobalPopup from "src/components/GlobalPopup";
 import { queryClient } from "src/utils/queryClient";
 
 import type { AppProps } from "next/app";
@@ -26,6 +27,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
         name="viewport"
       />
     </Head>
+    <GlobalPopup />
     <QueryClientProvider client={queryClient}>
       <Hydrate
         state={
