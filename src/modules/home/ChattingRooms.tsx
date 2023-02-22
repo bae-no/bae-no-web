@@ -28,7 +28,7 @@ interface ShareDealListProps {
 
 const PAGE_SIZE = 10;
 
-const ShareDealList = ({
+export const ShareDealList = ({
   category,
   sortType,
   onSortChange,

@@ -1,59 +1,54 @@
-import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-import {
-  AddressSystem,
-  FoodCategory,
-  useInfiniteGetShareDealList,
-  useOpenShareDeal,
-} from "src/graphql";
-import { Button } from "src/ui/Button";
+import { useInfiniteGetShareDealList } from "src/graphql";
+import ChattingListSkeleton from "src/modules/Chat/ChattingList/ChattingListSkeleton";
+import { Box } from "src/ui/Box";
 
-export const ShareDealList = () => {
-  const a = "a";
-  const { data, isError } = useInfiniteGetShareDealList(
-    "input",
-    {
-      input: {
-        page: 1,
-        size: 10,
-      },
-    },
-    {
-      suspense: false,
-    },
-  );
+import ShareDealListBox from "./ShareDealListBox";
 
-  const { mutate, isLoading } = useOpenShareDeal();
-  const handleMutate = () => {
-    mutate({
-      input: {
-        category: FoodCategory.Chicken,
-        maxParticipant: 3,
-        orderPrice: 10000,
-        shareZone: {
-          addressDetail: "testDetail",
-          addressPath: "testPath",
-          addressSystem: AddressSystem.Road,
-          latitude: 30,
-          longitude: 30,
+const PAGE_SIZE = 15;
+const INIT_PAGE_NUMBER = 0;
+
+const ShareDealList = () => {
+  const router = useRouter();
+  const { keyword } = router.query as { [key: string]: string };
+
+  const { data, hasNextPage, fetchNextPage, isLoading } =
+    useInfiniteGetShareDealList(
+      "input",
+      {
+        input: {
+          keyword,
+          page: INIT_PAGE_NUMBER,
+          size: PAGE_SIZE,
         },
-        storeName: "테스트공유딜",
-        thumbnail: "testThumbnail",
-        title: "테스트공유딜",
       },
-    });
-  };
-  console.log(data, isError);
+      {
+        getNextPageParam: (lastPage, allPages) => {
+          if (lastPage.shareDeals.items.length === PAGE_SIZE)
+            return { keyword, page: allPages.length, size: PAGE_SIZE };
+        },
+        suspense: false,
+      },
+    );
 
   return (
-    <div>
-      <Button
-        onClick={() => {
-          handleMutate();
-        }}
-      >
-        testtest
-      </Button>
-    </div>
+    <Box marginTop="32" width="full">
+      {isLoading ? (
+        <>
+          <ChattingListSkeleton />
+          <ChattingListSkeleton />
+          <ChattingListSkeleton />
+        </>
+      ) : (
+        <ShareDealListBox
+          data={data}
+          fetchNextPage={fetchNextPage}
+          hasNextPage={hasNextPage}
+        />
+      )}
+    </Box>
   );
 };
+
+export default ShareDealList;

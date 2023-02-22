@@ -33,6 +33,8 @@ function List<T>({
     }
   };
 
+  if (!list) return null;
+
   return (
     <Box as={as} {...css}>
       {list.map((chatting) => renderItem(chatting))}

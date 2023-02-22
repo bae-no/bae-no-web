@@ -1,6 +1,6 @@
 import { reastorage } from "@reastorage/react";
 
-type RecentlySearch = { id: number; value: string }[];
+type RecentlySearch = string[];
 
 export const recentlySearch = reastorage<RecentlySearch, any>(
   "recentlySearchList",
