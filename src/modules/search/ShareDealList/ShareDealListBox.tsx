@@ -9,7 +9,7 @@ import { FindShareDealQuery, GetShareDealList } from "src/graphql";
 import ChattingItem from "src/modules/Chat/ChattingList/ChattingItem";
 import { Box } from "src/ui/Box";
 
-import { NoShareDeal } from "../NoShareDeal";
+import { NoShareDeal } from "../SVGModules/NoShareDeal";
 
 interface ShareDealListBoxProps {
   data: InfiniteData<GetShareDealList> | undefined;

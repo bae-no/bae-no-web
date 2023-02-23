@@ -8,8 +8,8 @@ import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 import { Input } from "src/ui/Input";
 
-const SEARCH_DETAIL_URL = "/search-detail";
-const SEARCH_DETAIL_RECENT_URL = "/search-detail/recent";
+const SEARCH_DETAIL_URL = "/search/detail";
+const SEARCH_DETAIL_RECENT_URL = "/search/recent";
 
 export const SearchHeader = () => {
   const setRecentlySearchList = useSetReastorage(recentlySearch);
@@ -34,7 +34,7 @@ export const SearchHeader = () => {
       if (!value) return prev;
       return [value, ...prev.filter((item) => item !== value)];
     });
-    router.replace({
+    router.push({
       pathname: SEARCH_DETAIL_URL,
       query: {
         keyword: value,
@@ -43,13 +43,15 @@ export const SearchHeader = () => {
     ref.current?.blur();
   };
 
-  const handleBackIconClick = () => {
-    router.back();
-  };
-
   const handleNextPage = () => {
-    if (router.pathname === SEARCH_DETAIL_RECENT_URL) return;
-    router[keyword ? "replace" : "push"]({
+    const { pathname } = router;
+    if (pathname === SEARCH_DETAIL_RECENT_URL) return;
+    if (pathname === SEARCH_DETAIL_URL) {
+      router.back();
+
+      return;
+    }
+    router.push({
       pathname: SEARCH_DETAIL_RECENT_URL,
     });
   };
@@ -63,9 +65,6 @@ export const SearchHeader = () => {
       width="full"
       onSubmit={handleSubmit}
     >
-      <Box cursor="pointer" onClick={handleBackIconClick}>
-        <Icon name="arrow-left" />
-      </Box>
       <Box width="full">
         <Input
           autoFocus={router.pathname === SEARCH_DETAIL_RECENT_URL}

@@ -8,7 +8,7 @@ import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 import { Typography } from "src/ui/Typography";
 
-const SEARCH_DETAIL_URL = "/search-detail";
+const SEARCH_DETAIL_URL = "/search/detail";
 
 export const RecentlyList = () => {
   const router = useRouter();
@@ -28,7 +28,7 @@ export const RecentlyList = () => {
 
   const handleRowClick = (value: string) => {
     router
-      .replace({
+      .push({
         pathname: SEARCH_DETAIL_URL,
         query: {
           keyword: value,

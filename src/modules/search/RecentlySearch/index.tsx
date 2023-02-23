@@ -4,7 +4,7 @@ import { recentlySearch } from "src/store/recentlySearch";
 import { Box } from "src/ui/Box";
 import { Typography } from "src/ui/Typography";
 
-import { NoRecentSearchContent } from "../NoRecentSearchContent";
+import { NoRecentSearchContent } from "../SVGModules/NoRecentSearchContent";
 
 import { RecentlyList } from "./RecentlyList";
 
@@ -29,7 +29,7 @@ const RecentlyTitleAndAllRemove = () => {
 };
 
 const RecentSearchContent = () => (
-  <Box gap="16" paddingTop="20" width="full">
+  <Box gap="16" marginTop="20" width="full">
     <RecentlyTitleAndAllRemove />
     <RecentlyList />
   </Box>
