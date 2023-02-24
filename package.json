@@ -37,7 +37,7 @@
     "@vanilla-extract/sprinkles": "^1.5.1",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.6",
-    "framer-motion": "^7.6.18",
+    "framer-motion": "^9.1.6",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "jotai": "^2.0.2",
