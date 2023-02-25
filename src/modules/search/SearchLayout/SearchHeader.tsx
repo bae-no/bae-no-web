@@ -1,6 +1,5 @@
 import { FormEvent, useEffect, useRef } from "react";
 
-import { useSetReastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 
 import { recentlySearch } from "src/store/recentlySearch";
@@ -12,7 +11,6 @@ const SEARCH_DETAIL_URL = "/search/detail";
 const SEARCH_DETAIL_RECENT_URL = "/search/recent";
 
 export const SearchHeader = () => {
-  const setRecentlySearchList = useSetReastorage(recentlySearch);
   const ref = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const { keyword } = router.query as { [key: string]: string };
@@ -30,10 +28,7 @@ export const SearchHeader = () => {
   const handleSubmit = (e: FormEvent<HTMLElement>) => {
     e.preventDefault();
     const value = ref.current?.value;
-    setRecentlySearchList((prev) => {
-      if (!value) return prev;
-      return [value, ...prev.filter((item) => item !== value)];
-    });
+    recentlySearch.actions.add(value);
     router.push({
       pathname: SEARCH_DETAIL_URL,
       query: {

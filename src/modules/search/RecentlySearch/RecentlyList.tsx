@@ -1,6 +1,6 @@
 import { MouseEvent } from "react";
 
-import { useReastorage } from "@reastorage/react";
+import { useReastorageValue } from "@reastorage/react";
 import { useRouter } from "next/router";
 
 import { recentlySearch } from "src/store/recentlySearch";
@@ -12,18 +12,14 @@ const SEARCH_DETAIL_URL = "/search/detail";
 
 export const RecentlyList = () => {
   const router = useRouter();
-  const [recentlySearchList, setRecentlySearchList] =
-    useReastorage(recentlySearch);
+  const recentlySearchList = useReastorageValue(recentlySearch);
 
   const handleDelete = (
     e: MouseEvent<HTMLElement, globalThis.MouseEvent>,
     value: string,
   ) => {
     e.stopPropagation();
-    const removedTargetList = recentlySearchList.filter(
-      (item) => item !== value,
-    );
-    setRecentlySearchList(removedTargetList);
+    recentlySearch.actions.remove(value);
   };
 
   const handleRowClick = (value: string) => {
@@ -35,10 +31,7 @@ export const RecentlyList = () => {
         },
       })
       .then(() => {
-        setRecentlySearchList((prev) => [
-          value,
-          ...prev.filter((item) => item !== value),
-        ]);
+        recentlySearch.actions.add(value);
       });
   };
 
@@ -56,7 +49,7 @@ export const RecentlyList = () => {
           <Typography color="black2" fontSize="body1-m">
             {item}
           </Typography>
-          <Box as="button" onClickCapture={(e) => handleDelete(e, item)}>
+          <Box as="button" onClick={(e) => handleDelete(e, item)}>
             <Icon color="black7" name="close-typing" />
           </Box>
         </Box>

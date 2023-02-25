@@ -1,4 +1,4 @@
-import { useReastorageValue, useSetReastorage } from "@reastorage/react";
+import { useReastorageValue } from "@reastorage/react";
 
 import { recentlySearch } from "src/store/recentlySearch";
 import { Box } from "src/ui/Box";
@@ -9,9 +9,8 @@ import { NoRecentSearchContent } from "../SVGModules/NoRecentSearchContent";
 import { RecentlyList } from "./RecentlyList";
 
 const RecentlyTitleAndAllRemove = () => {
-  const setRecentSearchList = useSetReastorage(recentlySearch);
   const handleResetList = () => {
-    setRecentSearchList([]);
+    recentlySearch.reset();
   };
 
   return (

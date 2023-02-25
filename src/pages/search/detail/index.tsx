@@ -4,17 +4,17 @@ import { SearchLayout } from "src/modules/search/SearchLayout";
 import ShareDealList from "src/modules/search/ShareDealList";
 import { Box } from "src/ui/Box";
 
+const ShareDealSkeleton = () => (
+  <Box width="full">
+    <ChattingListSkeleton />
+    <ChattingListSkeleton />
+    <ChattingListSkeleton />
+  </Box>
+);
+
 const SearchDetail = () => (
   <SearchLayout>
-    <SSRSafeSuspense
-      fallback={
-        <Box width="full">
-          <ChattingListSkeleton />
-          <ChattingListSkeleton />
-          <ChattingListSkeleton />
-        </Box>
-      }
-    >
+    <SSRSafeSuspense fallback={<ShareDealSkeleton />}>
       <ShareDealList />
     </SSRSafeSuspense>
   </SearchLayout>
