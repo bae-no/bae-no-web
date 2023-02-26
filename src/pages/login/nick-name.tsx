@@ -85,7 +85,6 @@ const NickName = () => {
     setNickNameStorage(inputValue);
     router.push("/search-location");
   };
-
   return (
     <Box
       className={pageMarginTop136}

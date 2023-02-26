@@ -7,7 +7,7 @@ import { Input } from "src/ui/Input";
 const SearchBar = () => (
   <Box
     as={Link}
-    href="search-detail"
+    href="/search/recent"
     position="relative"
     px="16"
     transform="yHalfPlus"

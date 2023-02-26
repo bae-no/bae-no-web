@@ -1,0 +1,24 @@
+query getShareDealList($input: FindShareDealInput!) {
+  shareDeals(input: $input) {
+    total
+    items {
+      category
+      coordinate {
+        latitude
+        longitude
+      }
+      createdAt
+      currentParticipants
+      id
+      maxParticipants
+      orderPrice
+      status
+      thumbnail
+      title
+    }
+  }
+}
+
+mutation openShareDeal($input: OpenShareDealInput!) {
+  openShareDeal(input: $input)
+}
