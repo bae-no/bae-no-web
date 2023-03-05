@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
 import { FormProvider, useController, useWatch } from "react-hook-form";
 
 import { LeaveReasonType, useLeaveMutation } from "src/graphql";
+import { useLogout } from "src/hooks/useLogout";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { FormField } from "src/ui/Form";
@@ -9,7 +9,6 @@ import { Input } from "src/ui/Input";
 import { Popup } from "src/ui/Popup";
 import { Select } from "src/ui/Select";
 import { TextArea } from "src/ui/TextArea";
-import { setCookie } from "src/utils/cookie";
 
 import { useLeaveForm, useLeaveFormContext } from "./useLeaveForm";
 
@@ -81,14 +80,10 @@ const BodyField = () => {
 
 const SubmitButton = () => {
   const { handleSubmit, watch } = useLeaveFormContext();
-  const router = useRouter();
+  const logout = useLogout();
+
   const { mutate } = useLeaveMutation({
-    onSuccess: () => {
-      setCookie("token", "", {
-        path: "/",
-      });
-      router.push("/login");
-    },
+    onSuccess: logout,
   });
 
   const handleFormSubmit = handleSubmit((data) => {
