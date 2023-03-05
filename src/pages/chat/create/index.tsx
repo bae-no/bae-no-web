@@ -1,4 +1,4 @@
-import { CreateChatForm } from "src/modules/Chat/CreateForm";
+import { CreateChatFirstStepForm } from "src/modules/Chat/CreateForm/FirstStepForm";
 import { Container } from "src/ui/Container";
 import { Header, Layout } from "src/ui/Layout";
 import { Typography } from "src/ui/Typography";
@@ -11,7 +11,7 @@ const CreatePage = () => (
         <br />
         정보를 입력해주세요.
       </Typography>
-      <CreateChatForm />
+      <CreateChatFirstStepForm />
     </Container>
   </Layout>
 );

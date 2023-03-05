@@ -6,15 +6,7 @@ import {
   UseFormReturn,
 } from "react-hook-form";
 
-import { FoodCategory } from "src/graphql";
-
-export type CreateChatForm = {
-  category: FoodCategory;
-  maxParticipant: number;
-  orderPrice: number;
-  storeName: string;
-  title: string;
-};
+import { CreateChatForm } from "./storage";
 
 export const useCreateChatForm: <
   TFields extends CreateChatForm,

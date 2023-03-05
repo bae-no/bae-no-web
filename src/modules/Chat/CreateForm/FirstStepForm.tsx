@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 
-import { useSetAtom } from "jotai";
+import { useReastorageValue, useSetReastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 import { FormProvider, RegisterOptions, useController } from "react-hook-form";
 
@@ -11,9 +11,11 @@ import { FormField } from "src/ui/Form";
 import { Input } from "src/ui/Input";
 import { Select } from "src/ui/Select";
 
-import { createChatFormAtom } from "./atom";
 import {
   CreateChatForm as CreateChatFormType,
+  createChatFormStorage,
+} from "./storage";
+import {
   useCreateChatForm,
   useCreateChatFormContext,
 } from "./useCreateChatForm";
@@ -108,7 +110,7 @@ const NumberFieldWithPrefix = ({
 const SubmitButton = () => {
   const { handleSubmit, watch } = useCreateChatFormContext();
   const fields = watch();
-  const setCreateChatFormAtom = useSetAtom(createChatFormAtom);
+  const setCreateChatFormAtom = useSetReastorage(createChatFormStorage);
 
   const router = useRouter();
 
@@ -131,8 +133,13 @@ const SubmitButton = () => {
   );
 };
 
-export const CreateChatForm = () => {
-  const form = useCreateChatForm({ mode: "onChange" });
+export const CreateChatFirstStepForm = () => {
+  const formValues = useReastorageValue(createChatFormStorage);
+  const form = useCreateChatForm({
+    defaultValues: formValues,
+    mode: "onChange",
+  });
+
   return (
     <FormProvider {...form}>
       <Box as="form" gap="16">
