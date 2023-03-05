@@ -64,8 +64,10 @@ const Header = ({
     as="header"
     backgroundColor={backgroundColor}
     className={headerCss}
+    flexDirection="row"
     justify="center"
     position="sticky"
+    px="16"
     top="0"
     zIndex={1}
   >

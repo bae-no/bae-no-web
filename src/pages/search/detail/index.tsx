@@ -3,6 +3,7 @@ import ChattingListSkeleton from "src/modules/Chat/ChattingList/ChattingListSkel
 import { SearchLayout } from "src/modules/search/SearchLayout";
 import ShareDealList from "src/modules/search/ShareDealList";
 import { Box } from "src/ui/Box";
+import { Header } from "src/ui/Layout";
 
 const ShareDealSkeleton = () => (
   <Box width="full">
@@ -13,7 +14,7 @@ const ShareDealSkeleton = () => (
 );
 
 const SearchDetail = () => (
-  <SearchLayout>
+  <SearchLayout leftNode={<Header.Back />}>
     <SSRSafeSuspense fallback={<ShareDealSkeleton />}>
       <ShareDealList />
     </SSRSafeSuspense>

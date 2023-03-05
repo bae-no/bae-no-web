@@ -28,13 +28,16 @@ export const SearchHeader = () => {
   const handleSubmit = (e: FormEvent<HTMLElement>) => {
     e.preventDefault();
     const value = ref.current?.value;
-    recentlySearch.actions.add(value);
-    router.push({
-      pathname: SEARCH_DETAIL_URL,
-      query: {
-        keyword: value,
-      },
-    });
+    router
+      .replace({
+        pathname: SEARCH_DETAIL_URL,
+        query: {
+          keyword: value,
+        },
+      })
+      .then(() => {
+        recentlySearch.actions.add(value);
+      });
     ref.current?.blur();
   };
 
@@ -42,7 +45,10 @@ export const SearchHeader = () => {
     const { pathname } = router;
     if (pathname === SEARCH_DETAIL_RECENT_URL) return;
     if (pathname === SEARCH_DETAIL_URL) {
-      router.back();
+      router.replace({
+        pathname: SEARCH_DETAIL_RECENT_URL,
+        query: router.query,
+      });
 
       return;
     }
