@@ -1,24 +1,32 @@
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 
 import { Box } from "src/ui/Box";
-import { Header, Layout } from "src/ui/Layout";
+import { Layout } from "src/ui/Layout";
 
 import { SearchHeader } from "./SearchHeader";
 
 interface SearchLayoutProps {
   children: ReactElement;
+  leftNode?: ReactNode;
   showBottomTab?: boolean;
 }
 
 export const SearchLayout = ({
   children,
   showBottomTab,
+  leftNode,
 }: SearchLayoutProps) => (
   <Layout
     headerProps={{
-      leftNode: <Header.Back />,
       mainNode: (
-        <Box paddingLeft="48" paddingRight="16" width="full">
+        <Box
+          alignItems="center"
+          flexDirection="row"
+          gap="8"
+          py="8"
+          width="full"
+        >
+          {leftNode}
           <SearchHeader />
         </Box>
       ),

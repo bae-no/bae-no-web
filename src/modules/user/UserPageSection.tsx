@@ -2,6 +2,7 @@ import { forwardRef, ReactNode } from "react";
 
 import Link from "next/link";
 
+import { useLogout } from "src/hooks/useLogout";
 import { ConditionalProps } from "src/types/ConditionalProps";
 import { Box } from "src/ui/Box";
 import { Popup } from "src/ui/Popup";
@@ -55,6 +56,26 @@ const Section = ({ children, title }: SectionProps) => (
   </Box>
 );
 
+interface LogoutPopupProps {
+  trigger: ReactNode;
+}
+
+const LogoutPopup = ({ trigger }: LogoutPopupProps) => {
+  const logout = useLogout();
+
+  return (
+    <Popup
+      cancelText="취소"
+      confirmText="로그아웃"
+      description="정말로 로그아웃 하실건가요?"
+      title="로그아웃"
+      onConfirm={logout}
+    >
+      {trigger}
+    </Popup>
+  );
+};
+
 const UserPageSection = () => (
   <Box gap="24">
     <Section title="서비스이용약관">
@@ -63,18 +84,14 @@ const UserPageSection = () => (
       <SectionItem name="버전" suffix="1.0v" />
     </Section>
     <Section title="계정관리">
-      <Popup
-        cancelText="취소"
-        confirmText="로그아웃"
-        description="정말로 로그아웃 하실건가요?"
-        title="로그아웃"
-      >
-        <SectionItem name="로그아웃" />
-      </Popup>
-      <SectionItem href="/leave" name="회원탈퇴" />
+      <LogoutPopup trigger={<SectionItem name="로그아웃" />} />
+      <SectionItem href="/user/leave" name="회원탈퇴" />
     </Section>
     <Section title="고객센터">
-      <SectionItem name="이메일로 문의하기" />
+      <SectionItem
+        href="mailto: leejj2002@naver.com"
+        name="이메일로 문의하기"
+      />
     </Section>
   </Box>
 );

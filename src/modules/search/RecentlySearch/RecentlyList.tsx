@@ -24,7 +24,7 @@ export const RecentlyList = () => {
 
   const handleRowClick = (value: string) => {
     router
-      .push({
+      .replace({
         pathname: SEARCH_DETAIL_URL,
         query: {
           keyword: value,

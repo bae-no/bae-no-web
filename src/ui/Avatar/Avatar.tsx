@@ -42,12 +42,14 @@ const Avatar = ({
 
   return (
     <Root className={avatarRootCss({ rootSize: size })}>
-      <Image
-        alt={alt}
-        className={avatarImageCss}
-        src={src}
-        onLoadingStatusChange={onLoadingStatusChange}
-      />
+      {src && (
+        <Image
+          alt={alt}
+          className={avatarImageCss}
+          src={src}
+          onLoadingStatusChange={onLoadingStatusChange}
+        />
+      )}
       <Fallback className={avatarFallbackCss({ size, type })}>
         {iconName && <Icon name={iconName} size="24" />}
         {text && text[0]}
