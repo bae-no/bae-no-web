@@ -9,7 +9,7 @@ import SearchBar from "src/modules/home/HomeHead/SearchBar";
 import UserInfo from "src/modules/home/HomeHead/UserInfo";
 import { Box } from "src/ui/Box";
 import { Header, Layout } from "src/ui/Layout";
-import { prefetchQueriesOnServerSide } from "src/utils/prefetchQueryOnServerSide";
+import { prefetchQueriesOnServerSideWithAuth } from "src/utils/prefetchQueryOnServerSide";
 
 const Home = () => {
   const [ref, backgroundColor] = useHeaderBackgroundColor();
@@ -42,7 +42,7 @@ const Home = () => {
 
 export default Home;
 
-export const getServerSideProps = prefetchQueriesOnServerSide([
+export const getServerSideProps = prefetchQueriesOnServerSideWithAuth([
   {
     queryHook: useHomeStaticQuery,
   },
