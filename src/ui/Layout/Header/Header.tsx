@@ -10,6 +10,28 @@ import { headerCss } from "./Header.css";
 import Notification from "./Notification";
 import Setting from "./Setting";
 
+interface SideProps {
+  children: ReactNode;
+  position: "left" | "right";
+}
+
+const Side = ({ children, position }: SideProps) => (
+  <Box
+    position="absolute"
+    top="half"
+    transform="yHalfMinus"
+    {...{ [position]: "16" }}
+  >
+    {typeof children === "string" ? (
+      <Typography color="black2" fontSize="body2-m">
+        {children}
+      </Typography>
+    ) : (
+      children
+    )}
+  </Box>
+);
+
 interface HeaderBaseProps {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   backgroundColor?: Sprinkles["backgroundColor"];
@@ -49,17 +71,15 @@ const Header = ({
     top="0"
     zIndex={1}
   >
-    {leftNode && <Box>{leftNode}</Box>}
+    {leftNode && <Side position="left">{leftNode}</Side>}
     {title ? (
-      <Box align="center" width="full">
-        <Typography as={as} fontSize="headline5">
-          {title}
-        </Typography>
-      </Box>
+      <Typography as={as} fontSize="headline5">
+        {title}
+      </Typography>
     ) : (
       mainNode
     )}
-    {rightNode && <Box>{rightNode}</Box>}
+    {rightNode && <Side position="right">{rightNode}</Side>}
   </Box>
 );
 

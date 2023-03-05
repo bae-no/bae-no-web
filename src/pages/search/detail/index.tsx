@@ -14,13 +14,7 @@ const ShareDealSkeleton = () => (
 );
 
 const SearchDetail = () => (
-  <SearchLayout
-    leftNode={
-      <Box paddingRight="8">
-        <Header.Back />
-      </Box>
-    }
-  >
+  <SearchLayout leftNode={<Header.Back />}>
     <SSRSafeSuspense fallback={<ShareDealSkeleton />}>
       <ShareDealList />
     </SSRSafeSuspense>

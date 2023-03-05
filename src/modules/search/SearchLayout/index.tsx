@@ -18,9 +18,15 @@ export const SearchLayout = ({
 }: SearchLayoutProps) => (
   <Layout
     headerProps={{
-      leftNode,
       mainNode: (
-        <Box py="8" width="full">
+        <Box
+          alignItems="center"
+          flexDirection="row"
+          gap="8"
+          py="8"
+          width="full"
+        >
+          {leftNode}
           <SearchHeader />
         </Box>
       ),
