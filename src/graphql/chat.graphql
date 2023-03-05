@@ -1,0 +1,10 @@
+query getChatList($input: FindChatInput!) {
+  chats(input: $input) {
+    id
+    lastContent
+    thumbnail
+    title
+    unreadCount
+    lastUpdatedAt
+  }
+}

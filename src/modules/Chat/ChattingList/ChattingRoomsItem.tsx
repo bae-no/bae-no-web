@@ -12,24 +12,24 @@ import { Label } from "src/ui/Label";
 import { Typography } from "src/ui/Typography";
 
 export interface ChattingRoomsItemProps {
-  avatarSrc: string;
-  chattingId: string;
   checkbox?: boolean;
-  date: string;
   ended: boolean;
-  lastChat: string;
-  notReadMessage: number;
+  id: string;
+  lastContent: string;
+  lastUpdatedAt: string;
+  thumbnail: string;
   title: string;
+  unreadCount: number;
 }
 
 const ChattingRoomsItem = ({
-  avatarSrc,
-  chattingId,
+  thumbnail,
+  id,
   checkbox,
-  date,
+  lastUpdatedAt,
   ended,
-  lastChat,
-  notReadMessage,
+  lastContent,
+  unreadCount,
   title,
 }: ChattingRoomsItemProps) => {
   const { setValue } = useFormContext();
@@ -49,14 +49,27 @@ const ChattingRoomsItem = ({
     return { x: 0 };
   })();
 
+  const getFormattiedDate = (date: string) => {
+    if (!date) return;
+
+    const dateTypedDate = new Date(date);
+    const [year, month, day] = [
+      dateTypedDate.getFullYear(),
+      String(dateTypedDate.getMonth() + 1).padStart(2, "0"),
+      String(dateTypedDate.getDate()).padStart(2, "0"),
+    ];
+
+    return `${year}-${month}-${day}`;
+  };
+
   return (
     <Box as="li" flexDirection="row" position="relative">
       <LazyDomMaxMotion>
         {checkbox && (
           <CheckBox
-            id={chattingId}
-            value={chattingId}
-            onCheckedChange={(checked) => setValue(chattingId, checked)}
+            id={id}
+            value={id}
+            onCheckedChange={(checked) => setValue(id, checked)}
           />
         )}
         <MotionBox
@@ -71,17 +84,19 @@ const ChattingRoomsItem = ({
           dragElastic={0.2}
           height="64"
           justify="space-between"
-          px="16"
+          // px="16"
           py="4"
           width="full"
           onDragEnd={handleDragEnd}
         >
           <Box align="center" direction="row" gap="16" width="max">
-            <Avatar size="48" src={avatarSrc} />
+            <Box>
+              <Avatar size="48" src={thumbnail} />
+            </Box>
             <Box as="span" gap="2">
               <Typography fontSize="body1-b">{title}</Typography>
               <Typography color="black2" fontSize="body2-m">
-                {lastChat}
+                {lastContent}
               </Typography>
             </Box>
           </Box>
@@ -92,12 +107,14 @@ const ChattingRoomsItem = ({
             justify="space-between"
             {...(ended && { paddingBottom: "32" })}
           >
-            <Typography color="black4" fontSize="caption1-m">
-              {date}
-            </Typography>
+            <Box width="max">
+              <Typography color="black4" fontSize="caption1-m">
+                {getFormattiedDate(lastUpdatedAt)}
+              </Typography>
+            </Box>
             {!ended && (
               <Label color="primary" variant="border">
-                <Typography fontSize="caption1-m">{notReadMessage}</Typography>
+                <Typography fontSize="caption1-m">{unreadCount}</Typography>
               </Label>
             )}
           </Box>
