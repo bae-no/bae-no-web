@@ -10,6 +10,7 @@ export const MainSearchIcon = () => (
     position="absolute"
     top="half"
     transform="halfMinus"
+    width="full"
   >
     <MainSearchSvg />
     <Typography textAlign="center">

@@ -2,15 +2,15 @@ import { Box } from "src/ui/Box";
 import { Typography } from "src/ui/Typography";
 
 import NoRecentSearchSvg from "./no-recent-search.svg";
-import { iconMarginBottom128 } from "./noRecentSearch.css";
 
 export const NoRecentSearchContent = () => (
   <Box
     alignItems="center"
-    className={iconMarginBottom128}
     gap="16"
-    height="full"
-    justifyContent="center"
+    left="half"
+    position="absolute"
+    top="half"
+    transform="halfMinus"
   >
     <NoRecentSearchSvg />
     <Typography color="black2" fontSize="body1-m">
