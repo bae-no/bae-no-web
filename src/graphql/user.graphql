@@ -25,3 +25,7 @@ query userAddressQuery {
 mutation updateProfileMutation($input: UpdateProfileInput!) {
   updateProfile(input: $input)
 }
+
+mutation leaveMutation($input: LeaveUserInput!) {
+  leave(input: $input)
+}

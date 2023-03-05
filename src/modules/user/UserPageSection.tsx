@@ -71,7 +71,7 @@ const UserPageSection = () => (
       >
         <SectionItem name="로그아웃" />
       </Popup>
-      <SectionItem href="/leave" name="회원탈퇴" />
+      <SectionItem href="/user/leave" name="회원탈퇴" />
     </Section>
     <Section title="고객센터">
       <SectionItem name="이메일로 문의하기" />

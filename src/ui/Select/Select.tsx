@@ -2,6 +2,7 @@ import { ForwardedRef, forwardRef, useMemo, useState } from "react";
 
 import { Box } from "../Box";
 import { Icon } from "../Icon";
+import { Sprinkles } from "../sprinkles.css";
 import { Typography } from "../Typography";
 
 import { SelectBottomDrawer } from "./SelectBottomDrawer";
@@ -13,6 +14,8 @@ interface SelectProps
     "title" | "onValueChange" | "value" | "options"
   > {
   placeholder: string;
+  placeholderColor?: Sprinkles["color"];
+  showArrow?: boolean;
   size?: "small" | "large";
 }
 
@@ -24,6 +27,8 @@ const Select = (
     options,
     title,
     onValueChange,
+    showArrow = true,
+    placeholderColor = "black4",
     ...rest
   }: SelectProps,
   ref: ForwardedRef<HTMLDivElement>,
@@ -60,12 +65,14 @@ const Select = (
           {...rest}
         >
           <Typography
-            color={isSmall || value ? "black2" : "black4"}
+            color={isSmall || value ? "black2" : placeholderColor}
             fontSize={`body${isSmall ? "3" : "1"}-m`}
           >
             {selectLabel || placeholder}
           </Typography>
-          <Icon color={isSmall ? "black2" : "black4"} name="arrow-bottom" />
+          {showArrow && (
+            <Icon color={isSmall ? "black2" : "black4"} name="arrow-bottom" />
+          )}
         </Box>
       }
       value={value}
