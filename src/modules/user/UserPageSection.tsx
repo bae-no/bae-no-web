@@ -74,7 +74,10 @@ const UserPageSection = () => (
       <SectionItem href="/leave" name="회원탈퇴" />
     </Section>
     <Section title="고객센터">
-      <SectionItem name="이메일로 문의하기" />
+      <SectionItem
+        href="mailto: leejj2002@naver.com"
+        name="이메일로 문의하기"
+      />
     </Section>
   </Box>
 );
