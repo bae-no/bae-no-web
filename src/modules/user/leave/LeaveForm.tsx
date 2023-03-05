@@ -7,6 +7,7 @@ import { Button } from "src/ui/Button";
 import { Container } from "src/ui/Container";
 import { FormField } from "src/ui/Form";
 import { Input } from "src/ui/Input";
+import { Popup } from "src/ui/Popup";
 import { Select } from "src/ui/Select";
 import { TextArea } from "src/ui/TextArea";
 import { setCookie } from "src/utils/cookie";
@@ -97,15 +98,23 @@ const SubmitButton = () => {
 
   const { name, type } = watch();
   return (
-    <Container bottom="48" left="0" position="fixed" width="full">
-      <Button
-        disabled={[name, type].some((value) => !value)}
-        size="l"
-        onClick={handleFormSubmit}
-      >
-        탈퇴하기
-      </Button>
-    </Container>
+    <Popup
+      cancelText="취소"
+      confirmText="탈퇴하기"
+      description="배달비노노를 정말로 떠나실건가요?"
+      title="탈퇴하기"
+      onConfirm={handleFormSubmit}
+    >
+      <Box bottom="48" left="0" position="fixed" px="16" width="full">
+        <Button
+          disabled={[name, type].some((value) => !value)}
+          size="l"
+          type="button"
+        >
+          탈퇴하기
+        </Button>
+      </Box>
+    </Popup>
   );
 };
 
