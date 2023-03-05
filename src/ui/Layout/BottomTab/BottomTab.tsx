@@ -31,7 +31,7 @@ const BottomTab = () => (
       <Box
         as={Link}
         className={addIconCss}
-        href="/create-chat"
+        href="/chat/create"
         position="relative"
         title="채팅방 생성"
         top="0"

@@ -1,0 +1,8 @@
+query categoryListQuery {
+  categories {
+    foodCatalog {
+      code
+      name
+    }
+  }
+}
