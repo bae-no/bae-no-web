@@ -1,6 +1,7 @@
-import { memo, useState } from "react";
+import { memo, useState, useRef } from "react";
 
 import { PanInfo } from "framer-motion";
+import { useRouter } from "next/router";
 import { useFormContext } from "react-hook-form";
 
 import LazyDomMaxMotion from "src/components/LazyDomMaxMotion";
@@ -33,7 +34,9 @@ const ChattingRoomsItem = ({
   title,
 }: ChattingRoomsItemProps) => {
   const { setValue } = useFormContext();
+  const router = useRouter();
   const [show나가기, setShow나가기] = useState(false);
+  const mouseMoveRef = useRef(false);
 
   const handleDragEnd = (_: any, { offset }: PanInfo) => {
     if (offset.x < -44) {
@@ -66,8 +69,29 @@ const ChattingRoomsItem = ({
     return `${year}-${month}-${day}`;
   };
 
+  const handleRouteDetailPage = () => {
+    if (mouseMoveRef.current || show나가기) return;
+    router.push({
+      pathname: "/chat/[id]",
+      query: {
+        id,
+      },
+    });
+  };
+
   return (
-    <Box as="li" flexDirection="row" width="full">
+    <Box
+      as="li"
+      flexDirection="row"
+      width="full"
+      onClick={handleRouteDetailPage}
+      onMouseDown={() => {
+        mouseMoveRef.current = false;
+      }}
+      onMouseMove={() => {
+        mouseMoveRef.current = true;
+      }}
+    >
       <LazyDomMaxMotion>
         {checkbox && (
           <CheckBox
