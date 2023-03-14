@@ -3,58 +3,11 @@ import { Dispatch, ReactElement, SetStateAction, useCallback } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ConditionalRender } from "src/components/ConditionalRender";
+import { useLeaveChat } from "src/graphql";
 import { Box } from "src/ui/Box";
 import { Header, Layout } from "src/ui/Layout";
 import { Popup } from "src/ui/Popup";
 import { Typography } from "src/ui/Typography";
-
-let MOCK_CHATTINGS = [
-  {
-    avatarSrc: "a",
-    chattingId: "2",
-    date: "2022.04.12",
-    ended: false,
-    lastChat: "마지막 대화내용이 ..... 내용",
-    notReadMessage: 9,
-    title: "나는 피자가 좋다",
-  },
-  {
-    avatarSrc: "a",
-    chattingId: "1",
-    date: "2022.04.12",
-    ended: false,
-    lastChat: "마지막 대화내용이 ..... 내용",
-    notReadMessage: 10,
-    title: "나는 치킨이 좋다",
-  },
-  {
-    avatarSrc: "a",
-    chattingId: "3",
-    date: "2022.04.12",
-    ended: false,
-    lastChat: "마지막 대화내용이 ..... 내용",
-    notReadMessage: 51,
-    title: "나는 햄버거가 좋다",
-  },
-  {
-    avatarSrc: "a",
-    chattingId: "5",
-    date: "2022.04.12",
-    ended: false,
-    lastChat: "마지막 대화내용이 ..... 내용",
-    notReadMessage: 99,
-    title: "나는 보쌈이 좋다",
-  },
-  {
-    avatarSrc: "a",
-    chattingId: "6",
-    date: "2022.04.12",
-    ended: false,
-    lastChat: "마지막 대화내용이 ..... 내용",
-    notReadMessage: 103,
-    title: "나는 감자이 좋다",
-  },
-];
 
 interface ChatLayoutProps {
   children: ReactElement;
@@ -74,28 +27,34 @@ export const ChatLayout = ({
   toggleDelete,
 }: ChatLayoutProps) => {
   const methods = useForm();
+  const { mutate } = useLeaveChat({
+    onSettled: () => {
+      setDeleteMode(false);
+    },
+  });
 
   const onSubmit = useCallback(() => {
     toggleDeleteModal();
   }, [toggleDeleteModal]);
+
   const onCancel = useCallback(() => {
     toggleDeleteModal();
     methods.reset();
   }, [methods, toggleDeleteModal]);
+
   const onConfirm = useCallback(() => {
     toggleDeleteModal();
     setDeleteMode(false);
-
-    Object.entries(methods.watch()).map((x) => {
-      if (x[1]) {
-        MOCK_CHATTINGS = MOCK_CHATTINGS.filter((y) => y.chattingId !== x[0]);
-        return x;
-      }
-      return x;
+    Object.entries(methods.getValues()).forEach(([key, value]) => {
+      if (!value) return;
+      mutate({
+        input: {
+          shareDealId: key,
+        },
+      });
     });
-
     methods.reset();
-  }, [methods, toggleDeleteModal, setDeleteMode]);
+  }, [methods, mutate, setDeleteMode, toggleDeleteModal]);
 
   return (
     <>
