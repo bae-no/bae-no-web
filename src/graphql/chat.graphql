@@ -8,3 +8,7 @@ query getChatList($input: FindChatInput!) {
     lastUpdatedAt
   }
 }
+
+mutation leaveChat($input: LeaveShareDealInput!) {
+  leaveShareDeal(input: $input)
+}

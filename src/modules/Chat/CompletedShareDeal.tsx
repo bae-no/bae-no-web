@@ -30,7 +30,7 @@ export const CompletedShareDeal = ({ deleteMode }: CompletedShareDealProps) => {
           checkbox={deleteMode}
           key={item.id}
           {...item}
-          ended={false}
+          ended
         />
       )}
     />

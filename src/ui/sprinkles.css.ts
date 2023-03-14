@@ -60,6 +60,7 @@ const responsiveProperties = defineProperties({
     right: layout,
     textAlign: ["center", "left", "right"],
     textDecoration: ["overLine", "underLine"],
+    textOverflow: ["ellipsis"],
     top: layout,
     transform,
     whiteSpace: [
