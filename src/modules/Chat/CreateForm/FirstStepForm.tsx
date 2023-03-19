@@ -128,15 +128,17 @@ const SubmitButton = () => {
   });
 
   return (
-    <Box bottom="48" left="0" position="fixed" px="16" width="full">
-      <Button
-        disabled={Object.values(fields).some((value) => !value)}
-        size="l"
-        type="button"
-        onClick={handleFormSubmit}
-      >
-        다음
-      </Button>
+    <Box height="128">
+      <Box bottom="48" left="0" position="fixed" px="16" width="full">
+        <Button
+          disabled={Object.values(fields).some((value) => !value)}
+          size="l"
+          type="button"
+          onClick={handleFormSubmit}
+        >
+          다음
+        </Button>
+      </Box>
     </Box>
   );
 };
