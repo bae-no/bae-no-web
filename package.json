@@ -71,7 +71,7 @@
     "@swc/core": "^1.3.21",
     "@swc/jest": "^0.2.23",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^14.0.0",
     "@types/navermaps": "^3.6.1",
     "@types/node": "^18.11.10",
     "@types/react": "^18.0.26",
