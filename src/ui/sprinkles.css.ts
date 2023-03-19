@@ -25,6 +25,9 @@ const responsiveProperties = defineProperties({
     borderTopWidth: space,
     borderWidth: space,
     bottom: layout,
+    boxShadow: {
+      overlay: "0px 0px 5px rgba(0, 0, 0, 0.2);",
+    },
     boxSizing: ["border-box", "content-box"],
     cursor: ["pointer"],
     display: ["none", "flex", "block", "inline-block", "inline", "grid"],
@@ -76,7 +79,7 @@ const responsiveProperties = defineProperties({
     ],
     width: layout,
     wordBreak: ["break-all", "keep-all", "break-word", "normal"],
-    zIndex: [-1, 0, 1, 2, 3, 4, 5],
+    zIndex: [-1, 0, 1, 2, 3, 4, 5, 100],
   },
   responsiveArray: ["mobile", "tablet", "desktop"],
   shorthands: {
