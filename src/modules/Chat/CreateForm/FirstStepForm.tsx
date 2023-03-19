@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 
-import { useReastorageValue, useSetReastorage } from "@reastorage/react";
+import { useSetReastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
 import { FormProvider, RegisterOptions, useController } from "react-hook-form";
 
@@ -12,6 +12,7 @@ import { Input } from "src/ui/Input";
 import { Select } from "src/ui/Select";
 
 import {
+  CreateChatForm,
   CreateChatForm as CreateChatFormType,
   createChatFormStorage,
 } from "./storage";
@@ -49,12 +50,17 @@ const Field = ({
 
 const CategoryField = () => {
   const { setValue, control } = useCreateChatFormContext();
-  const { data } = useCategoryListQuery({}, { suspense: false });
+  const { data } = useCategoryListQuery(undefined, {
+    enabled: false,
+    suspense: false,
+  });
+
   const { field } = useController({
     control,
     name: "category",
     rules: { required: true },
   });
+
   return (
     <FormField label="카테고리">
       <Select
@@ -95,7 +101,9 @@ const NumberFieldWithPrefix = ({
         {...field}
         {...inputProps}
         value={
-          field.value !== undefined ? String(field.value) + prefix : field.value
+          field.value !== undefined
+            ? String(field.value) + prefix
+            : field.value ?? ""
         }
         onChange={(e) => {
           const { value } = e.target;
@@ -134,9 +142,13 @@ const SubmitButton = () => {
 };
 
 export const CreateChatFirstStepForm = () => {
-  const formValues = useReastorageValue(createChatFormStorage);
   const form = useCreateChatForm({
-    defaultValues: formValues,
+    defaultValues: async () =>
+      new Promise<CreateChatForm>((resolve) => {
+        setTimeout(() => {
+          resolve(createChatFormStorage.get());
+        }, 10);
+      }),
     mode: "onChange",
   });
 

@@ -1,7 +1,9 @@
+import { useCategoryListQuery } from "src/graphql";
 import { CreateChatFirstStepForm } from "src/modules/Chat/CreateForm/FirstStepForm";
 import { Container } from "src/ui/Container";
 import { Header, Layout } from "src/ui/Layout";
 import { Typography } from "src/ui/Typography";
+import { prefetchQueriesOnServerSide } from "src/utils/prefetchQueryOnServerSide";
 
 const CreatePage = () => (
   <Layout headerProps={{ leftNode: <Header.Back /> }}>
@@ -17,3 +19,9 @@ const CreatePage = () => (
 );
 
 export default CreatePage;
+
+export const getServerSideProps = prefetchQueriesOnServerSide([
+  {
+    queryHook: useCategoryListQuery,
+  },
+]);
