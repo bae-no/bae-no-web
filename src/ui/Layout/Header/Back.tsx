@@ -3,9 +3,14 @@ import { useRouter } from "next/router";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 
-const Back = () => {
+interface BackProps {
+  onClick?: () => void;
+}
+
+const Back = ({ onClick }: BackProps) => {
   const router = useRouter();
   const handleGoBack = () => {
+    onClick?.();
     router.back();
   };
 
