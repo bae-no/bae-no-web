@@ -11,6 +11,7 @@ import { EnrollParams } from "./detailLocationType";
 
 export const DetailLocationInputBox = () => {
   const { jibunAddress, roadAddress } = useReastorageValue(locationStorage);
+
   const { register, resetField } = useFormContext<EnrollParams>();
 
   return (
@@ -24,7 +25,7 @@ export const DetailLocationInputBox = () => {
             </Typography>
           </Label>
         }
-        value={roadAddress ?? jibunAddress}
+        value={roadAddress || jibunAddress}
         variant="underline"
       />
       <Input

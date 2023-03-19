@@ -16,8 +16,8 @@ const SubmitButton = () => {
 
   const { setShareZone } = useReastorageActions(createChatFormStorage);
 
-  const handleFormSubmit = handleSubmit((data) => {
-    setShareZone(data);
+  const handleFormSubmit = handleSubmit(() => {
+    setShareZone({ addressDetail });
     router.push("/chat/create/confirm");
   });
 

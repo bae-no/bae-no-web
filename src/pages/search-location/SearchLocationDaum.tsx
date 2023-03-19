@@ -59,8 +59,7 @@ const SearchLocationDaum = () => {
           roadAddress ?? jibunAddress,
           roadAddress ? "road" : "jibun",
         );
-        router.back();
-        router.push(nextUrl);
+        router.replace(nextUrl);
       },
       theme: THEME_OBJ,
       width,
