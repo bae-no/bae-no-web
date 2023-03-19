@@ -19,6 +19,6 @@ query getShareDealList($input: FindShareDealInput!) {
   }
 }
 
-mutation openShareDeal($input: OpenShareDealInput!) {
+mutation openShareDealMutation($input: OpenShareDealInput!) {
   openShareDeal(input: $input)
 }
