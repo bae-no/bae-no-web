@@ -22,3 +22,11 @@ query getShareDealList($input: FindShareDealInput!) {
 mutation openShareDeal($input: OpenShareDealInput!) {
   openShareDeal(input: $input)
 }
+
+mutation startShareDeal($input: StartShareDealInput!) {
+  startShareDeal(input: $input)
+}
+
+mutation endShareDeal($input: EndShareDealInput!) {
+  endShareDeal(input: $input)
+}

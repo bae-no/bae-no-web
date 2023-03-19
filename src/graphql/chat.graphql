@@ -12,3 +12,28 @@ query getChatList($input: FindChatInput!) {
 mutation leaveChat($input: LeaveShareDealInput!) {
   leaveShareDeal(input: $input)
 }
+
+query getChatDetail($input: FindChatDetailInput!) {
+  chatDetail(input: $input) {
+    authorName
+    content
+    id
+    type
+    writtenByMe
+  }
+}
+
+query ChatStatus($input: FindShareDealStatusInput!) {
+  shareDealStatus(input: $input) {
+    canEnd
+    canStart
+    isOwner
+    participants {
+      id
+      introduce
+      isMe
+      isOwner
+      nickname
+    }
+  }
+}
