@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 
 import { useReastorageValue } from "@reastorage/react";
+import { useRouter } from "next/router";
 import Script from "next/script";
 
 import { useOpenShareDealMutation } from "src/graphql";
@@ -17,6 +18,7 @@ import { Header } from "src/ui/Layout";
 import { getDistanceFromCoordinates } from "src/utils/getDistanceFromCoordinates";
 
 const ConfirmPage = () => {
+  const router = useRouter();
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const createChatForm = useReastorageValue(createChatFormStorage);
   const { category, maxParticipant, orderPrice, shareZone, storeName, title } =
@@ -31,9 +33,12 @@ const ConfirmPage = () => {
   const [isNaverMapReady, setIsNaverMapReady] = useState(false);
 
   const { mutate } = useOpenShareDealMutation({
-    onSuccess: () => {
-      createChatFormStorage.reset();
-      // TODO: 채팅방으로 이동
+    onSuccess: ({ openShareDeal: { shareDealId } }) => {
+      window.history.go(-4);
+      setTimeout(() => {
+        router.push("/chat/[id]", { query: { id: shareDealId } });
+        createChatFormStorage.reset();
+      }, 100);
     },
   });
 

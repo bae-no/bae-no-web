@@ -15,6 +15,7 @@ export const recentlySearchedShareZonesStorage = reastorage(
     actions: (prev) =>
       ({
         add: (value: RecentlySearchedShareZone) => {
+          if (!value.path) return prev;
           const isAlreadyExist = prev?.find((v) => v.path === value.path);
           if (isAlreadyExist) return prev;
           return [value, ...(prev ?? []).slice(0, 9)];

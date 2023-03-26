@@ -9,7 +9,7 @@ import SearchBar from "src/modules/home/HomeHead/SearchBar";
 import UserInfo from "src/modules/home/HomeHead/UserInfo";
 import LocationSelector from "src/modules/home/LocationSelector";
 import { Box } from "src/ui/Box";
-import { Header, Layout } from "src/ui/Layout";
+import { Layout } from "src/ui/Layout";
 import { prefetchQueriesOnServerSideWithAuth } from "src/utils/prefetchQueryOnServerSide";
 
 const Home = () => {
@@ -27,7 +27,7 @@ const Home = () => {
               <LocationSelector.Trigger />
             </LocationSelector>
           ),
-          rightNode: <Header.Notification />,
+          // rightNode: <Header.Notification />, // TODO: 알람기능 추후 출시
         }}
       >
         <Box gap="56">
