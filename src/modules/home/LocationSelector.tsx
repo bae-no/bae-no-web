@@ -1,10 +1,18 @@
 import { cloneElement, ReactElement } from "react";
 
-import { useReastorage, useReastorageValue } from "@reastorage/react";
+import {
+  useReastorage,
+  useReastorageValue,
+  useSetReastorage,
+} from "@reastorage/react";
 
 import { useDeleteAddressMutation, useUserAddressQuery } from "src/graphql";
 import { useToggle } from "src/hooks/useToggle";
-import { currentShareZoneStorage } from "src/store/shareZone";
+import {
+  currentShareZoneStorage,
+  RecentlySearchedShareZone,
+  showShareZoneTooltipStorage,
+} from "src/store/shareZone";
 import { PullToCloseBottomDrawer } from "src/ui/BottomDrawer";
 import { Box } from "src/ui/Box";
 import Divider from "src/ui/Divider";
@@ -53,6 +61,12 @@ const LocationSelector = ({ children }: LocationSelectorProps) => {
     onSuccess: () => refetch(),
   });
 
+  const setShowShareZoneTooltip = useSetReastorage(showShareZoneTooltipStorage);
+  const handleClick = (shareZone: RecentlySearchedShareZone) => {
+    setShowShareZoneTooltip(true);
+    setCurrentShareZone(shareZone);
+  };
+
   return (
     <PullToCloseBottomDrawer
       open={open}
@@ -81,7 +95,7 @@ const LocationSelector = ({ children }: LocationSelectorProps) => {
               shareZone={shareZone}
             />
           )}
-          onClick={setCurrentShareZone}
+          onClick={handleClick}
           onRemove={({ key }) => mutate({ id: key as string })}
         />
       </SearchLocation>

@@ -33,3 +33,8 @@ export const currentShareZoneStorage = reastorage(
   "current-share-zone",
   {} as RecentlySearchedShareZone,
 );
+
+export const showShareZoneTooltipStorage = reastorage(
+  "show-share-zone-tooltip",
+  false,
+);

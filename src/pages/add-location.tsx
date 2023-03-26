@@ -15,7 +15,10 @@ import { DetailLocationInputBox } from "src/modules/SearchLocation/DetailLocatio
 import { EnrollParams } from "src/modules/SearchLocation/DetailLocation/detailLocationType";
 import { LocationTypeRadioBox } from "src/modules/SearchLocation/DetailLocation/LocationTypeRadioBox";
 import { locationStorage, positionStorage } from "src/store/login";
-import { currentShareZoneStorage } from "src/store/shareZone";
+import {
+  currentShareZoneStorage,
+  showShareZoneTooltipStorage,
+} from "src/store/shareZone";
 import { Box } from "src/ui/Box";
 import { Header, Layout } from "src/ui/Layout";
 
@@ -30,6 +33,7 @@ const AddLocation = () => {
   const { mutate } = useAppendAddressMutation();
 
   const setCurrentShareZone = useSetReastorage(currentShareZoneStorage);
+  const setShowShareZoneTooltip = useSetReastorage(showShareZoneTooltipStorage);
 
   const form = useForm<EnrollParams>();
   const handleSubmit = form.handleSubmit((data) => {
@@ -57,6 +61,7 @@ const AddLocation = () => {
           setCurrentShareZone(address);
           queryClient.invalidateQueries(useUserAddressQuery.getKey());
           router.back();
+          setShowShareZoneTooltip(true);
         },
       },
     );
