@@ -22,6 +22,14 @@ query userAddressQuery {
   }
 }
 
+mutation appendAddressMutation($input: AddressInput!) {
+  appendAddress(input: $input)
+}
+
+mutation deleteAddressMutation($id: ID!) {
+  deleteAddress(key: $id)
+}
+
 mutation updateProfileMutation($input: UpdateProfileInput!) {
   updateProfile(input: $input)
 }

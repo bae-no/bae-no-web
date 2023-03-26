@@ -3,10 +3,11 @@ import {
   useHeaderBackgroundColor,
 } from "src/components/HeadWithBackgroundColor";
 import MetaTags from "src/components/MetaTags";
-import { useHomeStaticQuery } from "src/graphql";
+import { useHomeStaticQuery, useUserAddressQuery } from "src/graphql";
 import ChattingRooms from "src/modules/home/ChattingRooms";
 import SearchBar from "src/modules/home/HomeHead/SearchBar";
 import UserInfo from "src/modules/home/HomeHead/UserInfo";
+import LocationSelector from "src/modules/home/LocationSelector";
 import { Box } from "src/ui/Box";
 import { Header, Layout } from "src/ui/Layout";
 import { prefetchQueriesOnServerSideWithAuth } from "src/utils/prefetchQueryOnServerSide";
@@ -21,8 +22,12 @@ const Home = () => {
         showBottomTab
         headerProps={{
           backgroundColor,
+          mainNode: (
+            <LocationSelector>
+              <LocationSelector.Trigger />
+            </LocationSelector>
+          ),
           rightNode: <Header.Notification />,
-          title: "홈", // TODO: 홈 title 변경
         }}
       >
         <Box gap="56">
@@ -45,5 +50,8 @@ export default Home;
 export const getServerSideProps = prefetchQueriesOnServerSideWithAuth([
   {
     queryHook: useHomeStaticQuery,
+  },
+  {
+    queryHook: useUserAddressQuery,
   },
 ]);

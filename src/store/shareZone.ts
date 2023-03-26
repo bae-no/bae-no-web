@@ -1,40 +1,34 @@
 import { reastorage } from "@reastorage/react";
 
-import { CreateShareZoneInput } from "src/graphql";
+import { UserAddressQuery } from "src/graphql";
 
-type ShareZones = "chat" | "home";
+type ShareZone = UserAddressQuery["addresses"][number];
+type OptionalFields = "detail" | "alias" | "key";
 
-export type RecentlySearchedShareZone = Omit<
-  CreateShareZoneInput,
-  "addressDetail"
->;
+export type RecentlySearchedShareZone = Omit<ShareZone, OptionalFields> &
+  Partial<Pick<ShareZone, OptionalFields>>;
 
 export const recentlySearchedShareZonesStorage = reastorage(
   "recent-share-zones",
-  {} as Record<ShareZones, Array<RecentlySearchedShareZone> | undefined>,
+  [] as Array<RecentlySearchedShareZone> | undefined,
   {
     actions: (prev) =>
       ({
-        add: (key: ShareZones, value: RecentlySearchedShareZone) => {
-          const isAlreadyExist = prev[key]?.find(
-            (v) => v.addressPath === value.addressPath,
-          );
+        add: (value: RecentlySearchedShareZone) => {
+          const isAlreadyExist = prev?.find((v) => v.path === value.path);
           if (isAlreadyExist) return prev;
-          return {
-            ...prev,
-            [key]: [value, ...(prev[key] ?? []).slice(0, 9)],
-          };
+          return [value, ...(prev ?? []).slice(0, 9)];
         },
-        remove(
-          key: ShareZones,
-          value: RecentlySearchedShareZone["addressPath"],
-        ) {
-          const removedTargetList = prev[key]?.filter(
-            (item) => item.addressPath !== value,
-          );
+        remove(value: RecentlySearchedShareZone["path"]) {
+          const removedTargetList = prev?.filter((item) => item.path !== value);
 
-          return { ...prev, [key]: removedTargetList };
+          return removedTargetList;
         },
       } as const),
   },
+);
+
+export const currentShareZoneStorage = reastorage(
+  "current-share-zone",
+  {} as RecentlySearchedShareZone,
 );

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { useReastorageActions, useReastorageValue } from "@reastorage/react";
 
-import { AddressSystem } from "src/graphql";
+import { AddressSystem, AddressType } from "src/graphql";
 import { useMounted } from "src/hooks/useMounted";
 import DetailLocationForm from "src/modules/Chat/CreateForm/DetailLocationForm";
 import { createChatFormStorage } from "src/modules/Chat/CreateForm/storage";
@@ -23,17 +23,19 @@ const SetShareZone = () => {
 
   useEffect(() => {
     if (!isMounted) return;
-    const shareZone = {
-      ...position,
-      addressPath: location.roadAddress || location.jibunAddress || "",
-      addressSystem: location.jibunAddress
-        ? AddressSystem.Jibun
-        : AddressSystem.Road,
-    };
+    const path = location.roadAddress || location.jibunAddress || "";
+    const system = location.jibunAddress
+      ? AddressSystem.Jibun
+      : AddressSystem.Road;
 
-    recentlySearchedShareZonesActions.add("chat", shareZone);
+    recentlySearchedShareZonesActions.add({
+      coordinate: position,
+      path,
+      system,
+      type: AddressType.Etc,
+    });
 
-    setShareZone(shareZone);
+    setShareZone({ ...position, addressPath: path, addressSystem: system });
   }, [
     location,
     position,
