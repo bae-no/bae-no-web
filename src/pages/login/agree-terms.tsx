@@ -7,6 +7,8 @@ import { Button } from "src/ui/Button";
 import { Header, Layout } from "src/ui/Layout";
 import { Typography } from "src/ui/Typography";
 
+// TODO: 회원가입 되면 `showShareZoneTooltipStorage` true로 변경
+
 const AgreeTermsAndConditions = () => {
   const method = useForm<TermsAndConditions>();
 

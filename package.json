@@ -26,8 +26,10 @@
     "@radix-ui/react-checkbox": "^1.0.1",
     "@radix-ui/react-dialog": "^1.0.2",
     "@radix-ui/react-radio-group": "^1.1.0",
+    "@radix-ui/react-separator": "^1.0.2",
     "@radix-ui/react-switch": "^1.0.1",
     "@radix-ui/react-tabs": "^1.0.1",
+    "@radix-ui/react-tooltip": "^1.0.5",
     "@reastorage/react": "^1.2.1",
     "@tanstack/react-query": "^4.19.0",
     "@tanstack/react-query-devtools": "^4.19.1",
@@ -46,7 +48,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^3.1.4",
-    "react-hook-form": "^7.40.0",
+    "react-hook-form": "^7.43.7",
     "react-is": "^18.2.0"
   },
   "devDependencies": {

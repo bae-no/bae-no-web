@@ -3,6 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import {
   AddressSystem,
+  AddressType,
   useEnrollUserLocationNicknameMutation,
 } from "src/graphql";
 import { ConfirmLocationInMap } from "src/modules/SearchLocation/DetailLocation/ConfirmLocationInMap";
@@ -17,6 +18,11 @@ import {
 } from "src/store/login";
 import { Box } from "src/ui/Box";
 import { Header, Layout } from "src/ui/Layout";
+
+const ALIAS_PRESET_MAP = {
+  [AddressType.Home]: "우리집",
+  [AddressType.Work]: "회사",
+} as const;
 
 const DetailLocation = () => {
   const router = useRouter();
@@ -35,7 +41,9 @@ const DetailLocation = () => {
     mutate({
       input: {
         address: {
-          alias: addressAlias,
+          alias:
+            addressAlias ||
+            ALIAS_PRESET_MAP[addressType as keyof typeof ALIAS_PRESET_MAP],
           coordinate: position,
           detail: addressDetail,
           path: location.roadAddress ?? location.jibunAddress,

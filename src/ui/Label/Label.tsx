@@ -10,11 +10,11 @@ interface Props {
 
 export type LabelProps = Props & LabelCss;
 
-const Label = ({ children, color, variant }: LabelProps) => (
+const Label = ({ children, color, variant, size }: LabelProps) => (
   <Box
     alignItems="center"
     as="label"
-    className={[labelCss({ color, variant })]}
+    className={[labelCss({ color, size, variant })]}
     display="inline-block"
     flexDirection="row"
     justifyContent="center"
