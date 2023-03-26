@@ -31,7 +31,7 @@ const SearchLocationMap = () => {
   });
 
   const handleClick = () => {
-    router.push(nextUrl);
+    router.replace(nextUrl);
   };
 
   if (!isScriptLoad)
