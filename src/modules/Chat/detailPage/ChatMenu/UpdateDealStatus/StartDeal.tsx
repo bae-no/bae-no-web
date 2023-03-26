@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useStartShareDeal } from "src/graphql";
 import { Button } from "src/ui/Button";
 
-import { MenuContext } from "../MenuLayout";
+import { MenuLayoutContext } from "../MenuLayout";
 
 import { UpdateDealStatus } from "./UpdateDealStatus";
 import { UpdateModal } from "./UpdateModal";
@@ -13,9 +13,9 @@ import { UpdateModal } from "./UpdateModal";
 export const StartDeal = ({ isActive }: { isActive?: boolean }) => {
   const router = useRouter();
   const { id } = router.query as { [key: string]: string };
-  const { toggle } = useContext(MenuContext);
+  const { setOpen } = useContext(MenuLayoutContext);
   const { mutate } = useStartShareDeal({
-    onSuccess: toggle,
+    onSuccess: () => setOpen(false),
   });
 
   const handleStart = () => {

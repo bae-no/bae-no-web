@@ -13,7 +13,7 @@ const contentCloseAnimation = keyframes({
   "100%": { transform: "translateX(100%)" },
 });
 
-const contentBaseCss = style([
+export const contentBaseCss = style([
   sprinkles({
     backgroundColor: "white",
     height: "full",
@@ -59,7 +59,7 @@ const overlayCloseAnimation = keyframes({
   },
 });
 
-const overlayBaseCss = style([
+export const overlayBaseCss = style([
   sprinkles({
     height: "full",
     inset: "0",

@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useMemo } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useMemo,
+  useState,
+} from "react";
 
 import {
   Root,
@@ -11,35 +18,30 @@ import {
 import { useToggle } from "src/hooks/useToggle";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
-import { Typography } from "src/ui/Typography";
 
 import GuideModal from "../../GuideModal";
 
-import { contentCss, overlayCss } from "./chatMenu.css";
-import { Divider } from "./Divider";
+import {
+  contentCss,
+  overlayCss,
+  contentBaseCss,
+  overlayBaseCss,
+} from "./chatMenu.css";
 
-interface GuideTriggerProps {
-  toggleGuideModal: () => void;
+interface MenuLayoutContextType {
+  animationOn: boolean;
+  isSideMenuOpen: boolean;
+  setAnimationOn: Dispatch<SetStateAction<boolean>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  toggleGuide: () => void;
 }
 
-const GuideTrigger = ({ toggleGuideModal }: GuideTriggerProps) => (
-  <Box
-    alignItems="center"
-    cursor="pointer"
-    flexDirection="row"
-    justifyContent="space-between"
-    py="24"
-    width="full"
-    onClick={toggleGuideModal}
-  >
-    <Typography fontSize="body2-b">공유딜 이용 가이드</Typography>
-    <Icon name="arrow-right" size="12" />
-  </Box>
-);
-
-export const MenuContext = createContext({
-  isOpen: false,
-  toggle: () => {},
+export const MenuLayoutContext = createContext<MenuLayoutContextType>({
+  animationOn: true,
+  isSideMenuOpen: false,
+  setAnimationOn: () => {},
+  setOpen: () => {},
+  toggleGuide: () => {},
 });
 
 interface ChatMenuProps {
@@ -47,46 +49,69 @@ interface ChatMenuProps {
 }
 
 export const ChatMenuLayout = ({ children }: ChatMenuProps) => {
-  const [isOpen, toggle] = useToggle(false);
-  const [isGuideModalOpen, toggleGuideModal] = useToggle(false);
+  const [isOpen, setOpen] = useState(false);
+  const [animationOn, setAnimationOn] = useState(true);
+  const [isGuideOpen, toggleGuide] = useToggle(false);
 
-  const contextProviderValue = useMemo(
-    () => ({ isOpen, toggle }),
-    [isOpen, toggle],
+  const menuLayoutContextValue = useMemo(
+    () => ({
+      animationOn,
+      isSideMenuOpen: isOpen,
+      setAnimationOn,
+      setOpen,
+      toggleGuide,
+    }),
+    [animationOn, isOpen, toggleGuide],
   );
 
-  const handleGuideClose = () => {
-    toggle();
-    toggleGuideModal();
+  const handleGuideCloseCallback = () => {
+    setAnimationOn(true);
+    toggleGuide();
+    setOpen(true);
   };
 
   return (
-    <Root open={isOpen}>
-      <Trigger onClick={toggle}>
-        <Box cursor="pointer">
-          <Icon name="hamburger" />
-        </Box>
-      </Trigger>
-      {!isGuideModalOpen ? (
-        <Portal>
-          <Overlay className={overlayCss({ isOpen })} onClick={toggle} />
-          <Content className={contentCss({ isOpen })}>
-            <Box px="16">
-              <GuideTrigger toggleGuideModal={toggleGuideModal} />
-              <Divider />
-              <MenuContext.Provider value={contextProviderValue}>
-                {children}
-              </MenuContext.Provider>
-            </Box>
-          </Content>
-        </Portal>
-      ) : (
-        <GuideModal
-          defaultOpen
-          closeCallback={handleGuideClose}
-          trigger={null}
-        />
-      )}
-    </Root>
+    <div>
+      <Root open={isOpen}>
+        <Trigger onClick={() => setOpen(true)}>
+          <Box cursor="pointer">
+            <Icon name="hamburger" />
+          </Box>
+        </Trigger>
+        {!isGuideOpen ? (
+          <Portal>
+            <Overlay
+              className={
+                menuLayoutContextValue.animationOn
+                  ? overlayCss({
+                      isOpen,
+                    })
+                  : overlayBaseCss
+              }
+              onClick={() => setOpen(false)}
+            />
+            <Content
+              className={
+                menuLayoutContextValue.animationOn
+                  ? contentCss({ isOpen })
+                  : contentBaseCss
+              }
+            >
+              <Box px="16">
+                <MenuLayoutContext.Provider value={menuLayoutContextValue}>
+                  {children}
+                </MenuLayoutContext.Provider>
+              </Box>
+            </Content>
+          </Portal>
+        ) : (
+          <GuideModal
+            defaultOpen
+            closeCallback={handleGuideCloseCallback}
+            trigger={null}
+          />
+        )}
+      </Root>
+    </div>
   );
 };

@@ -1,5 +1,5 @@
-import { Box } from "src/ui/Box";
+import { Box, BoxProps } from "src/ui/Box";
 
-export const Divider = () => (
-  <Box borderColor="black7" borderStyle="solid" borderWidth="1" />
+export const Divider = (props: BoxProps) => (
+  <Box borderColor="black7" borderStyle="solid" borderWidth="1" {...props} />
 );

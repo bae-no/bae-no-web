@@ -3,7 +3,9 @@ import { useRouter } from "next/router";
 import { useChatStatus } from "src/graphql";
 import { Box } from "src/ui/Box";
 
+import { ChatMenuFooter } from "./ChatMenuFooter";
 import { Divider } from "./Divider";
+import { GuideTrigger } from "./GuideModalTrigger";
 import { ChatMenuLayout } from "./MenuLayout";
 import { Participants } from "./Participants";
 import { SettingDeal } from "./SettingDeal";
@@ -26,6 +28,8 @@ export const ChatMeun = () => {
 
   return (
     <ChatMenuLayout>
+      <GuideTrigger />
+      <Divider />
       <Box py="24">
         <SettingDeal />
         <StartDeal isActive={data?.shareDealStatus.canStart} />
@@ -33,8 +37,9 @@ export const ChatMeun = () => {
       </Box>
       <Divider />
       <Participants participants={data?.shareDealStatus.participants} />
-      <Box bottom="0" position="absolute">
-        밑에것들
+      <Box bottom="0" left="0" position="absolute" width="full">
+        <Divider />
+        <ChatMenuFooter shareDealStatus={data?.shareDealStatus} />
       </Box>
     </ChatMenuLayout>
   );

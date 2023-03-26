@@ -75,6 +75,7 @@ const ChattingRoomsItem = ({
 
       return;
     }
+    if (checkbox) return;
     router.push({
       pathname: "/chat/[id]",
       query: {
