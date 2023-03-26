@@ -18,7 +18,7 @@ interface CookieOptions {
   secure?: boolean;
 }
 
-const parseCookieOptions = (options?: CookieOptions) => {
+export const parseCookieOptions = (options?: CookieOptions) => {
   if (!options) return "";
   const { domain, expires, httpOnly, path, sameSite, secure } = options;
   return [
