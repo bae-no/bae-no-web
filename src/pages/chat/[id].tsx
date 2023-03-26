@@ -1,7 +1,4 @@
-const ChattingRoomPage = () => {
-  const a = "a";
-
-  return <div>ChattingRoomPage</div>;
-};
+const ChattingRoomPage = () => <div>ChattingRoomPage</div>;
+;
 
 export default ChattingRoomPage;
