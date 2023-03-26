@@ -48,8 +48,8 @@ interface GetServerSideQuery<
 }
 
 // prettier-ignore
-export const prefetchQueriesOnServerSide = <TQueryHook extends QueryHook, TContext extends  GetServerSidePropsContext | GetStaticPropsContext>(
-  queryObjects: Array<GetServerSideQuery<TQueryHook,TContext>>,
+export const prefetchQueriesOnServerSide = <TQueryHook extends Array<QueryHook>, TContext extends  GetServerSidePropsContext | GetStaticPropsContext>(
+  queryObjects: Array<GetServerSideQuery<TQueryHook[number],TContext>>,
 ) => async (context: TContext) => {
   const token = getCookie('token', (context as GetServerSidePropsContext).req?.cookies);
   
@@ -73,8 +73,8 @@ export const prefetchQueriesOnServerSide = <TQueryHook extends QueryHook, TConte
 };
 
 // prettier-ignore
-export const prefetchQueriesOnServerSideWithAuth = <TQueryHook extends QueryHook, TContext extends  GetServerSidePropsContext>(
-    queryObjects: Array<GetServerSideQuery<TQueryHook,TContext>>,
+export const prefetchQueriesOnServerSideWithAuth = <TQueryHook extends Array<QueryHook>, TContext extends  GetServerSidePropsContext>(
+    queryObjects: Array<GetServerSideQuery<TQueryHook[number],TContext>>,
   ) =>
   async (context: TContext) => {
     const { token } = context.req.cookies;

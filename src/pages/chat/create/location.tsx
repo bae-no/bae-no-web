@@ -22,7 +22,7 @@ const SetLocationPage = () => (
         width="full"
       />
       <Container>
-        <SearchLocation.RecentLocation from="chat" />
+        <SearchLocation.RecentLocation title="최근 검색한 배달 공유존" />
       </Container>
     </Box>
   </SearchLocation>

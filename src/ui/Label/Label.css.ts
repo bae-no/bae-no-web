@@ -5,7 +5,6 @@ import { sprinkles } from "../sprinkles.css";
 import { colors } from "../tokens/color";
 
 const defaultCss = sprinkles({
-  borderRadius: "4",
   minWidth: "64",
   py: "4",
   textAlign: "center",
@@ -22,7 +21,15 @@ export const labelCss = recipe({
     fontCss({ fontSize: "caption1-b" }),
     sprinkles({ height: "fit", px: "8" }),
   ],
-  defaultVariants: { color: "orange", variant: "default" },
+  compoundVariants: [
+    { style: defaultCss, variants: { size: "medium", variant: "default" } },
+    {
+      style: sprinkles({ px: "4", py: "2" }),
+      variants: { size: "small", variant: "default" },
+    },
+    { style: borderCss, variants: { size: "medium", variant: "border" } },
+  ],
+  defaultVariants: { color: "orange", size: "medium", variant: "default" },
   variants: {
     color: {
       gray: {
@@ -42,9 +49,13 @@ export const labelCss = recipe({
         color: colors.white,
       },
     },
+    size: {
+      medium: {},
+      small: sprinkles({ px: "4", py: "2" }),
+    },
     variant: {
-      border: borderCss,
-      default: defaultCss,
+      border: {},
+      default: sprinkles({ br: "4" }),
     },
   },
 });
