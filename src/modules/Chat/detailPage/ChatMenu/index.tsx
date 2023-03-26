@@ -30,12 +30,16 @@ export const ChatMeun = () => {
     <ChatMenuLayout>
       <GuideTrigger />
       <Divider />
-      <Box py="24">
-        <SettingDeal />
-        <StartDeal isActive={data?.shareDealStatus.canStart} />
-        <EndDeal isActive={data?.shareDealStatus.canEnd} />
-      </Box>
-      <Divider />
+      {data?.shareDealStatus.isOwner && (
+        <>
+          <Box py="24">
+            <SettingDeal />
+            <StartDeal isActive={data?.shareDealStatus.canStart} />
+            <EndDeal isActive={data?.shareDealStatus.canEnd} />
+          </Box>
+          <Divider />
+        </>
+      )}
       <Participants participants={data?.shareDealStatus.participants} />
       <Box bottom="0" left="0" position="absolute" width="full">
         <Divider />

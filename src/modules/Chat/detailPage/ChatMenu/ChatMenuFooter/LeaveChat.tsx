@@ -52,7 +52,7 @@ export const LeaveChat = ({ shareDealStatus }: LeaveChatProps) => {
       isActive={!progressing}
       title="채팅방 나가기"
     >
-      <Box as="button" flexDirection="row" gap="8">
+      <Box flexDirection="row" gap="8">
         <Icon name="log-out" />
         <Typography color="black2" fontSize="body2-m">
           나가기

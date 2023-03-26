@@ -19,7 +19,7 @@ export const Participants = ({ participants }: ParticipantsProps) => (
       </Typography>
     </Box>
     {participants?.map((participant) => (
-      <ParticipantRenderRow {...participant} />
+      <ParticipantRenderRow key={participant.id} {...participant} />
     ))}
   </Box>
 );

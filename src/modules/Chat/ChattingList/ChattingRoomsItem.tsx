@@ -80,6 +80,7 @@ const ChattingRoomsItem = ({
       pathname: "/chat/[id]",
       query: {
         id,
+        title,
       },
     });
   };
