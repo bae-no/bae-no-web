@@ -1,0 +1,14 @@
+query getChatList($input: FindChatInput!) {
+  chats(input: $input) {
+    id
+    lastContent
+    thumbnail
+    title
+    unreadCount
+    lastUpdatedAt
+  }
+}
+
+mutation leaveChat($input: LeaveShareDealInput!) {
+  leaveShareDeal(input: $input)
+}

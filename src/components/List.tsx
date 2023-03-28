@@ -11,7 +11,7 @@ import { Sprinkles } from "src/ui/sprinkles.css";
 interface ListProps<T> extends Pick<IntersectionAreaProps, "options"> {
   as: "ol" | "ul";
   css?: Sprinkles;
-  fetchMore: (lastItem: T) => MaybePromise<void>;
+  fetchMore?: (lastItem: T) => MaybePromise<void>;
   list: T[];
   renderItem: (item: T) => ReactElement | ReactElement[];
 }
@@ -28,7 +28,7 @@ function List<T>({
   const handleFetchMore: IntersectionObserverCallback = ([
     { isIntersecting },
   ]) => {
-    if (isIntersecting) {
+    if (isIntersecting && fetchMore) {
       fetchMore(list.at(-1) as T);
     }
   };
