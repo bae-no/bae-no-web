@@ -118,7 +118,7 @@ const JoinChatPage = () => {
           zIndex={100}
         >
           <Button size="l" type="button" onClick={handleSubmit}>
-            완료
+            참여하기
           </Button>
         </Box>
       </Box>
