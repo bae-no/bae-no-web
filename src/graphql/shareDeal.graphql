@@ -24,3 +24,26 @@ mutation openShareDealMutation($input: OpenShareDealInput!) {
     shareDealId
   }
 }
+
+query getShareDeal($shareDealId: ID!) {
+  shareDeal(id: $shareDealId) {
+    category
+    maxParticipants
+    orderPrice
+    shareZone {
+      system
+      path
+      detail
+      coordinate {
+        longitude
+        latitude
+      }
+    }
+    title
+    storeName
+  }
+}
+
+mutation joinShareDeal($input: JoinShareDealInput!) {
+  joinShareDeal(input: $input)
+}
