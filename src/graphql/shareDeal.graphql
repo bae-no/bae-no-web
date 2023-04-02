@@ -1,22 +1,21 @@
 query getShareDealList($input: FindShareDealInput!) {
   shareDeals(input: $input) {
-    total
     items {
-      category
-      coordinate {
-        latitude
-        longitude
-      }
-      createdAt
-      currentParticipants
-      id
-      maxParticipants
-      orderPrice
-      status
-      thumbnail
-      title
       isParticipant
+      title
+      thumbnail
+      status
+      orderPrice
+      maxParticipants
+      id
+      currentParticipants
+      createdAt
+      coordinate {
+        longitude
+        latitude
+      }
     }
+    total
   }
 }
 
