@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
 import { AuthType, useSignInMutation } from "src/graphql";
@@ -7,7 +8,7 @@ import { UserAccessPermissionInfo } from "src/modules/Login/Acess/UserAccessPerm
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { Typography } from "src/ui/Typography";
-import { setCookie } from "src/utils/cookie";
+import { parseCookieOptions } from "src/utils/cookie";
 import { addDate } from "src/utils/date";
 
 type AuthProvider = "Kakao" | "Google" | "Apple";
@@ -17,32 +18,11 @@ const isAuthProvider = (arg: string): arg is AuthProvider =>
 
 const AccessPage = () => {
   const router = useRouter();
-  const { type, code } = router.query as { [key: string]: string };
-  const { mutate, isLoading } = useSignInMutation({
-    onSuccess: (data) => {
-      if (data?.signIn.accessToken === undefined) return;
-      setCookie("token", data?.signIn.accessToken, {
-        expires: addDate(new Date(), 14),
-        path: "/",
-      });
-    },
-  });
 
   useEffect(() => {
     if (!router.isReady) return;
     Notification.requestPermission();
-    const pascalMutationType = type.replace(/^[a-z]/, (char) =>
-      char.toUpperCase(),
-    );
-    if (isAuthProvider(pascalMutationType)) {
-      mutate({
-        input: {
-          code,
-          type: AuthType[pascalMutationType],
-        },
-      });
-    }
-  }, [type, mutate, code, router.isReady]);
+  }, [router.isReady]);
 
   const handleClick = () => {
     router.push("verification");
@@ -57,11 +37,55 @@ const AccessPage = () => {
         </Typography>
         <UserAccessPermissionInfo />
       </Box>
-      <Button disabled={isLoading} onClick={handleClick}>
-        확인
-      </Button>
+      <Button onClick={handleClick}>확인</Button>
     </Box>
   );
 };
 
 export default AccessPage;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { type, code } = context.query;
+  if (!type)
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: true,
+      },
+    };
+
+  try {
+    const pascalMutationType = (type as string).replace(/^[a-z]/, (char) =>
+      char.toUpperCase(),
+    );
+
+    if (isAuthProvider(pascalMutationType)) {
+      const {
+        signIn: { accessToken },
+      } = await useSignInMutation.fetcher({
+        input: {
+          code: code as string,
+          type: AuthType[pascalMutationType],
+        },
+      })();
+
+      context.res.setHeader(
+        "Set-Cookie",
+        `token=${accessToken}; ${parseCookieOptions({
+          expires: addDate(new Date(), 14),
+          path: "/",
+        })}`,
+      );
+    }
+    return {
+      props: {},
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: true,
+      },
+    };
+  }
+};
