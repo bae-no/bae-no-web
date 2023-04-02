@@ -25,6 +25,7 @@ const ChattingItem = ({
     status,
     thumbnail,
     title,
+    isParticipant,
   },
 }: ChattingItemProps) => {
   const router = useRouter();
@@ -32,7 +33,7 @@ const ChattingItem = ({
   const distance = getDistanceFromCoordinates(coordinate, coordinate);
   const handleRouteJoinPage = () => {
     router.push({
-      pathname: "/chat/join/[id]",
+      pathname: isParticipant ? "/chat/[id]" : "/chat/join/[id]",
       query: { id },
     });
   };
