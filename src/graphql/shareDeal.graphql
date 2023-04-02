@@ -47,4 +47,10 @@ query getShareDeal($shareDealId: ID!) {
 
 mutation joinShareDeal($input: JoinShareDealInput!) {
   joinShareDeal(input: $input)
+mutation startShareDeal($input: StartShareDealInput!) {
+  startShareDeal(input: $input)
+}
+
+mutation endShareDeal($input: EndShareDealInput!) {
+  endShareDeal(input: $input)
 }

@@ -27,10 +27,15 @@ const TOTAL_STEPS = STEP_MAP.length;
 
 interface GuideModalProps
   extends Pick<AlertDialogPrimitives.AlertDialogProps, "defaultOpen"> {
+  closeCallback?: () => void;
   trigger: ReactNode;
 }
 
-const GuideModal = ({ defaultOpen, trigger }: GuideModalProps) => {
+const GuideModal = ({
+  defaultOpen,
+  trigger,
+  closeCallback,
+}: GuideModalProps) => {
   const setNeverShowAgain = useSetReastorage(guideStorage);
   const [step, setStep] = useState(0);
   const StepComponent = STEP_MAP[step];
@@ -50,6 +55,7 @@ const GuideModal = ({ defaultOpen, trigger }: GuideModalProps) => {
 
   const handleClose = () => {
     if (showAgainChecked) setNeverShowAgain(true);
+    if (closeCallback) closeCallback();
   };
 
   return (
