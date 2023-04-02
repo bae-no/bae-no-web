@@ -1,21 +1,22 @@
 query getShareDealList($input: FindShareDealInput!) {
   shareDeals(input: $input) {
-    total
     items {
+      isParticipant
+      title
+      thumbnail
+      status
+      orderPrice
+      maxParticipants
+      id
+      currentParticipants
+      createdAt
       category
       coordinate {
-        latitude
         longitude
+        latitude
       }
-      createdAt
-      currentParticipants
-      id
-      maxParticipants
-      orderPrice
-      status
-      thumbnail
-      title
     }
+    total
   }
 }
 
@@ -25,6 +26,28 @@ mutation openShareDealMutation($input: OpenShareDealInput!) {
   }
 }
 
+query getShareDeal($shareDealId: ID!) {
+  shareDeal(id: $shareDealId) {
+    category
+    maxParticipants
+    orderPrice
+    shareZone {
+      system
+      path
+      detail
+      coordinate {
+        longitude
+        latitude
+      }
+    }
+    title
+    storeName
+  }
+}
+
+mutation joinShareDeal($input: JoinShareDealInput!) {
+  joinShareDeal(input: $input)
+}
 mutation startShareDeal($input: StartShareDealInput!) {
   startShareDeal(input: $input)
 }

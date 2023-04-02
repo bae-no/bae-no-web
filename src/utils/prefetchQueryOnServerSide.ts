@@ -59,6 +59,7 @@ export const prefetchQueriesOnServerSide = <TQueryHook extends Array<QueryHook>,
         options,
         variables,
       } = getParams?.(context) ?? {};
+
       return {
         fetch: queryHook.fetcher(variables, {...options, ...(token ? { Authorization: `Bearer ${token}` } : {})}),
         key: queryHook.getKey(variables),
@@ -77,7 +78,7 @@ export const prefetchQueriesOnServerSideWithAuth = <TQueryHook extends Array<Que
     queryObjects: Array<GetServerSideQuery<TQueryHook[number],TContext>>,
   ) =>
   async (context: TContext) => {
-    const { token } = context.req.cookies;
+    const { token } = context.req.cookies; 
     if (!token) return { redirect: { destination: "/login", permanent: true } };
 
     return prefetchQueriesOnServerSide(queryObjects)(context);

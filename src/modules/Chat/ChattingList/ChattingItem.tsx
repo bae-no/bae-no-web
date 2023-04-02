@@ -1,5 +1,7 @@
 import { memo } from "react";
 
+import { useRouter } from "next/router";
+
 import { FindShareDealQuery, ShareDealStatus } from "src/graphql";
 import { InferArray } from "src/types";
 import { Avatar } from "src/ui/Avatar";
@@ -23,17 +25,28 @@ const ChattingItem = ({
     status,
     thumbnail,
     title,
+    isParticipant,
   },
 }: ChattingItemProps) => {
+  const router = useRouter();
   const isClose = status === ShareDealStatus.Close;
   const distance = getDistanceFromCoordinates(coordinate, coordinate);
+  const handleRouteJoinPage = () => {
+    router.push({
+      pathname: isParticipant ? "/chat/[id]" : "/chat/join/[id]",
+      query: { id },
+    });
+  };
+
   return (
     <Box
       align="center"
       as="li"
+      cursor="pointer"
       direction="row"
       justify="space-between"
       key={id}
+      onClick={handleRouteJoinPage}
     >
       <Box align="center" direction="row" gap="16">
         <Avatar size="48" src={thumbnail} />

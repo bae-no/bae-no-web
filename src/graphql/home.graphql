@@ -16,6 +16,7 @@ query findShareDealQuery($input: FindShareDealInput!) {
     items {
       category
       currentParticipants
+      isParticipant
       maxParticipants
       id
       orderPrice
