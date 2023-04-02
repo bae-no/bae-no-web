@@ -70,11 +70,17 @@ const ChattingRoomsItem = ({
   };
 
   const handleRouteDetailPage = () => {
-    if (mouseMoveRef.current || show나가기) return;
+    if (mouseMoveRef.current || show나가기) {
+      mouseMoveRef.current = false;
+
+      return;
+    }
+    if (checkbox) return;
     router.push({
       pathname: "/chat/[id]",
       query: {
         id,
+        title,
       },
     });
   };
@@ -84,13 +90,7 @@ const ChattingRoomsItem = ({
       as="li"
       flexDirection="row"
       width="full"
-      onClick={handleRouteDetailPage}
-      onMouseDown={() => {
-        mouseMoveRef.current = false;
-      }}
-      onMouseMove={() => {
-        mouseMoveRef.current = true;
-      }}
+      onMouseUpCapture={handleRouteDetailPage}
     >
       <LazyDomMaxMotion>
         {checkbox && (
@@ -117,6 +117,9 @@ const ChattingRoomsItem = ({
           py="4"
           zIndex={1}
           onDragEnd={handleDragEnd}
+          onDragStart={() => {
+            mouseMoveRef.current = true;
+          }}
         >
           <Box>
             <Avatar size="48" src={thumbnail} />

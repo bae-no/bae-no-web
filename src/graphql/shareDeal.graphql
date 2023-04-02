@@ -24,3 +24,11 @@ mutation openShareDealMutation($input: OpenShareDealInput!) {
     shareDealId
   }
 }
+
+mutation startShareDeal($input: StartShareDealInput!) {
+  startShareDeal(input: $input)
+}
+
+mutation endShareDeal($input: EndShareDealInput!) {
+  endShareDeal(input: $input)
+}
