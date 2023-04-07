@@ -61,7 +61,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     if (isAuthProvider(pascalMutationType)) {
       const {
-        signIn: { accessToken },
+        signIn: { accessToken, hasProfile, isPhoneNumberVerified },
       } = await useSignInMutation.fetcher({
         input: {
           code: code as string,
@@ -76,6 +76,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           path: "/",
         })}`,
       );
+
+      if (hasProfile && isPhoneNumberVerified)
+        return {
+          redirect: {
+            destination: "/",
+            permanent: true,
+          },
+        };
     }
     return {
       props: {},

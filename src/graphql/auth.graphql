@@ -1,5 +1,7 @@
 mutation signInMutation($input: SignInInput!) {
   signIn(input: $input) {
     accessToken
+    hasProfile
+    isPhoneNumberVerified
   }
 }
