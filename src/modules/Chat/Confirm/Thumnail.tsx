@@ -6,7 +6,7 @@ import { FoodCategory } from "src/graphql";
 import { Box } from "src/ui/Box";
 import ShuffleIcon from "src/ui/Icon/svgs/shuffle.svg";
 
-const getRandomIndex = () => Math.floor(Math.random() * 3) + 1;
+export const getRandomIndex = () => Math.floor(Math.random() * 3) + 1;
 
 interface ThumnailProps {
   category?: FoodCategory;

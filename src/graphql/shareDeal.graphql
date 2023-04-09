@@ -55,3 +55,7 @@ mutation startShareDeal($input: StartShareDealInput!) {
 mutation endShareDeal($input: EndShareDealInput!) {
   endShareDeal(input: $input)
 }
+
+mutation updateShareDeal($input: UpdateShareDealInput!) {
+  updateShareDeal(input: $input)
+}

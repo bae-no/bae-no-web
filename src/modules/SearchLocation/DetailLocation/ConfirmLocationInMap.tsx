@@ -4,7 +4,15 @@ import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 import { Typography } from "src/ui/Typography";
 
-export const ConfirmLocationInMap = () => {
+interface ConfirmLocationInMapProps {
+  nextUrl?: string;
+  query?: { [key: string]: string };
+}
+
+export const ConfirmLocationInMap = ({
+  nextUrl,
+  query,
+}: ConfirmLocationInMapProps) => {
   const router = useRouter();
 
   return (
@@ -19,7 +27,8 @@ export const ConfirmLocationInMap = () => {
         router.push({
           pathname: "/search-location/SearchLocationMap",
           query: {
-            nextUrl: "/search-location/detail",
+            nextUrl: nextUrl ?? "/search-location/detail",
+            ...query,
           },
         });
       }}
