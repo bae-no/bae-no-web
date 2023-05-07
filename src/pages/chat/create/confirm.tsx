@@ -34,7 +34,7 @@ const ConfirmPage = () => {
 
   const { mutate } = useOpenShareDealMutation({
     onSuccess: ({ openShareDeal: { shareDealId } }) => {
-      window.history.go(-4);
+      window.history.go(-5);
       setTimeout(() => {
         router.push({ pathname: "/chat/[id]", query: { id: shareDealId } });
         createChatFormStorage.reset();
