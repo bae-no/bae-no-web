@@ -36,7 +36,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
       >
         <Component {...pageProps} />
       </Hydrate>
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </LazyMotion>
 );
