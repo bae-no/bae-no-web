@@ -18,7 +18,7 @@ export const ChatWrapper = () => {
     ...data?.shareDealStatus,
     ...data?.shareDeal,
   };
-  const canChat = Number(maxParticipants) / 2 >= Number(participants?.length);
+  const canChat = Number(maxParticipants) / 2 <= Number(participants?.length);
   const [open, setOpen] = useState(!canChat);
   const handleConfirm = () => {
     setOpen(false);

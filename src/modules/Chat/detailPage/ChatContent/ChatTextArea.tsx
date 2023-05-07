@@ -29,7 +29,7 @@ export const ChatTextArea = () => {
     ...data?.shareDealStatus,
     ...data?.shareDeal,
   };
-  const canChat = Number(maxParticipants) / 2 >= Number(participants?.length);
+  const canChat = Number(maxParticipants) / 2 <= Number(participants?.length);
 
   const [hasValueInTextArea, setHasValueInTextArea] = useState(false);
   const [alignItemByTextareaHeight, setAlignItemByTextareaHeight] = useState<
