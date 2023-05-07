@@ -109,7 +109,7 @@ const SubmitButton = () => {
     setUpdateShareDealInfo({
       ...data,
       id: router.query.id as string,
-      maxParticipant: data.maxParticipants,
+      maxParticipants: data.maxParticipants,
       shareZone: {
         addressDetail,
         addressPath,

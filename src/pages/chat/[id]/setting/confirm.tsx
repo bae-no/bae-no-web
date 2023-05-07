@@ -23,7 +23,7 @@ const SettingShareDealConfirmPage = () => {
   const shareDealData = useReastorageValue(updateShareDealStorage);
   const {
     category,
-    maxParticipant: maxParticipants,
+    maxParticipants,
     orderPrice,
     shareZone,
     storeName,
@@ -57,7 +57,7 @@ const SettingShareDealConfirmPage = () => {
       input: {
         category,
         id,
-        maxParticipant: maxParticipants,
+        maxParticipants,
         orderPrice,
         shareZone,
         storeName,

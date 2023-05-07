@@ -17,9 +17,9 @@ export const contentBaseCss = style([
   sprinkles({
     backgroundColor: "white",
     height: "full",
-    position: "absolute",
+    position: "fixed",
     right: "0",
-    zIndex: 3,
+    zIndex: 2,
   }),
   {
     animationDuration: "0.5s",
@@ -63,8 +63,8 @@ export const overlayBaseCss = style([
   sprinkles({
     height: "full",
     inset: "0",
-    position: "absolute",
-    zIndex: 3,
+    position: "fixed",
+    zIndex: 2,
   }),
   {
     animationDuration: "0.5s",

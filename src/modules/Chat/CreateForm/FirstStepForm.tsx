@@ -169,7 +169,7 @@ export const CreateChatFirstStepForm = () => {
           placeholder="주문하실 가게 이름을 입력해주세요."
         />
         <NumberFieldWithPrefix
-          fieldName="maxParticipant"
+          fieldName="maxParticipants"
           inputProps={{ prefix: "명" }}
           label="최대 참여 인원"
           options={{ min: 0 }}

@@ -33,8 +33,8 @@ const ChattingItem = ({
   const distance = getDistanceFromCoordinates(coordinate, coordinate);
   const handleRouteJoinPage = () => {
     router.push({
-      pathname: isParticipant ? "/chat/[id]" : "/chat/join/[id]",
-      query: { id },
+      pathname: isParticipant ? "/chat/[id]" : "/chat/[id]/join",
+      query: { id, title },
     });
   };
 

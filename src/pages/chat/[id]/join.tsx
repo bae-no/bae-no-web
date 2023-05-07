@@ -21,17 +21,6 @@ const JoinChatPage = () => {
   const [isNaverMapReady, setIsNaverMapReady] = useState(false);
   const router = useRouter();
   const { id } = router.query as { [key: string]: string };
-
-  const { mutate } = useJoinShareDeal({
-    onSuccess: () => {
-      router.replace({
-        pathname: "/chat/[id]",
-        query: {
-          id,
-        },
-      });
-    },
-  });
   const { data } = useGetShareDeal({
     shareDealId: id,
   });
@@ -46,6 +35,18 @@ const JoinChatPage = () => {
     if (!location || !coordinate) return null;
     return getDistanceFromCoordinates(location, coordinate);
   }, [coordinate, location]);
+
+  const { mutate } = useJoinShareDeal({
+    onSuccess: () => {
+      router.replace({
+        pathname: "/chat/[id]",
+        query: {
+          id,
+          title,
+        },
+      });
+    },
+  });
 
   const handleSubmit = () => {
     mutate({

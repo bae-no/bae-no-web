@@ -71,47 +71,45 @@ export const ChatMenuLayout = ({ children }: ChatMenuProps) => {
   };
 
   return (
-    <div>
-      <Root open={isOpen}>
-        <Trigger onClick={() => setOpen(true)}>
-          <Box cursor="pointer">
-            <Icon name="hamburger" />
-          </Box>
-        </Trigger>
-        {!isGuideOpen ? (
-          <Portal>
-            <Overlay
-              className={
-                menuLayoutContextValue.animationOn
-                  ? overlayCss({
-                      isOpen,
-                    })
-                  : overlayBaseCss
-              }
-              onClick={() => setOpen(false)}
-            />
-            <Content
-              className={
-                menuLayoutContextValue.animationOn
-                  ? contentCss({ isOpen })
-                  : contentBaseCss
-              }
-            >
-              <Box px="16">
-                <MenuLayoutContext.Provider value={menuLayoutContextValue}>
-                  {children}
-                </MenuLayoutContext.Provider>
-              </Box>
-            </Content>
-          </Portal>
-        ) : (
-          <GuideModal
-            defaultOpen
-            closeCallback={handleGuideCloseCallback}
-            trigger={null}
+    <Root open={isOpen}>
+      <Trigger onClick={() => setOpen(true)}>
+        <Box cursor="pointer">
+          <Icon name="hamburger" />
+        </Box>
+      </Trigger>
+      {!isGuideOpen ? (
+        <Portal>
+          <Overlay
+            className={
+              menuLayoutContextValue.animationOn
+                ? overlayCss({
+                    isOpen,
+                  })
+                : overlayBaseCss
+            }
+            onClick={() => setOpen(false)}
           />
-        )}
-      </Root>
-    </div>
+          <Content
+            className={
+              menuLayoutContextValue.animationOn
+                ? contentCss({ isOpen })
+                : contentBaseCss
+            }
+          >
+            <Box px="16">
+              <MenuLayoutContext.Provider value={menuLayoutContextValue}>
+                {children}
+              </MenuLayoutContext.Provider>
+            </Box>
+          </Content>
+        </Portal>
+      ) : (
+        <GuideModal
+          defaultOpen
+          closeCallback={handleGuideCloseCallback}
+          trigger={null}
+        />
+      )}
+    </Root>
   );
 };

@@ -7,22 +7,18 @@ import { Header, Layout } from "src/ui/Layout";
 import { Typography } from "src/ui/Typography";
 import { prefetchQueriesOnServerSideWithAuth } from "src/utils/prefetchQueryOnServerSide";
 
-const SettingChatPage = () => {
-  const a = "a";
-
-  return (
-    <Layout headerProps={{ leftNode: <Header.Back /> }}>
-      <Container gap="32" marginTop="32">
-        <Typography color="black2" fontSize="headline2">
-          수정할 공유딜에 대한
-          <br />
-          정보를 입력해주세요.
-        </Typography>
-        <SettingFirstStepForm />
-      </Container>
-    </Layout>
-  );
-};
+const SettingChatPage = () => (
+  <Layout headerProps={{ leftNode: <Header.Back /> }}>
+    <Container gap="32" marginTop="32">
+      <Typography color="black2" fontSize="headline2">
+        수정할 공유딜에 대한
+        <br />
+        정보를 입력해주세요.
+      </Typography>
+      <SettingFirstStepForm />
+    </Container>
+  </Layout>
+);
 
 export default SettingChatPage;
 

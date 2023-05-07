@@ -4,7 +4,7 @@ import { CreateShareZoneInput, FoodCategory } from "src/graphql";
 
 export type CreateChatForm = {
   category: FoodCategory;
-  maxParticipant: number;
+  maxParticipants: number;
   orderPrice: number;
   shareZone: CreateShareZoneInput;
   storeName: string;

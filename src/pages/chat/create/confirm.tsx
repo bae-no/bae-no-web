@@ -21,7 +21,7 @@ const ConfirmPage = () => {
   const router = useRouter();
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const createChatForm = useReastorageValue(createChatFormStorage);
-  const { category, maxParticipant, orderPrice, shareZone, storeName, title } =
+  const { category, maxParticipants, orderPrice, shareZone, storeName, title } =
     createChatForm;
   const location = useCurrentLocation();
 
@@ -36,7 +36,7 @@ const ConfirmPage = () => {
     onSuccess: ({ openShareDeal: { shareDealId } }) => {
       window.history.go(-4);
       setTimeout(() => {
-        router.push("/chat/[id]", { query: { id: shareDealId } });
+        router.push({ pathname: "/chat/[id]", query: { id: shareDealId } });
         createChatFormStorage.reset();
       }, 100);
     },
@@ -68,7 +68,7 @@ const ConfirmPage = () => {
           <Information.Item
             affix="명"
             label="공유인원"
-            value={String(maxParticipant)}
+            value={String(maxParticipants)}
           />
           <Information.Item label="카테고리" value={category} />
           <Information.Item label="주문할 가게" value={storeName} />

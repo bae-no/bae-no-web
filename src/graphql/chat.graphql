@@ -17,10 +17,11 @@ query getChatDetail($input: FindChatDetailInput!) {
   chatDetail(input: $input) {
     authorName
     content
+    createdAt
     id
+    orderedKey
     type
     writtenByMe
-    createdAt
   }
 }
 
@@ -41,4 +42,17 @@ query ChatStatus($input: FindShareDealStatusInput!) {
 
 mutation WriteChat($input: WriteChatInput!) {
   writeChat(input: $input)
+}
+
+subscription subscriptionChat($shareDealId: ID!) {
+  chatWritten(shareDealId: $shareDealId) {
+    content
+    type
+    authorName
+    id
+    createdAt
+    orderedKey
+    unread
+    writtenByMe
+  }
 }
