@@ -6,7 +6,7 @@ import { Box } from "src/ui/Box";
 import { Header } from "src/ui/Layout";
 
 const ShareDealSkeleton = () => (
-  <Box width="full">
+  <Box marginTop="32" width="full">
     <ChattingListSkeleton />
     <ChattingListSkeleton />
     <ChattingListSkeleton />
