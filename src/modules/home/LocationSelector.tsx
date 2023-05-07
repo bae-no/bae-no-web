@@ -1,4 +1,4 @@
-import { cloneElement, ReactElement } from "react";
+import { cloneElement, ReactElement, useEffect, useRef } from "react";
 
 import {
   useReastorage,
@@ -52,6 +52,14 @@ const LocationSelector = ({ children }: LocationSelectorProps) => {
     currentShareZoneStorage,
   );
 
+  const initialShareZone = useRef(currentShareZoneStorage.get());
+
+  useEffect(() => {
+    if (open) {
+      initialShareZone.current = currentShareZoneStorage.get();
+    }
+  }, [open]);
+
   const { data, refetch } = useUserAddressQuery(undefined, {
     keepPreviousData: true,
     staleTime: Infinity,
@@ -63,15 +71,21 @@ const LocationSelector = ({ children }: LocationSelectorProps) => {
 
   const setShowShareZoneTooltip = useSetReastorage(showShareZoneTooltipStorage);
   const handleClick = (shareZone: RecentlySearchedShareZone) => {
-    setShowShareZoneTooltip(true);
     setCurrentShareZone(shareZone);
+  };
+
+  const handleOpenChange = (value: boolean) => {
+    if (!value && initialShareZone.current !== currentShareZone) {
+      setShowShareZoneTooltip(true);
+    }
+    setOpen(value);
   };
 
   return (
     <PullToCloseBottomDrawer
       open={open}
       trigger={cloneElement(children, { onClick: () => toggleOpen() })}
-      onOpenChange={setOpen}
+      onOpenChange={handleOpenChange}
     >
       <Typography fontSize="headline5">주소설정</Typography>
       <SearchLocation nextUrl="/add-location">
