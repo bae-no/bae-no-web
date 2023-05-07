@@ -34,10 +34,18 @@ const useCurrentLocation = () => {
     locationCache.getCoords,
   );
   useEffect(() => {
-    if (location.latitude && location.longitude) return;
-    navigator.geolocation.getCurrentPosition((position) => {
-      locationCache.setCoords(position.coords);
-    });
+    const setCoords = () => {
+      navigator.geolocation.getCurrentPosition((position) => {
+        locationCache.setCoords(position.coords);
+      });
+    };
+    if (!location.latitude || !location.longitude) {
+      setCoords();
+    }
+    window.addEventListener("focus", setCoords);
+    return () => {
+      window.removeEventListener("focus", setCoords);
+    };
   }, [location]);
 
   return useSyncExternalStore(
