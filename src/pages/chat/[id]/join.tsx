@@ -1,11 +1,11 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import Script from "next/script";
 
 import { useGetShareDeal, useJoinShareDeal } from "src/graphql";
-import useCurrentLocation from "src/hooks/useCurrentLocation";
+import { useDistance } from "src/hooks/useDistance";
 import Information from "src/modules/Chat/Confirm/Information";
 import ConfirmMap from "src/modules/Chat/Confirm/Map";
 import Thumnail from "src/modules/Chat/Confirm/Thumnail";
@@ -14,7 +14,6 @@ import { Button } from "src/ui/Button";
 import { Container } from "src/ui/Container";
 import Divider from "src/ui/Divider";
 import { Header } from "src/ui/Layout";
-import { getDistanceFromCoordinates } from "src/utils/getDistanceFromCoordinates";
 import { prefetchQueriesOnServerSideWithAuth } from "src/utils/prefetchQueryOnServerSide";
 
 const JoinChatPage = () => {
@@ -24,17 +23,13 @@ const JoinChatPage = () => {
   const { data } = useGetShareDeal({
     shareDealId: id,
   });
-  const location = useCurrentLocation();
   const [thumbnailUrl, setThumbnailUrl] = useState("");
 
   const { category, maxParticipants, orderPrice, shareZone, storeName, title } =
     data?.shareDeal || {};
   const { coordinate, detail, path } = shareZone || {};
 
-  const distance = useMemo(() => {
-    if (!location || !coordinate) return null;
-    return getDistanceFromCoordinates(location, coordinate);
-  }, [coordinate, location]);
+  const distance = useDistance(coordinate);
 
   const { mutate } = useJoinShareDeal({
     onSuccess: () => {
@@ -92,9 +87,7 @@ const JoinChatPage = () => {
         <Information title="공유존 정보">
           <Information.Item
             label="거리"
-            value={
-              Number.isNaN(distance) ? "계산중..." : `${String(distance)}km`
-            }
+            value={!distance ? "계산중..." : `${String(distance)}km`}
           />
           <Information.Item label="주소" value={`${path} ${detail}`} />
           <Script

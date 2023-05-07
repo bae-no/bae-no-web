@@ -1,11 +1,11 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { useReastorageValue } from "@reastorage/react";
 import { useRouter } from "next/router";
 import Script from "next/script";
 
 import { useOpenShareDealMutation } from "src/graphql";
-import useCurrentLocation from "src/hooks/useCurrentLocation";
+import { useDistance } from "src/hooks/useDistance";
 import Information from "src/modules/Chat/Confirm/Information";
 import ConfirmMap from "src/modules/Chat/Confirm/Map";
 import Thumnail from "src/modules/Chat/Confirm/Thumnail";
@@ -15,7 +15,6 @@ import { Button } from "src/ui/Button";
 import { Container } from "src/ui/Container";
 import Divider from "src/ui/Divider";
 import { Header } from "src/ui/Layout";
-import { getDistanceFromCoordinates } from "src/utils/getDistanceFromCoordinates";
 
 const ConfirmPage = () => {
   const router = useRouter();
@@ -23,12 +22,8 @@ const ConfirmPage = () => {
   const createChatForm = useReastorageValue(createChatFormStorage);
   const { category, maxParticipants, orderPrice, shareZone, storeName, title } =
     createChatForm;
-  const location = useCurrentLocation();
 
-  const distance = useMemo(() => {
-    if (!location || !shareZone) return null;
-    return getDistanceFromCoordinates(location, shareZone);
-  }, [location, shareZone]);
+  const distance = useDistance(shareZone);
 
   const [isNaverMapReady, setIsNaverMapReady] = useState(false);
 
@@ -82,9 +77,7 @@ const ConfirmPage = () => {
         <Information title="공유존 정보">
           <Information.Item
             label="거리"
-            value={
-              Number.isNaN(distance) ? "계산중..." : `${String(distance)}km`
-            }
+            value={!distance ? "계산중..." : `${String(distance)}km`}
           />
           <Information.Item label="주소" value={shareZone?.addressPath} />
           <Script

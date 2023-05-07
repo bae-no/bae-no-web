@@ -3,12 +3,12 @@ import { memo } from "react";
 import { useRouter } from "next/router";
 
 import { FindShareDealQuery, ShareDealStatus } from "src/graphql";
+import { useDistance } from "src/hooks/useDistance";
 import { InferArray } from "src/types";
 import { Avatar } from "src/ui/Avatar";
 import { Box } from "src/ui/Box";
 import { Label } from "src/ui/Label";
 import { Typography } from "src/ui/Typography";
-import { getDistanceFromCoordinates } from "src/utils/getDistanceFromCoordinates";
 
 export interface ChattingItemProps {
   shareDeal: InferArray<FindShareDealQuery["shareDeals"]["items"]>;
@@ -30,7 +30,7 @@ const ChattingItem = ({
 }: ChattingItemProps) => {
   const router = useRouter();
   const isClose = status === ShareDealStatus.Close;
-  const distance = getDistanceFromCoordinates(coordinate, coordinate);
+  const distance = useDistance(coordinate);
   const handleRouteJoinPage = () => {
     router.push({
       pathname: isParticipant ? "/chat/[id]" : "/chat/[id]/join",
@@ -54,8 +54,7 @@ const ChattingItem = ({
           <Typography fontSize="body1-b">{title}</Typography>
           <Typography color="black4" fontSize="caption1-m">
             {category}・배달비 {orderPrice.toLocaleString()}원・거리
-            {` ${distance}`}
-            km
+            {` ${!distance ? "계산중" : `${distance}km`}`}
           </Typography>
         </Box>
       </Box>
