@@ -2,20 +2,23 @@ import { useState } from "react";
 
 import { useRouter } from "next/router";
 
-import { useChatStatus } from "src/graphql";
+import { useChatParticipants } from "src/graphql";
 import { Popup } from "src/ui/Popup";
 
 export const ChatWrapper = () => {
   const router = useRouter();
   const { id } = router.query as { [key: string]: string };
-  const { data } = useChatStatus({
+  const { data } = useChatParticipants({
     input: {
       shareDealId: id,
     },
+    shareDealId: id,
   });
-  const { shareDealStatus } = data || {};
-  const { canEnd, canStart, isOwner } = shareDealStatus || {};
-  const canChat = canEnd && !canStart;
+  const { maxParticipants, participants, isOwner } = {
+    ...data?.shareDealStatus,
+    ...data?.shareDeal,
+  };
+  const canChat = Number(maxParticipants) / 2 >= Number(participants?.length);
   const [open, setOpen] = useState(!canChat);
   const handleConfirm = () => {
     setOpen(false);

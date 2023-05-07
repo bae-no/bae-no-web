@@ -56,3 +56,15 @@ subscription subscriptionChat($shareDealId: ID!) {
     writtenByMe
   }
 }
+
+query chatParticipants($shareDealId: ID!, $input: FindShareDealStatusInput!) {
+  shareDeal(id: $shareDealId) {
+    maxParticipants
+  }
+  shareDealStatus(input: $input) {
+    participants {
+      id
+    }
+    isOwner
+  }
+}

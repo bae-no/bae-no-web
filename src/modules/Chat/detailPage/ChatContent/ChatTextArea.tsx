@@ -3,7 +3,7 @@ import { ChangeEvent, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Textarea from "react-textarea-autosize";
 
-import { useChatStatus, useWriteChat } from "src/graphql";
+import { useChatParticipants, useWriteChat } from "src/graphql";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 
@@ -19,13 +19,17 @@ export const ChatTextArea = () => {
   });
   const router = useRouter();
   const { id } = router.query as { [key: string]: string };
-  const { data } = useChatStatus({
+  const { data } = useChatParticipants({
     input: {
       shareDealId: id,
     },
+    shareDealId: id,
   });
-  const { canEnd, canStart } = data?.shareDealStatus || {};
-  const canChat = canEnd && !canStart;
+  const { maxParticipants, participants } = {
+    ...data?.shareDealStatus,
+    ...data?.shareDeal,
+  };
+  const canChat = Number(maxParticipants) / 2 >= Number(participants?.length);
 
   const [hasValueInTextArea, setHasValueInTextArea] = useState(false);
   const [alignItemByTextareaHeight, setAlignItemByTextareaHeight] = useState<

@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 
 import SSRSafeSuspense from "src/components/AsyncBoundary/SSRSuspense";
-import { useChatStatus } from "src/graphql";
+import { useChatParticipants, useChatStatus } from "src/graphql";
 import { ChatWrapper } from "src/modules/Chat/ChatWrapper";
 import { ChatContent } from "src/modules/Chat/detailPage/ChatContent";
 import { ChatSkeleton } from "src/modules/Chat/detailPage/ChatContent/ChatSkeleton";
@@ -49,6 +49,17 @@ export const getServerSideProps = async (
         },
       }),
       queryHook: useChatStatus,
+    },
+    {
+      getParams: () => ({
+        variables: {
+          input: {
+            shareDealId: id,
+          },
+          shareDealId: id,
+        },
+      }),
+      queryHook: useChatParticipants,
     },
   ])(context);
 };
