@@ -36,7 +36,10 @@ const ConfirmPage = () => {
     onSuccess: ({ openShareDeal: { shareDealId } }) => {
       window.history.go(-5);
       setTimeout(() => {
-        router.push({ pathname: "/chat/[id]", query: { id: shareDealId } });
+        router.push({
+          pathname: "/chat/[id]",
+          query: { id: shareDealId, title },
+        });
         createChatFormStorage.reset();
       }, 100);
     },
