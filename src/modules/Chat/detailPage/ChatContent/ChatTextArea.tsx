@@ -3,7 +3,7 @@ import { ChangeEvent, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Textarea from "react-textarea-autosize";
 
-import { useWriteChat } from "src/graphql";
+import { useChatStatus, useWriteChat } from "src/graphql";
 import { Box } from "src/ui/Box";
 import { Icon } from "src/ui/Icon";
 
@@ -19,6 +19,14 @@ export const ChatTextArea = () => {
   });
   const router = useRouter();
   const { id } = router.query as { [key: string]: string };
+  const { data } = useChatStatus({
+    input: {
+      shareDealId: id,
+    },
+  });
+  const { canEnd, canStart } = data?.shareDealStatus || {};
+  const canChat = canEnd && !canStart;
+
   const [hasValueInTextArea, setHasValueInTextArea] = useState(false);
   const [alignItemByTextareaHeight, setAlignItemByTextareaHeight] = useState<
     "center" | "flex-end"
@@ -70,7 +78,13 @@ export const ChatTextArea = () => {
       >
         <Textarea
           className={textAreaCss}
+          disabled={!canChat}
           maxRows={4}
+          placeholder={
+            canChat
+              ? "메시지를 입력해주세요."
+              : "채팅방이 오픈되면 메세지 입력이 가능합니다."
+          }
           ref={textAreaRef}
           onChange={handleTextAreaChange}
           onHeightChange={handleChangeTextareaHeight}
