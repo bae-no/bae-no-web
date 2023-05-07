@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-import { useRouter } from "next/router";
+import Link from "next/link";
 
 import { FindShareDealQuery, ShareDealStatus } from "src/graphql";
 import { useDistance } from "src/hooks/useDistance";
@@ -28,39 +28,42 @@ const ChattingItem = ({
     isParticipant,
   },
 }: ChattingItemProps) => {
-  const router = useRouter();
   const isClose = status === ShareDealStatus.Close;
   const distance = useDistance(coordinate);
-  const handleRouteJoinPage = () => {
-    router.push({
-      pathname: isParticipant ? "/chat/[id]" : "/chat/[id]/join",
-      query: { id, title },
-    });
-  };
 
   return (
-    <Box
-      align="center"
-      as="li"
-      cursor="pointer"
-      direction="row"
-      justify="space-between"
-      key={id}
-      onClick={handleRouteJoinPage}
-    >
-      <Box align="center" direction="row" gap="16">
-        <Avatar size="48" src={thumbnail} />
-        <Box as="span">
-          <Typography fontSize="body1-b">{title}</Typography>
-          <Typography color="black4" fontSize="caption1-m">
-            {category}・배달비 {orderPrice.toLocaleString()}원・거리
-            {` ${!distance ? "계산중" : `${distance}km`}`}
-          </Typography>
+    <Box as="li" key={id}>
+      <Link
+        legacyBehavior
+        href={{
+          pathname: isParticipant ? "/chat/[id]" : "/chat/[id]/join",
+          query: { id, title },
+        }}
+      >
+        <Box
+          align="center"
+          as="a"
+          cursor="pointer"
+          direction="row"
+          justify="space-between"
+        >
+          <Box align="center" direction="row" gap="16">
+            <Avatar size="48" src={thumbnail} />
+            <Box as="span">
+              <Typography fontSize="body1-b">{title}</Typography>
+              <Typography color="black4" fontSize="caption1-m">
+                {category}・배달비 {orderPrice.toLocaleString()}원・거리
+                {` ${!distance ? "계산중" : `${distance}km`}`}
+              </Typography>
+            </Box>
+          </Box>
+          <Label color={isClose ? "gray" : "orange"}>
+            {isClose
+              ? "마감"
+              : `${currentParticipants}명 / ${maxParticipants}명`}
+          </Label>
         </Box>
-      </Box>
-      <Label color={isClose ? "gray" : "orange"}>
-        {isClose ? "마감" : `${currentParticipants}명 / ${maxParticipants}명`}
-      </Label>
+      </Link>
     </Box>
   );
 };
