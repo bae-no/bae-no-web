@@ -5,6 +5,7 @@ import {
   useReastorageValue,
   useSetReastorage,
 } from "@reastorage/react";
+import { useQueryClient } from "@tanstack/react-query";
 
 import {
   useDeleteAddressMutation,
@@ -24,7 +25,6 @@ import ArrowBottomIcon from "src/ui/Icon/svgs/arrow-bottom.svg";
 import { Typography } from "src/ui/Typography";
 
 import SearchLocation from "../SearchLocation/SearchLocation";
-import { useQueryClient } from "@tanstack/react-query";
 
 const LocationSelectorTrigger = ({ onClick }: { onClick?: VoidFunction }) => {
   const currentShareZone = useReastorageValue(currentShareZoneStorage);
