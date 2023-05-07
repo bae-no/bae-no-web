@@ -6,7 +6,11 @@ import {
   useSetReastorage,
 } from "@reastorage/react";
 
-import { useDeleteAddressMutation, useUserAddressQuery } from "src/graphql";
+import {
+  useDeleteAddressMutation,
+  UserAddressQuery,
+  useUserAddressQuery,
+} from "src/graphql";
 import { useToggle } from "src/hooks/useToggle";
 import {
   currentShareZoneStorage,
@@ -20,6 +24,7 @@ import ArrowBottomIcon from "src/ui/Icon/svgs/arrow-bottom.svg";
 import { Typography } from "src/ui/Typography";
 
 import SearchLocation from "../SearchLocation/SearchLocation";
+import { useQueryClient } from "@tanstack/react-query";
 
 const LocationSelectorTrigger = ({ onClick }: { onClick?: VoidFunction }) => {
   const currentShareZone = useReastorageValue(currentShareZoneStorage);
@@ -65,8 +70,24 @@ const LocationSelector = ({ children }: LocationSelectorProps) => {
     staleTime: Infinity,
   });
 
+  const queryClient = useQueryClient();
+
   const { mutate } = useDeleteAddressMutation({
-    onSuccess: () => refetch(),
+    onMutate: ({ id }) => {
+      const addressQueryKey = useUserAddressQuery.getKey();
+
+      queryClient.setQueryData(addressQueryKey, (old) => {
+        if (!old) return;
+
+        return {
+          ...old,
+          addresses: (old as UserAddressQuery).addresses.filter(
+            (address) => address.key !== id,
+          ),
+        };
+      });
+    },
+    onSettled: () => refetch(),
   });
 
   const setShowShareZoneTooltip = useSetReastorage(showShareZoneTooltipStorage);
