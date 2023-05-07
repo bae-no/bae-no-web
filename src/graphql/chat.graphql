@@ -1,0 +1,58 @@
+query getChatList($input: FindChatInput!) {
+  chats(input: $input) {
+    id
+    lastContent
+    thumbnail
+    title
+    unreadCount
+    lastUpdatedAt
+  }
+}
+
+mutation leaveChat($input: LeaveShareDealInput!) {
+  leaveShareDeal(input: $input)
+}
+
+query getChatDetail($input: FindChatDetailInput!) {
+  chatDetail(input: $input) {
+    authorName
+    content
+    createdAt
+    id
+    orderedKey
+    type
+    writtenByMe
+  }
+}
+
+query ChatStatus($input: FindShareDealStatusInput!) {
+  shareDealStatus(input: $input) {
+    canEnd
+    canStart
+    isOwner
+    participants {
+      id
+      introduce
+      isMe
+      isOwner
+      nickname
+    }
+  }
+}
+
+mutation WriteChat($input: WriteChatInput!) {
+  writeChat(input: $input)
+}
+
+subscription subscriptionChat($shareDealId: ID!) {
+  chatWritten(shareDealId: $shareDealId) {
+    content
+    type
+    authorName
+    id
+    createdAt
+    orderedKey
+    unread
+    writtenByMe
+  }
+}

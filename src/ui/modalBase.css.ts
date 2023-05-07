@@ -33,6 +33,7 @@ export const overlayCss = style([
         animationName: overlayHide,
       },
     },
+    zIndex: 1,
   },
   sprinkles({ bg: "black1", position: "fixed", zIndex: 1 }),
 ]);
@@ -45,6 +46,9 @@ export const contentCss = style([
         animationName: contentHide,
       },
     },
+    top: "50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: 2,
   },
   sprinkles({ left: "half", top: "half", transform: "halfMinus", zIndex: 2 }),
 ]);

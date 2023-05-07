@@ -6,13 +6,13 @@ module.exports = {
   ],
   moduleNameMapper: {
     "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
-
     "^src/(.*)$": "<rootDir>/src/$1",
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/"],
   testEnvironment: "jsdom",
   transform: {
+    "^.+\\.svg$": "jest-transformer-svg",
     "\\.css\\.ts$": "@vanilla-extract/jest-transform",
     "^.+\\.(js|jsx|ts|tsx)$": [
       "@swc/jest",

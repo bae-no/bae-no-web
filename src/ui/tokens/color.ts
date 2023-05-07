@@ -33,6 +33,7 @@ export const colors = {
   success3: "#ACE3B3",
   success4: "#C8EDCD",
   success5: "#E3F6E6",
+  transparent: "transparent",
   warning1: "#F4DB33",
   warning2: "#F7E25C",
   warning3: "#F9E985",

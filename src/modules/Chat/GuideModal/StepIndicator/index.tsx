@@ -1,19 +1,17 @@
 /* eslint-disable react/no-array-index-key */
-import { LazyMotion, m } from "framer-motion";
+import { m } from "framer-motion";
 
+import LazyDomMaxMotion from "src/components/LazyDomMaxMotion";
 import { Box } from "src/ui/Box";
 
 import { stepIndicatorCss } from "./StepIndicator.css";
-
-const loadDomMax = () =>
-  import("src/utils/framerDomMax").then((module) => module.default);
 
 interface StepIndicatorProps {
   step: number;
   totalSteps: number;
 }
 const StepIndicator = ({ step, totalSteps }: StepIndicatorProps) => (
-  <LazyMotion features={loadDomMax}>
+  <LazyDomMaxMotion>
     <Box direction="row" gap="8">
       {Array.from({ length: totalSteps }).map((_, index) =>
         index === step ? (
@@ -27,7 +25,7 @@ const StepIndicator = ({ step, totalSteps }: StepIndicatorProps) => (
         ),
       )}
     </Box>
-  </LazyMotion>
+  </LazyDomMaxMotion>
 );
 
 export default StepIndicator;

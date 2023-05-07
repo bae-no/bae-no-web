@@ -1,5 +1,7 @@
-mutation signIn($input: SignInInput!) {
+mutation signInMutation($input: SignInInput!) {
   signIn(input: $input) {
     accessToken
+    hasProfile
+    isPhoneNumberVerified
   }
 }

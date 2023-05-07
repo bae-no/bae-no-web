@@ -14,6 +14,7 @@ interface InputBaseProps
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onClearClick?: VoidFunction;
   placeholder?: string;
+  rightNode?: ReactElement;
   value?: string;
 }
 

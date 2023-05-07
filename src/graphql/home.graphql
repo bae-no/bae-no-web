@@ -1,0 +1,33 @@
+query homeStaticQuery {
+  categories {
+    shareDealSort {
+      code
+      name
+    }
+    foodCatalog {
+      code
+      name
+    }
+  }
+}
+
+query findShareDealQuery($input: FindShareDealInput!) {
+  shareDeals(input: $input) {
+    items {
+      category
+      currentParticipants
+      isParticipant
+      maxParticipants
+      id
+      orderPrice
+      status
+      thumbnail
+      title
+      coordinate {
+        latitude
+        longitude
+      }
+    }
+    total
+  }
+}

@@ -1,0 +1,61 @@
+query getShareDealList($input: FindShareDealInput!) {
+  shareDeals(input: $input) {
+    items {
+      isParticipant
+      title
+      thumbnail
+      status
+      orderPrice
+      maxParticipants
+      id
+      currentParticipants
+      createdAt
+      category
+      coordinate {
+        longitude
+        latitude
+      }
+    }
+    total
+  }
+}
+
+mutation openShareDealMutation($input: OpenShareDealInput!) {
+  openShareDeal(input: $input) {
+    shareDealId
+  }
+}
+
+query getShareDeal($shareDealId: ID!) {
+  shareDeal(id: $shareDealId) {
+    category
+    maxParticipants
+    orderPrice
+    shareZone {
+      system
+      path
+      detail
+      coordinate {
+        longitude
+        latitude
+      }
+    }
+    title
+    storeName
+  }
+}
+
+mutation joinShareDeal($input: JoinShareDealInput!) {
+  joinShareDeal(input: $input)
+}
+mutation startShareDeal($input: StartShareDealInput!) {
+  startShareDeal(input: $input)
+}
+
+mutation endShareDeal($input: EndShareDealInput!) {
+  endShareDeal(input: $input)
+}
+
+mutation updateShareDeal($input: UpdateShareDealInput!) {
+  updateShareDeal(input: $input)
+}

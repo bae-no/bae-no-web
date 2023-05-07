@@ -1,25 +1,30 @@
-import { ReactElement } from "react";
+import { ElementType, ReactElement } from "react";
 
 import { Box } from "../Box";
 
-import { BottomTab } from "./BottomTab";
 import { Header } from "./Header";
 import { HeaderProps } from "./Header/Header";
 
 interface LayoutProps {
+  as?: ElementType;
   children: ReactElement;
+  footer?: ReactElement;
   headerProps?: HeaderProps;
-  showBottomTab?: boolean;
 }
 
-const Layout = ({ children, showBottomTab, headerProps }: LayoutProps) => (
-  <>
+const Layout = ({
+  children,
+  as = "main",
+  headerProps,
+  footer,
+}: LayoutProps) => (
+  <Box height="full">
     <Header {...headerProps} />
-    <Box as="main" height="full">
+    <Box as={as} height="full">
       {children}
     </Box>
-    {showBottomTab && <BottomTab />}
-  </>
+    {footer}
+  </Box>
 );
 
 export default Layout;

@@ -6,4 +6,15 @@ generates:
     plugins:
       - typescript
       - typescript-operations
-      - typescript-urql
+      - typescript-react-query
+      - add
+    config:
+      fetcher:
+        func: "src/utils/fetchGraphql#fetchGraphql"
+      addInfiniteQuery: true
+      pureMagicComment: true
+      omitOperationSuffix: true
+      exposeDocument: true
+      exposeQueryKeys: true
+      exposeFetcher: true
+      content: "// @ts-nocheck"

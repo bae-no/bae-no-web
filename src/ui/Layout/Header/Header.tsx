@@ -5,6 +5,7 @@ import { Sprinkles } from "src/ui/sprinkles.css";
 import { Typography } from "src/ui/Typography";
 
 import Back from "./Back";
+import Close from "./Close";
 import Delete from "./Delete";
 import { headerCss } from "./Header.css";
 import Notification from "./Notification";
@@ -64,8 +65,10 @@ const Header = ({
     as="header"
     backgroundColor={backgroundColor}
     className={headerCss}
+    flexDirection="row"
     justify="center"
     position="sticky"
+    px="16"
     top="0"
     zIndex={1}
   >
@@ -85,5 +88,6 @@ Header.Back = Back;
 Header.Notification = Notification;
 Header.Delete = Delete;
 Header.Setting = Setting;
+Header.Close = Close;
 
 export default Header;

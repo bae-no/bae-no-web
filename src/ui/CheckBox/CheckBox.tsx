@@ -1,4 +1,4 @@
-import { useId, forwardRef, ForwardedRef } from "react";
+import { useId, forwardRef, ForwardedRef, ReactNode } from "react";
 
 import { Root, Indicator, CheckboxProps } from "@radix-ui/react-checkbox";
 
@@ -16,6 +16,7 @@ import {
 interface CheckBoxProp extends CheckboxProps {
   css?: Sprinkles;
   label?: string;
+  rightNode?: ReactNode;
   size?: "large" | "small";
 }
 
@@ -30,6 +31,7 @@ const CheckBox = forwardRef(
       label,
       name,
       css,
+      rightNode,
     }: CheckBoxProp,
     ref: ForwardedRef<HTMLButtonElement>,
   ) => {
@@ -52,16 +54,19 @@ const CheckBox = forwardRef(
             <Icon className={checkBoxIconCss} name="checkbox" size="24" />
           </Indicator>
         </Root>
-        {label && (
-          <Typography
-            as="label"
-            className={sprinkles({ cursor: "pointer" })}
-            fontSize={fontSize}
-            htmlFor={id}
-          >
-            {label}
-          </Typography>
-        )}
+        <Box flexDirection="row" justifyContent="space-between" width="full">
+          {label && (
+            <Typography
+              as="label"
+              className={sprinkles({ cursor: "pointer" })}
+              fontSize={fontSize}
+              htmlFor={id}
+            >
+              {label}
+            </Typography>
+          )}
+          <Box flexDirection="row">{rightNode}</Box>
+        </Box>
       </Box>
     );
   },

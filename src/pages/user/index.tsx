@@ -2,18 +2,20 @@ import {
   HeadWithBackgroundColor,
   useHeaderBackgroundColor,
 } from "src/components/HeadWithBackgroundColor";
+import { useMyProfileQuery } from "src/graphql";
 import UserHead from "src/modules/user/UserHead";
 import UserPageSection from "src/modules/user/UserPageSection";
 import { Box } from "src/ui/Box";
 import { Container } from "src/ui/Container";
-import { Header, Layout } from "src/ui/Layout";
+import { BottomTab, Header, Layout } from "src/ui/Layout";
+import { prefetchQueriesOnServerSideWithAuth } from "src/utils/prefetchQueryOnServerSide";
 
 const UserPage = () => {
   const [ref, backgroundColor] = useHeaderBackgroundColor();
 
   return (
     <Layout
-      showBottomTab
+      footer={<BottomTab />}
       headerProps={{
         backgroundColor,
         rightNode: <Header.Setting />,
@@ -36,3 +38,9 @@ const UserPage = () => {
 };
 
 export default UserPage;
+
+export const getServerSideProps = prefetchQueriesOnServerSideWithAuth([
+  {
+    queryHook: useMyProfileQuery,
+  },
+]);

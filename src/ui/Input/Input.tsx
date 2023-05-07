@@ -16,6 +16,7 @@ const Input = forwardRef(
       variant,
       state,
       onClearClick,
+      rightNode,
       value,
       disabled,
       leftNode,
@@ -49,6 +50,8 @@ const Input = forwardRef(
         className={inputContainerCss({ disabled, size, state, variant })}
         flexDirection="row"
         gap="8"
+        onBlur={toggleFocused}
+        onFocus={toggleFocused}
       >
         {leftNode}
         <Box
@@ -59,11 +62,9 @@ const Input = forwardRef(
           ref={ref}
           size="full"
           value={value}
-          onBlur={toggleFocused}
-          onFocus={toggleFocused}
           {...rest}
         />
-        {focused && (
+        {focused && !rightNode && (
           <Box
             aria-hidden={!isValid}
             aria-label="입력 내용 삭제"
@@ -75,13 +76,16 @@ const Input = forwardRef(
             onClick={handleClickClose}
             onMouseDown={(e) => e.preventDefault()}
           >
-            <Icon
-              color={iconColor}
-              name={isValid ? "check" : "close-typing"}
-              size="24"
-            />
+            {onClearClick ? (
+              <Icon
+                color={iconColor}
+                name={isValid ? "check" : "close-typing"}
+                size="24"
+              />
+            ) : null}
           </Box>
         )}
+        {rightNode}
       </Box>
     );
   },
