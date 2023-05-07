@@ -62,7 +62,7 @@ export const ShareDealList = ({
           <Typography as="span" fontSize="body1-b">
             총{" "}
             <Typography as="strong" color="orange2" fontSize="body1-b">
-              0
+              {data?.pages[0]?.shareDeals.total ?? 0}
             </Typography>
             개의 공유딜
           </Typography>
