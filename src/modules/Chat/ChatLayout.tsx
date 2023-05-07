@@ -8,6 +8,7 @@ import { Box } from "src/ui/Box";
 import { BottomTab, Header, Layout } from "src/ui/Layout";
 import { Popup } from "src/ui/Popup";
 import { Typography } from "src/ui/Typography";
+import { queryClient } from "src/utils/queryClient";
 
 interface ChatLayoutProps {
   children: ReactElement;
@@ -28,8 +29,8 @@ export const ChatLayout = ({
 }: ChatLayoutProps) => {
   const methods = useForm();
   const { mutate } = useLeaveChat({
-    onSettled: () => {
-      setDeleteMode(false);
+    onSuccess: () => {
+      queryClient.refetchQueries(["getChatList"]);
     },
   });
 
