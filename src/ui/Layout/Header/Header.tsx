@@ -70,6 +70,7 @@ const Header = ({
     position="sticky"
     px="16"
     top="0"
+    zIndex={1}
   >
     {leftNode && <Side position="left">{leftNode}</Side>}
     {title ? (
