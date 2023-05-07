@@ -37,7 +37,11 @@ const Chat = () => {
         <SSRSafeSuspense fallback={<ChattingListSkeleton />}>
           <CompletedShareDeal deleteMode={deleteMode} />
         </SSRSafeSuspense>
-        {deleteMode && <Button>나가기</Button>}
+        {deleteMode && (
+          <Box bottom="48" position="sticky">
+            <Button>나가기</Button>
+          </Box>
+        )}
       </Box>
     </ChatLayout>
   );
