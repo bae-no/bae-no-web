@@ -1,18 +1,50 @@
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
+
+import { Coordinate } from "src/utils/getDistanceFromCoordinates";
+
+const locationCache = (() => {
+  const listeners = new Set<(location: Coordinate) => void>();
+  let coords = {} as Coordinate;
+
+  const subscribe = (listener: (location: Coordinate) => void) => {
+    listeners.add(listener);
+    return () => {
+      listeners.delete(listener);
+    };
+  };
+
+  const setCoords = (newCoords: Coordinate) => {
+    coords = newCoords;
+    listeners.forEach((listener) => listener(coords));
+  };
+
+  const getCoords = () => coords;
+
+  return {
+    getCoords,
+    setCoords,
+    subscribe,
+  };
+})();
 
 const useCurrentLocation = () => {
-  const [location, setLocation] = useState(
-    {} as { latitude: number; longitude: number },
+  const location = useSyncExternalStore(
+    locationCache.subscribe,
+    locationCache.getCoords,
+    locationCache.getCoords,
   );
-
   useEffect(() => {
+    if (location.latitude && location.longitude) return;
     navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      setLocation({ latitude, longitude });
+      locationCache.setCoords(position.coords);
     });
-  }, []);
+  }, [location]);
 
-  return location;
+  return useSyncExternalStore(
+    locationCache.subscribe,
+    locationCache.getCoords,
+    locationCache.getCoords,
+  );
 };
 
 export default useCurrentLocation;
