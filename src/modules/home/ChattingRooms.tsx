@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useDeferredValue, useState } from "react";
 
 import SSRSafeSuspense from "src/components/AsyncBoundary/SSRSuspense";
 import List from "src/components/List";
@@ -34,11 +34,12 @@ export const ShareDealList = ({
   onSortChange,
   sortList,
 }: ShareDealListProps) => {
+  const deferredSort = useDeferredValue(sortType);
   const queryInput = {
     category: category || undefined,
     page: 0,
     size: PAGE_SIZE,
-    sortType,
+    sortType: deferredSort,
   };
   const { data, hasNextPage, fetchNextPage } = useInfiniteFindShareDealQuery(
     "input",
