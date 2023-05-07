@@ -15,10 +15,7 @@ export const EndDeal = ({ isActive }: { isActive?: boolean }) => {
   const { id } = router.query as { [key: string]: string };
   const { setOpen } = useContext(MenuLayoutContext);
   const { mutate } = useEndShareDeal({
-    onSuccess: () => {
-      setOpen(false);
-      router.push("/");
-    },
+    onSuccess: () => setOpen(false),
   });
 
   const handleEnd = () => {
