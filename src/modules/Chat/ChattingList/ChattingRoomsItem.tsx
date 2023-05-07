@@ -52,7 +52,7 @@ const ChattingRoomsItem = ({
     return { x: 0 };
   })();
 
-  const handleClick나가기Click = () => {
+  const handle나가기Click = () => {
     setValue(id, true);
   };
 
@@ -115,7 +115,6 @@ const ChattingRoomsItem = ({
           minWidth="full"
           paddingRight="16"
           py="4"
-          zIndex={1}
           onDragEnd={handleDragEnd}
           onDragStart={() => {
             mouseMoveRef.current = true;
@@ -167,8 +166,8 @@ const ChattingRoomsItem = ({
         position="absolute"
         right="0"
         size="64"
-        zIndex={0}
-        onClick={handleClick나가기Click}
+        zIndex={show나가기 ? 0 : -1}
+        onClick={handle나가기Click}
       >
         <Typography as="span" color="white" fontSize="body2-m">
           나가기

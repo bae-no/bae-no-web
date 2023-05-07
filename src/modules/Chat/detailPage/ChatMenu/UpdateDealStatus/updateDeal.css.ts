@@ -5,9 +5,8 @@ import { sprinkles } from "src/ui/sprinkles.css";
 const overlay = style([
   sprinkles({
     backgroundColor: "black1",
-    height: "full",
     inset: "0",
-    position: "absolute",
+    position: "fixed",
     zIndex: 4,
   }),
   {
@@ -18,7 +17,7 @@ const overlay = style([
 const content = style([
   sprinkles({
     left: "half",
-    position: "absolute",
+    position: "fixed",
     px: "32",
     top: "half",
     transform: "halfMinus",
