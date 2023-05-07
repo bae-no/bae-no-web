@@ -14,9 +14,13 @@ export const ChatWrapper = () => {
     },
   });
   const { shareDealStatus } = data || {};
-  const { canEnd, canStart } = shareDealStatus || {};
+  const { canEnd, canStart, isOwner } = shareDealStatus || {};
   const canChat = canEnd && !canStart;
   const [open, setOpen] = useState(!canChat);
+  const handleConfirm = () => {
+    setOpen(false);
+    router.back();
+  };
 
   return (
     <Popup
@@ -24,9 +28,9 @@ export const ChatWrapper = () => {
       description={`인원이 과반수 이상 진입해야
 채팅 입력이 가능해요.
 조금만 기다려 주세요.`}
-      open={open}
+      open={open && !isOwner}
       title=""
-      onConfirm={() => setOpen(false)}
+      onConfirm={handleConfirm}
     />
   );
 };
