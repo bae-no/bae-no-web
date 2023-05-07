@@ -35,8 +35,8 @@ export const UpdateModal = ({
   const [open, toggle] = useToggle();
 
   return (
-    <Root open={open && isActive}>
-      <Trigger onClick={toggle}>{children}</Trigger>
+    <Root open={Boolean(isActive && open)} onOpenChange={toggle}>
+      <Trigger>{children}</Trigger>
       <Portal>
         <Overlay className={updateDealStatus.overlay} />
         <Content className={updateDealStatus.content}>
