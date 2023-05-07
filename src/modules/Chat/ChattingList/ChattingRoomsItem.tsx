@@ -115,7 +115,6 @@ const ChattingRoomsItem = ({
           minWidth="full"
           paddingRight="16"
           py="4"
-          zIndex={1}
           onDragEnd={handleDragEnd}
           onDragStart={() => {
             mouseMoveRef.current = true;
@@ -167,7 +166,7 @@ const ChattingRoomsItem = ({
         position="absolute"
         right="0"
         size="64"
-        zIndex={0}
+        zIndex={-1}
         onClick={handleClick나가기Click}
       >
         <Typography as="span" color="white" fontSize="body2-m">
