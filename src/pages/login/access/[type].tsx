@@ -25,7 +25,7 @@ const AccessPage = () => {
   }, [router.isReady]);
 
   const handleClick = () => {
-    router.push("verification");
+    router.push("/login/verification");
   };
   return (
     <Box height="full" paddingBottom="48" px="16">
