@@ -11,7 +11,9 @@ const ChatItemSkeleton = ({ float = "left" }: ChatItemSkeletonProps) => (
     flexDirection={float === "right" ? "row-reverse" : "row"}
     gap="8"
   >
-    <Skeleton borderRadius="half" height="36" width="36" />
+    {float === "left" && (
+      <Skeleton borderRadius="half" height="36" width="36" />
+    )}
     <Skeleton borderRadius="24" height="40" width="128" />
     <Skeleton height="12" width="64" />
   </Box>
