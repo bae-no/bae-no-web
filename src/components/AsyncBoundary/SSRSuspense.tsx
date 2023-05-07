@@ -11,7 +11,8 @@ const SSRSafeSuspense = ({
   if (isMounted) {
     return <Suspense fallback={fallback}>{children}</Suspense>;
   }
-  return <>fallback</>;
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{fallback}</>;
 };
 
 export default SSRSafeSuspense;
