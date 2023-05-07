@@ -9,11 +9,11 @@ import { Typography } from "src/ui/Typography";
 import { UpdateModal } from "../UpdateDealStatus/UpdateModal";
 
 const POPUP_TEXT = {
-  beforeEnd: `정말로 채팅방을 나가실건가요?
-  채팅방을 나가면 해당 공유딜에 관해 나눈 내용은 전부 삭제됩니다.`,
-  beforeStart: `정말로 채팅방을 나가실건가요?
+  owner: `정말로 채팅방을 나가실건가요?
   공유딜 시작전에 대표자가 나가게되면,
   해당 채팅방은 파기됩니다.`,
+  participant: `정말로 채팅방을 나가실건가요?
+  채팅방을 나가면 해당 공유딜에 관해 나눈 내용은 전부 삭제됩니다.`,
 };
 
 interface LeaveChatProps {
@@ -34,22 +34,13 @@ export const LeaveChat = ({ shareDealStatus }: LeaveChatProps) => {
     });
   };
 
-  const [beforeStart, beforeEnd, progressing] = [
-    shareDealStatus?.canStart,
-    shareDealStatus?.canEnd,
-    !shareDealStatus?.canStart && !shareDealStatus?.canEnd,
-  ];
-  const popupText = () => {
-    if (beforeStart) return POPUP_TEXT.beforeStart;
-    if (beforeEnd) return POPUP_TEXT.beforeEnd;
-    return "";
-  };
+  const isOwner = shareDealStatus?.isOwner;
 
   return (
     <UpdateModal
+      isActive
       confirmBtn={<Button onClick={handleLeaveChat}>나가기</Button>}
-      description={popupText()}
-      isActive={!progressing}
+      description={isOwner ? POPUP_TEXT.owner : POPUP_TEXT.participant}
       title="채팅방 나가기"
     >
       <Box flexDirection="row" gap="8">
