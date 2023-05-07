@@ -11,7 +11,6 @@ import { EnrollParams } from "./detailLocationType";
 
 export const DetailLocationInputBox = () => {
   const { jibunAddress, roadAddress } = useReastorageValue(locationStorage);
-
   const { register, resetField } = useFormContext<EnrollParams>();
 
   return (

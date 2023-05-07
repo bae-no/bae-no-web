@@ -5,7 +5,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { ConditionalRender } from "src/components/ConditionalRender";
 import { useLeaveChat } from "src/graphql";
 import { Box } from "src/ui/Box";
-import { Header, Layout } from "src/ui/Layout";
+import { BottomTab, Header, Layout } from "src/ui/Layout";
 import { Popup } from "src/ui/Popup";
 import { Typography } from "src/ui/Typography";
 
@@ -61,6 +61,7 @@ export const ChatLayout = ({
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <Layout
+            footer={!deleteMode ? <BottomTab /> : undefined}
             headerProps={{
               rightNode: (
                 <ConditionalRender
@@ -79,7 +80,6 @@ export const ChatLayout = ({
               ),
               title: "채팅",
             }}
-            showBottomTab={!deleteMode}
           >
             {children}
           </Layout>

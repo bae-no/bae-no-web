@@ -1,59 +1,74 @@
 import { useMemo, useState } from "react";
 
-import { GetServerSidePropsContext } from "next";
+import { useReastorageValue } from "@reastorage/react";
 import { useRouter } from "next/router";
 import Script from "next/script";
 
-import { useGetShareDeal, useJoinShareDeal } from "src/graphql";
+import { useUpdateShareDeal } from "src/graphql";
 import useCurrentLocation from "src/hooks/useCurrentLocation";
 import Information from "src/modules/Chat/Confirm/Information";
 import ConfirmMap from "src/modules/Chat/Confirm/Map";
 import Thumnail from "src/modules/Chat/Confirm/Thumnail";
+import { updateShareDealStorage } from "src/store/updateShareDeal";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { Container } from "src/ui/Container";
 import Divider from "src/ui/Divider";
 import { Header } from "src/ui/Layout";
 import { getDistanceFromCoordinates } from "src/utils/getDistanceFromCoordinates";
-import { prefetchQueriesOnServerSideWithAuth } from "src/utils/prefetchQueryOnServerSide";
 
-const JoinChatPage = () => {
-  const [isNaverMapReady, setIsNaverMapReady] = useState(false);
+const SettingShareDealConfirmPage = () => {
   const router = useRouter();
   const { id } = router.query as { [key: string]: string };
+  const shareDealData = useReastorageValue(updateShareDealStorage);
+  const {
+    category,
+    maxParticipant,
+    orderPrice,
+    shareZone,
+    storeName,
+    thumbnail,
+    title,
+  } = shareDealData || {};
 
-  const { mutate } = useJoinShareDeal({
-    onSuccess: () => {
-      router.replace({
+  const { addressDetail, addressPath, latitude, longitude } = shareZone || {};
+
+  const location = useCurrentLocation();
+  const [isNaverMapReady, setIsNaverMapReady] = useState(false);
+  const [thumbnailUrl, setThumbnailUrl] = useState(thumbnail);
+
+  const { mutate } = useUpdateShareDeal({
+    onSuccess: () =>
+      router.push({
         pathname: "/chat/[id]",
         query: {
           id,
+          title,
         },
-      });
-    },
+      }),
   });
-  const { data } = useGetShareDeal({
-    shareDealId: id,
-  });
-  const location = useCurrentLocation();
-  const [thumbnailUrl, setThumbnailUrl] = useState("");
-
-  const { category, maxParticipants, orderPrice, shareZone, storeName, title } =
-    data?.shareDeal || {};
-  const { coordinate, detail, path } = shareZone || {};
 
   const distance = useMemo(() => {
-    if (!location || !coordinate) return null;
-    return getDistanceFromCoordinates(location, coordinate);
-  }, [coordinate, location]);
+    if (!location || !latitude || !longitude) return null;
+    return getDistanceFromCoordinates(location, { latitude, longitude });
+  }, [latitude, location, longitude]);
 
   const handleSubmit = () => {
     mutate({
       input: {
-        shareDealId: id,
+        category,
+        id,
+        maxParticipant,
+        orderPrice,
+        shareZone,
+        storeName,
+        thumbnail,
+        title,
       },
     });
   };
+
+  if (!shareDealData) return null;
 
   return (
     <Box gap="24">
@@ -77,7 +92,7 @@ const JoinChatPage = () => {
           <Information.Item
             affix="명"
             label="공유인원"
-            value={String(maxParticipants)}
+            value={String(maxParticipant)}
           />
           <Information.Item label="카테고리" value={category ?? ""} />
           <Information.Item label="주문할 가게" value={storeName ?? ""} />
@@ -95,14 +110,19 @@ const JoinChatPage = () => {
               Number.isNaN(distance) ? "계산중..." : `${String(distance)}km`
             }
           />
-          <Information.Item label="주소" value={`${path} ${detail}`} />
+          <Information.Item
+            label="주소"
+            value={`${addressPath} ${addressDetail}`}
+          />
           <Script
             src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_DEVELOPMENT_NAVER_CLIENT_ID}&submodules=geocoder`}
             strategy="afterInteractive"
             onReady={() => setIsNaverMapReady(true)}
           />
           {!!isNaverMapReady && (
-            <ConfirmMap center={coordinate ?? { latitude: 0, longitude: 0 }} />
+            <ConfirmMap
+              center={{ latitude, longitude } ?? { latitude: 0, longitude: 0 }}
+            />
           )}
         </Information>
       </Container>
@@ -118,7 +138,7 @@ const JoinChatPage = () => {
           zIndex={100}
         >
           <Button size="l" type="button" onClick={handleSubmit}>
-            참여하기
+            수정 완료
           </Button>
         </Box>
       </Box>
@@ -126,17 +146,4 @@ const JoinChatPage = () => {
   );
 };
 
-export default JoinChatPage;
-
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext,
-) => {
-  const { id } = context.query as { [key: string]: string };
-
-  return prefetchQueriesOnServerSideWithAuth([
-    {
-      getParams: () => ({ variables: { shareDealId: id } }),
-      queryHook: useGetShareDeal,
-    },
-  ])(context);
-};
+export default SettingShareDealConfirmPage;

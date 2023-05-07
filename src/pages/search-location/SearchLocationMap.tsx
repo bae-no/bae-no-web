@@ -18,7 +18,7 @@ const clientId = process.env.NEXT_PUBLIC_DEVELOPMENT_NAVER_CLIENT_ID;
 const SearchLocationMap = () => {
   const router = useRouter();
   const location = useReastorageValue(locationStorage);
-  const { nextUrl } = router.query as { [key: string]: string };
+  const { nextUrl, ...rest } = router.query as { [key: string]: string };
 
   const [isScriptLoad, setIsScriptLoad] = useState(false);
 
@@ -31,7 +31,10 @@ const SearchLocationMap = () => {
   });
 
   const handleClick = () => {
-    router.replace(nextUrl);
+    router.replace({
+      pathname: nextUrl,
+      query: rest,
+    });
   };
 
   if (!isScriptLoad)

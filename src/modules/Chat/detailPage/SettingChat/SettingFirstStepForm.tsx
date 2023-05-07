@@ -2,27 +2,33 @@ import { ComponentProps } from "react";
 
 import { useSetReastorage } from "@reastorage/react";
 import { useRouter } from "next/router";
-import { FormProvider, RegisterOptions, useController } from "react-hook-form";
+import {
+  FormProvider,
+  RegisterOptions,
+  useController,
+  useForm,
+  useFormContext,
+} from "react-hook-form";
 
-import { FoodCategory, useCategoryListQuery } from "src/graphql";
+import {
+  FoodCategory,
+  GetShareDeal,
+  UpdateShareDealInput,
+  useCategoryListQuery,
+  useGetShareDeal,
+} from "src/graphql";
+import { locationStorage } from "src/store/login";
+import { updateShareDealStorage } from "src/store/updateShareDeal";
 import { Box } from "src/ui/Box";
 import { Button } from "src/ui/Button";
 import { FormField } from "src/ui/Form";
 import { Input } from "src/ui/Input";
 import { Select } from "src/ui/Select";
 
-import {
-  CreateChatForm,
-  CreateChatForm as CreateChatFormType,
-  createChatFormStorage,
-} from "./storage";
-import {
-  useCreateChatForm,
-  useCreateChatFormContext,
-} from "./useCreateChatForm";
+import { getRandomIndex } from "../../Confirm/Thumnail";
 
 interface FieldProps {
-  fieldName: keyof CreateChatFormType;
+  fieldName: keyof UpdateShareDealInput;
   inputProps?: ComponentProps<typeof Input>;
   label: string;
   options?: RegisterOptions;
@@ -36,7 +42,8 @@ const Field = ({
   inputProps,
   options,
 }: FieldProps) => {
-  const { register } = useCreateChatFormContext();
+  const { register } = useFormContext();
+
   return (
     <FormField label={label}>
       <Input
@@ -48,8 +55,101 @@ const Field = ({
   );
 };
 
+const NumberFieldWithPrefix = ({
+  fieldName,
+  label,
+  placeholder,
+  inputProps,
+  options,
+  prefix,
+}: FieldProps & { prefix: string }) => {
+  const { control } = useFormContext();
+  const { field } = useController({
+    control,
+    name: fieldName,
+    rules: { required: true, ...options },
+  });
+  return (
+    <FormField label={label}>
+      <Input
+        placeholder={placeholder}
+        {...field}
+        {...inputProps}
+        value={
+          field.value !== undefined
+            ? String(field.value) + prefix
+            : field.value ?? ""
+        }
+        onChange={(e) => {
+          const { value } = e.target;
+          const number = Number(value.replace(prefix, ""));
+          field.onChange(number);
+        }}
+      />
+    </FormField>
+  );
+};
+
+const SubmitButton = () => {
+  const { handleSubmit, watch } = useFormContext<GetShareDeal["shareDeal"]>();
+  const router = useRouter();
+  const fields = watch();
+  const setUpdateShareDealInfo = useSetReastorage(updateShareDealStorage);
+  const setLocation = useSetReastorage(locationStorage);
+  const handleFormSubmit = handleSubmit((data) => {
+    const {
+      detail: addressDetail,
+      path: addressPath,
+      system: addressSystem,
+      coordinate,
+    } = data.shareZone;
+
+    const { latitude, longitude } = coordinate;
+
+    setUpdateShareDealInfo({
+      ...data,
+      id: router.query.id as string,
+      maxParticipant: data.maxParticipants,
+      shareZone: {
+        addressDetail,
+        addressPath,
+        addressSystem,
+        latitude,
+        longitude,
+      },
+      thumbnail: `/images/food/${data.category
+        ?.toLocaleLowerCase()
+        .replace("_", "")}${getRandomIndex()}.png`,
+    });
+
+    setLocation((prev) => ({
+      ...prev,
+      [addressSystem === "JIBUN" ? "jibunAddress" : "roadAddress"]: addressPath,
+    }));
+    router.push({
+      pathname: "/chat/[id]/setting/location-detail",
+      query: { id: router.query.id },
+    });
+  });
+
+  return (
+    <Box height="128">
+      <Box bottom="48" left="0" position="fixed" px="16" width="full">
+        <Button
+          disabled={Object.values(fields).some((value) => !value)}
+          size="l"
+          type="button"
+          onClick={handleFormSubmit}
+        >
+          다음
+        </Button>
+      </Box>
+    </Box>
+  );
+};
+
 const CategoryField = () => {
-  const { setValue, control } = useCreateChatFormContext();
+  const { setValue, control } = useFormContext();
   const { data } = useCategoryListQuery(undefined, {
     enabled: false,
     suspense: false,
@@ -80,78 +180,14 @@ const CategoryField = () => {
   );
 };
 
-const NumberFieldWithPrefix = ({
-  fieldName,
-  label,
-  placeholder,
-  inputProps,
-  options,
-  prefix,
-}: FieldProps & { prefix: string }) => {
-  const { control } = useCreateChatFormContext();
-  const { field } = useController({
-    control,
-    name: fieldName,
-    rules: { required: true, ...options },
-  });
-  return (
-    <FormField label={label}>
-      <Input
-        placeholder={placeholder}
-        {...field}
-        {...inputProps}
-        value={
-          field.value !== undefined
-            ? String(field.value) + prefix
-            : field.value ?? ""
-        }
-        onChange={(e) => {
-          const { value } = e.target;
-          const number = Number(value.replace(prefix, ""));
-          field.onChange(number);
-        }}
-      />
-    </FormField>
-  );
-};
-
-const SubmitButton = () => {
-  const { handleSubmit, watch } = useCreateChatFormContext();
-  const fields = watch();
-  const setCreateChatFormAtom = useSetReastorage(createChatFormStorage);
-
+export const SettingFirstStepForm = () => {
   const router = useRouter();
-
-  const handleFormSubmit = handleSubmit((data) => {
-    setCreateChatFormAtom(data);
-    router.push("/chat/create/location");
+  const { data } = useGetShareDeal({
+    shareDealId: router.query.id as string,
   });
 
-  return (
-    <Box height="128">
-      <Box bottom="48" left="0" position="fixed" px="16" width="full">
-        <Button
-          disabled={Object.values(fields).some((value) => !value)}
-          size="l"
-          type="button"
-          onClick={handleFormSubmit}
-        >
-          다음
-        </Button>
-      </Box>
-    </Box>
-  );
-};
-
-export const CreateChatFirstStepForm = () => {
-  const form = useCreateChatForm({
-    defaultValues: async () =>
-      new Promise<CreateChatForm>((resolve) => {
-        setTimeout(() => {
-          resolve(createChatFormStorage.get());
-        }, 10);
-      }),
-    mode: "onChange",
+  const form = useForm({
+    defaultValues: data?.shareDeal,
   });
 
   return (
@@ -169,7 +205,7 @@ export const CreateChatFirstStepForm = () => {
           placeholder="주문하실 가게 이름을 입력해주세요."
         />
         <NumberFieldWithPrefix
-          fieldName="maxParticipants"
+          fieldName="maxParticipant"
           inputProps={{ prefix: "명" }}
           label="최대 참여 인원"
           options={{ min: 0 }}

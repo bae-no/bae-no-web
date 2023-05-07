@@ -17,8 +17,12 @@ export const ChatMenuFooter = ({ shareDealStatus }: ChatMenuFooterProps) => (
     justifyContent="space-around"
     py="12"
   >
-    <SettingChat />
-    <Divider height="12" position="absolute" />
+    {shareDealStatus?.canStart && shareDealStatus.isOwner && (
+      <>
+        <SettingChat />
+        <Divider height="12" position="absolute" />
+      </>
+    )}
     <LeaveChat shareDealStatus={shareDealStatus} />
   </Box>
 );

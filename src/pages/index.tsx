@@ -13,7 +13,7 @@ import UserInfo from "src/modules/home/HomeHead/UserInfo";
 import LocationSelector from "src/modules/home/LocationSelector";
 import { showShareZoneTooltipStorage } from "src/store/shareZone";
 import { Box } from "src/ui/Box";
-import { Layout } from "src/ui/Layout";
+import { BottomTab, Layout } from "src/ui/Layout";
 import { prefetchQueriesOnServerSideWithAuth } from "src/utils/prefetchQueryOnServerSide";
 
 const Tooltip = dynamic(() => import("src/ui/Tooltip"), { ssr: false });
@@ -28,7 +28,7 @@ const Home = () => {
     <>
       <MetaTags />
       <Layout
-        showBottomTab
+        footer={<BottomTab />}
         headerProps={{
           backgroundColor,
           mainNode: (

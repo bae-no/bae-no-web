@@ -2,29 +2,28 @@ import { ElementType, ReactElement } from "react";
 
 import { Box } from "../Box";
 
-import { BottomTab } from "./BottomTab";
 import { Header } from "./Header";
 import { HeaderProps } from "./Header/Header";
 
 interface LayoutProps {
   as?: ElementType;
   children: ReactElement;
+  footer?: ReactElement;
   headerProps?: HeaderProps;
-  showBottomTab?: boolean;
 }
 
 const Layout = ({
   children,
-  showBottomTab,
   as = "main",
   headerProps,
+  footer,
 }: LayoutProps) => (
   <Box height="full">
     <Header {...headerProps} />
     <Box as={as} height="full">
       {children}
     </Box>
-    {showBottomTab && <BottomTab />}
+    {footer}
   </Box>
 );
 

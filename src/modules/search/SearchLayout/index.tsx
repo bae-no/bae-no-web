@@ -1,22 +1,18 @@
 import { ReactElement, ReactNode } from "react";
 
 import { Box } from "src/ui/Box";
-import { Layout } from "src/ui/Layout";
+import { BottomTab, Layout } from "src/ui/Layout";
 
 import { SearchHeader } from "./SearchHeader";
 
 interface SearchLayoutProps {
   children: ReactElement;
   leftNode?: ReactNode;
-  showBottomTab?: boolean;
 }
 
-export const SearchLayout = ({
-  children,
-  showBottomTab,
-  leftNode,
-}: SearchLayoutProps) => (
+export const SearchLayout = ({ children, leftNode }: SearchLayoutProps) => (
   <Layout
+    footer={<BottomTab />}
     headerProps={{
       mainNode: (
         <Box
@@ -31,7 +27,6 @@ export const SearchLayout = ({
         </Box>
       ),
     }}
-    showBottomTab={showBottomTab}
   >
     <Box px="16">{children}</Box>
   </Layout>

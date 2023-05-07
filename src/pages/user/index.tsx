@@ -7,7 +7,7 @@ import UserHead from "src/modules/user/UserHead";
 import UserPageSection from "src/modules/user/UserPageSection";
 import { Box } from "src/ui/Box";
 import { Container } from "src/ui/Container";
-import { Header, Layout } from "src/ui/Layout";
+import { BottomTab, Header, Layout } from "src/ui/Layout";
 import { prefetchQueriesOnServerSideWithAuth } from "src/utils/prefetchQueryOnServerSide";
 
 const UserPage = () => {
@@ -15,7 +15,7 @@ const UserPage = () => {
 
   return (
     <Layout
-      showBottomTab
+      footer={<BottomTab />}
       headerProps={{
         backgroundColor,
         rightNode: <Header.Setting />,

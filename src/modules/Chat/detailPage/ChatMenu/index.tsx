@@ -15,16 +15,11 @@ import { StartDeal } from "./UpdateDealStatus/StartDeal";
 export const ChatMeun = () => {
   const router = useRouter();
   const { id } = router.query as { [key: string]: string };
-  const { data } = useChatStatus(
-    {
-      input: {
-        shareDealId: id,
-      },
+  const { data } = useChatStatus({
+    input: {
+      shareDealId: id,
     },
-    {
-      enabled: router.isReady,
-    },
-  );
+  });
 
   return (
     <ChatMenuLayout>

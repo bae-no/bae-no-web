@@ -42,14 +42,17 @@
     "framer-motion": "^7.6.18",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
+    "graphql-ws": "^5.12.1",
+    "isomorphic-ws": "^5.0.0",
     "jotai": "^2.0.2",
     "lottie-web": "^5.10.0",
     "next": "^13.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^3.1.4",
-    "react-hook-form": "^7.43.7",
-    "react-is": "^18.2.0"
+    "react-hook-form": "^7.40.0",
+    "react-is": "^18.2.0",
+    "react-textarea-autosize": "^8.4.1"
   },
   "devDependencies": {
     "@graphql-codegen/add": "^3.2.1",
