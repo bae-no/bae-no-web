@@ -23,7 +23,7 @@ const SettingShareDealConfirmPage = () => {
   const shareDealData = useReastorageValue(updateShareDealStorage);
   const {
     category,
-    maxParticipants,
+    maxParticipant,
     orderPrice,
     shareZone,
     storeName,
@@ -43,6 +43,7 @@ const SettingShareDealConfirmPage = () => {
         pathname: "/chat/[id]",
         query: {
           id,
+          title,
         },
       }),
   });
@@ -57,7 +58,7 @@ const SettingShareDealConfirmPage = () => {
       input: {
         category,
         id,
-        maxParticipants,
+        maxParticipant,
         orderPrice,
         shareZone,
         storeName,
@@ -91,7 +92,7 @@ const SettingShareDealConfirmPage = () => {
           <Information.Item
             affix="명"
             label="공유인원"
-            value={String(maxParticipants)}
+            value={String(maxParticipant)}
           />
           <Information.Item label="카테고리" value={category ?? ""} />
           <Information.Item label="주문할 가게" value={storeName ?? ""} />

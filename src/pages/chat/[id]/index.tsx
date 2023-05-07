@@ -5,6 +5,7 @@ import SSRSafeSuspense from "src/components/AsyncBoundary/SSRSuspense";
 import { useChatStatus } from "src/graphql";
 import { ChatWrapper } from "src/modules/Chat/ChatWrapper";
 import { ChatContent } from "src/modules/Chat/detailPage/ChatContent";
+import { ChatSkeleton } from "src/modules/Chat/detailPage/ChatContent/ChatSkeleton";
 import { ChatTextArea } from "src/modules/Chat/detailPage/ChatContent/ChatTextArea";
 import { ChatMeun } from "src/modules/Chat/detailPage/ChatMenu";
 import { Header, Layout } from "src/ui/Layout";
@@ -25,7 +26,7 @@ const ChattingRoomPage = () => {
     >
       <>
         <ChatWrapper />
-        <SSRSafeSuspense fallback={<h1>로딩중....</h1>}>
+        <SSRSafeSuspense fallback={<ChatSkeleton />}>
           <ChatContent />
         </SSRSafeSuspense>
       </>

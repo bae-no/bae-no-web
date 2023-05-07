@@ -109,7 +109,7 @@ const SubmitButton = () => {
     setUpdateShareDealInfo({
       ...data,
       id: router.query.id as string,
-      maxParticipants: data.maxParticipants,
+      maxParticipant: data.maxParticipants,
       shareZone: {
         addressDetail,
         addressPath,
@@ -205,7 +205,7 @@ export const SettingFirstStepForm = () => {
           placeholder="주문하실 가게 이름을 입력해주세요."
         />
         <NumberFieldWithPrefix
-          fieldName="maxParticipants"
+          fieldName="maxParticipant"
           inputProps={{ prefix: "명" }}
           label="최대 참여 인원"
           options={{ min: 0 }}
