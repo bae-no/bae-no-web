@@ -39,7 +39,7 @@ const DetailLocationForm = () => {
         <DetailLocationInputBox />
         <SubmitButton />
       </FormProvider>
-      <ConfirmLocationInMap />
+      <ConfirmLocationInMap nextUrl="/chat/create/location-detail" />
     </Box>
   );
 };

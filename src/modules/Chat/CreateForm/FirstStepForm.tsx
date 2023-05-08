@@ -108,6 +108,7 @@ const NumberFieldWithPrefix = ({
         onChange={(e) => {
           const { value } = e.target;
           const number = Number(value.replace(prefix, ""));
+          if (!number) return;
           field.onChange(number);
         }}
       />
