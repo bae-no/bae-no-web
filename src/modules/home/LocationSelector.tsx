@@ -1,4 +1,10 @@
-import { cloneElement, ReactElement, useEffect, useRef } from "react";
+import {
+  cloneElement,
+  forwardRef,
+  ReactElement,
+  useEffect,
+  useRef,
+} from "react";
 
 import {
   useReastorage,
@@ -22,29 +28,33 @@ import { PullToCloseBottomDrawer } from "src/ui/BottomDrawer";
 import { Box } from "src/ui/Box";
 import Divider from "src/ui/Divider";
 import ArrowBottomIcon from "src/ui/Icon/svgs/arrow-bottom.svg";
+import { colors } from "src/ui/tokens/color";
 import { Typography } from "src/ui/Typography";
 
 import SearchLocation from "../SearchLocation/SearchLocation";
 
-const LocationSelectorTrigger = ({ onClick }: { onClick?: VoidFunction }) => {
+const LocationSelectorTrigger = forwardRef<
+  HTMLButtonElement,
+  { onClick?: VoidFunction }
+>(({ onClick }, ref) => {
   const currentShareZone = useReastorageValue(currentShareZoneStorage);
 
   return (
     <Box
       align="center"
-      as="button"
       direction="row"
       gap="8"
+      ref={ref}
       type="button"
       onClick={onClick}
     >
       <Typography fontSize="body1-b">
         {currentShareZone?.alias || "주소를 설정해주세요"}
       </Typography>
-      <ArrowBottomIcon />
+      <ArrowBottomIcon color={colors.black1} />
     </Box>
   );
-};
+});
 
 interface LocationSelectorProps {
   children: ReactElement;

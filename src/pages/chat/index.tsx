@@ -38,8 +38,19 @@ const Chat = () => {
           <CompletedShareDeal deleteMode={deleteMode} />
         </SSRSafeSuspense>
         {deleteMode && (
-          <Box bottom="48" position="sticky">
-            <Button>나가기</Button>
+          <Box height="128">
+            <Box
+              backgroundColor="white"
+              bottom="0"
+              left="0"
+              paddingBottom="48"
+              position="fixed"
+              px="16"
+              width="full"
+              zIndex={1}
+            >
+              <Button>나가기</Button>
+            </Box>
           </Box>
         )}
       </Box>

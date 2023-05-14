@@ -1,7 +1,7 @@
 import { memo, useState, useRef } from "react";
 
 import { PanInfo } from "framer-motion";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import { useFormContext } from "react-hook-form";
 
 import LazyDomMaxMotion from "src/components/LazyDomMaxMotion";
@@ -34,11 +34,12 @@ const ChattingRoomsItem = ({
   title,
 }: ChattingRoomsItemProps) => {
   const { setValue } = useFormContext();
-  const router = useRouter();
   const [show나가기, setShow나가기] = useState(false);
   const mouseMoveRef = useRef(false);
 
-  const handleDragEnd = (_: any, { offset }: PanInfo) => {
+  const handleDragEnd = (_: any, { offset, velocity }: PanInfo) => {
+    mouseMoveRef.current = false;
+    if (Math.abs(velocity.x) < Math.abs(velocity.y)) return;
     if (offset.x < -44) {
       setShow나가기(true);
     } else {
@@ -69,92 +70,81 @@ const ChattingRoomsItem = ({
     return `${year}-${month}-${day}`;
   };
 
-  const handleRouteDetailPage = () => {
-    if (mouseMoveRef.current || show나가기) {
-      mouseMoveRef.current = false;
-
-      return;
-    }
-    if (checkbox) return;
-    router.push({
-      pathname: "/chat/[id]",
-      query: {
-        id,
-        title,
-      },
-    });
-  };
-
   return (
-    <Box
-      as="li"
-      flexDirection="row"
-      width="full"
-      onMouseUpCapture={handleRouteDetailPage}
-    >
-      <LazyDomMaxMotion>
-        {checkbox && (
-          <CheckBox
-            id={id}
-            value={id}
-            onCheckedChange={(checked) => setValue(id, checked)}
-          />
-        )}
-        <MotionBox
-          dragSnapToOrigin
-          align="center"
-          animate={animation}
-          backgroundColor="white"
-          boxSizing="content-box"
-          direction="row"
-          drag={!checkbox && "x"}
-          dragConstraints={{ left: -88, right: 0 }}
-          dragElastic={0.2}
-          gap="16"
-          height="64"
-          minWidth="full"
-          paddingRight="16"
-          py="4"
-          onDragEnd={handleDragEnd}
-          onDragStart={() => {
-            mouseMoveRef.current = true;
-          }}
-        >
-          <Box>
-            <Avatar size="48" src={thumbnail} />
-          </Box>
-          <Box as="span" gap="2" overflow="hidden" width="full">
-            <Typography fontSize="body1-b">{title}</Typography>
-            <Box width="full">
-              <Typography
-                color="black2"
-                fontSize="body2-m"
-                textOverflow="ellipsis"
-                whiteSpace="nowrap"
-                wordBreak="break-all"
-              >
-                {lastContent}
-              </Typography>
-            </Box>
-          </Box>
-          <Box
-            align="flex-end"
-            as="span"
-            gap="5.5"
-            minWidth="max"
-            {...(ended && { paddingBottom: "32" })}
+    <Box as="li">
+      <Box
+        as={checkbox ? "div" : Link}
+        flexDirection="row"
+        href={`/chat/${id}?title=${title}`}
+        width="full"
+      >
+        <LazyDomMaxMotion>
+          {checkbox && (
+            <CheckBox
+              id={id}
+              value={id}
+              onCheckedChange={(checked) => setValue(id, checked)}
+            />
+          )}
+          <MotionBox
+            dragSnapToOrigin
+            align="center"
+            animate={animation}
+            backgroundColor="white"
+            boxSizing="content-box"
+            direction="row"
+            drag={!checkbox && "x"}
+            dragConstraints={{ left: -88, right: 0 }}
+            dragElastic={0.2}
+            gap="16"
+            height="64"
+            minWidth="full"
+            paddingRight="16"
+            py="4"
+            zIndex={1}
+            onDragEnd={handleDragEnd}
+            onDragStart={() => {
+              mouseMoveRef.current = true;
+            }}
           >
-            <Typography color="black4" fontSize="caption1-m">
-              {getFormattiedDate(lastUpdatedAt)}
-            </Typography>
-            {!ended && (
-              <Label color="primary" variant="border">
-                <Typography fontSize="caption1-m">{unreadCount}</Typography>
-              </Label>
-            )}
-          </Box>
-        </MotionBox>
-      </LazyDomMaxMotion>
+            <Box>
+              <Avatar size="48" src={thumbnail} />
+            </Box>
+            <Box as="span" gap="2" overflow="hidden" width="full">
+              <Typography fontSize="body1-b">{title}</Typography>
+              <Box width="full">
+                <Typography
+                  color="black2"
+                  fontSize="body2-m"
+                  textOverflow="ellipsis"
+                  whiteSpace="nowrap"
+                  wordBreak="break-all"
+                >
+                  {lastContent}
+                </Typography>
+              </Box>
+            </Box>
+            <Box
+              align="flex-end"
+              as="span"
+              gap="5.5"
+              minWidth="max"
+              {...(ended && { paddingBottom: "32" })}
+            >
+              <Typography color="black4" fontSize="caption1-m">
+                {getFormattiedDate(lastUpdatedAt)}
+              </Typography>
+              {!ended && (
+                <Label color="primary" variant="border">
+                  <Typography color="white" fontSize="caption1-m">
+                    {unreadCount}
+                  </Typography>
+                </Label>
+              )}
+            </Box>
+          </MotionBox>
+        </LazyDomMaxMotion>
+      </Box>
       <Box
         align="center"
         as="button"
@@ -166,7 +156,7 @@ const ChattingRoomsItem = ({
         position="absolute"
         right="0"
         size="64"
-        zIndex={show나가기 ? 0 : -1}
+        // zIndex={0}
         onClick={handle나가기Click}
       >
         <Typography as="span" color="white" fontSize="body2-m">

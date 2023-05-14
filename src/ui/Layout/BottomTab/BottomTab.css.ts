@@ -13,4 +13,5 @@ export const addIconCss = style({
 
 export const bottomTabContainerCss = style({
   padding: "4rem 0",
+  zIndex: 1,
 });

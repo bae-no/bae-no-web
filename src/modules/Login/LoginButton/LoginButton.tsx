@@ -4,16 +4,10 @@ import { Button } from "src/ui/Button";
 import { Typography } from "src/ui/Typography";
 
 import { buttonCss } from "./loginButton.css";
-import Apple from "./svgs/apple.svg";
 import Google from "./svgs/google.svg";
 import Kakao from "./svgs/kakao.svg";
 
 const loginButtonObject = {
-  apple: {
-    icon: <Apple />,
-    text: "Apple로 계속하기",
-    url: "여기는 나중에 배포전에 만들부분입니다.",
-  },
   google: {
     icon: <Google />,
     text: "구글로 계속하기",
@@ -27,7 +21,7 @@ const loginButtonObject = {
 };
 
 interface LoginButtonProps {
-  loginType: "google" | "kakao" | "apple";
+  loginType: "google" | "kakao";
 }
 
 export const LoginButton = ({ loginType }: LoginButtonProps) => {

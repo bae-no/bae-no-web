@@ -20,7 +20,6 @@ const Login = () => (
     <Box gap="12" width="full">
       <LoginButton loginType="google" />
       <LoginButton loginType="kakao" />
-      <LoginButton loginType="apple" />
     </Box>
   </Box>
 );
