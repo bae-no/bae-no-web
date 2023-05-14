@@ -43,7 +43,7 @@ const Typography = forwardRef(
     {
       children,
       as = "p",
-      color = "black1",
+      color,
       fontSize,
       className,
       textAlign,

@@ -74,6 +74,7 @@ const ChattingRoomsItem = ({
     <Box as="li">
       <Box
         as={checkbox ? "div" : Link}
+        color="black1"
         flexDirection="row"
         href={`/chat/${id}?title=${title}`}
         width="full"
