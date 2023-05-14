@@ -130,7 +130,15 @@ const SubmitButton = () => {
 
   return (
     <Box height="128">
-      <Box bottom="48" left="0" position="fixed" px="16" width="full">
+      <Box
+        backgroundColor="white"
+        bottom="0"
+        left="0"
+        paddingBottom="48"
+        position="fixed"
+        px="16"
+        width="full"
+      >
         <Button
           disabled={Object.values(fields).some((value) => !value)}
           size="l"
