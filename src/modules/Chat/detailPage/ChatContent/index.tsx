@@ -119,7 +119,7 @@ export const ChatContent = () => {
             const date = dateFilter(before, after);
 
             return (
-              <Box alignItems="center" key={item.id} px="16">
+              <Box alignItems="center" as="li" key={item.id} px="16">
                 <DateChip date={date} />
                 <ChatItem {...item} />
               </Box>
@@ -128,6 +128,7 @@ export const ChatContent = () => {
           .reverse()}
         {data?.pages.map((page, index) => (
           <Box
+            as="ol"
             flexDirection="column-reverse"
             gap="16"
             key={index.toFixed()}
@@ -141,7 +142,7 @@ export const ChatContent = () => {
               const date = dateFilter(before, after);
 
               return (
-                <Box alignItems="center" key={item.id}>
+                <Box alignItems="center" as="li" key={item.id}>
                   <DateChip date={date} />
                   <ChatItem {...item} />
                 </Box>

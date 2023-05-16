@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useRef, useState } from "react";
 
 import { useRouter } from "next/router";
 import Textarea from "react-textarea-autosize";
@@ -44,8 +44,9 @@ export const ChatTextArea = () => {
     setHasValueInTextArea(!!value);
   };
 
-  const handleWriteChat = () => {
-    if (!textAreaRef.current?.value) return;
+  const handleMutateChat = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key !== "Enter" || e.shiftKey || !textAreaRef.current?.value) return;
+    e.preventDefault();
     mutate({
       input: {
         content: textAreaRef.current.value,
@@ -68,17 +69,20 @@ export const ChatTextArea = () => {
     >
       <Box
         alignItems={alignItemByTextareaHeight}
+        as="form"
         borderColor="black7"
         borderRadius="24"
         borderStyle="solid"
         borderWidth="1"
         flexDirection="row"
+        height="fit"
         justifyContent="space-between"
         minHeight="40"
         paddingLeft="16"
         paddingRight="8"
         py="4"
         width="full"
+        onKeyDown={handleMutateChat}
       >
         <Textarea
           className={textAreaCss}
@@ -94,7 +98,7 @@ export const ChatTextArea = () => {
           onHeightChange={handleChangeTextareaHeight}
         />
         {hasValueInTextArea && (
-          <Box cursor="pointer" onClick={handleWriteChat}>
+          <Box as="button" cursor="pointer" type="submit">
             <Icon name="btn_send" />
           </Box>
         )}
